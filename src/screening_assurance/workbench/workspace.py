@@ -76,6 +76,15 @@ EXPORTS = {
 }
 
 
+DEMO_ACTOR = "demo visitor"
+DEFAULT_DEMO = "REQ-SRE-0142"
+
+
+def session_mode(source: str) -> str:
+    """'demo' for sessions built from included sample data, 'real' for the recruiter's own uploads."""
+    return "demo" if str(source).startswith(("example:", "demo:")) else "real"
+
+
 class WorkbenchError(ValueError):
     """A user-facing error (bad input, unknown id, disallowed action)."""
 
@@ -271,6 +280,11 @@ class Workspace:
 
     # ------------------------------------------------------------------ sessions
     def create_session(self, texts: dict[str, str], *, source: str, actor: str) -> dict[str, Any]:
+        """Create a session. Sessions built from included sample data are demo sessions; uploads are real.
+
+        The mode is derived from the source and never changes, so sample data cannot end up in a
+        recruiter's own (real) session list, and uploaded data is never labelled as a demo.
+        """
         v = self.validate_inputs(texts)
         if not v.ok:
             raise WorkbenchError("inputs failed validation", [f"{r['kind']}: {e}" for r in v.report for e in r["errors"]]
@@ -291,6 +305,7 @@ class Workspace:
             "created_at": created.isoformat(),
             "created_by": actor,
             "source": source,
+            "mode": session_mode(source),
             "requisition_id": v.data["requisition"]["id"],
             "title": v.data["requisition"]["title"],
             "inputs": inputs,
@@ -311,6 +326,24 @@ class Workspace:
     def create_session_from_example(self, example_id: str, *, actor: str, include_outcomes: bool = True) -> dict[str, Any]:
         return self.create_session(self._example_texts(example_id, include_outcomes), source=f"example:{example_id}", actor=actor)
 
+    def demo_examples(self) -> list[dict[str, Any]]:
+        """Included samples that can run the full guided demo (they carry candidate evidence)."""
+        return [e for e in self.examples() if "candidates" in e["files"]]
+
+    def start_demo(self, example_id: str | None = None, *, actor: str = DEMO_ACTOR) -> dict[str, Any]:
+        """Create a demo session from included synthetic data and run it with the production knowledge.
+
+        Recorded outcomes are left out: the demo shows what the product finds, not fictional results.
+        """
+        options = {e["id"] for e in self.demo_examples()}
+        example_id = example_id or DEFAULT_DEMO
+        if example_id not in options:
+            raise WorkbenchError(f"{example_id!r} is not an included sample that supports the guided demo", status=404)
+        actor = (actor or DEMO_ACTOR).strip()[:200] or DEMO_ACTOR
+        meta = self.create_session(self._example_texts(example_id, include_outcomes=False), source=f"demo:{example_id}", actor=actor)
+        run = self.run(meta["id"], "env:production", actor=actor)
+        return {"session_id": meta["id"], "run_id": run["run_id"]}
+
     def _session_dir(self, sid: str) -> Path:
         d = self.sessions_dir / _safe_id(sid, "S-")
         if not (d / "session.json").exists():
@@ -320,6 +353,7 @@ class Workspace:
     def session(self, sid: str) -> dict[str, Any]:
         d = self._session_dir(sid)
         meta = json.loads((d / "session.json").read_text())
+        meta.setdefault("mode", session_mode(meta.get("source", "")))
         meta["runs"] = self.runs(sid)
         meta["decisions"] = self.finding_decisions(sid).get("decisions", [])
         meta["review_decisions"] = self.review_decisions(sid).get("decisions", [])
@@ -342,7 +376,10 @@ class Workspace:
         for d in sorted(self.sessions_dir.glob("S-*")):
             if (d / "session.json").exists():
                 m = json.loads((d / "session.json").read_text())
-                out.append({k: m.get(k) for k in ("id", "title", "requisition_id", "created_at", "source", "retention", "candidate_data_deleted")})
+                row = {k: m.get(k) for k in ("id", "title", "requisition_id", "created_at", "source", "retention", "candidate_data_deleted")}
+                row["mode"] = m.get("mode") or session_mode(m.get("source", ""))
+                row["runs"] = len(list((d / "runs").glob("R-*"))) if (d / "runs").exists() else 0
+                out.append(row)
         return out
 
     def _inputs(self, sid: str) -> dict[str, Any]:
@@ -704,6 +741,34 @@ class Workspace:
         suite = run_suite(cases, self.registry.load(knowledge_spec), th)
         return {"passed": suite["passed"], "failures": suite["failures"], "knowledge": suite["knowledge"],
                 "markdown": render_suite_markdown(suite)}
+
+    def validation_sample(self, knowledge_spec: str = "env:production") -> dict[str, Any]:
+        """Run the existing validation measurement on the included SYNTHETIC dataset, for explanation only.
+
+        Returns the synthetic label, the evaluation contract and a few metrics with their denominators. The
+        caller must present these as a demonstration of how measurement works, never as effectiveness evidence.
+        """
+        from ..measure.validation import load_dataset, measure_dataset
+        path = self.evals_root / "validation" / "northwind-synthetic.yaml"
+        if not path.exists():
+            raise WorkbenchError("no sample validation dataset is included in this installation", status=404)
+        res = measure_dataset(load_dataset(path), self.registry.load(knowledge_spec))
+        m = res["metrics"]
+        return {
+            "label": res["label"], "kind": res["dataset"]["kind"], "dataset_id": res["dataset"]["id"],
+            "result_id": res["result_id"], "evaluation_contract": res["evaluation_contract"],
+            "knowledge": res["knowledge"]["fingerprint"], "engine_version": res["engine_version"],
+            "coverage": m["coverage"],
+            "metrics": {
+                "D1_relevant_surfaced": m["discovery"]["D1_relevant_surfaced"],
+                "D3_irrelevant_surfaced": m["discovery"]["D3_irrelevant_surfaced"],
+                "B2_recovered_by_product": m["baseline"]["B2_recovered_by_product"],
+                "F1_confirmed": m["screening_risks"]["F1_confirmed"],
+                "F5_unreviewed": m["screening_risks"]["F5_unreviewed"],
+            },
+            "violations_occurred": m["violations"]["occurred"],
+            "limitations": res["limitations"],
+        }
 
     def compare(self, baseline: str, candidate: str) -> dict[str, Any]:
         from ..evals import compare_suites, render_compare_markdown, run_suite

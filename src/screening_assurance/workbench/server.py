@@ -27,7 +27,9 @@ from urllib.parse import unquote, urlparse
 from .. import ENGINE_VERSION
 from ..contracts import ContractError
 from ..engine.risks import RISK_CATEGORIES, SIM_CATEGORIES, SIM_LABELS
-from .workspace import CANDIDATE_DISPOSITIONS, EXPORTS, INPUT_KINDS, MAX_FILE_BYTES, Workspace, WorkbenchError
+from .walkthrough import guide
+from .workspace import (CANDIDATE_DISPOSITIONS, DEFAULT_DEMO, EXPORTS, INPUT_KINDS, MAX_FILE_BYTES, Workspace,
+                        WorkbenchError)
 
 MAX_BODY_BYTES = len(INPUT_KINDS) * MAX_FILE_BYTES + 64 * 1024
 LOOPBACK_NAMES = {"localhost", "127.0.0.1", "::1"}
@@ -57,6 +59,7 @@ class WorkbenchServer(ThreadingHTTPServer):
         self.token = token or secrets.token_urlsafe(24)
         self.quiet = quiet
         self.lock = threading.Lock()  # serialize writes to the workspace
+        self.validation_cache: dict[str, Any] | None = None
         super().__init__(address, Handler)
 
     @property
@@ -179,6 +182,8 @@ class Handler(BaseHTTPRequestHandler):
                 "engine_version": ENGINE_VERSION,
                 "knowledge": ws.knowledge_options(),
                 "examples": ws.examples(),
+                "demo_examples": ws.demo_examples(),
+                "default_demo": DEFAULT_DEMO,
                 "sessions": ws.sessions(),
                 "candidate_dispositions": CANDIDATE_DISPOSITIONS,
                 "risk_categories": RISK_CATEGORIES,
@@ -191,6 +196,16 @@ class Handler(BaseHTTPRequestHandler):
             body = self._body()
             v = ws.validate_inputs(_files(body))
             return self._json(200, {"ok": v.ok, "report": v.report, "summary": ws.input_summary(v.data)})
+        if parts == ["demo"] and method == "POST":
+            body = self._body()
+            with self.server.lock:
+                out = ws.start_demo(str(body.get("example") or DEFAULT_DEMO), actor=str(body.get("actor") or "").strip() or "demo visitor")
+            return self._json(201, out)
+        if parts == ["validation-sample"] and method == "GET":
+            with self.server.lock:
+                if self.server.validation_cache is None:
+                    self.server.validation_cache = ws.validation_sample()
+            return self._json(200, self.server.validation_cache)
         if parts == ["sessions"] and method == "POST":
             body = self._body()
             actor = str(body.get("actor") or "").strip()
@@ -221,7 +236,9 @@ class Handler(BaseHTTPRequestHandler):
                 rid = parts[3]
                 rest = parts[4:]
                 if not rest and method == "GET":
-                    return self._json(200, ws.load_run(sid, rid))
+                    stored = ws.load_run(sid, rid)
+                    stored["guide"] = guide(stored["result"], stored["discovery"])
+                    return self._json(200, stored)
                 if rest == ["verify"] and method == "POST":
                     return self._json(200, ws.verify_run(sid, rid, actor=_actor(self._body())))
                 if rest == ["finding-decisions"] and method == "POST":

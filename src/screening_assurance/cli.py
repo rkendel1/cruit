@@ -1,6 +1,6 @@
 """Command-line interface: `sa` / `screening-assurance`.
 
-    sa workbench                           open the local Candidate Rediscovery Workbench (recruiter UI)
+    sa workbench                           open the local recruiter workbench (guided demo or your own requisition)
     sa diagnose <requisition-dir>          run the diagnostic loop and write the assurance report
     sa discover <requisition-dir>          candidate rediscovery over applicants and an authorized pool
     sa portfolio <dir>                     portfolio overview across requisitions
@@ -104,7 +104,8 @@ def cmd_workbench(args: argparse.Namespace) -> int:
     if purged:
         _print(f"Retention: removed candidate data from {len(purged)} expired session(s).")
     srv = make_server(ws, args.host, args.port, allow_remote=args.allow_remote)
-    _print(f"Candidate Rediscovery Workbench running at {srv.url}")
+    _print(f"Screening Assurance workbench running at {srv.url}")
+    _print("New here? Choose 'Try the guided demo' on the start screen.")
     _print(f"Workspace: {Path(args.workspace).resolve()}  (candidate data stays on this computer)")
     _print("Press Ctrl+C to stop.")
     if not args.no_browser:
@@ -373,7 +374,7 @@ def build_parser() -> argparse.ArgumentParser:
     d.add_argument("--include-pending", action="store_true", help="include pending findings in changes.yaml")
     d.set_defaults(func=cmd_diagnose)
 
-    wb = sub.add_parser("workbench", help="open the local recruiter workbench in your browser")
+    wb = sub.add_parser("workbench", help="open the local recruiter workbench (guided demo or your own requisition)")
     wb.add_argument("--host", default="127.0.0.1", help="bind address (loopback only unless --allow-remote)")
     wb.add_argument("--port", type=int, default=8765)
     wb.add_argument("--workspace", default="workspace", help="local working area for sessions and runs")

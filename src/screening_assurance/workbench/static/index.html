@@ -4,22 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="sa-token" content="__SA_TOKEN__">
-<title>Candidate Rediscovery Workbench</title>
+<title>Screening Assurance — Recruiter Workbench</title>
 <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="top-inner">
-    <div class="brand">Candidate Rediscovery Workbench<span>Screening Assurance, running on this computer only</span></div>
+    <div class="brand">Screening Assurance<span>Recruiter workbench · runs only on this computer</span></div>
     <div class="provenance" id="provenance"></div>
-    <label class="reviewer">Reviewer <input type="text" id="reviewer" placeholder="your name or email" autocomplete="off"></label>
   </div>
+  <div class="modeband" id="modeband" hidden></div>
 </header>
 <div class="shell">
-  <nav class="steps" id="steps" aria-label="Workflow"></nav>
+  <nav class="steps" id="steps" aria-label="Workbench"></nav>
   <main id="main" tabindex="-1"></main>
 </div>
-<div id="toast" class="toast" role="status" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="announce" class="sr-only" aria-live="polite"></div>
 <script src="/static/app.js"></script>
 </body>
 </html>

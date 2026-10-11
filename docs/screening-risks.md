@@ -96,15 +96,15 @@ Candidate-review opportunities additionally show the candidate's own rule-by-rul
 
 ## Demonstration
 
-1. `sa workbench`, enter a reviewer name, load `REQ-SRE-0142`, run.
-2. Open **Screening risks**. Choose *Rule narrower than the requirement*, then *Q1 is narrower than R1*.
-3. Read the evidence (requirement R1 versus rule Q1), then the **correction simulation**: 13 records excluded,
-   C-103, C-106 and C-110 newly eligible (together with other proposed corrections), C-104 and the pool's P-204 in
-   *relevance not established*, P-202 and P-203 hypothetical pool records that still fail other rules. Open *Why each
-   candidate is in these categories*; candidate ids link to their discovery evidence.
-4. Record **Accept** with a rationale; the decision history shows who decided what in which run.
-5. Filter *Mandatory requirement protected* on `REQ-LH-0217` to see a protected licence with no correction proposed.
-6. **Review and export** → re-run → export *Screening risks and simulations*; **Verify** the run.
+1. `sa workbench`, then **Start the guided demo** (Senior SRE sample), or skip the tour and open **Screening rules**.
+2. Choose *Rule narrower than the requirement*, then *Q1 is narrower than R1*.
+3. Read what the supplied materials show (requirement R1 versus rule Q1), then **Before and after**: 13 of 20
+   records excluded today; C-103, C-106 and C-110 eligible for human review if corrected (expand each for their
+   evidence); C-104 and the pool's P-204 would pass the rule but their evidence doesn't support the role; P-202 and
+   P-203 are hypothetical pool records that still fail other rules. Per-candidate notes are under *Simulation limits*.
+4. Record **Accept the concern** with a rationale and your name; the decision history shows who decided what in which run.
+5. Start the demo with the Linehaul sample (or filter *Mandatory requirement protected* on `REQ-LH-0217`) to see a protected licence with no correction proposed.
+6. **Decisions & export** → *Update the analysis* → download the *screening-rule findings*; **Verify** the run under *Runs and reproducibility*.
 
 `sa eval` reports the synthetic screening-risk metrics (relevant surfaced/missed, irrelevant surfaced,
 mandatory-requirement and policy violations, results needing human verification, expectations met), and
