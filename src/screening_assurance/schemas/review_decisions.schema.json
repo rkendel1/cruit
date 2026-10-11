@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/review_decisions.schema.json",
+  "title": "Candidate review decisions",
+  "description": "Recruiter dispositions for candidates surfaced by discovery, keyed by opaque candidate id and requisition. A disposition records what the recruiter wants to do next inside their own process; it never advances, rejects or contacts anyone.",
+  "type": "object",
+  "required": ["requisition_id", "decisions"],
+  "additionalProperties": false,
+  "properties": {
+    "requisition_id": { "type": "string" },
+    "decisions": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "required": ["candidate_id", "disposition", "rationale", "decided_by", "decided_at", "run_id"],
+        "additionalProperties": false,
+        "properties": {
+          "candidate_id": { "type": "string", "maxLength": 40 },
+          "disposition": {
+            "enum": ["review_in_ats", "request_more_information", "not_a_fit_for_this_role", "defer"]
+          },
+          "rationale": { "type": "string", "minLength": 1, "maxLength": 2000 },
+          "decided_by": { "type": "string", "minLength": 1, "maxLength": 200 },
+          "decided_at": { "type": "string" },
+          "run_id": { "type": "string", "description": "Discovery run the reviewer was looking at." },
+          "knowledge": { "type": "string" },
+          "review_minutes": { "type": "number", "minimum": 0, "maximum": 600 }
+        }
+      }
+    }
+  }
+}

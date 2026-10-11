@@ -1,6 +1,8 @@
 """Command-line interface: `sa` / `screening-assurance`.
 
+    sa workbench                           open the local Candidate Rediscovery Workbench (recruiter UI)
     sa diagnose <requisition-dir>          run the diagnostic loop and write the assurance report
+    sa discover <requisition-dir>          candidate rediscovery over applicants and an authorized pool
     sa portfolio <dir>                     portfolio overview across requisitions
     sa eval                                regression-test the knowledge pack against labeled cases
     sa eval-compare --baseline A --candidate B   before/after comparison when knowledge changes
@@ -68,6 +70,49 @@ def cmd_diagnose(args: argparse.Namespace) -> int:
     _print(f"  Candidates surfaced for review: {s['candidates_surfaced']} of {s['candidates_assessed']}   "
            f"Pending decisions: {s['pending_decisions']}   Accepted changes: {len(changes['changes']) if not args.include_pending else '-'}")
     _print(f"  Wrote {out}/")
+    return 0
+
+
+def cmd_discover(args: argparse.Namespace) -> int:
+    from .engine import discover
+    from .report.discovery import render_discovery_markdown
+    pack = _pack(args)
+    bundle = load_bundle(args.requisition, policy=args.policy)
+    if args.pool:
+        bundle.pool = load("candidate_pool", args.pool)
+    diag = diagnose(bundle, pack, run_at=args.run_at)
+    res = discover(bundle, pack, diag, as_of=args.as_of).as_dict()
+    out = Path(args.out) / res["requisition_id"]
+    _write(out / "discovery.json", json.dumps(res, indent=2, default=str) + "\n")
+    _write(out / "discovery.md", render_discovery_markdown(res).lstrip() + "\n")
+    c = res["counts"]
+    _print(f"{res['requisition_id']} [knowledge {res['knowledge']}] as of {res['as_of']}")
+    _print("  " + "   ".join(f"{k.replace('_', ' ')}: {v}" for k, v in c.items()))
+    _print(f"  Wrote {out}/discovery.md")
+    return 0
+
+
+def cmd_workbench(args: argparse.Namespace) -> int:
+    import webbrowser
+    from .workbench.server import make_server
+    from .workbench.workspace import Workspace
+    ws = Workspace(args.workspace, knowledge_root=args.knowledge_root or os.environ.get("SA_KNOWLEDGE_ROOT", "knowledge"),
+                   examples_root=args.examples, evals_root=args.evals)
+    purged = ws.purge_expired()
+    if purged:
+        _print(f"Retention: removed candidate data from {len(purged)} expired session(s).")
+    srv = make_server(ws, args.host, args.port, allow_remote=args.allow_remote)
+    _print(f"Candidate Rediscovery Workbench running at {srv.url}")
+    _print(f"Workspace: {Path(args.workspace).resolve()}  (candidate data stays on this computer)")
+    _print("Press Ctrl+C to stop.")
+    if not args.no_browser:
+        webbrowser.open(srv.url)
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        _print("\nStopped.")
+    finally:
+        srv.server_close()
     return 0
 
 
@@ -278,6 +323,26 @@ def build_parser() -> argparse.ArgumentParser:
     d.add_argument("--include-pending", action="store_true", help="include pending findings in changes.yaml")
     d.set_defaults(func=cmd_diagnose)
 
+    wb = sub.add_parser("workbench", help="open the local recruiter workbench in your browser")
+    wb.add_argument("--host", default="127.0.0.1", help="bind address (loopback only unless --allow-remote)")
+    wb.add_argument("--port", type=int, default=8765)
+    wb.add_argument("--workspace", default="workspace", help="local working area for sessions and runs")
+    wb.add_argument("--examples", default="examples")
+    wb.add_argument("--evals", default="evals")
+    wb.add_argument("--no-browser", action="store_true")
+    wb.add_argument("--allow-remote", action="store_true", help=argparse.SUPPRESS)
+    wb.set_defaults(func=cmd_workbench)
+
+    ds = sub.add_parser("discover", help="candidate rediscovery for one requisition directory")
+    ds.add_argument("requisition")
+    ds.add_argument("--knowledge", default=None, help=kspec)
+    ds.add_argument("--policy")
+    ds.add_argument("--pool", help="candidate pool file (default: candidate-pool.yaml in the requisition directory)")
+    ds.add_argument("--as-of", help="assessment date for evidence freshness (default: pool export date)")
+    ds.add_argument("--run-at")
+    ds.add_argument("--out", default="out")
+    ds.set_defaults(func=cmd_discover)
+
     pf = sub.add_parser("portfolio", help="portfolio overview across all requisitions under a directory")
     pf.add_argument("root")
     pf.add_argument("--knowledge", default=None, help=kspec)
@@ -323,11 +388,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     sc = sub.add_parser("schema", help="print a data contract")
     sc.add_argument("name", choices=["synonyms", "skills", "equivalencies", "manifest", "policy", "requisition",
-                                     "candidates", "decisions", "outcomes", "eval_case", "proposal", "common"])
+                                     "candidates", "candidate_pool", "decisions", "review_decisions", "outcomes",
+                                     "eval_case", "discovery_case", "proposal", "common"])
     sc.set_defaults(func=cmd_schema)
 
     ch = sub.add_parser("check", help="validate a file against a data contract")
-    ch.add_argument("contract", choices=["policy", "requisition", "candidates", "decisions", "outcomes", "eval_case", "proposal"])
+    ch.add_argument("contract", choices=["policy", "requisition", "candidates", "candidate_pool", "decisions",
+                                         "review_decisions", "outcomes", "eval_case", "discovery_case", "proposal"])
     ch.add_argument("path"); ch.set_defaults(func=cmd_check)
     return p
 
@@ -340,6 +407,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     except FileNotFoundError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    except ValueError as exc:  # WorkbenchError and similar user-facing errors
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

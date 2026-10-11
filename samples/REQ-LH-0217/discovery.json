@@ -1,0 +1,808 @@
+{
+  "requisition_id": "REQ-LH-0217",
+  "knowledge": "core@1.1.0+8a94e741e4",
+  "as_of": "2026-10-10",
+  "inputs": {
+    "current_applicants": 4,
+    "pool": {
+      "pool_id": "NW-POOL-2026-10-OPS",
+      "source_system": "northwind-talent-crm",
+      "exported_at": "2026-10-10",
+      "max_evidence_age_days": 730,
+      "permitted_uses": [
+        "rediscovery_review"
+      ],
+      "retention_days": 90,
+      "deletion": "delete_candidate_data"
+    },
+    "screening_configuration": "ats_export_verified"
+  },
+  "counts": {
+    "direct": 1,
+    "transferable": 1,
+    "insufficient": 1,
+    "not_surfaced": 3,
+    "blocked": 0,
+    "active_workflow": 1
+  },
+  "limitations": [
+    "Groups describe the supplied evidence, not qualification. Every surfaced candidate needs human review.",
+    "No ranking or match score is produced; order within a group is by candidate id.",
+    "Prior applications are context only and do not establish permission to contact anyone."
+  ],
+  "entries": [
+    {
+      "candidate_id": "P-301",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-55120",
+        "pool_id": "NW-POOL-2026-10-OPS",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Record from northwind-talent-crm (application resume), authorized for rediscovery review.",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-301/credentials.s1",
+              "text": "CDL Class A",
+              "path": "terminology_variant",
+              "matched": "CDL Class A",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-301/experience[0].title",
+              "text": "Dispatch Supervisor",
+              "path": "terminology_variant",
+              "matched": "dispatch supervisor",
+              "concept": "skill.transportation-supervision",
+              "record": "skill.transportation-supervision"
+            }
+          ],
+          "months": 48,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-301/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "direct",
+              "matched": "hours of service",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-07-02",
+        "age_days": 100,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Contact permission is not established by this record."
+      ],
+      "signals": [
+        "R1: described as CDL Class A",
+        "R2: described as dispatch supervisor"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-303",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-LH-0217/C-303",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "transferable",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology).",
+        "At least one requirement is supported through an alternative path that a recruiter must verify."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-303/credentials.s1",
+              "text": "Class A CDL",
+              "path": "terminology_variant",
+              "matched": "Class A CDL",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:C-303/experience[0].s1",
+              "text": "Supervised 14 linehaul drivers and scheduled daily routes.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:C-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            },
+            {
+              "source": "candidate:C-303/experience[0].s3",
+              "text": "Improved on-time delivery performance by 12%.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "on_time_performance",
+              "matched": "Owned on-time performance or route efficiency."
+            }
+          ],
+          "months": 48,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 3 of 3 indicators present; 48 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "direct",
+              "matched": "hours of service",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q1",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "listed credential not held"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 36 required"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-LH-0217-6f063ac1"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as Class A CDL",
+        "R2: transferable experience (eq.transportation-supervision.fleet-coordination)"
+      ],
+      "verify_next": [
+        "Confirm number of drivers supervised and authority over scheduling.",
+        "Confirm compliance responsibilities."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-303",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-56004",
+        "pool_id": "NW-POOL-2026-10-OPS",
+        "evidence_provenance": "talent_community_profile"
+      },
+      "group": "insufficient",
+      "why": [
+        "Record from northwind-talent-crm (talent community profile), authorized for rediscovery review.",
+        "Evidence supports R2 (transferable experience); R3 (same terminology); other mandatory requirements cannot be verified from the supplied record."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "protected_missing",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Protected requirement not evidenced: Commercial driver's license (Class A) is a regulated credential in the knowledge base. No alternative path is considered."
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:P-303/experience[0].s1",
+              "text": "Supervised 12 linehaul drivers and scheduled daily routes.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:P-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            }
+          ],
+          "months": 40,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 2 of 3 indicators present; 40 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "direct",
+              "matched": "hours of service",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R2",
+        "R3"
+      ],
+      "unverified": [],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "cannot_verify",
+          "detail": "Mandatory credential cannot be verified: credentials were not supplied completely for this record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-08-09",
+        "age_days": 62,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "talent_community_profile"
+      },
+      "constraints": [
+        "Opted in to the talent community (supplied). Confirm current consent in your own system before any contact."
+      ],
+      "signals": [
+        "R2: transferable experience (eq.transportation-supervision.fleet-coordination)"
+      ],
+      "verify_next": [
+        "Confirm number of drivers supervised and authority over scheduling.",
+        "Confirm compliance responsibilities."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-302",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-LH-0217/C-302",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "protected_missing",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Protected requirement not evidenced: Commercial driver's license (Class A) is a regulated credential in the knowledge base. No alternative path is considered."
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:C-302/experience[0].s2",
+              "text": "Managed dispatch of outbound trailers and scheduled routes with carriers.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:C-302/experience[0].s3",
+              "text": "Ran DOT safety compliance audits for the yard.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            }
+          ],
+          "months": 84,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 2 of 3 indicators present; 84 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R2"
+      ],
+      "unverified": [],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "not_satisfied",
+          "detail": "Mandatory credential is not among the credentials supplied for this complete record."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q1",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "listed credential not held"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 36 required"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R2: transferable experience (eq.transportation-supervision.fleet-coordination)"
+      ],
+      "verify_next": [
+        "Confirm number of drivers supervised and authority over scheduling.",
+        "Confirm compliance responsibilities."
+      ],
+      "reason": "A mandatory requirement is not met: R1 \u2014 Mandatory credential is not among the credentials supplied for this complete record.",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-304",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-LH-0217/C-304",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q2 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-304/credentials.s1",
+              "text": "CDL Class A",
+              "path": "terminology_variant",
+              "matched": "CDL Class A",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Partial evidence for eq.transportation-supervision.fleet-coordination: only 1 of required 2 indicators."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1"
+      ],
+      "unverified": [],
+      "mandatory_issues": [
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "Partial evidence for eq.transportation-supervision.fleet-coordination: only 1 of required 2 indicators."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q2",
+        "excluded_by": [
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 36 required"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as CDL Class A"
+      ],
+      "verify_next": [],
+      "reason": "Required evidence missing from a complete record: R2 \u2014 Partial evidence for eq.transportation-supervision.fleet-coordination: only 1 of required 2 indicators.; R3 \u2014 No supporting evidence in the supplied record.",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-302",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-55871",
+        "pool_id": "NW-POOL-2026-10-OPS",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Record from northwind-talent-crm (application resume), authorized for rediscovery review."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "Active Class A commercial driver's license.",
+          "stated_as": "required",
+          "protected": true,
+          "status": "protected_missing",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Protected requirement not evidenced: Commercial driver's license (Class A) is a regulated credential in the knowledge base. No alternative path is considered."
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:P-302/experience[0].s1",
+              "text": "Supervised 40 drivers and dispatchers across five terminals.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:P-302/experience[0].s2",
+              "text": "Ran DOT compliance audits.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            },
+            {
+              "source": "candidate:P-302/experience[0].s3",
+              "text": "Improved on-time delivery performance by 9%.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "on_time_performance",
+              "matched": "Owned on-time performance or route efficiency."
+            }
+          ],
+          "months": 96,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 3 of 3 indicators present; 96 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Working knowledge of DOT and hours-of-service compliance.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-302/experience[0].s2",
+              "text": "Ran DOT compliance audits.",
+              "path": "terminology_variant",
+              "matched": "DOT compliance",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R2",
+        "R3"
+      ],
+      "unverified": [],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "not_satisfied",
+          "detail": "Mandatory credential is not among the credentials supplied for this complete record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-06-18",
+        "age_days": 114,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Contact permission is not established by this record."
+      ],
+      "signals": [
+        "R2: transferable experience (eq.transportation-supervision.fleet-coordination)",
+        "R3: described as DOT compliance"
+      ],
+      "verify_next": [
+        "Confirm number of drivers supervised and authority over scheduling.",
+        "Confirm compliance responsibilities."
+      ],
+      "reason": "A mandatory requirement is not met: R1 \u2014 Mandatory credential is not among the credentials supplied for this complete record.",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-301",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-LH-0217/C-301",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "active_workflow",
+      "why": [],
+      "requirements": [],
+      "supported": [],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {},
+      "prior_applications": [],
+      "freshness": {},
+      "constraints": [],
+      "signals": [],
+      "verify_next": [],
+      "reason": "Already in active review in the ATS (status: advanced).",
+      "listable": false
+    }
+  ]
+}

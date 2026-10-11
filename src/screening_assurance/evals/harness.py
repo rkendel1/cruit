@@ -19,6 +19,7 @@ from typing import Any
 from ..contracts import load
 from ..engine import RequisitionBundle, diagnose
 from ..knowledge.pack import KnowledgePack
+from .discovery_eval import compare_discovery, discovery_failures, render_discovery_suite_markdown, run_discovery_suite
 
 DEFAULT_THRESHOLDS = {
     "min_expected_finding_recall": 1.0,
@@ -29,6 +30,12 @@ DEFAULT_THRESHOLDS = {
     # compare gate
     "max_precision_drop": 0.0,
     "max_false_positive_increase": 0,
+    # discovery (synthetic fixtures)
+    "max_mandatory_violations": 0,
+    "max_blocked_violations": 0,
+    "max_irrelevant_surfaced": 0,
+    "max_overclaimed_certainty": 0,
+    "min_discovery_recall": 0.8,
 }
 
 RUN_AT = "1970-01-01T00:00:00+00:00"  # fixed so eval output is reproducible
@@ -128,8 +135,17 @@ def run_case(case_path: Path, pack: KnowledgePack) -> CaseResult:
     return CaseResult(case["id"], case["description"], result, expected, forbidden, cand, guard)
 
 
-def run_suite(cases_dir: str | Path, pack: KnowledgePack, thresholds: dict[str, Any] | None = None) -> dict[str, Any]:
+def run_suite(
+    cases_dir: str | Path,
+    pack: KnowledgePack,
+    thresholds: dict[str, Any] | None = None,
+    discovery_dir: str | Path | None = None,
+) -> dict[str, Any]:
+    """Run screening cases from cases_dir and discovery cases from discovery_dir
+    (default: a 'discovery' directory next to cases_dir)."""
     th = {**DEFAULT_THRESHOLDS, **(thresholds or {})}
+    discovery_dir = Path(discovery_dir) if discovery_dir else Path(cases_dir).parent / "discovery"
+    disc = run_discovery_suite(discovery_dir, pack) if discovery_dir.exists() else None
     paths = sorted(Path(cases_dir).glob("*.yaml"))
     cases = [run_case(p, pack) for p in paths]
     exp_total = sum(len(c.expected) for c in cases)
@@ -165,6 +181,7 @@ def run_suite(cases_dir: str | Path, pack: KnowledgePack, thresholds: dict[str, 
         failures.append(f"{forb} forbidden finding(s) produced")
     if guard > th["max_guardrail_violations"]:
         failures.append(f"{guard} guardrail violation(s)")
+    failures += discovery_failures(disc, th)
     return {
         "knowledge": pack.fingerprint,
         "thresholds": th,
@@ -172,6 +189,7 @@ def run_suite(cases_dir: str | Path, pack: KnowledgePack, thresholds: dict[str, 
         "passed": not failures,
         "failures": failures,
         "cases": [c.as_dict() for c in cases],
+        "discovery": disc,
     }
 
 
@@ -215,7 +233,15 @@ def compare_suites(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict[
     for d in case_diffs:
         for e in d["expected_findings_lost"]:
             regressions.append(f"{d['case_id']}: previously found expected finding lost ({e['check']} {e.get('rule') or e.get('candidate') or e.get('requirement') or ''})")
+    disc_diffs, disc_regressions = compare_discovery(baseline.get("discovery"), candidate.get("discovery"), th)
+    regressions += disc_regressions
     return {
+        "discovery": {
+            "label": (candidate.get("discovery") or {}).get("label"),
+            "baseline": (baseline.get("discovery") or {}).get("metrics"),
+            "candidate": (candidate.get("discovery") or {}).get("metrics"),
+            "cases": disc_diffs,
+        } if candidate.get("discovery") else None,
         "baseline": baseline["knowledge"],
         "candidate": candidate["knowledge"],
         "metrics": {"baseline": mb, "candidate": mc, "delta": deltas},
@@ -253,7 +279,26 @@ def render_suite_markdown(s: dict[str, Any]) -> str:
         if c["guardrail_violations"]:
             L += [f"- ❌ {g}" for g in c["guardrail_violations"]]
         L.append("")
-    return "\n".join(L)
+    return "\n".join(L) + render_discovery_suite_markdown(s.get("discovery"))
+
+
+def _render_compare_discovery(c: dict[str, Any]) -> list[str]:
+    d = c.get("discovery")
+    if not d:
+        return []
+    L = ["## Candidate rediscovery", "", f"> **{d['label']}**", "", "| Metric | Baseline | Candidate |", "|---|---|---|"]
+    for k, v in d["baseline"].items():
+        L.append(f"| {k.replace('_', ' ')} | {v} | {d['candidate'][k]} |")
+    L.append("")
+    for case in d["cases"]:
+        L.append(f"### {case['case_id']}")
+        L.append("")
+        if not case["group_changes"]:
+            L.append("_No change._")
+        for cid, (a, b) in sorted(case["group_changes"].items()):
+            L.append(f"- {cid}: {a} → {b}")
+        L.append("")
+    return L
 
 
 def render_compare_markdown(c: dict[str, Any]) -> str:
@@ -287,4 +332,5 @@ def render_compare_markdown(c: dict[str, Any]) -> str:
         for e in d["expected_findings_lost"]:
             L.append(f"- ❌ expected finding lost: {e['check']} {e.get('rule') or e.get('candidate') or e.get('requirement') or ''}")
         L.append("")
+    L += _render_compare_discovery(c)
     return "\n".join(L)

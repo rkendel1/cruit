@@ -44,6 +44,13 @@ outcomes.yaml ────┘─────────────────
 5. **Measure** — `measure.py` turns `outcomes.yaml` into measured metrics, separately labelled estimates,
    per-correction attribution, and one Level 3 finding.
 
+## Candidate rediscovery and the workbench
+
+`engine/discovery.py` groups current applicants and an authorized `candidate_pool` by the evidence supporting
+review, reusing the requirement-evidence logic and the diagnostic run's rule simulation. The local workbench
+(`workbench/`) orchestrates sessions, runs, decisions, exports, retention and reproducibility verification over
+the same engine; see [workbench.md](workbench.md).
+
 ## Determinism and reproducibility
 
 - No randomness, no network, no language model in the decision path. The same inputs and knowledge version

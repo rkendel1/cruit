@@ -95,7 +95,16 @@ def _candidate_block(result: dict[str, Any], f: dict[str, Any]) -> list[str]:
     return out
 
 
-def render_markdown(result: dict[str, Any]) -> str:
+def render_markdown(result: dict[str, Any], discovery: dict[str, Any] | None = None,
+                    review_decisions: dict[str, Any] | None = None) -> str:
+    from .discovery import render_discovery_markdown
+    body = _render_markdown(result)
+    if discovery:
+        body = body.rstrip() + "\n" + render_discovery_markdown(discovery, review_decisions) + "\n"
+    return body
+
+
+def _render_markdown(result: dict[str, Any]) -> str:
     req = result["requisition"]
     s = result["summary"]
     L = [f"# Requisition assurance report — {req['title']} ({req['id']})", ""]

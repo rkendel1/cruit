@@ -1,0 +1,164 @@
+# Authorized, de-identified candidate pool for rediscovery (fictional, synthetic).
+# Prior applicants and talent-community records. No names, contact details or
+# protected characteristics. A prior application is context, not permission to contact.
+pool_id: NW-POOL-2026-10-ENG
+source_system: northwind-talent-crm
+exported_at: "2026-10-10"
+description: Engineering and operations records authorized for rediscovery against open roles.
+max_evidence_age_days: 730
+authorization:
+  basis: Candidate privacy notice v3 permits review of retained profiles for other open roles (illustrative)
+  de_identified: true
+  permitted_uses: [rediscovery_review, screening_audit]
+  retention_days: 90
+  deletion: delete_candidate_data
+  granted_by: privacy-office@northwind.example
+
+candidates:
+  - id: P-201
+    source_record_ref: crm:rec-88213
+    evidence_updated_at: "2026-06-15"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    prior_applications:
+      - { requisition_ref: REQ-SRE-0098, role_title: Site Reliability Engineer, applied_at: "2025-11-03", outcome: not_selected, recorded_reason: Role filled }
+    contact_status: no_preference_recorded
+    experience:
+      - title: Site Reliability Engineer
+        domain: mobility
+        months: 74
+        summary: >-
+          Led incident response as incident commander for a ride-hailing platform.
+          Ran blameless postmortems with tracked corrective actions.
+          Maintained Terraform for production infrastructure.
+          Built Prometheus SLO alerting.
+    skills: [Terraform, Prometheus, Go]
+
+  - id: P-202
+    source_record_ref: crm:rec-90455
+    evidence_updated_at: "2026-04-02"
+    evidence_provenance: talent_community_profile
+    evidence_coverage: { experience: complete, credentials: complete }
+    contact_status: opted_in_talent_community
+    experience:
+      - title: Infrastructure Operations Engineer
+        domain: insurance
+        months: 66
+        summary: >-
+          Owned infrastructure operations and on-call for policy administration systems.
+          Led incident response for customer-facing outages and wrote postmortems.
+          Automated provisioning with Terraform.
+    skills: [Terraform, Linux, Python]
+
+  - id: P-203
+    source_record_ref: crm:rec-77310
+    evidence_updated_at: "2026-02-20"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    prior_applications:
+      - { requisition_ref: REQ-OPS-0310, role_title: Operations Analyst, applied_at: "2025-08-19", outcome: withdrawn }
+    contact_status: no_preference_recorded
+    experience:
+      - title: Grid Control Room Supervisor
+        domain: utilities
+        months: 84
+        summary: >-
+          Ran systems operations for the regional grid control room, owning availability of production SCADA systems.
+          Led the response to grid outages and coordinated restoration across field teams and vendors.
+          Issued outage status updates to executives.
+          Ran post-incident reviews and tracked corrective actions.
+          Automated server provisioning with Ansible.
+    skills: [Ansible, Linux, SCADA]
+
+  - id: P-204
+    source_record_ref: crm:rec-61902
+    evidence_updated_at: "2026-05-11"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    prior_applications:
+      - { requisition_ref: REQ-IT-0221, role_title: IT Support Lead, applied_at: "2026-05-11", outcome: rejected, recorded_reason: Role closed }
+    experience:
+      - title: IT Service Desk Lead
+        domain: retail
+        months: 60
+        summary: >-
+          Led a help desk team of 8 handling incident tickets for store systems.
+          Monitored systems operations dashboards and escalated issues to the infrastructure vendor.
+          Maintained the support knowledge base.
+    skills: [ServiceNow, Windows]
+
+  - id: P-205
+    source_record_ref: crm:rec-93377
+    evidence_updated_at: "2026-09-01"
+    evidence_provenance: talent_community_profile
+    evidence_coverage: { experience: partial, credentials: not_supplied }
+    contact_status: opted_in_talent_community
+    experience:
+      - title: Platform Engineer
+        domain: unknown
+        months: 30
+        summary: Built Terraform modules and Kubernetes clusters.
+    skills: [incident response, Terraform, Kubernetes]
+
+  - id: P-206
+    source_record_ref: crm:rec-20114
+    evidence_updated_at: "2021-05-10"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    prior_applications:
+      - { requisition_ref: REQ-SRE-0011, role_title: Site Reliability Engineer, applied_at: "2021-05-10", outcome: not_selected }
+    experience:
+      - title: Site Reliability Engineer
+        domain: gaming
+        months: 70
+        summary: >-
+          Led incident response as incident commander for game servers.
+          Maintained Terraform for production infrastructure.
+
+  - id: P-207
+    source_record_ref: crm:rec-95120
+    evidence_updated_at: "2026-08-30"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    authorization: { permitted_uses: [original_requisition_only] }
+    prior_applications:
+      - { requisition_ref: REQ-SRE-0131, role_title: Site Reliability Engineer, applied_at: "2026-08-30", outcome: not_selected }
+    experience:
+      - title: Site Reliability Engineer
+        domain: health-tech
+        months: 80
+        summary: >-
+          Led incident response as incident commander for clinical scheduling systems.
+          Maintained Terraform for production infrastructure.
+
+  - id: P-208
+    source_record_ref: crm:rec-97002
+    evidence_updated_at: "2026-07-21"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    prior_applications:
+      - { requisition_ref: REQ-SRE-0098, role_title: Site Reliability Engineer, applied_at: "2025-10-28", outcome: rejected, recorded_reason: Keyword filter }
+    contact_status: do_not_contact
+    experience:
+      - title: Production Reliability Engineer
+        domain: e-commerce
+        months: 62
+        summary: >-
+          Led incident response for checkout outages.
+          Wrote postmortems.
+          Maintained Terraform modules.
+    skills: [Terraform]
+
+  - id: P-209
+    source_record_ref: crm:rec-84456
+    evidence_updated_at: "2026-03-14"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    authorization: { expires_at: "2026-09-30" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: logistics
+        months: 64
+        summary: >-
+          Led incident response as incident commander for warehouse systems.
+          Maintained Terraform for production infrastructure.

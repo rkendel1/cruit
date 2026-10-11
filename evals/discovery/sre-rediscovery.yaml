@@ -1,0 +1,63 @@
+id: sre-rediscovery
+description: >-
+  SYNTHETIC. Rediscovery for the Senior SRE requisition across current applicants and an
+  authorized talent-CRM pool. Covers direct evidence, different titles, transferable
+  experience, look-alikes without necessary evidence, partial records, and stale,
+  unauthorized and expired records that must never be surfaced for action.
+requisition: ../../examples/northwind/requisitions/REQ-SRE-0142/requisition.yaml
+candidates: ../../examples/northwind/requisitions/REQ-SRE-0142/candidates.yaml
+pool: ../../examples/northwind/requisitions/REQ-SRE-0142/candidate-pool.yaml
+policy: ../../examples/northwind/policy.yaml
+as_of: "2026-10-10"
+
+labels:
+  C-101: relevant
+  C-102: relevant
+  C-103: relevant
+  C-104: not_relevant
+  C-105: not_relevant
+  C-106: relevant
+  C-107: not_relevant
+  C-108: relevant
+  C-109: relevant
+  C-110: relevant
+  C-111: not_relevant
+  C-112: not_relevant
+  C-113: relevant
+  P-201: relevant
+  P-202: relevant
+  P-203: relevant
+  P-204: not_relevant
+  P-205: insufficient
+  P-206: must_not_surface
+  P-207: must_not_surface
+  P-208: relevant
+  P-209: must_not_surface
+
+fixture_types:
+  P-201: direct evidence (prior applicant, conventional title)
+  P-202: different title, relevant evidence
+  P-203: plausibly transferable experience (utility grid control room) needing review
+  P-204: appears similar (incident tickets, systems dashboards) but lacks necessary evidence
+  P-205: insufficient evidence (partial talent-community profile)
+  P-206: stale record (evidence older than 730 days)
+  P-207: unauthorized record (original requisition only)
+  P-209: expired authorization
+  P-208: discovered only after knowledge 1.1.0 (production reliability title variant)
+  C-107: conventional title, below the posted experience threshold
+
+expected_groups:
+  P-201: direct
+  P-202: direct
+  P-203: transferable
+  P-204: not_surfaced
+  P-205: insufficient
+  P-206: blocked
+  P-207: blocked
+  P-208: direct
+  P-209: blocked
+  C-101: active_workflow
+  C-103: transferable
+  C-106: transferable
+  C-104: not_surfaced
+  C-107: not_surfaced

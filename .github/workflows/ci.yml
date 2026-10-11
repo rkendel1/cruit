@@ -20,6 +20,8 @@ jobs:
         run: |
           sa knowledge validate
           for r in knowledge/releases/*/; do sa knowledge validate --knowledge "$r"; done
+      - name: Validate example candidate pools
+        run: for f in examples/northwind/requisitions/*/candidate-pool.yaml; do sa check candidate_pool "$f"; done
       - name: Unit tests
         run: pytest -q
       - name: Evaluation suite (regression gate)
