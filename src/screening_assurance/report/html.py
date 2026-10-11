@@ -215,7 +215,10 @@ def _measurement_html(result: dict[str, Any]) -> str:
     return "".join(html)
 
 
-def render_html(result: dict[str, Any]) -> str:
+def render_html(result: dict[str, Any], discovery: dict[str, Any] | None = None,
+                review_decisions: dict[str, Any] | None = None) -> str:
+    from .discovery import render_discovery_html
+    discovery_html = render_discovery_html(discovery, review_decisions) if discovery else ""
     req = result["requisition"]
     s = result["summary"]
     lv = s["by_level"]
@@ -287,6 +290,7 @@ def render_html(result: dict[str, Any]) -> str:
 {('<div class="tbl"><table><thead><tr><th>Finding</th><th>Decision</th><th>By</th><th>Rationale</th></tr></thead><tbody>' + decided_rows + '</tbody></table></div>') if decided else '<p class="meta">No decisions recorded yet. Use the controls on each finding, then export <code>decisions.yaml</code> and re-run.</p>'}
 <h2 id="s8">8. Outcome measurements</h2>{_measurement_html(result)}
 {section(("measured_impact",)) if any(f["category"] == "measured_impact" for f in F) else ""}
+{discovery_html}
 </main>
 <div class="bar"><div class="wrap"><div class="who"><label for="who" class="meta">Reviewer</label><input id="who" placeholder="you@company.com"></div>
 <span id="count"></span><button class="ghost" id="show">Preview</button><button id="export">Export decisions.yaml</button></div>

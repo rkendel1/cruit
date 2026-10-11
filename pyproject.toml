@@ -26,7 +26,7 @@ sa = "screening_assurance.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-screening_assurance = ["schemas/*.json", "report/templates/*"]
+screening_assurance = ["schemas/*.json", "workbench/static/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

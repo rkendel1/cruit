@@ -21,6 +21,7 @@ It is built to prove one thing:
 | Evaluation harness with conventional and nontraditional candidates, before/after comparison when knowledge changes | [`evals/`](evals), [`src/screening_assurance/evals/`](src/screening_assurance/evals) |
 | Human review report separating confirmed inconsistencies from potential missed-talent opportunities | [`src/screening_assurance/report/`](src/screening_assurance/report), [`samples/`](samples) |
 | Pilot measurement plan + outcome measurement (measured vs. estimated, separately) | [`docs/pilot-measurement-plan.md`](docs/pilot-measurement-plan.md), [`src/screening_assurance/measure.py`](src/screening_assurance/measure.py) |
+| Candidate rediscovery over an authorized pool + local recruiter workbench | [`src/screening_assurance/engine/discovery.py`](src/screening_assurance/engine/discovery.py), [`src/screening_assurance/workbench/`](src/screening_assurance/workbench), [`docs/workbench.md`](docs/workbench.md) |
 
 Deliberately **not** built yet (per the blueprint): ATS API integrations, an elaborate dashboard, a large
 general-purpose ontology, language-model extraction. The integration contract is specified in
@@ -28,7 +29,47 @@ general-purpose ontology, language-model extraction. The integration contract is
 
 ---
 
-## Quick start
+## Candidate Rediscovery Workbench (recruiter workflow)
+
+A local web workspace for recruiters. Pick a requisition, supply an authorized de-identified candidate-pool
+export, run discovery and diagnostics, inspect the evidence behind each result, record decisions, and export.
+It runs only on your computer (bound to `127.0.0.1`) and uses the same deterministic engine and versioned
+knowledge pack as the CLI; the browser code only displays results and posts decisions.
+
+```bash
+pip install -e ".[dev]"
+sa workbench                      # opens http://127.0.0.1:8765/ ; workspace data goes to ./workspace
+```
+
+**Five-minute demonstration (no CLI needed after launch):**
+
+1. Enter your name in **Reviewer** (every run and decision is attributed), then **Load** `REQ-SRE-0142`.
+2. **Requisition intake** shows the inputs and their fingerprints, whether the screening rules are verified
+   ATS configuration or recruiter documentation, the pool's permitted uses and retention, the requirements,
+   the rules and the employer policy. Choose a knowledge revision and **Run discovery and diagnostics**.
+3. **Candidate discovery** groups people by what their evidence supports: *Direct evidence*, *Potentially
+   transferable*, *Insufficient evidence*. Open **P-203** (a utility grid control-room supervisor): the
+   evidence ledger shows each requirement, how it is supported, the quoted source sentences, what remains
+   unknown, what to verify next, record freshness and contact constraints. There is no score.
+4. Below the list, *Not surfaced or not available for action* explains P-204 (looks similar, lacks the
+   evidence) and the stale, unauthorized and expired records — whose evidence is never shown.
+5. Record a decision for P-203 (for example *Review in the ATS*) with a rationale.
+6. **Screening findings**: open *Q2 requires 7 years; the posting asks for 5*, see the affected candidates,
+   and **Accept** it with a rationale.
+7. **Review and export**: **Re-run with the same knowledge** — your decisions carry over by their stable ids.
+   Export the **Candidate review list (CSV)** and the **Report**. Measured outcomes and estimates are shown
+   separately.
+8. Under *Runs and reproducibility*, **Verify** an earlier run: it is re-computed from its stored input
+   fingerprints, knowledge snapshot and decision snapshot and compared byte for byte.
+9. Knowledge change: edit a file in `knowledge/pack/` (for example add a variant in `synonyms.yaml`), then in
+   *Knowledge and evaluation* **Run evaluation** and **Compare** against production. Earlier runs still verify,
+   because each run keeps a copy of the exact knowledge it used.
+
+What the workbench will not do: contact anyone, write to an ATS, advance or reject candidates, rank people,
+or treat a prior application as permission to contact. See [docs/workbench.md](docs/workbench.md) for the
+data boundaries, the candidate-pool contract and the security model.
+
+## Quick start (CLI)
 
 ```bash
 pip install -e ".[dev]"          # Python 3.10+; dependencies: PyYAML, jsonschema
@@ -40,7 +81,8 @@ open out/REQ-SRE-0142/report.html   # review findings, record decisions, export 
 sa eval                          # regression suite against expert-labeled cases
 sa eval-compare --baseline release:1.0.0 --candidate pack   # what changed when knowledge changed
 sa portfolio examples --out out  # portfolio overview across requisitions
-pytest                           # 53 tests
+sa discover examples/northwind/requisitions/REQ-SRE-0142 --out out   # rediscovery from the CLI
+pytest                           # 84 tests
 ```
 
 Pre-rendered output for every example is committed under [`samples/`](samples) (`make samples` regenerates it).
@@ -122,6 +164,11 @@ pilot cases showed 1.0.0 missing them:
 | Candidates surfaced that experts judged unqualified | 0 | 0 |
 | Guardrail / forbidden-finding violations | 0 | 0 |
 
+The suite also evaluates **candidate rediscovery** on synthetic fixtures (`evals/discovery/`): relevant surfaced
+and missed, irrelevant surfaced, over-claimed certainty, mandatory-requirement and blocked-record violations,
+and how many results need human verification. Under 1.0.0 two relevant candidates are missed (recall 0.846);
+1.1.0 surfaces them (1.0) without surfacing anyone who lacks the legally required license.
+
 These figures come from **illustrative cases authored alongside the seed knowledge**; they show the harness
 working, not real-world accuracy. Establishing that requires design-partner data — see the
 [pilot measurement plan](docs/pilot-measurement-plan.md). The test suite also proves the gate catches a
@@ -135,12 +182,14 @@ src/screening_assurance/
   knowledge/          pack loading/indexing, validation, diff, release/promote/rollback registry
   engine/             interpret (normalize + knowledge), checks (design findings), rules (simulation), candidates, orchestration
   measure.py          outcome & investment measurement (Level 3)
-  report/             markdown + HTML requisition reports, change proposals, portfolio overview
+  report/             markdown + HTML requisition reports, discovery section, change proposals, portfolio overview
+  workbench/          local web workbench: workspace (sessions, runs, decisions, exports, retention) + loopback server + static UI
   evals/              evaluation harness and knowledge comparison
   cli.py              `sa` command
 knowledge/            pack/ (working copy), releases/<ver>/, deployments.yaml, proposals/
-examples/northwind/   fictional employer: policy + 4 requisitions (SRE, customer success, linehaul w/ protected license, pre-publication RevOps)
-evals/                labeled cases + regression thresholds
+examples/northwind/   fictional employer: policy + 4 requisitions (SRE, customer success, linehaul w/ protected license, pre-publication RevOps),
+                      with authorized candidate pools for SRE and linehaul
+evals/                labeled screening cases, synthetic discovery cases, regression thresholds
 samples/              committed output of `make samples`
 docs/                 blueprint, architecture, knowledge authoring, pilot measurement plan, integration contract
 tests/                pytest suite
@@ -153,3 +202,4 @@ tests/                pytest suite
 - [Knowledge authoring](docs/knowledge-authoring.md) — how to write and ship knowledge safely.
 - [Pilot measurement plan](docs/pilot-measurement-plan.md) — acceptance criteria and how to tell whether surfaced candidates are genuinely qualified and recruiter effort is justified.
 - [Integration contract](docs/integration-contract.md) — what an ATS connector must provide, and the audit/retention rules.
+- [Workbench](docs/workbench.md) — the recruiter workflow, candidate-pool contract, discovery groups, data boundaries and security model.

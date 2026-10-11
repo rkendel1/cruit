@@ -8,6 +8,7 @@ outcomes, eval cases, proposals) are validated against the JSON Schemas in
 from __future__ import annotations
 
 import json
+import re
 from functools import lru_cache
 from importlib import resources
 from pathlib import Path
@@ -31,6 +32,9 @@ SCHEMA_NAMES = (
     "outcomes",
     "eval_case",
     "proposal",
+    "candidate_pool",
+    "review_decisions",
+    "discovery_case",
 )
 
 # Fields that must never appear in candidate evidence. The candidates schema
@@ -100,13 +104,58 @@ def read_yaml(path: str | Path) -> Any:
 
 def load(name: str, path: str | Path) -> dict[str, Any]:
     """Load a YAML/JSON document and validate it against the named schema."""
-    data = read_yaml(path)
-    if name == "candidates" and isinstance(data, dict):
-        _check_prohibited_fields(path, data)
+    return validate_data(name, read_yaml(path), path)
+
+
+def parse_text(text: str, label: str = "<upload>") -> Any:
+    """Parse YAML or JSON text supplied by a user (dates kept as strings)."""
+    try:
+        if text.lstrip().startswith(("{", "[")):
+            return json.loads(text)
+        return yaml.load(text, Loader=_StringDateLoader)  # noqa: S506 - SafeLoader subclass
+    except (yaml.YAMLError, json.JSONDecodeError) as exc:
+        raise ContractError(label, [f"not valid YAML or JSON: {str(exc).splitlines()[0][:200]}"]) from None
+
+
+def validate_data(name: str, data: Any, label: str | Path = "<data>") -> dict[str, Any]:
+    if name in ("candidates", "candidate_pool") and isinstance(data, dict):
+        _check_prohibited_fields(label, data)
+        _check_contact_details(label, data)
     errors = schema_errors(name, data)
     if errors:
-        raise ContractError(path, errors)
+        raise ContractError(label, errors)
     return data
+
+
+_EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+_PHONE_RE = re.compile(r"(?<![\d-])(?:\+\d{1,3}[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]\d{4}(?![\d-])")
+
+
+def _strings(obj: Any):
+    if isinstance(obj, str):
+        yield obj
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            yield from _strings(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from _strings(v)
+
+
+def _check_contact_details(label: str | Path, data: dict[str, Any]) -> None:
+    """Reject candidate evidence that embeds email addresses or phone numbers in free text."""
+    errors = []
+    for cand in data.get("candidates") or []:
+        if not isinstance(cand, dict):
+            continue
+        evidence = {k: v for k, v in cand.items() if k in ("experience", "skills", "credentials", "education", "learning")}
+        for text in _strings(evidence):
+            if _EMAIL_RE.search(text) or _PHONE_RE.search(text):
+                errors.append(f"candidate {cand.get('id', '?')}: evidence text appears to contain an email address or "
+                              "phone number. Remove contact details before import.")
+                break
+    if errors:
+        raise ContractError(label, errors)
 
 
 def _check_prohibited_fields(path: str | Path, data: dict[str, Any]) -> None:

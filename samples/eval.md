@@ -57,3 +57,68 @@ Senior SRE requisition with literal keyword filters, a title-based experience ru
 - Precision 1.0 · recall 1.0
 - Expected findings: 14/14 found
 - Forbidden findings produced: 0
+
+## Candidate rediscovery
+
+> **SYNTHETIC FIXTURE RESULTS — not a measure of real-world accuracy**
+
+| Metric | Value |
+|---|---|
+| cases | 2 |
+| relevant surfaced | 13 |
+| relevant missed | 0 |
+| irrelevant surfaced | 0 |
+| overclaimed certainty | 0 |
+| mandatory violations | 0 |
+| blocked violations | 0 |
+| needs human verification | 6 |
+| group mismatches | 0 |
+| relevant recall | 1.0 |
+| recruiter dispositions | not measured in fixtures |
+| recruiter minutes | not measured in fixtures |
+
+### linehaul-rediscovery
+
+SYNTHETIC. Rediscovery for the Linehaul Operations Supervisor requisition, where a Class A CDL is legally required. A strong operations leader without the license must not be surfaced; a record whose credentials were not supplied may only appear as "insufficient evidence".
+
+- relevant surfaced: C-303, P-301
+- relevant missed: —
+- irrelevant surfaced: —
+- overclaimed certainty: —
+- mandatory violations: —
+- blocked violations: —
+- needs human verification: C-303, P-303
+- group mismatches: —
+
+| Fixture | Type | Group |
+|---|---|---|
+| P-301 | direct evidence with the required license | direct |
+| P-302 | missing a genuine mandatory qualification (license absent from a complete credential list) | not_surfaced |
+| P-303 | license cannot be verified (credentials not supplied) | insufficient |
+| C-302 | strong supervisor without the license (current applicant) | not_surfaced |
+
+### sre-rediscovery
+
+SYNTHETIC. Rediscovery for the Senior SRE requisition across current applicants and an authorized talent-CRM pool. Covers direct evidence, different titles, transferable experience, look-alikes without necessary evidence, partial records, and stale, unauthorized and expired records that must never be surfaced for action.
+
+- relevant surfaced: C-102, C-103, C-106, C-108, C-109, C-110, C-113, P-201, P-202, P-203, P-208
+- relevant missed: —
+- irrelevant surfaced: —
+- overclaimed certainty: —
+- mandatory violations: —
+- blocked violations: —
+- needs human verification: C-103, C-106, P-203, P-205
+- group mismatches: —
+
+| Fixture | Type | Group |
+|---|---|---|
+| P-201 | direct evidence (prior applicant, conventional title) | direct |
+| P-202 | different title, relevant evidence | direct |
+| P-203 | plausibly transferable experience (utility grid control room) needing review | transferable |
+| P-204 | appears similar (incident tickets, systems dashboards) but lacks necessary evidence | not_surfaced |
+| P-205 | insufficient evidence (partial talent-community profile) | insufficient |
+| P-206 | stale record (evidence older than 730 days) | blocked |
+| P-207 | unauthorized record (original requisition only) | blocked |
+| P-209 | expired authorization | blocked |
+| P-208 | discovered only after knowledge 1.1.0 (production reliability title variant) | direct |
+| C-107 | conventional title, below the posted experience threshold | not_surfaced |

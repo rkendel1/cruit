@@ -36,6 +36,7 @@ class RequisitionBundle:
     candidates: dict[str, Any] | None = None
     decisions: dict[str, Any] | None = None
     outcomes: dict[str, Any] | None = None
+    pool: dict[str, Any] | None = None
 
 
 def _find_upwards(start: Path, name: str, levels: int = 3) -> Path | None:
@@ -68,6 +69,9 @@ def load_bundle(path: str | Path, *, policy: str | Path | None = None) -> Requis
             if data["requisition_id"] != req["id"]:
                 raise ContractError(p, [f"{name} is for {data['requisition_id']}, expected {req['id']}"])
             setattr(bundle, attr, data)
+    pool_path = root / "candidate-pool.yaml"
+    if pool_path.exists():
+        bundle.pool = load("candidate_pool", pool_path)
     return bundle
 
 

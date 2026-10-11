@@ -1,0 +1,3685 @@
+{
+  "requisition_id": "REQ-SRE-0142",
+  "knowledge": "core@1.1.0+8a94e741e4",
+  "as_of": "2026-10-10",
+  "inputs": {
+    "current_applicants": 13,
+    "pool": {
+      "pool_id": "NW-POOL-2026-10-ENG",
+      "source_system": "northwind-talent-crm",
+      "exported_at": "2026-10-10",
+      "max_evidence_age_days": 730,
+      "permitted_uses": [
+        "rediscovery_review",
+        "screening_audit"
+      ],
+      "retention_days": 90,
+      "deletion": "delete_candidate_data"
+    },
+    "screening_configuration": "ats_export_verified"
+  },
+  "counts": {
+    "direct": 8,
+    "transferable": 3,
+    "insufficient": 1,
+    "not_surfaced": 6,
+    "blocked": 3,
+    "active_workflow": 1
+  },
+  "limitations": [
+    "Groups describe the supplied evidence, not qualification. Every surfaced candidate needs human review.",
+    "No ranking or match score is produced; order within a group is by candidate id.",
+    "Prior applications are context only and do not establish permission to contact anyone."
+  ],
+  "entries": [
+    {
+      "candidate_id": "C-102",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-102",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q5 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (equivalent tool or credential)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].title",
+              "text": "Production Reliability Engineer",
+              "path": "terminology_variant",
+              "matched": "production reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 64,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].s2",
+              "text": "Led incident response for major outages and coordinated restoration across teams.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "supporting_skill"
+          ],
+          "path_label": "equivalent tool or credential",
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].s4",
+              "text": "Provisioned infrastructure with Pulumi and automated deployments.",
+              "path": "supporting_skill",
+              "matched": "Pulumi",
+              "concept": "skill.pulumi",
+              "record": "skill.pulumi"
+            },
+            {
+              "source": "candidate:C-102/skills.s1",
+              "text": "Pulumi.",
+              "path": "supporting_skill",
+              "matched": "Pulumi",
+              "concept": "skill.pulumi",
+              "record": "skill.pulumi"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-102/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-102/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q1",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q5",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-5f56524c"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as production reliability engineer",
+        "R2: described as incident response",
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-108",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-108",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q2, Q4 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 72,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s1",
+              "text": "Led incident response as incident commander for trading systems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s3",
+              "text": "Managed Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-108/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s3",
+              "text": "Managed Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:C-108/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "unverified": [
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q4",
+        "excluded_by": [
+          {
+            "rule": "Q2",
+            "reason": "72 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-cd635676"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R2: described as incident response"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-109",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-109",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q2, Q6 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 66,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].s2",
+              "text": "Led incident response for customer-facing outages and wrote postmortems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].s3",
+              "text": "Maintained Terraform for all infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-109/skills.s2",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-109/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q6",
+        "excluded_by": [
+          {
+            "rule": "Q2",
+            "reason": "66 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-c1d0ef0b"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R2: described as incident response",
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-110",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-110",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q7 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology, equivalent tool or credential)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s1",
+              "text": "Owned production infrastructure operations and on-call for a SaaS platform.",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 74,
+          "notes": [
+            "Closely related (not equivalent) terminology found: 'DevOps engineer' in candidate:C-110/experience[0].title"
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s2",
+              "text": "Led incident response for major outages and authored postmortems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill"
+          ],
+          "path_label": "same terminology, equivalent tool or credential",
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s3",
+              "text": "Wrote Terraform and CloudFormation for all environments.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-110/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-110/skills.s2",
+              "text": "CloudFormation.",
+              "path": "supporting_skill",
+              "matched": "CloudFormation",
+              "concept": "skill.cloudformation",
+              "record": "skill.cloudformation"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-110/skills.s3",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-110/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q7",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-82276566"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as infrastructure operations",
+        "R2: described as incident response",
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-113",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-113",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Applied to this requisition and was rejected; the supplied rules do not explain the exclusion.",
+        "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 96,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s1",
+              "text": "Led incident response as incident commander for booking systems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s2",
+              "text": "Maintained Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-113/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s2",
+              "text": "Maintained Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:C-113/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-113/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": null,
+        "excluded_by": [],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [],
+        "note": "The supplied rules do not explain this exclusion; it may be a manual decision or configuration that was not supplied."
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R2: described as incident response",
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-201",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-88213",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Prior applicant (REQ-SRE-0098, 2025-11-03, outcome: not_selected); record authorized for rediscovery review. The prior disposition is not explained by any supplied rule.",
+        "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-201/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 74,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-201/experience[0].s1",
+              "text": "Led incident response as incident commander for a ride-hailing platform.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-201/experience[0].s3",
+              "text": "Maintained Terraform for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:P-201/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [
+        {
+          "requisition_ref": "REQ-SRE-0098",
+          "role_title": "Site Reliability Engineer",
+          "applied_at": "2025-11-03",
+          "outcome": "not_selected",
+          "recorded_reason": "Role filled"
+        }
+      ],
+      "freshness": {
+        "evidence_updated_at": "2026-06-15",
+        "age_days": 117,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Contact permission is not established by this record."
+      ],
+      "signals": [
+        "R2: described as incident response"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-202",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-90455",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "talent_community_profile"
+      },
+      "group": "direct",
+      "why": [
+        "Record from northwind-talent-crm (talent community profile), authorized for rediscovery review.",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-202/experience[0].title",
+              "text": "Infrastructure Operations Engineer",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            },
+            {
+              "source": "candidate:P-202/experience[0].s1",
+              "text": "Owned infrastructure operations and on-call for policy administration systems.",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 66,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-202/experience[0].s2",
+              "text": "Led incident response for customer-facing outages and wrote postmortems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-202/experience[0].s3",
+              "text": "Automated provisioning with Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:P-202/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-04-02",
+        "age_days": 191,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "talent_community_profile"
+      },
+      "constraints": [
+        "Opted in to the talent community (supplied). Confirm current consent in your own system before any contact."
+      ],
+      "signals": [
+        "R1: described as infrastructure operations",
+        "R2: described as incident response"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-208",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-97002",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "direct",
+      "why": [
+        "Prior applicant (REQ-SRE-0098, 2025-10-28, outcome: rejected); record authorized for rediscovery review. The prior disposition is not explained by any supplied rule.",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-208/experience[0].title",
+              "text": "Production Reliability Engineer",
+              "path": "terminology_variant",
+              "matched": "production reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 62,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-208/experience[0].s1",
+              "text": "Led incident response for checkout outages.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-208/experience[0].s3",
+              "text": "Maintained Terraform modules.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:P-208/skills.s1",
+              "text": "Terraform",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [
+        {
+          "requisition_ref": "REQ-SRE-0098",
+          "role_title": "Site Reliability Engineer",
+          "applied_at": "2025-10-28",
+          "outcome": "rejected",
+          "recorded_reason": "Keyword filter"
+        }
+      ],
+      "freshness": {
+        "evidence_updated_at": "2026-07-21",
+        "age_days": 81,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Do not contact (supplied by the source system)."
+      ],
+      "signals": [
+        "R1: described as production reliability engineer",
+        "R2: described as incident response"
+      ],
+      "verify_next": [],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-103",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-103",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "transferable",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential).",
+        "At least one requirement is supported through an alternative path that a recruiter must verify."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].title",
+              "text": "Clinical Systems Operations Manager",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            },
+            {
+              "source": "candidate:C-103/experience[0].s1",
+              "text": "Ran systems operations for the electronic health record platform across four hospitals, owning uptime and availability of production systems.",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 66,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].s2",
+              "text": "Led the response to EHR outages and coordinated restoration across clinical and IT teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s4",
+              "text": "Ran post-incident reviews that produced corrective actions.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s3",
+              "text": "Briefed hospital leadership and clinicians with incident status updates.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            }
+          ],
+          "months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 66 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill"
+          ],
+          "path_label": "same terminology, equivalent tool or credential",
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].s5",
+              "text": "Automated server provisioning with Terraform and Ansible.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-103/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-103/skills.s2",
+              "text": "Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q3",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-4989b969"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as systems operations",
+        "R2: transferable experience (eq.incident-management.operational-crisis-response)"
+      ],
+      "verify_next": [
+        "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+        "Confirm they communicated status to stakeholders during the event.",
+        "Confirm they drove a review that produced corrective actions.",
+        "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-106",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-106",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "transferable",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential, different terminology).",
+        "At least one requirement is supported through an alternative path that a recruiter must verify."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s1",
+              "text": "Directed network and infrastructure operations for a 2,000-person brigade.",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 72,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s2",
+              "text": "Directed the response to communications outages during deployments, restoring service across units.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s3",
+              "text": "Delivered status briefings to commanders throughout each outage.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s4",
+              "text": "Led after-action reviews and tracked corrective actions to closure.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "post_incident_learning",
+              "matched": "Ran post-incident or after-action reviews that produced corrective actions."
+            }
+          ],
+          "months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 72 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill",
+            "terminology_variant"
+          ],
+          "path_label": "same terminology, equivalent tool or credential, different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s5",
+              "text": "Built infrastructure automation with Ansible and Terraform.",
+              "path": "terminology_variant",
+              "matched": "infrastructure automation",
+              "concept": "skill.infrastructure-as-code",
+              "record": "skill.infrastructure-as-code"
+            },
+            {
+              "source": "candidate:C-106/skills.s1",
+              "text": "Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            },
+            {
+              "source": "candidate:C-106/skills.s2",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-106/learning.s1",
+              "text": "Self-directed study of Kubernetes",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "unverified": [
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q2",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": [
+          "SA-REQ-SRE-0142-36d39631"
+        ]
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as infrastructure operations",
+        "R2: transferable experience (eq.incident-management.operational-crisis-response)",
+        "R3: described as infrastructure automation"
+      ],
+      "verify_next": [
+        "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+        "Confirm they communicated status to stakeholders during the event.",
+        "Confirm they drove a review that produced corrective actions.",
+        "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-203",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-77310",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "transferable",
+      "why": [
+        "Prior applicant (REQ-OPS-0310, 2025-08-19, outcome: withdrawn); record authorized for rediscovery review. The prior disposition is not explained by any supplied rule.",
+        "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (equivalent tool or credential).",
+        "At least one requirement is supported through an alternative path that a recruiter must verify."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-203/experience[0].s1",
+              "text": "Ran systems operations for the regional grid control room, owning availability of production SCADA systems.",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 84,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:P-203/experience[0].s2",
+              "text": "Led the response to grid outages and coordinated restoration across field teams and vendors.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:P-203/experience[0].s4",
+              "text": "Ran post-incident reviews and tracked corrective actions.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:P-203/experience[0].s3",
+              "text": "Issued outage status updates to executives.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            }
+          ],
+          "months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 84 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "supporting_skill"
+          ],
+          "path_label": "equivalent tool or credential",
+          "evidence": [
+            {
+              "source": "candidate:P-203/experience[0].s5",
+              "text": "Automated server provisioning with Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            },
+            {
+              "source": "candidate:P-203/skills.s1",
+              "text": "Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [
+        {
+          "requisition_ref": "REQ-OPS-0310",
+          "role_title": "Operations Analyst",
+          "applied_at": "2025-08-19",
+          "outcome": "withdrawn"
+        }
+      ],
+      "freshness": {
+        "evidence_updated_at": "2026-02-20",
+        "age_days": 232,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Contact permission is not established by this record."
+      ],
+      "signals": [
+        "R1: described as systems operations",
+        "R2: transferable experience (eq.incident-management.operational-crisis-response)"
+      ],
+      "verify_next": [
+        "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+        "Confirm they communicated status to stakeholders during the event.",
+        "Confirm they drove a review that produced corrective actions.",
+        "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-205",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-93377",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "talent_community_profile"
+      },
+      "group": "insufficient",
+      "why": [
+        "Record from northwind-talent-crm (talent community profile), authorized for rediscovery review.",
+        "Evidence supports R2 (different terminology); R3 (same terminology); other mandatory requirements cannot be verified from the supplied record."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Partial evidence for eq.site-reliability.production-operations: missing required indicator(s) ['production_ownership']; only 2 of required 3 indicators; 0 months is below the 24-month minimum.",
+            "Closely related (not equivalent) terminology found: 'platform engineer' in candidate:P-205/experience[0].title"
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-205/skills.s1",
+              "text": "incident response.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-205/experience[0].s1",
+              "text": "Built Terraform modules and Kubernetes clusters.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:P-205/skills.s2",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-205/experience[0].s1",
+              "text": "Built Terraform modules and Kubernetes clusters.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:P-205/skills.s3",
+              "text": "Kubernetes",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "unverified": [
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "cannot_verify",
+          "detail": "Not evidenced in a partial record; cannot be supported or ruled out."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-09-01",
+        "age_days": 39,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "talent_community_profile"
+      },
+      "constraints": [
+        "Opted in to the talent community (supplied). Confirm current consent in your own system before any contact."
+      ],
+      "signals": [
+        "R2: described as incident response"
+      ],
+      "verify_next": [
+        "Verify whether the closely related experience meets the requirement."
+      ],
+      "reason": "",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-104",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-104",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-104/experience[0].title",
+              "text": "Network Operations Lead",
+              "path": "terminology_variant",
+              "matched": "network operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            },
+            {
+              "source": "candidate:C-104/experience[0].s1",
+              "text": "Led network operations for 30 distribution centers.",
+              "path": "terminology_variant",
+              "matched": "network operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 72,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "path_label": "transferable experience",
+          "evidence": [
+            {
+              "source": "candidate:C-104/experience[0].s2",
+              "text": "Led the response to warehouse network outages and coordinated recovery across site teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-104/experience[0].s3",
+              "text": "Sent outage communications to regional leadership.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-104/experience[0].s4",
+              "text": "Wrote root cause reports after major failures.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "post_incident_learning",
+              "matched": "Ran post-incident or after-action reviews that produced corrective actions."
+            }
+          ],
+          "months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 72 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R2"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q3",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q5",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R1: described as network operations",
+        "R2: transferable experience (eq.incident-management.operational-crisis-response)"
+      ],
+      "verify_next": [
+        "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+        "Confirm they communicated status to stakeholders during the event.",
+        "Confirm they drove a review that produced corrective actions.",
+        "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+      ],
+      "reason": "Required evidence missing from a complete record: R3 \u2014 No supporting evidence in the supplied record.",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-105",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-105",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        },
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q1",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q5",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [],
+      "verify_next": [],
+      "reason": "No supplied evidence supports any required requirement.",
+      "listable": false
+    },
+    {
+      "candidate_id": "C-107",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-107",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q2, Q3 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "insufficient",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 36,
+          "notes": [
+            "36 months of relevant experience found; requirement states 5 years."
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].s2",
+              "text": "Participated in incident response.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].s1",
+              "text": "Supported production services on call and automated deployments with Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-107/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-107/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-107/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "below_threshold",
+          "detail": "36 months of relevant experience found; requirement states 5 years."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q2",
+        "excluded_by": [
+          {
+            "rule": "Q2",
+            "reason": "36 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R2: described as incident response",
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "Required evidence missing from a complete record: R1 \u2014 36 months of relevant experience found; requirement states 5 years.",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-111",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-111",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "insufficient",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-111/learning.s1",
+              "text": "Online course: Introduction to Site Reliability Engineering",
+              "path": "direct",
+              "matched": "Site reliability engineering",
+              "concept": "skill.site-reliability-engineering",
+              "record": "skill.site-reliability-engineering"
+            }
+          ],
+          "months": 0,
+          "notes": [
+            "0 months of relevant experience found; requirement states 5 years."
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "below_threshold",
+          "detail": "0 months of relevant experience found; requirement states 5 years."
+        },
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q2",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q4",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q5",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [],
+      "verify_next": [],
+      "reason": "No supplied evidence supports any required requirement.",
+      "listable": false
+    },
+    {
+      "candidate_id": "C-112",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-112",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-112/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R1",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        },
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": "Q1",
+        "excluded_by": [
+          {
+            "rule": "Q1",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q2",
+            "reason": "0 relevant months vs 84 required"
+          },
+          {
+            "rule": "Q3",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q5",
+            "reason": "no listed term found"
+          },
+          {
+            "rule": "Q6",
+            "reason": "answered 'no', rule requires 'yes'"
+          },
+          {
+            "rule": "Q7",
+            "reason": "no listed term found"
+          }
+        ],
+        "basis": "simulated against the ATS-exported screening configuration",
+        "established": true,
+        "related_findings": []
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "No supplied evidence supports any required requirement.",
+      "listable": false
+    },
+    {
+      "candidate_id": "P-204",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-61902",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Prior applicant (REQ-IT-0221, 2026-05-11, outcome: rejected); record authorized for rediscovery review. The prior disposition is not explained by any supplied rule."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:P-204/experience[0].s2",
+              "text": "Monitored systems operations dashboards and escalated issues to the infrastructure vendor.",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "months": 60,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": [
+            "Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators."
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R5",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators."
+        },
+        {
+          "requirement": "R3",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": false,
+        "excluded_by": [],
+        "basis": "No supplied screening rule applies: this record is not an application to this requisition.",
+        "established": false,
+        "related_findings": []
+      },
+      "prior_applications": [
+        {
+          "requisition_ref": "REQ-IT-0221",
+          "role_title": "IT Support Lead",
+          "applied_at": "2026-05-11",
+          "outcome": "rejected",
+          "recorded_reason": "Role closed"
+        }
+      ],
+      "freshness": {
+        "evidence_updated_at": "2026-05-11",
+        "age_days": 152,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [
+        "Contact permission is not established by this record."
+      ],
+      "signals": [
+        "R1: described as systems operations"
+      ],
+      "verify_next": [],
+      "reason": "Required evidence missing from a complete record: R2 \u2014 Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators.; R3 \u2014 No supporting evidence in the supplied record.",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-206",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-20114",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "blocked",
+      "why": [],
+      "requirements": [],
+      "supported": [],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {},
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2021-05-10",
+        "age_days": 1979,
+        "max_age_days": 730,
+        "status": "stale",
+        "provenance": "application_resume"
+      },
+      "constraints": [],
+      "signals": [],
+      "verify_next": [],
+      "reason": "Evidence last updated 2021-05-10 (1979 days ago) exceeds the 730-day limit.",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-207",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-95120",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "blocked",
+      "why": [],
+      "requirements": [],
+      "supported": [],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {},
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-08-30",
+        "age_days": 41,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [],
+      "signals": [],
+      "verify_next": [],
+      "reason": "Not authorized for rediscovery review (permitted uses: original_requisition_only).",
+      "listable": true
+    },
+    {
+      "candidate_id": "P-209",
+      "source": {
+        "kind": "candidate_pool",
+        "system": "northwind-talent-crm",
+        "record_ref": "crm:rec-84456",
+        "pool_id": "NW-POOL-2026-10-ENG",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "blocked",
+      "why": [],
+      "requirements": [],
+      "supported": [],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {},
+      "prior_applications": [],
+      "freshness": {
+        "evidence_updated_at": "2026-03-14",
+        "age_days": 210,
+        "max_age_days": 730,
+        "status": "fresh",
+        "provenance": "application_resume"
+      },
+      "constraints": [],
+      "signals": [],
+      "verify_next": [],
+      "reason": "Authorization expired on 2026-09-30.",
+      "listable": true
+    },
+    {
+      "candidate_id": "C-101",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-101",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "active_workflow",
+      "why": [],
+      "requirements": [],
+      "supported": [],
+      "unverified": [],
+      "mandatory_issues": [],
+      "screening": {},
+      "prior_applications": [],
+      "freshness": {},
+      "constraints": [],
+      "signals": [],
+      "verify_next": [],
+      "reason": "Already in active review in the ATS (status: advanced).",
+      "listable": false
+    }
+  ]
+}

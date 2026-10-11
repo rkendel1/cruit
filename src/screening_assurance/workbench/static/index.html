@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="sa-token" content="__SA_TOKEN__">
+<title>Candidate Rediscovery Workbench</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">Candidate Rediscovery Workbench<span>Screening Assurance, running on this computer only</span></div>
+    <div class="provenance" id="provenance"></div>
+    <label class="reviewer">Reviewer <input type="text" id="reviewer" placeholder="your name or email" autocomplete="off"></label>
+  </div>
+</header>
+<div class="shell">
+  <nav class="steps" id="steps" aria-label="Workflow"></nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -9,6 +9,7 @@ the rules below. The ATS remains the system of record.
 |---|---|---|
 | `requisition` | Job/requisition record, posted description, requirements, knockout questions, filters, scoring criteria | Set `inputs_received.screening_configuration` to `ats_api_verified` only when rules were read from the live configuration. |
 | `candidates` | Application stage, disposition, the rule that excluded the applicant (if recorded), knockout answers, résumé-derived experience | De-identified. No names, contact details, photos or protected characteristics — the schema rejects them. |
+| `candidate_pool` | Retained profiles authorized for other open roles (prior applicants, talent community) | De-identified; opaque `source_record_ref`; `evidence_updated_at`, provenance and coverage; `permitted_uses` must include `rediscovery_review`; retention and deletion behaviour required. Never implies consent to contact. |
 | `outcomes` | Stage progression and recruiter activity for the measurement periods | Aggregate counts plus per-candidate review records for surfaced candidates. |
 
 `sa schema <name>` prints each contract; `sa check <contract> <file>` validates a file.

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/discovery_case.schema.json",
+  "title": "Discovery evaluation case (synthetic)",
+  "description": "Labeled synthetic fixture for candidate rediscovery. Labels are ground truth for evaluation only; the engine never sees them. Results are synthetic and do not represent real-world accuracy.",
+  "type": "object",
+  "required": ["id", "description", "requisition", "policy", "pool", "as_of", "labels"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "description": { "type": "string" },
+    "requisition": { "type": "string" },
+    "policy": { "type": "string" },
+    "candidates": { "type": "string" },
+    "pool": { "type": "string" },
+    "as_of": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "labels": {
+      "description": "relevant = should be surfaced for review; not_relevant = should not be surfaced; insufficient = only the 'insufficient evidence' group is acceptable; must_not_surface = blocked or missing a mandatory qualification and must never appear in an actionable group.",
+      "type": "object",
+      "additionalProperties": { "enum": ["relevant", "not_relevant", "insufficient", "must_not_surface"] }
+    },
+    "fixture_types": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "expected_groups": {
+      "type": "object",
+      "additionalProperties": { "enum": ["direct", "transferable", "insufficient", "not_surfaced", "blocked", "active_workflow"] }
+    }
+  }
+}

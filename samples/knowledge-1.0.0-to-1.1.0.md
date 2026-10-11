@@ -44,6 +44,35 @@ _No change._
 - Newly flagged for review: C-106
 - ✅ expected finding now found: candidate_review_opportunity C-106
 
+## Candidate rediscovery
+
+> **SYNTHETIC FIXTURE RESULTS — not a measure of real-world accuracy**
+
+| Metric | Baseline | Candidate |
+|---|---|---|
+| cases | 2 | 2 |
+| relevant surfaced | 11 | 13 |
+| relevant missed | 2 | 0 |
+| irrelevant surfaced | 0 | 0 |
+| overclaimed certainty | 0 | 0 |
+| mandatory violations | 0 | 0 |
+| blocked violations | 0 | 0 |
+| needs human verification | 6 | 6 |
+| group mismatches | 2 | 0 |
+| relevant recall | 0.846 | 1.0 |
+| recruiter dispositions | not measured in fixtures | not measured in fixtures |
+| recruiter minutes | not measured in fixtures | not measured in fixtures |
+
+### linehaul-rediscovery
+
+_No change._
+
+### sre-rediscovery
+
+- C-102: transferable → direct
+- C-106: not_surfaced → transferable
+- P-208: not_surfaced → direct
+
 ## Knowledge records changed
 
 ```

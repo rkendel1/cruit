@@ -1,0 +1,32 @@
+id: linehaul-rediscovery
+description: >-
+  SYNTHETIC. Rediscovery for the Linehaul Operations Supervisor requisition, where a Class A CDL
+  is legally required. A strong operations leader without the license must not be surfaced; a
+  record whose credentials were not supplied may only appear as "insufficient evidence".
+requisition: ../../examples/northwind/requisitions/REQ-LH-0217/requisition.yaml
+candidates: ../../examples/northwind/requisitions/REQ-LH-0217/candidates.yaml
+pool: ../../examples/northwind/requisitions/REQ-LH-0217/candidate-pool.yaml
+policy: ../../examples/northwind/policy.yaml
+as_of: "2026-10-10"
+
+labels:
+  C-301: relevant
+  C-302: must_not_surface
+  C-303: relevant
+  C-304: not_relevant
+  P-301: relevant
+  P-302: must_not_surface
+  P-303: insufficient
+
+fixture_types:
+  P-301: direct evidence with the required license
+  P-302: missing a genuine mandatory qualification (license absent from a complete credential list)
+  P-303: license cannot be verified (credentials not supplied)
+  C-302: strong supervisor without the license (current applicant)
+
+expected_groups:
+  P-301: direct
+  P-302: not_surfaced
+  P-303: insufficient
+  C-302: not_surfaced
+  C-303: transferable

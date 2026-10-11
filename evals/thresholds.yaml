@@ -7,3 +7,9 @@ max_forbidden_violations: 0        # e.g. surfacing someone without a legally re
 max_guardrail_violations: 0
 max_precision_drop: 0.0            # compare gate: precision may not fall versus baseline
 max_false_positive_increase: 0     # compare gate: no new false positives
+# Candidate rediscovery (synthetic fixtures)
+max_mandatory_violations: 0        # surfaced as direct/transferable while a mandatory requirement is unmet or unverifiable
+max_blocked_violations: 0          # stale, unauthorized or expired records surfaced for action
+max_irrelevant_surfaced: 0
+max_overclaimed_certainty: 0       # 'insufficient' fixtures shown as direct/transferable
+min_discovery_recall: 0.8

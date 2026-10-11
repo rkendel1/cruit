@@ -1,0 +1,56 @@
+# Authorized, de-identified candidate pool for rediscovery (fictional, synthetic).
+pool_id: NW-POOL-2026-10-OPS
+source_system: northwind-talent-crm
+exported_at: "2026-10-10"
+max_evidence_age_days: 730
+authorization:
+  basis: Candidate privacy notice v3 permits review of retained profiles for other open roles (illustrative)
+  de_identified: true
+  permitted_uses: [rediscovery_review]
+  retention_days: 90
+  deletion: delete_candidate_data
+  granted_by: privacy-office@northwind.example
+
+candidates:
+  - id: P-301
+    source_record_ref: crm:rec-55120
+    evidence_updated_at: "2026-07-02"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    experience:
+      - title: Dispatch Supervisor
+        domain: logistics
+        months: 48
+        summary: >-
+          Supervised 18 linehaul drivers and the overnight dispatch desk.
+          Ran hours-of-service compliance audits.
+    credentials: [CDL Class A]
+
+  - id: P-302
+    source_record_ref: crm:rec-55871
+    evidence_updated_at: "2026-06-18"
+    evidence_provenance: application_resume
+    evidence_coverage: { experience: complete, credentials: complete }
+    experience:
+      - title: Regional Fleet Manager
+        domain: logistics
+        months: 96
+        summary: >-
+          Supervised 40 drivers and dispatchers across five terminals.
+          Ran DOT compliance audits.
+          Improved on-time delivery performance by 9%.
+    credentials: []
+
+  - id: P-303
+    source_record_ref: crm:rec-56004
+    evidence_updated_at: "2026-08-09"
+    evidence_provenance: talent_community_profile
+    evidence_coverage: { experience: complete, credentials: not_supplied }
+    contact_status: opted_in_talent_community
+    experience:
+      - title: Fleet Coordinator
+        domain: logistics
+        months: 40
+        summary: >-
+          Supervised 12 linehaul drivers and scheduled daily routes.
+          Ran hours-of-service compliance audits.

@@ -7,7 +7,12 @@
     "max_forbidden_violations": 0,
     "max_guardrail_violations": 0,
     "max_precision_drop": 0.0,
-    "max_false_positive_increase": 0
+    "max_false_positive_increase": 0,
+    "max_mandatory_violations": 0,
+    "max_blocked_violations": 0,
+    "max_irrelevant_surfaced": 0,
+    "max_overclaimed_certainty": 0,
+    "min_discovery_recall": 0.8
   },
   "metrics": {
     "cases": 4,
@@ -827,5 +832,159 @@
         }
       ]
     }
-  ]
+  ],
+  "discovery": {
+    "label": "SYNTHETIC FIXTURE RESULTS \u2014 not a measure of real-world accuracy",
+    "metrics": {
+      "cases": 2,
+      "relevant_surfaced": 13,
+      "relevant_missed": 0,
+      "irrelevant_surfaced": 0,
+      "overclaimed_certainty": 0,
+      "mandatory_violations": 0,
+      "blocked_violations": 0,
+      "needs_human_verification": 6,
+      "group_mismatches": 0,
+      "relevant_recall": 1.0,
+      "recruiter_dispositions": "not measured in fixtures",
+      "recruiter_minutes": "not measured in fixtures"
+    },
+    "cases": [
+      {
+        "case_id": "linehaul-rediscovery",
+        "description": "SYNTHETIC. Rediscovery for the Linehaul Operations Supervisor requisition, where a Class A CDL is legally required. A strong operations leader without the license must not be surfaced; a record whose credentials were not supplied may only appear as \"insufficient evidence\".",
+        "knowledge": "core@1.1.0+8a94e741e4",
+        "groups": {
+          "P-301": "direct",
+          "C-303": "transferable",
+          "P-303": "insufficient",
+          "C-302": "not_surfaced",
+          "C-304": "not_surfaced",
+          "P-302": "not_surfaced",
+          "C-301": "active_workflow"
+        },
+        "fixture_types": {
+          "P-301": "direct evidence with the required license",
+          "P-302": "missing a genuine mandatory qualification (license absent from a complete credential list)",
+          "P-303": "license cannot be verified (credentials not supplied)",
+          "C-302": "strong supervisor without the license (current applicant)"
+        },
+        "relevant_surfaced": [
+          "C-303",
+          "P-301"
+        ],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "overclaimed_certainty": [],
+        "mandatory_violations": [],
+        "blocked_violations": [],
+        "needs_human_verification": [
+          "C-303",
+          "P-303"
+        ],
+        "group_mismatches": [],
+        "unlabeled_surfaced": [],
+        "reasons": {
+          "P-301": "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology).",
+          "C-303": "At least one requirement is supported through an alternative path that a recruiter must verify.",
+          "P-303": "Evidence supports R2 (transferable experience); R3 (same terminology); other mandatory requirements cannot be verified from the supplied record.",
+          "C-302": "A mandatory requirement is not met: R1 \u2014 Mandatory credential is not among the credentials supplied for this complete record.",
+          "C-304": "Required evidence missing from a complete record: R2 \u2014 Partial evidence for eq.transportation-supervision.fleet-coordination: only 1 of required 2 indicators.; R3 \u2014 No supporting evidence in the supplied record.",
+          "P-302": "A mandatory requirement is not met: R1 \u2014 Mandatory credential is not among the credentials supplied for this complete record.",
+          "C-301": "Already in active review in the ATS (status: advanced)."
+        }
+      },
+      {
+        "case_id": "sre-rediscovery",
+        "description": "SYNTHETIC. Rediscovery for the Senior SRE requisition across current applicants and an authorized talent-CRM pool. Covers direct evidence, different titles, transferable experience, look-alikes without necessary evidence, partial records, and stale, unauthorized and expired records that must never be surfaced for action.",
+        "knowledge": "core@1.1.0+8a94e741e4",
+        "groups": {
+          "C-102": "direct",
+          "C-108": "direct",
+          "C-109": "direct",
+          "C-110": "direct",
+          "C-113": "direct",
+          "P-201": "direct",
+          "P-202": "direct",
+          "P-208": "direct",
+          "C-103": "transferable",
+          "C-106": "transferable",
+          "P-203": "transferable",
+          "P-205": "insufficient",
+          "C-104": "not_surfaced",
+          "C-105": "not_surfaced",
+          "C-107": "not_surfaced",
+          "C-111": "not_surfaced",
+          "C-112": "not_surfaced",
+          "P-204": "not_surfaced",
+          "P-206": "blocked",
+          "P-207": "blocked",
+          "P-209": "blocked",
+          "C-101": "active_workflow"
+        },
+        "fixture_types": {
+          "P-201": "direct evidence (prior applicant, conventional title)",
+          "P-202": "different title, relevant evidence",
+          "P-203": "plausibly transferable experience (utility grid control room) needing review",
+          "P-204": "appears similar (incident tickets, systems dashboards) but lacks necessary evidence",
+          "P-205": "insufficient evidence (partial talent-community profile)",
+          "P-206": "stale record (evidence older than 730 days)",
+          "P-207": "unauthorized record (original requisition only)",
+          "P-209": "expired authorization",
+          "P-208": "discovered only after knowledge 1.1.0 (production reliability title variant)",
+          "C-107": "conventional title, below the posted experience threshold"
+        },
+        "relevant_surfaced": [
+          "C-102",
+          "C-103",
+          "C-106",
+          "C-108",
+          "C-109",
+          "C-110",
+          "C-113",
+          "P-201",
+          "P-202",
+          "P-203",
+          "P-208"
+        ],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "overclaimed_certainty": [],
+        "mandatory_violations": [],
+        "blocked_violations": [],
+        "needs_human_verification": [
+          "C-103",
+          "C-106",
+          "P-203",
+          "P-205"
+        ],
+        "group_mismatches": [],
+        "unlabeled_surfaced": [],
+        "reasons": {
+          "C-102": "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (equivalent tool or credential).",
+          "C-108": "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).",
+          "C-109": "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).",
+          "C-110": "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology, equivalent tool or credential).",
+          "C-113": "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).",
+          "P-201": "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).",
+          "P-202": "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology).",
+          "P-208": "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology).",
+          "C-103": "At least one requirement is supported through an alternative path that a recruiter must verify.",
+          "C-106": "At least one requirement is supported through an alternative path that a recruiter must verify.",
+          "P-203": "At least one requirement is supported through an alternative path that a recruiter must verify.",
+          "P-205": "Evidence supports R2 (different terminology); R3 (same terminology); other mandatory requirements cannot be verified from the supplied record.",
+          "C-104": "Required evidence missing from a complete record: R3 \u2014 No supporting evidence in the supplied record.",
+          "C-105": "No supplied evidence supports any required requirement.",
+          "C-107": "Required evidence missing from a complete record: R1 \u2014 36 months of relevant experience found; requirement states 5 years.",
+          "C-111": "No supplied evidence supports any required requirement.",
+          "C-112": "No supplied evidence supports any required requirement.",
+          "P-204": "Required evidence missing from a complete record: R2 \u2014 Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators.; R3 \u2014 No supporting evidence in the supplied record.",
+          "P-206": "Evidence last updated 2021-05-10 (1979 days ago) exceeds the 730-day limit.",
+          "P-207": "Not authorized for rediscovery review (permitted uses: original_requisition_only).",
+          "P-209": "Authorization expired on 2026-09-30.",
+          "C-101": "Already in active review in the ATS (status: advanced)."
+        }
+      }
+    ]
+  }
 }
