@@ -1,0 +1,474 @@
+{
+  "requisition": {
+    "id": "REQ-RO-0455",
+    "title": "Revenue Operations Manager",
+    "job_family": "revenue-operations",
+    "employer_id": "northwind",
+    "ats": null
+  },
+  "policy": {
+    "employer_id": "northwind",
+    "policy_version": "2026.2"
+  },
+  "knowledge": {
+    "pack": "core",
+    "version": "1.1.0",
+    "fingerprint": "core@1.1.0+8a94e741e4",
+    "status": "approved",
+    "path": "knowledge/releases/1.1.0"
+  },
+  "engine_version": "0.1.0",
+  "run_at": "2026-11-03T12:00:00Z",
+  "inputs": {
+    "job_description": "supplied",
+    "screening_configuration": "recruiter_documentation",
+    "candidate_evidence": "not_supplied",
+    "notes": "Draft rules reviewed before the job is published."
+  },
+  "limitations": [
+    "Screening rules were supplied as recruiter documentation, not verified ATS configuration. Findings describe the documented rules; the live ATS may differ.",
+    "No authorized candidate evidence was supplied; candidate-pool assurance was not performed.",
+    "Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run."
+  ],
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "5+ years of revenue operations experience.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.revenue-operations"
+      ],
+      "concept_names": [
+        "Revenue operations"
+      ],
+      "proposed_classification": "essential",
+      "classification_basis": "linked to objectives ['O1']",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": 5
+    },
+    {
+      "id": "R2",
+      "text": "Salesforce administration experience.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.salesforce"
+      ],
+      "concept_names": [
+        "Salesforce"
+      ],
+      "proposed_classification": "essential",
+      "classification_basis": "Northwind's go-to-market stack runs on Salesforce and this role is its administrator.",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R3",
+      "text": "MBA or equivalent business education.",
+      "stated_as": "preferred",
+      "concepts": [],
+      "concept_names": [],
+      "proposed_classification": "preferred",
+      "classification_basis": "stated as preferred in the posting",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "Q1",
+      "type": "minimum_experience",
+      "text": "7 years as Revenue Operations Manager (by job title).",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.revenue-operations"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "Revenue Operations Manager",
+          "Revenue operations",
+          "RevOps",
+          "revenue ops",
+          "commercial operations"
+        ],
+        "years": 5,
+        "field": "resume",
+        "equivalencies": []
+      },
+      "finding_ids": [
+        "SA-REQ-RO-0455-4d7c87e1",
+        "SA-REQ-RO-0455-088d343c",
+        "SA-REQ-RO-0455-568981f2"
+      ]
+    },
+    {
+      "id": "Q2",
+      "type": "knockout_question",
+      "text": "Do you hold an MBA?",
+      "action": "reject",
+      "linked_requirement": "R3",
+      "concepts": [],
+      "status": "correction_proposed",
+      "corrected": {
+        "removed": true
+      },
+      "finding_ids": [
+        "SA-REQ-RO-0455-30380d96"
+      ]
+    },
+    {
+      "id": "Q3",
+      "type": "keyword_filter",
+      "text": "R\u00e9sum\u00e9 must mention RevOps.",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.revenue-operations"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "RevOps",
+          "Revenue operations",
+          "revenue operations manager",
+          "revenue ops",
+          "commercial operations"
+        ],
+        "match": "any",
+        "field": "resume"
+      },
+      "finding_ids": [
+        "SA-REQ-RO-0455-130b17ea"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SA-REQ-RO-0455-4d7c87e1",
+      "check": "threshold_inconsistency",
+      "title": "Q1 requires 7 years; the posting asks for 5",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-RO-0455",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R1 states 5+ years, but rule Q1 enforces 7 years.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of revenue operations experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "7 years as Revenue Operations Manager (by job title)."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "5+ years of revenue operations experience."
+        },
+        {
+          "source": "rule:Q1",
+          "text": "years: 7 \u2014 7 years as Revenue Operations Manager (by job title)."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Align the rule threshold with the posted requirement (5 years), or update the posting if the higher threshold is genuinely required.",
+      "expected_benefit": "Applicants who meet the posted threshold are no longer silently excluded.",
+      "tradeoffs": "None if the posting reflects the real need.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "years": 5
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-RO-0455-30380d96",
+      "check": "preferred_enforced_as_knockout",
+      "title": "Preferred qualification R3 is enforced as a knockout by Q2",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-RO-0455",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R3 is stated as preferred, but rule Q2 rejects applicants who do not meet it.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R3",
+          "text": "MBA or equivalent business education."
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "Do you hold an MBA?"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R3",
+          "text": "stated_as: preferred \u2014 MBA or equivalent business education."
+        },
+        {
+          "source": "rule:Q2",
+          "text": "action: reject \u2014 Do you hold an MBA?"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.",
+      "expected_benefit": "Applicants who meet all essential requirements are no longer rejected for lacking a preference.",
+      "tradeoffs": "More applicants reach review; ranking should still favour the preferred qualification.",
+      "rule_id": "Q2",
+      "requirement_id": "R3",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "removed": true
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-RO-0455-088d343c",
+      "check": "literal_term_missing_variants",
+      "title": "Q1 matches literally and misses recognized variants of Revenue operations",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-RO-0455",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 matches only 'Revenue Operations Manager'. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "7 years as Revenue Operations Manager (by job title)."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.revenue-operations",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.commercial-operations",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.revenue-operations",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.revenue-operations",
+          "text": "recognized variant(s): Revenue operations, RevOps, revenue ops, commercial operations"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "Terminology only; scope of revenue operations roles varies by organization.",
+        "Equivalent to revenue operations in some organizations but not universally; verify scope.",
+        "Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Revenue operations, RevOps, revenue ops, commercial operations.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q1",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "Revenue operations",
+          "RevOps",
+          "revenue ops",
+          "commercial operations"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.revenue-operations",
+        "term.commercial-operations",
+        "term.revenue-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-RO-0455-568981f2",
+      "check": "experience_path_narrower",
+      "title": "Q1 counts experience only under specific job titles",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-RO-0455",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 only counts experience held under the titles 'Revenue Operations Manager'. The underlying capability can be demonstrated under other titles and in other domains.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "7 years as Revenue Operations Manager (by job title)."
+        },
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of revenue operations experience."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "rule:Q1",
+          "text": "7 years as Revenue Operations Manager (by job title)."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.",
+        "Title-based counting may reflect a deliberate employer choice; confirm intent."
+      ],
+      "proposed_action": "Count relevant experience by responsibilities, not titles: match recognized terminology across the full r\u00e9sum\u00e9 and route equivalency evidence to recruiter review.",
+      "expected_benefit": "Candidates whose titles differ from the conventional path reach human review.",
+      "tradeoffs": "Responsibility-based matching needs recruiter verification; expect modest extra review time.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "field": "resume",
+        "add_terms": [
+          "Revenue operations",
+          "revenue operations manager",
+          "RevOps",
+          "revenue ops",
+          "commercial operations"
+        ],
+        "equivalencies": []
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-RO-0455-130b17ea",
+      "check": "literal_term_missing_variants",
+      "title": "Q3 matches literally and misses recognized variants of Revenue operations",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-RO-0455",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q3 matches only 'RevOps'. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": "R\u00e9sum\u00e9 must mention RevOps."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.revenue-operations",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.commercial-operations",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.revenue-operations",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.revenue-operations",
+          "text": "recognized variant(s): Revenue operations, revenue operations manager, revenue ops, commercial operations"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "Terminology only; scope of revenue operations roles varies by organization.",
+        "Equivalent to revenue operations in some organizations but not universally; verify scope.",
+        "Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Revenue operations, revenue operations manager, revenue ops, commercial operations.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q3",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "Revenue operations",
+          "revenue operations manager",
+          "revenue ops",
+          "commercial operations"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.revenue-operations",
+        "term.commercial-operations",
+        "term.revenue-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    }
+  ],
+  "candidates": [],
+  "suppressed": [],
+  "measurement": null,
+  "summary": {
+    "findings": 5,
+    "by_category": {
+      "confirmed_inconsistency": 2,
+      "design_risk": 3
+    },
+    "by_level": {
+      "level_1": 2,
+      "level_2": 3,
+      "level_3": 0
+    },
+    "pending_decisions": 5,
+    "candidates_assessed": 0,
+    "candidates_surfaced": 0
+  }
+}

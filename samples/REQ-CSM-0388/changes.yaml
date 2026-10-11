@@ -1,0 +1,38 @@
+requisition_id: REQ-CSM-0388
+knowledge: core@1.1.0+8a94e741e4
+note: Suggested changes for the employer to implement in the ATS. Screening Assurance
+  does not modify ATS configuration.
+changes:
+- finding_id: SA-REQ-CSM-0388-7da18d53
+  rule: Q1
+  decision: accepted
+  change:
+    allows_equivalent: true
+    equivalencies:
+    - eq.customer-success.b2b-account-management
+  instruction: Add an equivalent-evidence path (e.g. a follow-up question or recruiter
+    review route) so applicants with equivalent experience are reviewed rather than
+    rejected.
+  current_rule_text: "R\xE9sum\xE9 must mention customer success."
+- finding_id: SA-REQ-CSM-0388-7d038e7c
+  rule: Q3
+  decision: accepted
+  change:
+    evidence_concepts:
+    - skill.salesforce
+  instruction: Accept demonstrated proficiency as well as the credential, or document
+    why the credential itself is required.
+  current_rule_text: Must hold Salesforce Certified Administrator.
+- finding_id: SA-REQ-CSM-0388-1fa7cee2
+  rule: Q1
+  decision: accepted
+  change:
+    add_terms:
+    - client success
+    - customer success management
+    - customer success manager
+    - client success manager
+    - CSM
+  instruction: 'Add recognized variants to the rule: client success, customer success
+    management, customer success manager, client success manager, CSM.'
+  current_rule_text: "R\xE9sum\xE9 must mention customer success."

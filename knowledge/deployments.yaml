@@ -1,0 +1,29 @@
+environments:
+  production: 1.1.0
+  staging: 1.1.0
+history:
+- at: '2026-10-11T16:50:10+00:00'
+  action: promote
+  environment: production
+  version: 1.0.0
+  previous: null
+  by: knowledge-admin@example.com
+  reason: Initial seed deployment (released before evaluation cases existed)
+  eval_passed: null
+- at: '2026-10-11T16:50:11+00:00'
+  action: promote
+  environment: staging
+  version: 1.1.0
+  previous: null
+  by: knowledge-admin@example.com
+  reason: 'Pilot findings: production reliability titles, military incident leadership,
+    B2B account management'
+  eval_passed: true
+- at: '2026-10-11T16:50:12+00:00'
+  action: promote
+  environment: production
+  version: 1.1.0
+  previous: 1.0.0
+  by: knowledge-admin@example.com
+  reason: Regression gate passed on 4 cases; recall 0.8 -> 1.0 with no new false positives
+  eval_passed: true

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/decisions.schema.json",
+  "title": "Human review decisions",
+  "description": "Recruiter / hiring-manager dispositions for findings. Findings are never acted on without a recorded human decision.",
+  "type": "object",
+  "required": ["requisition_id", "decisions"],
+  "additionalProperties": false,
+  "properties": {
+    "requisition_id": { "type": "string" },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["finding_id", "disposition", "rationale", "decided_by", "decided_at"],
+        "additionalProperties": false,
+        "properties": {
+          "finding_id": { "type": "string" },
+          "disposition": {
+            "enum": [
+              "accepted",
+              "rejected",
+              "deferred",
+              "requested_evidence",
+              "confirmed_necessary",
+              "reclassified_preferred",
+              "approved_candidate_review"
+            ]
+          },
+          "rationale": { "type": "string", "minLength": 1 },
+          "decided_by": { "type": "string" },
+          "decided_at": { "type": "string" },
+          "propose_knowledge_update": {
+            "description": "Reviewer suggests this decision inform shared knowledge. Creates a proposal; never edits production knowledge directly.",
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

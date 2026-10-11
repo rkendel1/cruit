@@ -1,0 +1,2150 @@
+{
+  "requisition": {
+    "id": "REQ-CSM-0388",
+    "title": "Customer Success Manager, Mid-Market",
+    "job_family": "customer-success",
+    "employer_id": "northwind",
+    "ats": "generic-ats-export-v1"
+  },
+  "policy": {
+    "employer_id": "northwind",
+    "policy_version": "2026.2"
+  },
+  "knowledge": {
+    "pack": "core",
+    "version": "1.1.0",
+    "fingerprint": "core@1.1.0+8a94e741e4",
+    "status": "approved",
+    "path": "knowledge/releases/1.1.0"
+  },
+  "engine_version": "0.1.0",
+  "run_at": "2026-11-03T12:00:00Z",
+  "inputs": {
+    "job_description": "supplied",
+    "screening_configuration": "recruiter_documentation",
+    "candidate_evidence": "authorized_sample",
+    "notes": "Rules transcribed by the requisition's recruiter on 2026-10-06."
+  },
+  "limitations": [
+    "Requirement R4 treated as 'preferred' because of human decision on SA-REQ-CSM-0388-a1beef17.",
+    "Screening rules were supplied as recruiter documentation, not verified ATS configuration. Findings describe the documented rules; the live ATS may differ.",
+    "Candidate evidence is a sample; candidate counts do not represent the full applicant pool.",
+    "Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run."
+  ],
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "3+ years of customer success experience with B2B accounts.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.customer-success"
+      ],
+      "concept_names": [
+        "Customer success"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": 3
+    },
+    {
+      "id": "R2",
+      "text": "Track record of managing renewals for a book of business.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.renewals-management"
+      ],
+      "concept_names": [
+        "Renewals management"
+      ],
+      "proposed_classification": "essential",
+      "classification_basis": "linked to objectives ['O1']",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R3",
+      "text": "Data-driven approach to account health.",
+      "stated_as": "preferred",
+      "concepts": [
+        "skill.data-analysis"
+      ],
+      "concept_names": [
+        "Data analysis"
+      ],
+      "proposed_classification": "preferred",
+      "classification_basis": "stated as preferred in the posting",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R4",
+      "text": "Salesforce proficiency.",
+      "stated_as": "preferred",
+      "concepts": [
+        "skill.salesforce"
+      ],
+      "concept_names": [
+        "Salesforce"
+      ],
+      "proposed_classification": "preferred",
+      "classification_basis": "set by recorded human decision",
+      "employer_classification": "preferred",
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R5",
+      "text": "Cross-functional problem-solving with product and support teams.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.cross-functional-delivery"
+      ],
+      "concept_names": [
+        "Cross-functional problem-solving"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "Q1",
+      "type": "keyword_filter",
+      "text": "R\u00e9sum\u00e9 must mention customer success.",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.customer-success"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "customer success",
+          "client success",
+          "customer success management",
+          "customer success manager",
+          "client success manager",
+          "CSM"
+        ],
+        "match": "any",
+        "field": "resume",
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.customer-success.b2b-account-management"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-CSM-0388-7da18d53",
+        "SA-REQ-CSM-0388-1fa7cee2"
+      ]
+    },
+    {
+      "id": "Q2",
+      "type": "title_filter",
+      "text": "Prioritize applicants who have held the title Customer Success Manager.",
+      "action": "deprioritize",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.customer-success"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "Customer Success Manager",
+          "Customer success",
+          "client success",
+          "customer success management",
+          "client success manager",
+          "CSM"
+        ],
+        "field": "resume",
+        "equivalencies": [
+          "eq.customer-success.b2b-account-management"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-CSM-0388-095c74b9",
+        "SA-REQ-CSM-0388-309d1f67"
+      ]
+    },
+    {
+      "id": "Q3",
+      "type": "credential_filter",
+      "text": "Must hold Salesforce Certified Administrator.",
+      "action": "reject",
+      "linked_requirement": "R4",
+      "concepts": [
+        "skill.salesforce-admin-cert"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "removed": true
+      },
+      "finding_ids": [
+        "SA-REQ-CSM-0388-7d038e7c",
+        "SA-REQ-CSM-0388-7f815e04",
+        "SA-REQ-CSM-0388-16684b3b"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SA-REQ-CSM-0388-7da18d53",
+      "check": "equivalent_path_blocked",
+      "title": "R1 accepts equivalent experience, but Q1 has no equivalent path",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "The posting accepts equivalent experience for R1, but rule Q1 only recognizes the listed terms and has no route for recognized equivalent experience.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "3+ years of customer success experience with B2B accounts."
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "R\u00e9sum\u00e9 must mention customer success."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "3+ years of customer success experience with B2B accounts."
+        },
+        {
+          "source": "rule:Q1",
+          "text": "R\u00e9sum\u00e9 must mention customer success."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.",
+      "expected_benefit": "Restores the equivalency the employer already committed to in the posting.",
+      "tradeoffs": "Equivalent-path applicants need recruiter verification time.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202",
+        "C-204"
+      ],
+      "unlocked_candidates": [
+        "C-202",
+        "C-204"
+      ],
+      "proposed_change": {
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.customer-success.b2b-account-management"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.customer-success.b2b-account-management"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "B2B account managers who own renewals have done well on this team.",
+        "decided_by": "head-of-cs@northwind.example",
+        "decided_at": "2026-10-13T14:05:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-7d038e7c",
+      "check": "credential_stricter_than_requirement",
+      "title": "Q3 requires a credential where R4 asks for proficiency",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R4 asks for a capability ('Salesforce proficiency.'), but rule Q3 requires the credential 'Salesforce Certified Administrator'.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R4",
+          "text": "Salesforce proficiency."
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": "Must hold Salesforce Certified Administrator."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R4",
+          "text": "Salesforce proficiency."
+        },
+        {
+          "source": "rule:Q3",
+          "text": "Must hold Salesforce Certified Administrator."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Accept demonstrated proficiency as well as the credential, or document why the credential itself is required.",
+      "expected_benefit": "Proficient applicants without the specific certification are reviewed.",
+      "tradeoffs": "Proficiency claims need verification during review.",
+      "rule_id": "Q3",
+      "requirement_id": "R4",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202",
+        "C-204",
+        "C-208"
+      ],
+      "unlocked_candidates": [
+        "C-202",
+        "C-204"
+      ],
+      "proposed_change": {
+        "evidence_concepts": [
+          "skill.salesforce"
+        ]
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "We never meant to require the admin certification.",
+        "decided_by": "head-of-cs@northwind.example",
+        "decided_at": "2026-10-13T14:02:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-7f815e04",
+      "check": "preferred_enforced_as_knockout",
+      "title": "Preferred qualification R4 is enforced as a knockout by Q3",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R4 is stated as preferred, but rule Q3 rejects applicants who do not meet it.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R4",
+          "text": "Salesforce proficiency."
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": "Must hold Salesforce Certified Administrator."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R4",
+          "text": "stated_as: preferred \u2014 Salesforce proficiency."
+        },
+        {
+          "source": "rule:Q3",
+          "text": "action: reject \u2014 Must hold Salesforce Certified Administrator."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.",
+      "expected_benefit": "Applicants who meet all essential requirements are no longer rejected for lacking a preference.",
+      "tradeoffs": "More applicants reach review; ranking should still favour the preferred qualification.",
+      "rule_id": "Q3",
+      "requirement_id": "R4",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202",
+        "C-203",
+        "C-204",
+        "C-205",
+        "C-206",
+        "C-207",
+        "C-208"
+      ],
+      "unlocked_candidates": [
+        "C-202",
+        "C-204",
+        "C-207"
+      ],
+      "proposed_change": {
+        "removed": true
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-1fa7cee2",
+      "check": "literal_term_missing_variants",
+      "title": "Q1 matches literally and misses recognized variants of Customer success",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 matches only 'customer success'. The knowledge base records 5 equivalent term(s) for Customer success that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "R\u00e9sum\u00e9 must mention customer success."
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.customer-success",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:term.customer-success",
+          "text": "recognized variant(s): client success, customer success management, customer success manager, client success manager, CSM"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "'CSM': Also 'Certified ScrumMaster'. Only treated as customer success inside customer-success contexts.",
+        "The presence of a related term does not prove ownership of renewals or account outcomes."
+      ],
+      "proposed_action": "Add recognized variants to the rule: client success, customer success management, customer success manager, client success manager, CSM.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q1",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202"
+      ],
+      "unlocked_candidates": [
+        "C-202"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "client success",
+          "customer success management",
+          "customer success manager",
+          "client success manager",
+          "CSM"
+        ]
+      },
+      "knowledge_refs": [
+        "term.customer-success"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Client success and customer success are the same job here. Exclude the CSM abbreviation per the ambiguity note.",
+        "decided_by": "recruiter.diaz@northwind.example",
+        "decided_at": "2026-10-13T13:40:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-095c74b9",
+      "check": "literal_term_missing_variants",
+      "title": "Q2 matches literally and misses recognized variants of Customer success",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 matches only 'Customer Success Manager'. The knowledge base records 5 equivalent term(s) for Customer success that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "Prioritize applicants who have held the title Customer Success Manager."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.customer-success",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.customer-success",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.customer-success",
+          "text": "recognized variant(s): Customer success, client success, customer success management, client success manager, CSM"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "'CSM': Also 'Certified ScrumMaster'. Only treated as customer success inside customer-success contexts.",
+        "The presence of a related term does not prove ownership of renewals or account outcomes."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Customer success, client success, customer success management, client success manager, CSM.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q2",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202"
+      ],
+      "unlocked_candidates": [
+        "C-202"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Customer success",
+          "client success",
+          "customer success management",
+          "client success manager",
+          "CSM"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.customer-success",
+        "term.customer-success"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-309d1f67",
+      "check": "experience_path_narrower",
+      "title": "Q2 counts experience only under specific job titles",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 only counts experience held under the titles 'Customer Success Manager'. The underlying capability can be demonstrated under other titles and in other domains.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "Prioritize applicants who have held the title Customer Success Manager."
+        },
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "3+ years of customer success experience with B2B accounts."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "rule:Q2",
+          "text": "Prioritize applicants who have held the title Customer Success Manager."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.",
+        "Title-based counting may reflect a deliberate employer choice; confirm intent."
+      ],
+      "proposed_action": "Count relevant experience by responsibilities, not titles: match recognized terminology across the full r\u00e9sum\u00e9 and route equivalency evidence to recruiter review.",
+      "expected_benefit": "Candidates whose titles differ from the conventional path reach human review.",
+      "tradeoffs": "Responsibility-based matching needs recruiter verification; expect modest extra review time.",
+      "rule_id": "Q2",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-202",
+        "C-204"
+      ],
+      "unlocked_candidates": [
+        "C-202",
+        "C-204"
+      ],
+      "proposed_change": {
+        "field": "resume",
+        "add_terms": [
+          "Customer success",
+          "client success",
+          "customer success management",
+          "customer success manager",
+          "client success manager",
+          "CSM"
+        ],
+        "equivalencies": [
+          "eq.customer-success.b2b-account-management"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.customer-success.b2b-account-management"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-16684b3b",
+      "check": "literal_term_missing_variants",
+      "title": "Q3 matches literally and misses recognized variants of Salesforce Certified Administrator",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q3 matches only 'Salesforce Certified Administrator'. The knowledge base records 1 equivalent term(s) for Salesforce Certified Administrator that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": "Must hold Salesforce Certified Administrator."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.salesforce-admin-cert",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.salesforce-admin-cert",
+          "text": "recognized variant(s): Salesforce Administrator certification"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Salesforce Administrator certification.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q3",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "Salesforce Administrator certification"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.salesforce-admin-cert"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-a1beef17",
+      "check": "unverified_necessity",
+      "title": "Business necessity of required qualification R4 is undocumented",
+      "category": "unverified_assumption",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "R4 ('Salesforce proficiency.') is marked required, but has no documented rationale and is not linked to any stated job objective.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R4",
+          "text": "Salesforce proficiency."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R4",
+          "text": "Salesforce proficiency."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "The requirement may be genuinely necessary; this finding asks for clarification, not removal."
+      ],
+      "proposed_action": "Classify the requirement: essential (document the rationale), preferred, or demonstrable through alternatives.",
+      "expected_benefit": "Required qualifications reflect what the job actually needs, and the rationale is auditable.",
+      "tradeoffs": "Requires a short hiring-manager conversation.",
+      "rule_id": null,
+      "requirement_id": "R4",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "reclassified_preferred",
+        "rationale": "Any modern CRM is fine; Salesforce is learnable in a few weeks.",
+        "decided_by": "head-of-cs@northwind.example",
+        "decided_at": "2026-10-13T14:00:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-7f33b017",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-202 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-202 was rejected by Q1, Q2, Q3. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-202",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-202/experience[0].title",
+          "text": "Client Success Lead",
+          "path": "terminology_variant",
+          "matched": "client success",
+          "concept": "skill.customer-success",
+          "record": "term.customer-success",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-202/experience[0].s1",
+          "text": "Owned renewals and expansion for a portfolio of 30 enterprise accounts.",
+          "path": "direct",
+          "matched": "renewals",
+          "concept": "skill.renewals-management",
+          "record": "skill.renewals-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-202/experience[0].s4",
+          "text": "Maintained pipeline and renewals forecasts in Salesforce.",
+          "path": "direct",
+          "matched": "renewals",
+          "concept": "skill.renewals-management",
+          "record": "skill.renewals-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-202/experience[0].s4",
+          "text": "Maintained pipeline and renewals forecasts in Salesforce.",
+          "path": "direct",
+          "matched": "Salesforce",
+          "concept": "skill.salesforce",
+          "record": "skill.salesforce",
+          "requirement": "R4"
+        },
+        {
+          "source": "candidate:C-202/experience[0].s3",
+          "text": "Worked cross-functional with product and support teams to resolve blockers.",
+          "path": "direct",
+          "matched": "cross-functional",
+          "concept": "skill.cross-functional-delivery",
+          "record": "skill.cross-functional-delivery",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-202",
+      "affected_candidates": [
+        "C-202"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-CSM-0388-095c74b9",
+        "SA-REQ-CSM-0388-1fa7cee2",
+        "SA-REQ-CSM-0388-309d1f67",
+        "SA-REQ-CSM-0388-7d038e7c",
+        "SA-REQ-CSM-0388-7da18d53",
+        "SA-REQ-CSM-0388-7f815e04"
+      ],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-dc08d1e4",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-204 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-204 was rejected by Q1, Q2, Q3. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-204",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-204/experience[0].s1",
+          "text": "Managed a book of 40 mid-market SaaS accounts.",
+          "path": "equivalency:eq.customer-success.b2b-account-management",
+          "indicator": "portfolio",
+          "matched": "Owned a defined book of business customers.",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s2",
+          "text": "Owned renewals and grew revenue through expansion across accounts.",
+          "path": "equivalency:eq.customer-success.b2b-account-management",
+          "indicator": "renewals",
+          "matched": "Owned renewals for existing accounts.",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s5",
+          "text": "Tracked pipeline and renewals in Salesforce.",
+          "path": "equivalency:eq.customer-success.b2b-account-management",
+          "indicator": "renewals",
+          "matched": "Owned renewals for existing accounts.",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s2",
+          "text": "Owned renewals and grew revenue through expansion across accounts.",
+          "path": "direct",
+          "matched": "renewals",
+          "concept": "skill.renewals-management",
+          "record": "skill.renewals-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s5",
+          "text": "Tracked pipeline and renewals in Salesforce.",
+          "path": "direct",
+          "matched": "renewals",
+          "concept": "skill.renewals-management",
+          "record": "skill.renewals-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s5",
+          "text": "Tracked pipeline and renewals in Salesforce.",
+          "path": "direct",
+          "matched": "Salesforce",
+          "concept": "skill.salesforce",
+          "record": "skill.salesforce",
+          "requirement": "R4"
+        },
+        {
+          "source": "candidate:C-204/experience[0].s4",
+          "text": "Coordinated cross-functional fixes with product and support teams.",
+          "path": "direct",
+          "matched": "cross-functional",
+          "concept": "skill.cross-functional-delivery",
+          "record": "skill.cross-functional-delivery",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review.",
+        "R1: eq.customer-success.b2b-account-management: 4 of 4 indicators present; 52 months of relevant experience. Conditions: Candidate must have owned renewals, not only new-business sales. Accounts must be business customers with recurring contracts."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: Confirm size and segment of the book of business. Confirm renewal ownership and retention results. Confirm adoption or onboarding work, not only commercial negotiation.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-204",
+      "affected_candidates": [
+        "C-204"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [
+        "eq.customer-success.b2b-account-management"
+      ],
+      "related_findings": [
+        "SA-REQ-CSM-0388-309d1f67",
+        "SA-REQ-CSM-0388-7d038e7c",
+        "SA-REQ-CSM-0388-7da18d53",
+        "SA-REQ-CSM-0388-7f815e04"
+      ],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-CSM-0388-ea6778d8",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-207 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-CSM-0388",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-207 was rejected by Q3. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-207",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-207/experience[0].title",
+          "text": "Customer Success Manager",
+          "path": "direct",
+          "matched": "Customer success",
+          "concept": "skill.customer-success",
+          "record": "skill.customer-success",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-207/experience[0].s1",
+          "text": "Owned renewals for a book of 35 SMB SaaS accounts.",
+          "path": "direct",
+          "matched": "renewals",
+          "concept": "skill.renewals-management",
+          "record": "skill.renewals-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-207/experience[0].s3",
+          "text": "Worked cross-functional with product and support to unblock customers.",
+          "path": "direct",
+          "matched": "cross-functional",
+          "concept": "skill.cross-functional-delivery",
+          "record": "skill.cross-functional-delivery",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-207",
+      "affected_candidates": [
+        "C-207"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-CSM-0388-7f815e04"
+      ],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "C-201",
+      "ats_status": "advanced",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['customer success']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "holds ['Salesforce Certified Administrator']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['customer success', 'customer success manager']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-201/experience[0].title",
+              "text": "Customer Success Manager",
+              "path": "direct",
+              "matched": "Customer success",
+              "concept": "skill.customer-success",
+              "record": "skill.customer-success"
+            }
+          ],
+          "relevant_months": 48,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-201/experience[0].s1",
+              "text": "Managed a book of 45 B2B SaaS accounts and owned renewals.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-201/experience[0].s4",
+              "text": "Built account health dashboards in Salesforce.",
+              "path": "terminology_variant",
+              "matched": "dashboards",
+              "concept": "skill.data-analysis",
+              "record": "skill.data-analysis"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-201/experience[0].s4",
+              "text": "Built account health dashboards in Salesforce.",
+              "path": "direct",
+              "matched": "Salesforce",
+              "concept": "skill.salesforce",
+              "record": "skill.salesforce"
+            },
+            {
+              "source": "candidate:C-201/credentials.s1",
+              "text": "Salesforce Certified Administrator",
+              "path": "direct",
+              "matched": "Salesforce",
+              "concept": "skill.salesforce",
+              "record": "skill.salesforce"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-201/experience[0].s3",
+              "text": "Partnered cross-functional with product and support teams to resolve adoption blockers.",
+              "path": "direct",
+              "matched": "cross-functional",
+              "concept": "skill.cross-functional-delivery",
+              "record": "skill.cross-functional-delivery"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R3 described in different terminology: dashboards",
+        "Experience domains: saas"
+      ],
+      "surfaced": false,
+      "reason": "Not excluded by the ATS (status: advanced)."
+    },
+    {
+      "candidate_id": "C-202",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['client success']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-202/experience[0].title",
+              "text": "Client Success Lead",
+              "path": "terminology_variant",
+              "matched": "client success",
+              "concept": "skill.customer-success",
+              "record": "term.customer-success"
+            }
+          ],
+          "relevant_months": 50,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-202/experience[0].s1",
+              "text": "Owned renewals and expansion for a portfolio of 30 enterprise accounts.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            },
+            {
+              "source": "candidate:C-202/experience[0].s4",
+              "text": "Maintained pipeline and renewals forecasts in Salesforce.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-202/experience[0].s4",
+              "text": "Maintained pipeline and renewals forecasts in Salesforce.",
+              "path": "direct",
+              "matched": "Salesforce",
+              "concept": "skill.salesforce",
+              "record": "skill.salesforce"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-202/experience[0].s3",
+              "text": "Worked cross-functional with product and support teams to resolve blockers.",
+              "path": "direct",
+              "matched": "cross-functional",
+              "concept": "skill.cross-functional-delivery",
+              "record": "skill.cross-functional-delivery"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: client success",
+        "Experience domains: saas"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-203",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-203/experience[0].s3",
+              "text": "Presented to leadership monthly on guest trends using analytics.",
+              "path": "terminology_variant",
+              "matched": "analytics",
+              "concept": "skill.data-analysis",
+              "record": "skill.data-analysis"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "alternative_path",
+          "paths": [
+            "combination:combo.cross-functional-problem-solving"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-203/experience[0].s3",
+              "text": "Presented to leadership monthly on guest trends using analytics.",
+              "path": "direct",
+              "matched": "analytics",
+              "concept": "skill.data-analysis",
+              "record": "skill.data-analysis"
+            },
+            {
+              "source": "candidate:C-203/experience[0].s3",
+              "text": "Presented to leadership monthly on guest trends using analytics.",
+              "path": "direct",
+              "matched": "presented to leadership",
+              "concept": "skill.stakeholder-communication",
+              "record": "skill.stakeholder-communication"
+            },
+            {
+              "source": "candidate:C-203/experience[0].s1",
+              "text": "Led a team of 12 front-desk staff.",
+              "path": "direct",
+              "matched": "led a team",
+              "concept": "skill.operational-leadership",
+              "record": "skill.operational-leadership"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [
+            "Analysis + communication + operational leadership: Together, analysing a problem, communicating it to stakeholders and leading the operational response is evidence of cross-functional problem-solving even when no single role was titled that way."
+          ],
+          "verify_next": [
+            "Each component must be evidenced separately; the combination does not infer missing components.",
+            "Surfaced only when the role states a need for cross-functional problem-solving."
+          ]
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R3 described in different terminology: analytics",
+        "R5 evidenced through a combination of skills (combo.cross-functional-problem-solving)",
+        "Experience domains: hospitality"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2."
+    },
+    {
+      "candidate_id": "C-204",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "equivalent path: eq.customer-success.b2b-account-management satisfied"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.customer-success.b2b-account-management"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-204/experience[0].s1",
+              "text": "Managed a book of 40 mid-market SaaS accounts.",
+              "path": "equivalency:eq.customer-success.b2b-account-management",
+              "indicator": "portfolio",
+              "matched": "Owned a defined book of business customers."
+            },
+            {
+              "source": "candidate:C-204/experience[0].s2",
+              "text": "Owned renewals and grew revenue through expansion across accounts.",
+              "path": "equivalency:eq.customer-success.b2b-account-management",
+              "indicator": "renewals",
+              "matched": "Owned renewals for existing accounts."
+            },
+            {
+              "source": "candidate:C-204/experience[0].s5",
+              "text": "Tracked pipeline and renewals in Salesforce.",
+              "path": "equivalency:eq.customer-success.b2b-account-management",
+              "indicator": "renewals",
+              "matched": "Owned renewals for existing accounts."
+            },
+            {
+              "source": "candidate:C-204/experience[0].s2",
+              "text": "Owned renewals and grew revenue through expansion across accounts.",
+              "path": "equivalency:eq.customer-success.b2b-account-management",
+              "indicator": "expansion",
+              "matched": "Grew revenue within existing accounts."
+            },
+            {
+              "source": "candidate:C-204/experience[0].s3",
+              "text": "Ran onboarding and quarterly business reviews to drive adoption.",
+              "path": "equivalency:eq.customer-success.b2b-account-management",
+              "indicator": "account_health",
+              "matched": "Managed adoption, onboarding or account health."
+            }
+          ],
+          "relevant_months": 52,
+          "notes": [
+            "eq.customer-success.b2b-account-management: 4 of 4 indicators present; 52 months of relevant experience. Conditions: Candidate must have owned renewals, not only new-business sales. Accounts must be business customers with recurring contracts."
+          ],
+          "verify_next": [
+            "Confirm size and segment of the book of business.",
+            "Confirm renewal ownership and retention results.",
+            "Confirm adoption or onboarding work, not only commercial negotiation."
+          ]
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-204/experience[0].s2",
+              "text": "Owned renewals and grew revenue through expansion across accounts.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            },
+            {
+              "source": "candidate:C-204/experience[0].s5",
+              "text": "Tracked pipeline and renewals in Salesforce.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-204/experience[0].s5",
+              "text": "Tracked pipeline and renewals in Salesforce.",
+              "path": "direct",
+              "matched": "Salesforce",
+              "concept": "skill.salesforce",
+              "record": "skill.salesforce"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-204/experience[0].s4",
+              "text": "Coordinated cross-functional fixes with product and support teams.",
+              "path": "direct",
+              "matched": "cross-functional",
+              "concept": "skill.cross-functional-delivery",
+              "record": "skill.cross-functional-delivery"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 evidenced through transferable experience (eq.customer-success.b2b-account-management)",
+        "Experience domains: saas"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-205",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-205/experience[0].s2",
+              "text": "Analyzed ticket trends with SQL dashboards to find product defects.",
+              "path": "terminology_variant",
+              "matched": "SQL",
+              "concept": "skill.data-analysis",
+              "record": "skill.data-analysis"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "alternative_path",
+          "paths": [
+            "combination:combo.cross-functional-problem-solving"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-205/experience[0].s2",
+              "text": "Analyzed ticket trends with SQL dashboards to find product defects.",
+              "path": "direct",
+              "matched": "SQL",
+              "concept": "skill.data-analysis",
+              "record": "skill.data-analysis"
+            },
+            {
+              "source": "candidate:C-205/experience[0].s3",
+              "text": "Presented to leadership on top customer pain points.",
+              "path": "direct",
+              "matched": "presented to leadership",
+              "concept": "skill.stakeholder-communication",
+              "record": "skill.stakeholder-communication"
+            },
+            {
+              "source": "candidate:C-205/experience[0].s1",
+              "text": "Led a team of 6 support engineers.",
+              "path": "direct",
+              "matched": "led a team",
+              "concept": "skill.operational-leadership",
+              "record": "skill.operational-leadership"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [
+            "Analysis + communication + operational leadership: Together, analysing a problem, communicating it to stakeholders and leading the operational response is evidence of cross-functional problem-solving even when no single role was titled that way."
+          ],
+          "verify_next": [
+            "Each component must be evidenced separately; the combination does not infer missing components.",
+            "Surfaced only when the role states a need for cross-functional problem-solving."
+          ]
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R3 described in different terminology: SQL",
+        "R5 evidenced through a combination of skills (combo.cross-functional-problem-solving)",
+        "Experience domains: saas"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2."
+    },
+    {
+      "candidate_id": "C-206",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "none",
+      "nontraditional_signals": [
+        "Experience domains: education"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2."
+    },
+    {
+      "candidate_id": "C-207",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['customer success']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['customer success', 'customer success manager']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "matching title found"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-207/experience[0].title",
+              "text": "Customer Success Manager",
+              "path": "direct",
+              "matched": "Customer success",
+              "concept": "skill.customer-success",
+              "record": "skill.customer-success"
+            }
+          ],
+          "relevant_months": 44,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-207/experience[0].s1",
+              "text": "Owned renewals for a book of 35 SMB SaaS accounts.",
+              "path": "direct",
+              "matched": "renewals",
+              "concept": "skill.renewals-management",
+              "record": "skill.renewals-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-207/experience[0].s3",
+              "text": "Worked cross-functional with product and support to unblock customers.",
+              "path": "direct",
+              "matched": "cross-functional",
+              "concept": "skill.cross-functional-delivery",
+              "record": "skill.cross-functional-delivery"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q3"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "Experience domains: saas"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-208",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "listed credential not held"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "no matching title"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [
+            "eq.customer-success.support-escalation-leadership would apply but is rejected by employer policy (head-of-cs@northwind.example): Our CSM roles carry full commercial quota; support escalation alone has not predicted success here..",
+            "Partial evidence for eq.customer-success.b2b-account-management: missing required indicator(s) ['renewals']; only 2 of required 3 indicators; 0 months is below the 24-month minimum."
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-208/experience[0].s4",
+              "text": "Used Salesforce Service Cloud daily.",
+              "path": "direct",
+              "matched": "Salesforce",
+              "concept": "skill.salesforce",
+              "record": "skill.salesforce"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-208/experience[0].s3",
+              "text": "Worked cross-functional with product teams on recurring defects.",
+              "path": "direct",
+              "matched": "cross-functional",
+              "concept": "skill.cross-functional-delivery",
+              "record": "skill.cross-functional-delivery"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "Experience domains: saas"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2."
+    }
+  ],
+  "suppressed": [
+    {
+      "kind": "equivalency",
+      "id": "eq.customer-success.support-escalation-leadership",
+      "rule": "Q2",
+      "reason": "rejected by employer policy (head-of-cs@northwind.example): Our CSM roles carry full commercial quota; support escalation alone has not predicted success here."
+    }
+  ],
+  "measurement": null,
+  "summary": {
+    "findings": 11,
+    "by_category": {
+      "confirmed_inconsistency": 3,
+      "design_risk": 4,
+      "unverified_assumption": 1,
+      "candidate_review_opportunity": 3
+    },
+    "by_level": {
+      "level_1": 3,
+      "level_2": 8,
+      "level_3": 0
+    },
+    "pending_decisions": 7,
+    "candidates_assessed": 8,
+    "candidates_surfaced": 3
+  }
+}

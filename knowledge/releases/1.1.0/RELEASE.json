@@ -1,0 +1,26 @@
+{
+  "version": "1.1.0",
+  "fingerprint": "core@1.1.0+8a94e741e4",
+  "checksum": "8a94e741e4ffd2963b4c5c144b4bed0f6270766783d29d00b24963a48c377231",
+  "released_at": "2026-10-11T16:50:11+00:00",
+  "released_by": "knowledge-admin@example.com",
+  "approved_by": "knowledge-admin@example.com",
+  "eval_summary": {
+    "passed": true,
+    "metrics": {
+      "cases": 4,
+      "expected_findings": 28,
+      "expected_found": 28,
+      "expected_finding_recall": 1.0,
+      "forbidden_violations": 0,
+      "guardrail_violations": 0,
+      "candidates_flagged": 10,
+      "true_positives": 10,
+      "false_positives": 0,
+      "missed_qualified": 0,
+      "candidate_precision": 1.0,
+      "candidate_recall": 1.0
+    },
+    "knowledge": "core@1.1.0+8a94e741e4"
+  }
+}

@@ -1,0 +1,857 @@
+{
+  "requisition": {
+    "id": "REQ-LH-0217",
+    "title": "Linehaul Operations Supervisor",
+    "job_family": "logistics-operations",
+    "employer_id": "northwind",
+    "ats": "generic-ats-export-v1"
+  },
+  "policy": {
+    "employer_id": "northwind",
+    "policy_version": "2026.2"
+  },
+  "knowledge": {
+    "pack": "core",
+    "version": "1.1.0",
+    "fingerprint": "core@1.1.0+8a94e741e4",
+    "status": "approved",
+    "path": "knowledge/releases/1.1.0"
+  },
+  "engine_version": "0.1.0",
+  "run_at": "2026-11-03T12:00:00Z",
+  "inputs": {
+    "job_description": "supplied",
+    "screening_configuration": "ats_export_verified",
+    "candidate_evidence": "authorized_sample"
+  },
+  "limitations": [
+    "Candidate evidence is a sample; candidate counts do not represent the full applicant pool.",
+    "Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run."
+  ],
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "Active Class A commercial driver's license.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.cdl-class-a"
+      ],
+      "concept_names": [
+        "Commercial driver's license (Class A)"
+      ],
+      "proposed_classification": "essential",
+      "classification_basis": "Commercial driver's license (Class A) is a regulated credential in the knowledge base",
+      "employer_classification": null,
+      "protected": true,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R2",
+      "text": "3+ years supervising transportation or dispatch operations.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.transportation-supervision"
+      ],
+      "concept_names": [
+        "Transportation supervision"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": 3
+    },
+    {
+      "id": "R3",
+      "text": "Working knowledge of DOT and hours-of-service compliance.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.dot-compliance"
+      ],
+      "concept_names": [
+        "DOT compliance"
+      ],
+      "proposed_classification": "essential",
+      "classification_basis": "linked to objectives ['O2']",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "Q1",
+      "type": "credential_filter",
+      "text": "Must hold CDL Class A.",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.cdl-class-a"
+      ],
+      "status": "protected",
+      "corrected": {
+        "credentials": [
+          "CDL Class A",
+          "Commercial driver's license (Class A)",
+          "Class A CDL",
+          "CDL-A",
+          "Class A commercial driver's license",
+          "commercial driver license class A"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-LH-0217-24c327f3"
+      ]
+    },
+    {
+      "id": "Q2",
+      "type": "minimum_experience",
+      "text": "3 years as Transportation Supervisor or Dispatch Supervisor (by job title).",
+      "action": "reject",
+      "linked_requirement": "R2",
+      "concepts": [
+        "skill.transportation-supervision"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "Transportation Supervisor",
+          "Dispatch Supervisor",
+          "Transportation supervision",
+          "dispatch supervision",
+          "fleet supervision",
+          "linehaul operations"
+        ],
+        "years": 3,
+        "field": "resume",
+        "equivalencies": [
+          "eq.transportation-supervision.fleet-coordination"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-LH-0217-bdfae568",
+        "SA-REQ-LH-0217-b7263005"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SA-REQ-LH-0217-24c327f3",
+      "check": "literal_term_missing_variants",
+      "title": "Q1 matches literally and misses recognized variants of Commercial driver's license (Class A)",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-LH-0217",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 matches only 'CDL Class A'. The knowledge base records 5 equivalent term(s) for Commercial driver's license (Class A) that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "Must hold CDL Class A."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.cdl-class-a",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.cdl-class-a",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.cdl-class-a",
+          "text": "recognized variant(s): Commercial driver's license (Class A), Class A CDL, CDL-A, Class A commercial driver's license, commercial driver license class A"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "Terminology only. A license is never satisfied by adjacent experience."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Commercial driver's license (Class A), Class A CDL, CDL-A, Class A commercial driver's license, commercial driver license class A.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q1",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-303"
+      ],
+      "unlocked_candidates": [
+        "C-303"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Commercial driver's license (Class A)",
+          "Class A CDL",
+          "CDL-A",
+          "Class A commercial driver's license",
+          "commercial driver license class A"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.cdl-class-a",
+        "term.cdl-class-a"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-LH-0217-bdfae568",
+      "check": "literal_term_missing_variants",
+      "title": "Q2 matches literally and misses recognized variants of Transportation supervision",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-LH-0217",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 matches only 'Transportation Supervisor', 'Dispatch Supervisor'. The knowledge base records 4 equivalent term(s) for Transportation supervision that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "3 years as Transportation Supervisor or Dispatch Supervisor (by job title)."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.transportation-supervision",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.transportation-supervision",
+          "text": "recognized variant(s): Transportation supervision, dispatch supervision, fleet supervision, linehaul operations"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Transportation supervision, dispatch supervision, fleet supervision, linehaul operations.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q2",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "Transportation supervision",
+          "dispatch supervision",
+          "fleet supervision",
+          "linehaul operations"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.transportation-supervision"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-LH-0217-b7263005",
+      "check": "experience_path_narrower",
+      "title": "Q2 counts experience only under specific job titles",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-LH-0217",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 only counts experience held under the titles 'Transportation Supervisor', 'Dispatch Supervisor'. The underlying capability can be demonstrated under other titles and in other domains.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "3 years as Transportation Supervisor or Dispatch Supervisor (by job title)."
+        },
+        {
+          "kind": "requirement",
+          "id": "R2",
+          "text": "3+ years supervising transportation or dispatch operations."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "rule:Q2",
+          "text": "3 years as Transportation Supervisor or Dispatch Supervisor (by job title)."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.",
+        "Title-based counting may reflect a deliberate employer choice; confirm intent."
+      ],
+      "proposed_action": "Count relevant experience by responsibilities, not titles: match recognized terminology across the full r\u00e9sum\u00e9 and route equivalency evidence to recruiter review.",
+      "expected_benefit": "Candidates whose titles differ from the conventional path reach human review.",
+      "tradeoffs": "Responsibility-based matching needs recruiter verification; expect modest extra review time.",
+      "rule_id": "Q2",
+      "requirement_id": "R2",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-302",
+        "C-303"
+      ],
+      "unlocked_candidates": [
+        "C-303"
+      ],
+      "proposed_change": {
+        "field": "resume",
+        "add_terms": [
+          "Transportation supervision",
+          "dispatch supervision",
+          "fleet supervision",
+          "linehaul operations",
+          "transportation supervisor",
+          "dispatch supervisor"
+        ],
+        "equivalencies": [
+          "eq.transportation-supervision.fleet-coordination"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.transportation-supervision.fleet-coordination"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-LH-0217-6f063ac1",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-303 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-LH-0217",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-303 was rejected by Q1, Q2. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-303",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-303/credentials.s1",
+          "text": "Class A CDL",
+          "path": "terminology_variant",
+          "matched": "Class A CDL",
+          "concept": "skill.cdl-class-a",
+          "record": "skill.cdl-class-a",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-303/experience[0].s1",
+          "text": "Supervised 14 linehaul drivers and scheduled daily routes.",
+          "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+          "indicator": "supervises_drivers",
+          "matched": "Supervised or scheduled drivers, routes or dispatch.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-303/experience[0].s2",
+          "text": "Ran hours-of-service compliance audits.",
+          "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+          "indicator": "safety_compliance",
+          "matched": "Ran DOT, hours-of-service or safety compliance.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-303/experience[0].s3",
+          "text": "Improved on-time delivery performance by 12%.",
+          "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+          "indicator": "on_time_performance",
+          "matched": "Owned on-time performance or route efficiency.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-303/experience[0].s2",
+          "text": "Ran hours-of-service compliance audits.",
+          "path": "direct",
+          "matched": "hours of service",
+          "concept": "skill.dot-compliance",
+          "record": "skill.dot-compliance",
+          "requirement": "R3"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review.",
+        "R2: eq.transportation-supervision.fleet-coordination: 3 of 3 indicators present; 48 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: Confirm number of drivers supervised and authority over scheduling. Confirm compliance responsibilities.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-303",
+      "affected_candidates": [
+        "C-303"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [
+        "eq.transportation-supervision.fleet-coordination"
+      ],
+      "related_findings": [
+        "SA-REQ-LH-0217-24c327f3",
+        "SA-REQ-LH-0217-b7263005"
+      ],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "C-301",
+      "ats_status": "advanced",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "holds ['CDL Class A']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "60 relevant months vs 36 required"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "holds ['CDL Class A']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "60 relevant months vs 36 required"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-301/credentials.s1",
+              "text": "CDL Class A",
+              "path": "terminology_variant",
+              "matched": "CDL Class A",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-301/experience[0].title",
+              "text": "Transportation Supervisor",
+              "path": "terminology_variant",
+              "matched": "transportation supervisor",
+              "concept": "skill.transportation-supervision",
+              "record": "skill.transportation-supervision"
+            }
+          ],
+          "relevant_months": 60,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-301/experience[0].s2",
+              "text": "Ran DOT and hours-of-service compliance audits.",
+              "path": "direct",
+              "matched": "hours of service",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: CDL Class A",
+        "R2 described in different terminology: transportation supervisor",
+        "Experience domains: logistics"
+      ],
+      "surfaced": false,
+      "reason": "Not excluded by the ATS (status: advanced)."
+    },
+    {
+      "candidate_id": "C-302",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "listed credential not held"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 36 required"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "listed credential not held"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "84 relevant months vs 36 required"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "protected_missing",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [
+            "Protected requirement not evidenced: Commercial driver's license (Class A) is a regulated credential in the knowledge base. No alternative path is considered."
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-302/experience[0].s2",
+              "text": "Managed dispatch of outbound trailers and scheduled routes with carriers.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:C-302/experience[0].s3",
+              "text": "Ran DOT safety compliance audits for the yard.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            }
+          ],
+          "relevant_months": 84,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 2 of 3 indicators present; 84 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ],
+          "verify_next": [
+            "Confirm number of drivers supervised and authority over scheduling.",
+            "Confirm compliance responsibilities."
+          ]
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R2 evidenced through transferable experience (eq.transportation-supervision.fleet-coordination)",
+        "Experience domains: logistics"
+      ],
+      "surfaced": false,
+      "reason": "Does not meet a protected requirement; not surfaced."
+    },
+    {
+      "candidate_id": "C-303",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "listed credential not held"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 36 required"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "holds ['Class A CDL']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "48 relevant months vs 36 required"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-303/credentials.s1",
+              "text": "Class A CDL",
+              "path": "terminology_variant",
+              "matched": "Class A CDL",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.transportation-supervision.fleet-coordination"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-303/experience[0].s1",
+              "text": "Supervised 14 linehaul drivers and scheduled daily routes.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "supervises_drivers",
+              "matched": "Supervised or scheduled drivers, routes or dispatch."
+            },
+            {
+              "source": "candidate:C-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "safety_compliance",
+              "matched": "Ran DOT, hours-of-service or safety compliance."
+            },
+            {
+              "source": "candidate:C-303/experience[0].s3",
+              "text": "Improved on-time delivery performance by 12%.",
+              "path": "equivalency:eq.transportation-supervision.fleet-coordination",
+              "indicator": "on_time_performance",
+              "matched": "Owned on-time performance or route efficiency."
+            }
+          ],
+          "relevant_months": 48,
+          "notes": [
+            "eq.transportation-supervision.fleet-coordination: 3 of 3 indicators present; 48 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers."
+          ],
+          "verify_next": [
+            "Confirm number of drivers supervised and authority over scheduling.",
+            "Confirm compliance responsibilities."
+          ]
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-303/experience[0].s2",
+              "text": "Ran hours-of-service compliance audits.",
+              "path": "direct",
+              "matched": "hours of service",
+              "concept": "skill.dot-compliance",
+              "record": "skill.dot-compliance"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: Class A CDL",
+        "R2 evidenced through transferable experience (eq.transportation-supervision.fleet-coordination)",
+        "Experience domains: logistics"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-304",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "holds ['CDL Class A']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 36 required"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "holds ['CDL Class A']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "30 relevant months vs 36 required"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-304/credentials.s1",
+              "text": "CDL Class A",
+              "path": "terminology_variant",
+              "matched": "CDL Class A",
+              "concept": "skill.cdl-class-a",
+              "record": "skill.cdl-class-a"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [
+            "Partial evidence for eq.transportation-supervision.fleet-coordination: only 1 of required 2 indicators."
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q2"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R1 described in different terminology: CDL Class A",
+        "Experience domains: logistics"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q2."
+    }
+  ],
+  "suppressed": [
+    {
+      "kind": "candidate",
+      "id": "C-302",
+      "reason": "Does not meet a protected requirement; not surfaced."
+    },
+    {
+      "kind": "rule",
+      "id": "Q1",
+      "reason": "Commercial driver's license (Class A) is a regulated credential in the knowledge base"
+    }
+  ],
+  "measurement": null,
+  "summary": {
+    "findings": 4,
+    "by_category": {
+      "design_risk": 3,
+      "candidate_review_opportunity": 1
+    },
+    "by_level": {
+      "level_1": 0,
+      "level_2": 4,
+      "level_3": 0
+    },
+    "pending_decisions": 4,
+    "candidates_assessed": 4,
+    "candidates_surfaced": 1
+  }
+}

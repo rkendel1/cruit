@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assurance · REQ-LH-0217</title><style>
+:root{--bg:#f7f6f3;--surface:#ffffff;--ink:#1d1d1b;--muted:#5f5e5a;--line:#e3e1db;--accent:#1f5f8b;
+--l1:#9a3412;--l1bg:#fdf0e8;--l2:#7c5e10;--l2bg:#fbf5e3;--l3:#1e6b3a;--l3bg:#e9f5ee;--ok:#1e6b3a;--warn:#9a3412;
+--chip:#efede7;--code:#f1efe9}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151514;--surface:#1e1e1c;--ink:#ecebe6;--muted:#a3a19a;
+--line:#34332f;--accent:#7cb4dd;--l1:#f0a27a;--l1bg:#3a2419;--l2:#e2c473;--l2bg:#352d17;--l3:#8fd1a6;--l3bg:#1b3125;
+--ok:#8fd1a6;--warn:#f0a27a;--chip:#2a2926;--code:#262522}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+header.top{background:var(--surface);border-bottom:1px solid var(--line);padding:28px 16px 20px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+h1{font-size:26px;line-height:1.25;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:19px;margin:40px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:0 0 6px;line-height:1.35}
+.meta{color:var(--muted);font-size:13px}
+.meta code{font-size:12px}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.note{border-left:3px solid var(--accent);padding:8px 12px;background:var(--surface);color:var(--muted);font-size:13.5px;margin:16px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:24px;line-height:1.1}
+.stat span{color:var(--muted);font-size:12.5px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+nav.toc a{font-size:12.5px;color:var(--accent);text-decoration:none;background:var(--chip);padding:3px 9px;border-radius:999px}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+tr:last-child td{border-bottom:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.card .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.badge{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.b1{color:var(--l1);background:var(--l1bg)}.b2{color:var(--l2);background:var(--l2bg)}.b3{color:var(--l3);background:var(--l3bg)}
+.chip{font-size:11.5px;color:var(--muted);background:var(--chip);padding:2px 8px;border-radius:999px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;font-size:14px;margin:10px 0}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+ul{margin:4px 0 8px;padding-left:20px}
+li{margin:2px 0}
+.ev{font-size:13.5px}
+.ev .src{color:var(--muted);font:12px ui-monospace,SFMono-Regular,Menlo,monospace}
+details{margin-top:8px}
+summary{cursor:pointer;color:var(--accent);font-size:13.5px}
+.decision{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:grid;grid-template-columns:220px 1fr;gap:8px;align-items:start}
+.decision select,.decision textarea,.who input{font:inherit;font-size:13.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;width:100%}
+.decision textarea{min-height:38px;resize:vertical}
+.decided{font-size:13.5px;color:var(--ok)}
+.st-evidenced,.st-alternative_path{color:var(--ok)}.st-not_evidenced,.st-protected_missing,.st-insufficient{color:var(--warn)}
+.st-pending_clarification{color:var(--muted)}
+.bar{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 0;margin-top:40px}
+.bar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.who{display:flex;gap:8px;align-items:center;flex:1;min-width:240px}
+.who input{max-width:280px}
+button{font:inherit;font-size:14px;border:0;border-radius:8px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{background:var(--chip);color:var(--ink)}
+#count{color:var(--muted);font-size:13px}
+pre{background:var(--code);padding:10px;border-radius:8px;overflow:auto;font-size:12.5px}
+@media (max-width:640px){.bar{position:static}.kv{grid-template-columns:1fr}.decision{grid-template-columns:1fr}h1{font-size:22px}}
+</style></head>
+<body data-req="REQ-LH-0217">
+<header class="top"><div class="wrap">
+<div class="meta">Screening Assurance · requisition assurance report</div>
+<h1>Linehaul Operations Supervisor <span class="meta">(REQ-LH-0217)</span></h1>
+<div class="meta">job family <code>logistics-operations</code> · knowledge <code>core@1.1.0+8a94e741e4</code> · engine 0.1.0 · run 2026-11-03T12:00:00Z</div>
+<div class="stats">
+<div class="stat"><b>0</b><span>demonstrable inconsistencies</span></div>
+<div class="stat"><b>4</b><span>risks &amp; review opportunities</span></div>
+<div class="stat"><b>1<span style="font-size:14px"> / 4</span></b><span>candidates surfaced for review</span></div>
+<div class="stat"><b>0</b><span>measured outcomes</span></div>
+<div class="stat"><b>4</b><span>awaiting decision</span></div>
+</div>
+<nav class="toc"><a href="#s1">1 Requirements</a><a href="#s2">2 Rules</a><a href="#s3">3 Inconsistencies</a><a href="#s4">4 Risks</a><a href="#s5">5 Candidates</a><a href="#s6">6 Changes</a><a href="#s7">7 Decisions</a><a href="#s8">8 Outcomes</a></nav>
+</div></header>
+<main class="wrap">
+<div class="note">This report recommends changes and human review. It does not reject, advance or hire anyone, and it never claims a candidate was wrongly excluded. Level 1 findings are established by the supplied materials; Level 2 findings need human judgement; Level 3 findings are measured outcomes.</div>
+<p class="meta">Inputs received: job description: <code>supplied</code> · screening configuration: <code>ats_export_verified</code> · candidate evidence: <code>authorized_sample</code></p>
+<details open><summary>Limitations of this run</summary><ul><li>Candidate evidence is a sample; candidate counts do not represent the full applicant pool.</li><li>Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run.</li></ul></details>
+<h2 id="s1">1. Requirements and stated intent</h2>
+<div class="tbl"><table><thead><tr><th>ID</th><th>Requirement</th><th>Stated</th><th>Proposed classification</th><th>Basis</th></tr></thead><tbody><tr><td><b>R1</b></td><td>Active Class A commercial driver&#x27;s license.</td><td>required</td><td>Essential 🔒</td><td class="meta">Commercial driver&#x27;s license (Class A) is a regulated credential in the knowledge base</td></tr><tr><td><b>R2</b></td><td>3+ years supervising transportation or dispatch operations.</td><td>required</td><td>Demonstrable through alternatives</td><td class="meta">posting accepts equivalent experience</td></tr><tr><td><b>R3</b></td><td>Working knowledge of DOT and hours-of-service compliance.</td><td>required</td><td>Essential</td><td class="meta">linked to objectives [&#x27;O2&#x27;]</td></tr></tbody></table></div>
+<p class="meta">🔒 Protected (legal, licensing or employer non-negotiable): no alternative path is ever proposed.</p>
+<h2 id="s2">2. Screening rules inspected</h2>
+<div class="tbl"><table><thead><tr><th>Rule</th><th>Rule text</th><th>Linked req.</th><th>Status</th><th>Findings</th></tr></thead><tbody><tr><td><b>Q1</b></td><td>Must hold CDL Class A.<br><span class="meta">credential_filter · reject</span></td><td>R1</td><td>protected</td><td><a href=#SA-REQ-LH-0217-24c327f3>24c327f3</a> </td></tr><tr><td><b>Q2</b></td><td>3 years as Transportation Supervisor or Dispatch Supervisor (by job title).<br><span class="meta">minimum_experience · reject</span></td><td>R2</td><td>correction proposed</td><td><a href=#SA-REQ-LH-0217-bdfae568>bdfae568</a> <a href=#SA-REQ-LH-0217-b7263005>b7263005</a> </td></tr></tbody></table></div>
+<h2 id="s3">3. Confirmed inconsistencies</h2><p class="meta">None found.</p>
+<h2 id="s4">4. Potential missed-talent risks</h2><article class="card" id="SA-REQ-LH-0217-24c327f3"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: high</span><span class="chip"><code>SA-REQ-LH-0217-24c327f3</code></span></div><h3>Q1 matches literally and misses recognized variants of Commercial driver&#x27;s license (Class A)</h3><p>Rule Q1 matches only &#x27;CDL Class A&#x27;. The knowledge base records 5 equivalent term(s) for Commercial driver&#x27;s license (Class A) that the rule does not recognize.</p><ul><li class="ev"><span class="src">knowledge:skill.cdl-class-a</span><br>recognized variant(s): Commercial driver&#x27;s license (Class A), Class A CDL, CDL-A, Class A commercial driver&#x27;s license, commercial driver license class A</li></ul><p><b>Consequence in the supplied sample:</b> 1 candidate(s) pass this rule under this correction alone (C-303); 1 candidate-review opportunity depends on it (C-303).</p><dl class="kv"><dt>Proposed action</dt><dd>Add recognized variants to the rule: Commercial driver&#x27;s license (Class A), Class A CDL, CDL-A, Class A commercial driver&#x27;s license, commercial driver license class A.</dd><dt>Expected benefit</dt><dd>Applicants describing the same work in different words are no longer filtered out.</dd><dt>Trade-off</dt><dd>Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>add_terms:
+- Commercial driver&#x27;s license (Class A)
+- Class A CDL
+- CDL-A
+- Class A commercial driver&#x27;s license
+- commercial driver license class A
+</pre></details><details><summary>Limitations</summary><ul><li>Synonyms improve recognition; they do not establish competence.</li><li>Terminology only. A license is never satisfied by adjacent experience.</li></ul></details><p class="meta">Sources: rule:Q1, knowledge:skill.cdl-class-a, knowledge:term.cdl-class-a · knowledge <code>core@1.1.0+8a94e741e4</code> · records: skill.cdl-class-a, term.cdl-class-a</p><div class="decision" data-fid="SA-REQ-LH-0217-24c327f3"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article><article class="card" id="SA-REQ-LH-0217-bdfae568"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: high</span><span class="chip"><code>SA-REQ-LH-0217-bdfae568</code></span></div><h3>Q2 matches literally and misses recognized variants of Transportation supervision</h3><p>Rule Q2 matches only &#x27;Transportation Supervisor&#x27;, &#x27;Dispatch Supervisor&#x27;. The knowledge base records 4 equivalent term(s) for Transportation supervision that the rule does not recognize.</p><ul><li class="ev"><span class="src">knowledge:skill.transportation-supervision</span><br>recognized variant(s): Transportation supervision, dispatch supervision, fleet supervision, linehaul operations</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Add recognized variants to the rule: Transportation supervision, dispatch supervision, fleet supervision, linehaul operations.</dd><dt>Expected benefit</dt><dd>Applicants describing the same work in different words are no longer filtered out.</dd><dt>Trade-off</dt><dd>Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>add_terms:
+- Transportation supervision
+- dispatch supervision
+- fleet supervision
+- linehaul operations
+</pre></details><details><summary>Limitations</summary><ul><li>Synonyms improve recognition; they do not establish competence.</li></ul></details><p class="meta">Sources: rule:Q2, knowledge:skill.transportation-supervision · knowledge <code>core@1.1.0+8a94e741e4</code> · records: skill.transportation-supervision</p><div class="decision" data-fid="SA-REQ-LH-0217-bdfae568"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article><article class="card" id="SA-REQ-LH-0217-b7263005"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: medium</span><span class="chip"><code>SA-REQ-LH-0217-b7263005</code></span></div><h3>Q2 counts experience only under specific job titles</h3><p>Rule Q2 only counts experience held under the titles &#x27;Transportation Supervisor&#x27;, &#x27;Dispatch Supervisor&#x27;. The underlying capability can be demonstrated under other titles and in other domains.</p><ul><li class="ev"><span class="src">rule:Q2</span><br>3 years as Transportation Supervisor or Dispatch Supervisor (by job title).</li></ul><p><b>Consequence in the supplied sample:</b> 2 candidate(s) pass this rule under this correction alone (C-302, C-303); 1 candidate-review opportunity depends on it (C-303).</p><dl class="kv"><dt>Proposed action</dt><dd>Count relevant experience by responsibilities, not titles: match recognized terminology across the full résumé and route equivalency evidence to recruiter review.</dd><dt>Expected benefit</dt><dd>Candidates whose titles differ from the conventional path reach human review.</dd><dt>Trade-off</dt><dd>Responsibility-based matching needs recruiter verification; expect modest extra review time.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>field: resume
+add_terms:
+- Transportation supervision
+- dispatch supervision
+- fleet supervision
+- linehaul operations
+- transportation supervisor
+- dispatch supervisor
+equivalencies:
+- eq.transportation-supervision.fleet-coordination
+</pre></details><details><summary>Limitations</summary><ul><li>Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.</li><li>Title-based counting may reflect a deliberate employer choice; confirm intent.</li></ul></details><p class="meta">Sources: rule:Q2, requirement:R2 · knowledge <code>core@1.1.0+8a94e741e4</code> · records: eq.transportation-supervision.fleet-coordination</p><div class="decision" data-fid="SA-REQ-LH-0217-b7263005"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article>
+<h2 id="s5">5. Candidate-review opportunities</h2><article class="card" id="SA-REQ-LH-0217-6f063ac1"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Candidate-review opportunity</span><span class="chip">confidence: medium</span><span class="chip"><code>SA-REQ-LH-0217-6f063ac1</code></span></div><h3>Candidate C-303 may meet the requirements through a path the current rules do not recognize</h3><p>C-303 was rejected by Q1, Q2. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.</p><p><b>What requirement might this person satisfy, and what evidence supports it?</b></p><div class="tbl"><table><thead><tr><th>Req</th><th>Requirement</th><th>Status · path</th><th>Evidence</th></tr></thead><tbody><tr><td><b>R1</b><br><span class="meta">required</span></td><td>Active Class A commercial driver&#x27;s license.</td><td class="st-evidenced">Evidenced<br><span class="meta">different terminology</span></td><td><div class="ev"><span class="src">credentials.s1</span> Class A CDL</div></td></tr><tr><td><b>R2</b><br><span class="meta">required</span></td><td>3+ years supervising transportation or dispatch operations.</td><td class="st-alternative_path">Evidenced via alternative path · 48 mo<br><span class="meta">transferable experience (eq.transportation-supervision.fleet-coordination)</span></td><td><div class="ev"><span class="src">experience[0].s1</span> Supervised 14 linehaul drivers and scheduled daily routes.</div><div class="ev"><span class="src">experience[0].s2</span> Ran hours-of-service compliance audits.</div></td></tr><tr><td><b>R3</b><br><span class="meta">required</span></td><td>Working knowledge of DOT and hours-of-service compliance.</td><td class="st-evidenced">Evidenced<br><span class="meta">same terminology</span></td><td><div class="ev"><span class="src">experience[0].s2</span> Ran hours-of-service compliance audits.</div></td></tr></tbody></table></div><p><b>Excluded by:</b> Q1 — listed credential not held; Q2 — 0 relevant months vs 36 required</p><p><b>How their experience differs from the conventional path</b></p><ul><li>R1 described in different terminology: Class A CDL</li><li>R2 evidenced through transferable experience (eq.transportation-supervision.fleet-coordination)</li><li>Experience domains: logistics</li></ul><p><b>What remains unproven</b></p><ul><li>R2: eq.transportation-supervision.fleet-coordination: 3 of 3 indicators present; 48 months of relevant experience. Conditions: Must include direct supervision or scheduling of drivers.</li><li>Qualification has not been established by this analysis.</li></ul><p><b>What to verify next</b></p><ul><li>Confirm number of drivers supervised and authority over scheduling.</li><li>Confirm compliance responsibilities.</li></ul><p class="meta">Surfaced because of: <a href="#SA-REQ-LH-0217-24c327f3">SA-REQ-LH-0217-24c327f3</a>, <a href="#SA-REQ-LH-0217-b7263005">SA-REQ-LH-0217-b7263005</a></p><p class="meta">Sources: candidate:C-303, rule:Q1, rule:Q2 · knowledge <code>core@1.1.0+8a94e741e4</code> · records: eq.transportation-supervision.fleet-coordination</p><div class="decision" data-fid="SA-REQ-LH-0217-6f063ac1"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article>
+<details><summary>Candidates assessed but not surfaced</summary><div class="tbl"><table><thead><tr><th>Candidate</th><th>ATS status</th><th>Excluded by</th><th>Reason</th></tr></thead><tbody><tr><td><b>C-301</b></td><td>advanced</td><td>—</td><td>Not excluded by the ATS (status: advanced).</td></tr><tr><td><b>C-302</b></td><td>rejected</td><td>Q1, Q2</td><td>Does not meet a protected requirement; not surfaced.</td></tr><tr><td><b>C-304</b></td><td>rejected</td><td>Q2</td><td>Still excluded after proposed corrections by Q2.</td></tr></tbody></table></div></details>
+<details><summary>Protected and suppressed items</summary><ul><li>candidate <code>C-302</code>: Does not meet a protected requirement; not surfaced.</li><li>rule <code>Q1</code>: Commercial driver&#x27;s license (Class A) is a regulated credential in the knowledge base</li></ul></details>
+<h2 id="s6">6. Recommended changes</h2>
+<p class="meta">Suggested changes for the employer to implement in the ATS. Nothing is applied automatically.</p><div class="card"><h3>Q1 — Must hold CDL Class A.</h3><pre>suggested_logic:
+  credentials:
+  - CDL Class A
+  - Commercial driver&#x27;s license (Class A)
+  - Class A CDL
+  - CDL-A
+  - Class A commercial driver&#x27;s license
+  - commercial driver license class A
+</pre><p class="meta">From findings: <a href=#SA-REQ-LH-0217-24c327f3>SA-REQ-LH-0217-24c327f3</a></p></div><div class="card"><h3>Q2 — 3 years as Transportation Supervisor or Dispatch Supervisor (by job title).</h3><pre>suggested_logic:
+  terms:
+  - Transportation Supervisor
+  - Dispatch Supervisor
+  - Transportation supervision
+  - dispatch supervision
+  - fleet supervision
+  - linehaul operations
+  years: 3
+  field: resume
+  equivalencies:
+  - eq.transportation-supervision.fleet-coordination
+</pre><p class="meta">From findings: <a href=#SA-REQ-LH-0217-bdfae568>SA-REQ-LH-0217-bdfae568</a>, <a href=#SA-REQ-LH-0217-b7263005>SA-REQ-LH-0217-b7263005</a></p></div>
+<h2 id="s7">7. Human decisions and rationale</h2>
+<p class="meta">No decisions recorded yet. Use the controls on each finding, then export <code>decisions.yaml</code> and re-run.</p>
+<h2 id="s8">8. Outcome measurements</h2><p class="meta">No outcome data supplied yet. Add <code>outcomes.yaml</code> with a documented baseline after corrections are implemented.</p>
+
+</main>
+<div class="bar"><div class="wrap"><div class="who"><label for="who" class="meta">Reviewer</label><input id="who" placeholder="you@company.com"></div>
+<span id="count"></span><button class="ghost" id="show">Preview</button><button id="export">Export decisions.yaml</button></div>
+<div class="wrap"><pre id="preview" hidden></pre></div></div>
+<script>
+const KEY='sa-decisions-'+document.body.dataset.req;
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+const state=load();
+function refresh(){let n=0;document.querySelectorAll('[data-fid]').forEach(el=>{if(el.querySelector('select').value)n++});
+document.getElementById('count').textContent=n+' decision'+(n==1?'':'s')+' recorded in this browser';}
+document.querySelectorAll('[data-fid]').forEach(el=>{const id=el.dataset.fid,sel=el.querySelector('select'),ta=el.querySelector('textarea');
+ if(state[id]){sel.value=state[id].d||'';ta.value=state[id].r||''}
+ const upd=()=>{state[id]={d:sel.value,r:ta.value};save(state);refresh()};sel.onchange=upd;ta.oninput=upd;});
+const who=document.getElementById('who');try{who.value=localStorage.getItem('sa-who')||''}catch(e){}
+who.oninput=()=>{try{localStorage.setItem('sa-who',who.value)}catch(e){}};
+function q(s){return JSON.stringify(s)}
+function build(){const by=who.value.trim()||'reviewer@example.com';const now=new Date().toISOString().slice(0,19)+'Z';
+ let y='requisition_id: '+q(document.body.dataset.req)+'\ndecisions:\n';let n=0,missing=[];
+ document.querySelectorAll('[data-fid]').forEach(el=>{const d=el.querySelector('select').value,r=el.querySelector('textarea').value.trim();
+  if(!d)return; if(!r){missing.push(el.dataset.fid);return}
+  n++;y+='  - finding_id: '+q(el.dataset.fid)+'\n    disposition: '+d+'\n    rationale: '+q(r)+'\n    decided_by: '+q(by)+'\n    decided_at: '+q(now)+'\n';});
+ if(!n)y+='  []\n';return {y,missing};}
+document.getElementById('export').onclick=()=>{const {y,missing}=build();
+ if(missing.length&&!confirm('A rationale is required. '+missing.length+' decision(s) without rationale will be left out. Continue?'))return;
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([y],{type:'text/yaml'}));a.download='decisions.yaml';a.click();};
+document.getElementById('show').onclick=()=>{const p=document.getElementById('preview');p.hidden=!p.hidden;p.textContent=build().y;};
+refresh();
+</script>
+</body></html>

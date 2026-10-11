@@ -1,0 +1,15 @@
+pack: core
+version: 1.0.0
+status: approved
+approved_by: knowledge-admin@example.com
+approved_at: '2026-10-01'
+documents:
+  synonyms: synonyms.yaml
+  equivalencies: equivalencies.yaml
+  skills: skills.yaml
+changelog:
+- version: 1.0.0
+  date: '2026-10-01'
+  author: seed-knowledge
+  summary: Initial seed pack for software-infrastructure, customer-success and logistics-operations
+    job families.

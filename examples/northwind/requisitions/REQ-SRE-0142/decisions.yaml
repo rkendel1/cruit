@@ -1,0 +1,25 @@
+# Human review decisions (exported from the HTML report, then committed).
+# Every decision carries a rationale. The engine never changes ATS configuration.
+requisition_id: REQ-SRE-0142
+decisions:
+  - { finding_id: SA-REQ-SRE-0142-704c5892, disposition: accepted, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:10:00Z", rationale: "Posting already accepts equivalent experience; add a recruiter-review route for production-operations résumés." }
+  - { finding_id: SA-REQ-SRE-0142-9164e1d0, disposition: accepted, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:11:00Z", rationale: "R1 explicitly allows production operations; the filter should too." }
+  - { finding_id: SA-REQ-SRE-0142-b05a4c5a, disposition: accepted, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:12:00Z", rationale: "Same function, different title." }
+  - { finding_id: SA-REQ-SRE-0142-d15dcf14, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:00:00Z", rationale: "Five years is the real bar; seven was copied from the staff-level req." }
+  - { finding_id: SA-REQ-SRE-0142-9403725f, disposition: accepted, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:13:00Z", rationale: "Consistent with R1." }
+  - { finding_id: SA-REQ-SRE-0142-e3e3d885, disposition: rejected, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:13:30Z", rationale: "Moot: Q2 will count responsibilities across the résumé (see the experience-path finding), so adding title variants is unnecessary." }
+  - { finding_id: SA-REQ-SRE-0142-a0ac83a9, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:02:00Z", rationale: "Count responsibilities, not titles; recruiter verifies scope." }
+  - { finding_id: SA-REQ-SRE-0142-5302d6be, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:05:00Z", rationale: "Some of our best incident leads came from operations. Route 'no' answers with crisis-leadership evidence to review." }
+  - { finding_id: SA-REQ-SRE-0142-3bc61a83, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:06:00Z", rationale: "Degree is a preference; use it for ranking only." }
+  - { finding_id: SA-REQ-SRE-0142-512cd6d3, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:06:30Z", rationale: "Same change as the knockout removal." }
+  - { finding_id: SA-REQ-SRE-0142-f01e2bd0, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:07:00Z", rationale: "Pulumi, CloudFormation and Ansible experience transfers; we said 'or equivalent'." }
+  - { finding_id: SA-REQ-SRE-0142-9d626aeb, disposition: deferred, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:20:00Z", rationale: "Superseded by the broader Q5 change; revisit if Q5 stays literal." }
+  - { finding_id: SA-REQ-SRE-0142-48360a3a, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:08:00Z", rationale: "Kubernetes is learnable; Nomad experience is fine." }
+  - { finding_id: SA-REQ-SRE-0142-99df8968, disposition: accepted, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:10:00Z", rationale: "Stale filter from an earlier requisition; we run Prometheus and any monitoring experience transfers." }
+  - { finding_id: SA-REQ-SRE-0142-ff4b8adc, disposition: reclassified_preferred, decided_by: hm.okafor@northwind.example, decided_at: "2026-10-12T16:12:00Z", rationale: "Freight experience helps but is not needed to do the job." }
+  - { finding_id: SA-REQ-SRE-0142-6f96884a, disposition: requested_evidence, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:25:00Z", rationale: "Asked the ATS admin for the full configuration export; C-113 may have been a manual rejection." }
+  - { finding_id: SA-REQ-SRE-0142-5f56524c, disposition: approved_candidate_review, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:30:00Z", rationale: "Production reliability engineer title; review." }
+  - { finding_id: SA-REQ-SRE-0142-4989b969, disposition: approved_candidate_review, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:31:00Z", rationale: "Hospital EHR incident lead; verify Terraform depth." }
+  - { finding_id: SA-REQ-SRE-0142-36d39631, disposition: approved_candidate_review, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:32:00Z", rationale: "Military communications operations; verify production-scale automation.", propose_knowledge_update: true }
+  - { finding_id: SA-REQ-SRE-0142-cd635676, disposition: approved_candidate_review, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:33:00Z", rationale: "Conventional profile without a degree." }
+  - { finding_id: SA-REQ-SRE-0142-c1d0ef0b, disposition: approved_candidate_review, decided_by: recruiter.lee@northwind.example, decided_at: "2026-10-12T15:34:00Z", rationale: "Nomad instead of Kubernetes." }

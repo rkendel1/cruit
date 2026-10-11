@@ -1,0 +1,5113 @@
+{
+  "requisition": {
+    "id": "REQ-SRE-0142",
+    "title": "Senior Site Reliability Engineer",
+    "job_family": "software-infrastructure",
+    "employer_id": "northwind",
+    "ats": "generic-ats-export-v1"
+  },
+  "policy": {
+    "employer_id": "northwind",
+    "policy_version": "2026.2"
+  },
+  "knowledge": {
+    "pack": "core",
+    "version": "1.1.0",
+    "fingerprint": "core@1.1.0+8a94e741e4",
+    "status": "approved",
+    "path": "knowledge/releases/1.1.0"
+  },
+  "engine_version": "0.1.0",
+  "run_at": "2026-11-03T12:00:00Z",
+  "inputs": {
+    "job_description": "supplied",
+    "screening_configuration": "ats_export_verified",
+    "candidate_evidence": "authorized_sample",
+    "notes": "Knockout questions and filters exported from the ATS job configuration on 2026-10-05."
+  },
+  "limitations": [
+    "Requirement R6 treated as 'preferred' because of human decision on SA-REQ-SRE-0142-ff4b8adc.",
+    "Candidate evidence is a sample; candidate counts do not represent the full applicant pool.",
+    "Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run."
+  ],
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "5+ years of site reliability engineering or production operations experience.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.production-operations",
+        "skill.site-reliability-engineering"
+      ],
+      "concept_names": [
+        "Production operations",
+        "Site reliability engineering"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": 5
+    },
+    {
+      "id": "R2",
+      "text": "Experience leading incident management, including post-incident reviews.",
+      "stated_as": "required",
+      "concepts": [
+        "skill.incident-management"
+      ],
+      "concept_names": [
+        "Incident management"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": null
+    },
+    {
+      "id": "R3",
+      "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+      "stated_as": "required",
+      "concepts": [
+        "skill.infrastructure-as-code",
+        "skill.terraform"
+      ],
+      "concept_names": [
+        "Infrastructure as code",
+        "Terraform"
+      ],
+      "proposed_classification": "demonstrable_through_alternatives",
+      "classification_basis": "posting accepts equivalent experience",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": null
+    },
+    {
+      "id": "R4",
+      "text": "Experience operating Kubernetes.",
+      "stated_as": "preferred",
+      "concepts": [
+        "skill.kubernetes"
+      ],
+      "concept_names": [
+        "Kubernetes"
+      ],
+      "proposed_classification": "preferred",
+      "classification_basis": "stated as preferred in the posting",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    },
+    {
+      "id": "R5",
+      "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+      "stated_as": "preferred",
+      "concepts": [
+        "skill.cs-degree"
+      ],
+      "concept_names": [
+        "Bachelor's degree in computer science"
+      ],
+      "proposed_classification": "preferred",
+      "classification_basis": "stated as preferred in the posting",
+      "employer_classification": null,
+      "protected": false,
+      "accepts_equivalent": true,
+      "min_years": null
+    },
+    {
+      "id": "R6",
+      "text": "Experience in the logistics or freight industry.",
+      "stated_as": "preferred",
+      "concepts": [],
+      "concept_names": [],
+      "proposed_classification": "preferred",
+      "classification_basis": "set by recorded human decision",
+      "employer_classification": "preferred",
+      "protected": false,
+      "accepts_equivalent": false,
+      "min_years": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "Q1",
+      "type": "keyword_filter",
+      "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE.",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.site-reliability-engineering"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "site reliability engineer",
+          "SRE",
+          "Site reliability engineering",
+          "production reliability engineering",
+          "production reliability engineer",
+          "Production operations",
+          "IT operations",
+          "systems operations",
+          "infrastructure operations",
+          "operations engineering",
+          "platform operations",
+          "network operations",
+          "DevOps engineering"
+        ],
+        "match": "any",
+        "field": "resume",
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.site-reliability.production-operations"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-704c5892",
+        "SA-REQ-SRE-0142-9164e1d0",
+        "SA-REQ-SRE-0142-b05a4c5a"
+      ]
+    },
+    {
+      "id": "Q2",
+      "type": "minimum_experience",
+      "text": "At least 7 years in Site Reliability Engineer roles (by job title).",
+      "action": "reject",
+      "linked_requirement": "R1",
+      "concepts": [
+        "skill.site-reliability-engineering"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "site reliability engineer",
+          "SRE",
+          "Production operations",
+          "IT operations",
+          "systems operations",
+          "infrastructure operations",
+          "operations engineering",
+          "platform operations",
+          "network operations",
+          "DevOps engineering",
+          "Site reliability engineering",
+          "production reliability engineering",
+          "production reliability engineer"
+        ],
+        "years": 5,
+        "field": "resume",
+        "equivalencies": [
+          "eq.site-reliability.production-operations"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-9403725f",
+        "SA-REQ-SRE-0142-d15dcf14",
+        "SA-REQ-SRE-0142-e3e3d885",
+        "SA-REQ-SRE-0142-a0ac83a9"
+      ]
+    },
+    {
+      "id": "Q3",
+      "type": "knockout_question",
+      "text": "Have you served as incident commander for a software production environment?",
+      "action": "reject",
+      "linked_requirement": "R2",
+      "concepts": [
+        "skill.incident-management"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "required_answer": "yes",
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.incident-management.operational-crisis-response"
+        ],
+        "evidence_concepts": [
+          "skill.incident-management"
+        ]
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-5302d6be"
+      ]
+    },
+    {
+      "id": "Q4",
+      "type": "knockout_question",
+      "text": "Do you hold a bachelor's degree in computer science?",
+      "action": "reject",
+      "linked_requirement": "R5",
+      "concepts": [
+        "skill.cs-degree"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "removed": true
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-3bc61a83",
+        "SA-REQ-SRE-0142-512cd6d3"
+      ]
+    },
+    {
+      "id": "Q5",
+      "type": "keyword_filter",
+      "text": "R\u00e9sum\u00e9 must mention Terraform.",
+      "action": "reject",
+      "linked_requirement": "R3",
+      "concepts": [
+        "skill.terraform"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "terms": [
+          "Terraform",
+          "HashiCorp Terraform",
+          "OpenTofu",
+          "Infrastructure as code",
+          "infrastructure automation",
+          "IaC",
+          "Ansible",
+          "AWS CloudFormation",
+          "CloudFormation",
+          "Pulumi"
+        ],
+        "match": "any",
+        "field": "resume"
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-f01e2bd0",
+        "SA-REQ-SRE-0142-9d626aeb"
+      ]
+    },
+    {
+      "id": "Q6",
+      "type": "knockout_question",
+      "text": "Do you have hands-on Kubernetes experience?",
+      "action": "reject",
+      "linked_requirement": "R4",
+      "concepts": [
+        "skill.kubernetes"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "removed": true
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-48360a3a"
+      ]
+    },
+    {
+      "id": "Q7",
+      "type": "keyword_filter",
+      "text": "R\u00e9sum\u00e9 must mention Datadog.",
+      "action": "reject",
+      "linked_requirement": null,
+      "concepts": [
+        "skill.datadog"
+      ],
+      "status": "correction_proposed",
+      "corrected": {
+        "removed": true
+      },
+      "finding_ids": [
+        "SA-REQ-SRE-0142-99df8968"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SA-REQ-SRE-0142-704c5892",
+      "check": "equivalent_path_blocked",
+      "title": "R1 accepts equivalent experience, but Q1 has no equivalent path",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "The posting accepts equivalent experience for R1, but rule Q1 only recognizes the listed terms and has no route for recognized equivalent experience.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "source": "rule:Q1",
+          "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.",
+      "expected_benefit": "Restores the equivalency the employer already committed to in the posting.",
+      "tradeoffs": "Equivalent-path applicants need recruiter verification time.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-102",
+        "C-103",
+        "C-110"
+      ],
+      "unlocked_candidates": [
+        "C-102",
+        "C-103",
+        "C-110"
+      ],
+      "proposed_change": {
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.site-reliability.production-operations"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.site-reliability.production-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Posting already accepts equivalent experience; add a recruiter-review route for production-operations r\u00e9sum\u00e9s.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:10:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-9164e1d0",
+      "check": "rule_narrower_than_requirement",
+      "title": "Q1 is narrower than R1: it ignores Production operations",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R1 can be met through Production operations, but rule Q1 only recognizes 'site reliability engineer', 'SRE'.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "source": "rule:Q1",
+          "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Concept recognition uses the knowledge pack; review the proposed terms before adopting them."
+      ],
+      "proposed_action": "Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations, DevOps engineering.",
+      "expected_benefit": "Applicants who meet the requirement as written are no longer filtered out.",
+      "tradeoffs": "Broader matching may increase review volume; terms are limited to the posted requirement.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-106",
+        "C-110"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106",
+        "C-110"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Production operations",
+          "IT operations",
+          "systems operations",
+          "infrastructure operations",
+          "operations engineering",
+          "platform operations",
+          "network operations",
+          "DevOps engineering"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.production-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "R1 explicitly allows production operations; the filter should too.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:11:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-9403725f",
+      "check": "rule_narrower_than_requirement",
+      "title": "Q2 is narrower than R1: it ignores Production operations",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R1 can be met through Production operations, but rule Q2 only recognizes 'site reliability engineer', 'SRE'.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "source": "rule:Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Concept recognition uses the knowledge pack; review the proposed terms before adopting them."
+      ],
+      "proposed_action": "Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations, DevOps engineering.",
+      "expected_benefit": "Applicants who meet the requirement as written are no longer filtered out.",
+      "tradeoffs": "Broader matching may increase review volume; terms are limited to the posted requirement.",
+      "rule_id": "Q2",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [
+        "C-102",
+        "C-103",
+        "C-106",
+        "C-110"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Production operations",
+          "IT operations",
+          "systems operations",
+          "infrastructure operations",
+          "operations engineering",
+          "platform operations",
+          "network operations",
+          "DevOps engineering"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.production-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Consistent with R1.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:13:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-d15dcf14",
+      "check": "threshold_inconsistency",
+      "title": "Q2 requires 7 years; the posting asks for 5",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R1 states 5+ years, but rule Q2 enforces 7 years.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        },
+        {
+          "source": "rule:Q2",
+          "text": "years: 7 \u2014 At least 7 years in Site Reliability Engineer roles (by job title)."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Align the rule threshold with the posted requirement (5 years), or update the posting if the higher threshold is genuinely required.",
+      "expected_benefit": "Applicants who meet the posted threshold are no longer silently excluded.",
+      "tradeoffs": "None if the posting reflects the real need.",
+      "rule_id": "Q2",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-108",
+        "C-109"
+      ],
+      "unlocked_candidates": [
+        "C-102",
+        "C-103",
+        "C-106",
+        "C-108",
+        "C-109",
+        "C-110"
+      ],
+      "proposed_change": {
+        "years": 5
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Five years is the real bar; seven was copied from the staff-level req.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:00:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-5302d6be",
+      "check": "equivalent_path_blocked",
+      "title": "R2 accepts equivalent experience, but Q3 has no equivalent path",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "The posting accepts equivalent experience for R2, but rule Q3 rejects applicants who answer or hold otherwise, regardless of equivalent evidence.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews."
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": "Have you served as incident commander for a software production environment?"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R2",
+          "text": "Experience leading incident management, including post-incident reviews."
+        },
+        {
+          "source": "rule:Q3",
+          "text": "Have you served as incident commander for a software production environment?"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.",
+      "expected_benefit": "Restores the equivalency the employer already committed to in the posting.",
+      "tradeoffs": "Equivalent-path applicants need recruiter verification time.",
+      "rule_id": "Q3",
+      "requirement_id": "R2",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-106",
+        "C-107"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106"
+      ],
+      "proposed_change": {
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.incident-management.operational-crisis-response"
+        ],
+        "evidence_concepts": [
+          "skill.incident-management"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.incident-management.operational-crisis-response"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Some of our best incident leads came from operations. Route 'no' answers with crisis-leadership evidence to review.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:05:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-3bc61a83",
+      "check": "preferred_enforced_as_knockout",
+      "title": "Preferred qualification R5 is enforced as a knockout by Q4",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R5 is stated as preferred, but rule Q4 rejects applicants who do not meet it.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q4",
+          "text": "Do you hold a bachelor's degree in computer science?"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R5",
+          "text": "stated_as: preferred \u2014 Bachelor's degree in computer science or a related field, or equivalent practical experience."
+        },
+        {
+          "source": "rule:Q4",
+          "text": "action: reject \u2014 Do you hold a bachelor's degree in computer science?"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.",
+      "expected_benefit": "Applicants who meet all essential requirements are no longer rejected for lacking a preference.",
+      "tradeoffs": "More applicants reach review; ranking should still favour the preferred qualification.",
+      "rule_id": "Q4",
+      "requirement_id": "R5",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-105",
+        "C-106",
+        "C-108",
+        "C-111"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106",
+        "C-108"
+      ],
+      "proposed_change": {
+        "removed": true
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Degree is a preference; use it for ranking only.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:06:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-512cd6d3",
+      "check": "equivalent_path_blocked",
+      "title": "R5 accepts equivalent experience, but Q4 has no equivalent path",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "The posting accepts equivalent experience for R5, but rule Q4 rejects applicants who answer or hold otherwise, regardless of equivalent evidence.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience."
+        },
+        {
+          "kind": "rule",
+          "id": "Q4",
+          "text": "Do you hold a bachelor's degree in computer science?"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience."
+        },
+        {
+          "source": "rule:Q4",
+          "text": "Do you hold a bachelor's degree in computer science?"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Equivalent practical experience is interpreted as meeting the posted experience requirement(s) R1."
+      ],
+      "proposed_action": "Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.",
+      "expected_benefit": "Restores the equivalency the employer already committed to in the posting.",
+      "tradeoffs": "Equivalent-path applicants need recruiter verification time.",
+      "rule_id": "Q4",
+      "requirement_id": "R5",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-106",
+        "C-108",
+        "C-111"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106",
+        "C-108"
+      ],
+      "proposed_change": {
+        "allows_equivalent": true,
+        "equivalencies": [
+          "eq.site-reliability.production-operations"
+        ],
+        "evidence_concepts": [
+          "skill.production-operations",
+          "skill.site-reliability-engineering"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.site-reliability.production-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Same change as the knockout removal.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:06:30Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-f01e2bd0",
+      "check": "rule_narrower_than_requirement",
+      "title": "Q5 is narrower than R3: it ignores Infrastructure as code",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R3 can be met through Infrastructure as code, but rule Q5 only recognizes 'Terraform'.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent)."
+        },
+        {
+          "kind": "rule",
+          "id": "Q5",
+          "text": "R\u00e9sum\u00e9 must mention Terraform."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent)."
+        },
+        {
+          "source": "rule:Q5",
+          "text": "R\u00e9sum\u00e9 must mention Terraform."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Concept recognition uses the knowledge pack; review the proposed terms before adopting them."
+      ],
+      "proposed_action": "Extend the rule to recognize: Infrastructure as code, infrastructure automation, IaC, Ansible, AWS CloudFormation, CloudFormation, Pulumi, Terraform, HashiCorp Terraform, OpenTofu.",
+      "expected_benefit": "Applicants who meet the requirement as written are no longer filtered out.",
+      "tradeoffs": "Broader matching may increase review volume; terms are limited to the posted requirement.",
+      "rule_id": "Q5",
+      "requirement_id": "R3",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-102"
+      ],
+      "unlocked_candidates": [
+        "C-102"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Infrastructure as code",
+          "infrastructure automation",
+          "IaC",
+          "Ansible",
+          "AWS CloudFormation",
+          "CloudFormation",
+          "Pulumi",
+          "Terraform",
+          "HashiCorp Terraform",
+          "OpenTofu"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.infrastructure-as-code"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Pulumi, CloudFormation and Ansible experience transfers; we said 'or equivalent'.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:07:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-48360a3a",
+      "check": "preferred_enforced_as_knockout",
+      "title": "Preferred qualification R4 is enforced as a knockout by Q6",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Requirement R4 is stated as preferred, but rule Q6 rejects applicants who do not meet it.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R4",
+          "text": "Experience operating Kubernetes."
+        },
+        {
+          "kind": "rule",
+          "id": "Q6",
+          "text": "Do you have hands-on Kubernetes experience?"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R4",
+          "text": "stated_as: preferred \u2014 Experience operating Kubernetes."
+        },
+        {
+          "source": "rule:Q6",
+          "text": "action: reject \u2014 Do you have hands-on Kubernetes experience?"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [],
+      "proposed_action": "Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.",
+      "expected_benefit": "Applicants who meet all essential requirements are no longer rejected for lacking a preference.",
+      "tradeoffs": "More applicants reach review; ranking should still favour the preferred qualification.",
+      "rule_id": "Q6",
+      "requirement_id": "R4",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-105",
+        "C-106",
+        "C-109",
+        "C-111",
+        "C-112"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106",
+        "C-109"
+      ],
+      "proposed_change": {
+        "removed": true
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Kubernetes is learnable; Nomad experience is fine.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:08:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-99df8968",
+      "check": "unstated_requirement_enforced",
+      "title": "Rule Q7 enforces a requirement the job description does not state",
+      "category": "confirmed_inconsistency",
+      "evidence_level": 1,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Screening rule Q7 (keyword_filter, action: reject) screens on 'Datadog', but no posted requirement corresponds to it.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q7",
+          "text": "R\u00e9sum\u00e9 must mention Datadog."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "rule:Q7",
+          "text": "R\u00e9sum\u00e9 must mention Datadog."
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "The requirement may be genuine but undocumented; only the employer can confirm."
+      ],
+      "proposed_action": "Confirm whether this is a genuine job requirement. If it is, add it to the posted requirements with its rationale; if not, remove the rule or convert it to a preference.",
+      "expected_benefit": "Applicants are screened only on requirements they were told about.",
+      "tradeoffs": "If the requirement is genuine, removing the rule would admit unqualified applicants; confirm first.",
+      "rule_id": "Q7",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-103",
+        "C-104",
+        "C-105",
+        "C-106",
+        "C-110",
+        "C-111",
+        "C-112"
+      ],
+      "unlocked_candidates": [
+        "C-103",
+        "C-106",
+        "C-110"
+      ],
+      "proposed_change": {
+        "removed": true
+      },
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Stale filter from an earlier requisition; we run Prometheus and any monitoring experience transfers.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:10:00Z"
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-b05a4c5a",
+      "check": "literal_term_missing_variants",
+      "title": "Q1 matches literally and misses recognized variants of Site reliability engineering",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 matches only 'site reliability engineer', 'SRE'. The knowledge base records 3 equivalent term(s) for Site reliability engineering that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "R\u00e9sum\u00e9 must mention site reliability engineer or SRE."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.site-reliability-engineering",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.site-reliability-engineering",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.site-reliability-engineering",
+          "text": "recognized variant(s): Site reliability engineering, production reliability engineering, production reliability engineer"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "'reliability engineering': Deliberately not a variant: in manufacturing and hardware contexts it means equipment reliability.",
+        "The presence of a related term does not prove that the candidate possesses the required experience."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Site reliability engineering, production reliability engineering, production reliability engineer.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q1",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-102",
+        "C-111"
+      ],
+      "unlocked_candidates": [
+        "C-102"
+      ],
+      "proposed_change": {
+        "add_terms": [
+          "Site reliability engineering",
+          "production reliability engineering",
+          "production reliability engineer"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.site-reliability-engineering",
+        "term.site-reliability-engineering"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Same function, different title.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:12:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-e3e3d885",
+      "check": "literal_term_missing_variants",
+      "title": "Q2 matches literally and misses recognized variants of Site reliability engineering",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 matches only 'site reliability engineer', 'SRE'. The knowledge base records 3 equivalent term(s) for Site reliability engineering that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.site-reliability-engineering",
+          "text": ""
+        },
+        {
+          "kind": "knowledge",
+          "id": "term.site-reliability-engineering",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.site-reliability-engineering",
+          "text": "recognized variant(s): Site reliability engineering, production reliability engineering, production reliability engineer"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence.",
+        "'reliability engineering': Deliberately not a variant: in manufacturing and hardware contexts it means equipment reliability.",
+        "The presence of a related term does not prove that the candidate possesses the required experience."
+      ],
+      "proposed_action": "Add recognized variants to the rule: Site reliability engineering, production reliability engineering, production reliability engineer.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q2",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "Site reliability engineering",
+          "production reliability engineering",
+          "production reliability engineer"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.site-reliability-engineering",
+        "term.site-reliability-engineering"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "rejected",
+        "rationale": "Moot: Q2 will count responsibilities across the r\u00e9sum\u00e9 (see the experience-path finding), so adding title variants is unnecessary.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:13:30Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-a0ac83a9",
+      "check": "experience_path_narrower",
+      "title": "Q2 counts experience only under specific job titles",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q2 only counts experience held under the titles 'site reliability engineer', 'SRE'. The underlying capability can be demonstrated under other titles and in other domains.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        },
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "rule:Q2",
+          "text": "At least 7 years in Site Reliability Engineer roles (by job title)."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.",
+        "Title-based counting may reflect a deliberate employer choice; confirm intent."
+      ],
+      "proposed_action": "Count relevant experience by responsibilities, not titles: match recognized terminology across the full r\u00e9sum\u00e9 and route equivalency evidence to recruiter review.",
+      "expected_benefit": "Candidates whose titles differ from the conventional path reach human review.",
+      "tradeoffs": "Responsibility-based matching needs recruiter verification; expect modest extra review time.",
+      "rule_id": "Q2",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [
+        "C-102",
+        "C-103",
+        "C-106",
+        "C-110"
+      ],
+      "proposed_change": {
+        "field": "resume",
+        "add_terms": [
+          "Production operations",
+          "IT operations",
+          "systems operations",
+          "infrastructure operations",
+          "operations engineering",
+          "platform operations",
+          "network operations",
+          "DevOps engineering",
+          "Site reliability engineering",
+          "SRE",
+          "site reliability engineer",
+          "production reliability engineering",
+          "production reliability engineer"
+        ],
+        "equivalencies": [
+          "eq.site-reliability.production-operations"
+        ]
+      },
+      "knowledge_refs": [
+        "eq.site-reliability.production-operations"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "accepted",
+        "rationale": "Count responsibilities, not titles; recruiter verifies scope.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:02:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-9d626aeb",
+      "check": "literal_term_missing_variants",
+      "title": "Q5 matches literally and misses recognized variants of Terraform",
+      "category": "design_risk",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q5 matches only 'Terraform'. The knowledge base records 2 equivalent term(s) for Terraform that the rule does not recognize.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q5",
+          "text": "R\u00e9sum\u00e9 must mention Terraform."
+        },
+        {
+          "kind": "knowledge",
+          "id": "skill.terraform",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "knowledge:skill.terraform",
+          "text": "recognized variant(s): HashiCorp Terraform, OpenTofu"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Synonyms improve recognition; they do not establish competence."
+      ],
+      "proposed_action": "Add recognized variants to the rule: HashiCorp Terraform, OpenTofu.",
+      "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
+      "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
+      "rule_id": "Q5",
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": {
+        "add_terms": [
+          "HashiCorp Terraform",
+          "OpenTofu"
+        ]
+      },
+      "knowledge_refs": [
+        "skill.terraform"
+      ],
+      "related_findings": [],
+      "disposition": {
+        "status": "deferred",
+        "rationale": "Superseded by the broader Q5 change; revisit if Q5 stays literal.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:20:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-ff4b8adc",
+      "check": "unverified_necessity",
+      "title": "Business necessity of required qualification R6 is undocumented",
+      "category": "unverified_assumption",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "R6 ('Experience in the logistics or freight industry.') is marked required, but has no documented rationale and is not linked to any stated job objective.",
+      "source_refs": [
+        {
+          "kind": "requirement",
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "requirement:R6",
+          "text": "Experience in the logistics or freight industry."
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "The requirement may be genuinely necessary; this finding asks for clarification, not removal."
+      ],
+      "proposed_action": "Classify the requirement: essential (document the rationale), preferred, or demonstrable through alternatives.",
+      "expected_benefit": "Required qualifications reflect what the job actually needs, and the rationale is auditable.",
+      "tradeoffs": "Requires a short hiring-manager conversation.",
+      "rule_id": null,
+      "requirement_id": "R6",
+      "candidate_id": null,
+      "affected_candidates": [],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "reclassified_preferred",
+        "rationale": "Freight experience helps but is not needed to do the job.",
+        "decided_by": "hm.okafor@northwind.example",
+        "decided_at": "2026-10-12T16:12:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-5f56524c",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-102 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-102 was rejected by Q1, Q2, Q5. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-102",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q5",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-102/experience[0].title",
+          "text": "Production Reliability Engineer",
+          "path": "terminology_variant",
+          "matched": "production reliability engineer",
+          "concept": "skill.site-reliability-engineering",
+          "record": "term.site-reliability-engineering",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-102/experience[0].s2",
+          "text": "Led incident response for major outages and coordinated restoration across teams.",
+          "path": "terminology_variant",
+          "matched": "incident response",
+          "concept": "skill.incident-management",
+          "record": "skill.incident-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-102/experience[0].s4",
+          "text": "Provisioned infrastructure with Pulumi and automated deployments.",
+          "path": "supporting_skill",
+          "matched": "Pulumi",
+          "concept": "skill.pulumi",
+          "record": "skill.pulumi",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-102/skills.s1",
+          "text": "Pulumi.",
+          "path": "supporting_skill",
+          "matched": "Pulumi",
+          "concept": "skill.pulumi",
+          "record": "skill.pulumi",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-102/skills.s2",
+          "text": "Kubernetes.",
+          "path": "direct",
+          "matched": "Kubernetes",
+          "concept": "skill.kubernetes",
+          "record": "skill.kubernetes",
+          "requirement": "R4"
+        },
+        {
+          "source": "candidate:C-102/education.s1",
+          "text": "BS in Computer Science",
+          "path": "terminology_variant",
+          "matched": "BS in computer science",
+          "concept": "skill.cs-degree",
+          "record": "skill.cs-degree",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-102",
+      "affected_candidates": [
+        "C-102"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-SRE-0142-704c5892",
+        "SA-REQ-SRE-0142-9403725f",
+        "SA-REQ-SRE-0142-a0ac83a9",
+        "SA-REQ-SRE-0142-b05a4c5a",
+        "SA-REQ-SRE-0142-d15dcf14",
+        "SA-REQ-SRE-0142-f01e2bd0"
+      ],
+      "disposition": {
+        "status": "approved_candidate_review",
+        "rationale": "Production reliability engineer title; review.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:30:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-4989b969",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-103 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-103 was rejected by Q1, Q2, Q3, Q4, Q6, Q7. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-103",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q4",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q6",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q7",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-103/experience[0].title",
+          "text": "Clinical Systems Operations Manager",
+          "path": "terminology_variant",
+          "matched": "systems operations",
+          "concept": "skill.production-operations",
+          "record": "skill.production-operations",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s1",
+          "text": "Ran systems operations for the electronic health record platform across four hospitals, owning uptime and availability of production systems.",
+          "path": "terminology_variant",
+          "matched": "systems operations",
+          "concept": "skill.production-operations",
+          "record": "skill.production-operations",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s2",
+          "text": "Led the response to EHR outages and coordinated restoration across clinical and IT teams.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "led_response",
+          "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part).",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s4",
+          "text": "Ran post-incident reviews that produced corrective actions.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "led_response",
+          "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part).",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s2",
+          "text": "Led the response to EHR outages and coordinated restoration across clinical and IT teams.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "cross_team_recovery",
+          "matched": "Coordinated recovery or restoration across teams, departments or units.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s5",
+          "text": "Automated server provisioning with Terraform and Ansible.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-103/experience[0].s5",
+          "text": "Automated server provisioning with Terraform and Ansible.",
+          "path": "supporting_skill",
+          "matched": "Ansible",
+          "concept": "skill.ansible",
+          "record": "skill.ansible",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-103/skills.s1",
+          "text": "Terraform.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review.",
+        "R2: eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 66 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: Ask for a specific incident the candidate led, its scale, and their decision-making role. Confirm they communicated status to stakeholders during the event. Confirm they drove a review that produced corrective actions. Assess ability to learn the employer's production stack (technical depth is a separate requirement).",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-103",
+      "affected_candidates": [
+        "C-103"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [
+        "eq.incident-management.operational-crisis-response"
+      ],
+      "related_findings": [
+        "SA-REQ-SRE-0142-3bc61a83",
+        "SA-REQ-SRE-0142-48360a3a",
+        "SA-REQ-SRE-0142-512cd6d3",
+        "SA-REQ-SRE-0142-5302d6be",
+        "SA-REQ-SRE-0142-704c5892",
+        "SA-REQ-SRE-0142-9164e1d0",
+        "SA-REQ-SRE-0142-9403725f",
+        "SA-REQ-SRE-0142-99df8968",
+        "SA-REQ-SRE-0142-a0ac83a9",
+        "SA-REQ-SRE-0142-d15dcf14"
+      ],
+      "disposition": {
+        "status": "approved_candidate_review",
+        "rationale": "Hospital EHR incident lead; verify Terraform depth.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:31:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-36d39631",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-106 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-106 was rejected by Q1, Q2, Q3, Q4, Q6, Q7. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-106",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q3",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q4",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q6",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q7",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-106/experience[0].s1",
+          "text": "Directed network and infrastructure operations for a 2,000-person brigade.",
+          "path": "terminology_variant",
+          "matched": "infrastructure operations",
+          "concept": "skill.production-operations",
+          "record": "skill.production-operations",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s2",
+          "text": "Directed the response to communications outages during deployments, restoring service across units.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "led_response",
+          "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part).",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s2",
+          "text": "Directed the response to communications outages during deployments, restoring service across units.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "cross_team_recovery",
+          "matched": "Coordinated recovery or restoration across teams, departments or units.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s2",
+          "text": "Directed the response to communications outages during deployments, restoring service across units.",
+          "path": "equivalency:eq.incident-management.operational-crisis-response",
+          "indicator": "incident_communications",
+          "matched": "Owned status communications during incidents.",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s5",
+          "text": "Built infrastructure automation with Ansible and Terraform.",
+          "path": "terminology_variant",
+          "matched": "infrastructure automation",
+          "concept": "skill.infrastructure-as-code",
+          "record": "skill.infrastructure-as-code",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s5",
+          "text": "Built infrastructure automation with Ansible and Terraform.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-106/experience[0].s5",
+          "text": "Built infrastructure automation with Ansible and Terraform.",
+          "path": "supporting_skill",
+          "matched": "Ansible",
+          "concept": "skill.ansible",
+          "record": "skill.ansible",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-106/learning.s1",
+          "text": "Self-directed study of Kubernetes",
+          "path": "direct",
+          "matched": "Kubernetes",
+          "concept": "skill.kubernetes",
+          "record": "skill.kubernetes",
+          "requirement": "R4"
+        }
+      ],
+      "confidence": "medium",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review.",
+        "R2: eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 72 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: Ask for a specific incident the candidate led, its scale, and their decision-making role. Confirm they communicated status to stakeholders during the event. Confirm they drove a review that produced corrective actions. Assess ability to learn the employer's production stack (technical depth is a separate requirement).",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-106",
+      "affected_candidates": [
+        "C-106"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [
+        "eq.incident-management.operational-crisis-response"
+      ],
+      "related_findings": [
+        "SA-REQ-SRE-0142-3bc61a83",
+        "SA-REQ-SRE-0142-48360a3a",
+        "SA-REQ-SRE-0142-512cd6d3",
+        "SA-REQ-SRE-0142-5302d6be",
+        "SA-REQ-SRE-0142-9164e1d0",
+        "SA-REQ-SRE-0142-9403725f",
+        "SA-REQ-SRE-0142-99df8968",
+        "SA-REQ-SRE-0142-a0ac83a9",
+        "SA-REQ-SRE-0142-d15dcf14"
+      ],
+      "disposition": {
+        "status": "approved_candidate_review",
+        "rationale": "Military communications operations; verify production-scale automation.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:32:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-cd635676",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-108 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-108 was rejected by Q2, Q4. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-108",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q4",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-108/experience[0].title",
+          "text": "Site Reliability Engineer",
+          "path": "direct",
+          "matched": "site reliability engineer",
+          "concept": "skill.site-reliability-engineering",
+          "record": "term.site-reliability-engineering",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-108/experience[0].s1",
+          "text": "Led incident response as incident commander for trading systems.",
+          "path": "terminology_variant",
+          "matched": "incident response",
+          "concept": "skill.incident-management",
+          "record": "skill.incident-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-108/experience[0].s3",
+          "text": "Managed Terraform and Kubernetes for production infrastructure.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-108/skills.s1",
+          "text": "Terraform.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-108/experience[0].s3",
+          "text": "Managed Terraform and Kubernetes for production infrastructure.",
+          "path": "direct",
+          "matched": "Kubernetes",
+          "concept": "skill.kubernetes",
+          "record": "skill.kubernetes",
+          "requirement": "R4"
+        },
+        {
+          "source": "candidate:C-108/skills.s2",
+          "text": "Kubernetes.",
+          "path": "direct",
+          "matched": "Kubernetes",
+          "concept": "skill.kubernetes",
+          "record": "skill.kubernetes",
+          "requirement": "R4"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-108",
+      "affected_candidates": [
+        "C-108"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-SRE-0142-3bc61a83",
+        "SA-REQ-SRE-0142-512cd6d3",
+        "SA-REQ-SRE-0142-d15dcf14"
+      ],
+      "disposition": {
+        "status": "approved_candidate_review",
+        "rationale": "Conventional profile without a degree.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:33:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-c1d0ef0b",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-109 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-109 was rejected by Q2, Q6. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-109",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q6",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-109/experience[0].title",
+          "text": "Site Reliability Engineer",
+          "path": "direct",
+          "matched": "site reliability engineer",
+          "concept": "skill.site-reliability-engineering",
+          "record": "term.site-reliability-engineering",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-109/experience[0].s2",
+          "text": "Led incident response for customer-facing outages and wrote postmortems.",
+          "path": "terminology_variant",
+          "matched": "incident response",
+          "concept": "skill.incident-management",
+          "record": "skill.incident-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-109/experience[0].s3",
+          "text": "Maintained Terraform for all infrastructure.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-109/skills.s2",
+          "text": "Terraform.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-109/education.s1",
+          "text": "BS in Computer Science",
+          "path": "terminology_variant",
+          "matched": "BS in computer science",
+          "concept": "skill.cs-degree",
+          "record": "skill.cs-degree",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review."
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-109",
+      "affected_candidates": [
+        "C-109"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-SRE-0142-48360a3a",
+        "SA-REQ-SRE-0142-d15dcf14"
+      ],
+      "disposition": {
+        "status": "approved_candidate_review",
+        "rationale": "Nomad instead of Kubernetes.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:34:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-82276566",
+      "check": "candidate_review_opportunity",
+      "title": "Candidate C-110 may meet the requirements through a path the current rules do not recognize",
+      "category": "candidate_review_opportunity",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "C-110 was rejected by Q1, Q2, Q7. Under the proposed corrections they pass every rule, and each required requirement has supporting evidence.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-110",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q2",
+          "text": ""
+        },
+        {
+          "kind": "rule",
+          "id": "Q7",
+          "text": ""
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-110/experience[0].s1",
+          "text": "Owned production infrastructure operations and on-call for a SaaS platform.",
+          "path": "terminology_variant",
+          "matched": "infrastructure operations",
+          "concept": "skill.production-operations",
+          "record": "skill.production-operations",
+          "requirement": "R1"
+        },
+        {
+          "source": "candidate:C-110/experience[0].s2",
+          "text": "Led incident response for major outages and authored postmortems.",
+          "path": "terminology_variant",
+          "matched": "incident response",
+          "concept": "skill.incident-management",
+          "record": "skill.incident-management",
+          "requirement": "R2"
+        },
+        {
+          "source": "candidate:C-110/experience[0].s3",
+          "text": "Wrote Terraform and CloudFormation for all environments.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-110/experience[0].s3",
+          "text": "Wrote Terraform and CloudFormation for all environments.",
+          "path": "supporting_skill",
+          "matched": "CloudFormation",
+          "concept": "skill.cloudformation",
+          "record": "skill.cloudformation",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-110/skills.s1",
+          "text": "Terraform.",
+          "path": "direct",
+          "matched": "Terraform",
+          "concept": "skill.terraform",
+          "record": "skill.terraform",
+          "requirement": "R3"
+        },
+        {
+          "source": "candidate:C-110/skills.s3",
+          "text": "Kubernetes.",
+          "path": "direct",
+          "matched": "Kubernetes",
+          "concept": "skill.kubernetes",
+          "record": "skill.kubernetes",
+          "requirement": "R4"
+        },
+        {
+          "source": "candidate:C-110/education.s1",
+          "text": "BS in Computer Science",
+          "path": "terminology_variant",
+          "matched": "BS in computer science",
+          "concept": "skill.cs-degree",
+          "record": "skill.cs-degree",
+          "requirement": "R5"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Qualification has not been established; this is a request for human review.",
+        "R1: Closely related (not equivalent) terminology found: 'DevOps engineer' in candidate:C-110/experience[0].title"
+      ],
+      "proposed_action": "Recruiter review of this candidate. Verify: the evidence listed.",
+      "expected_benefit": "A potentially qualified applicant already in the pipeline receives human review instead of being lost.",
+      "tradeoffs": "Recruiter review time (typically 10\u201320 minutes).",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": "C-110",
+      "affected_candidates": [
+        "C-110"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-SRE-0142-704c5892",
+        "SA-REQ-SRE-0142-9164e1d0",
+        "SA-REQ-SRE-0142-9403725f",
+        "SA-REQ-SRE-0142-99df8968",
+        "SA-REQ-SRE-0142-a0ac83a9",
+        "SA-REQ-SRE-0142-d15dcf14"
+      ],
+      "disposition": {
+        "status": "pending"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-6f96884a",
+      "check": "unexplained_exclusions",
+      "title": "1 exclusion(s) are not explained by the supplied screening rules",
+      "category": "input_limitation",
+      "evidence_level": 2,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Candidates C-113 were rejected or deprioritized, but pass every supplied rule. Either the supplied configuration is incomplete, or the exclusions were manual decisions.",
+      "source_refs": [
+        {
+          "kind": "candidate",
+          "id": "C-113",
+          "text": ""
+        }
+      ],
+      "evidence": [],
+      "confidence": "high",
+      "limitations": [
+        "The engine can only audit configuration it was given; it does not claim a complete audit."
+      ],
+      "proposed_action": "Supply the complete ATS screening configuration, or confirm these were manual decisions.",
+      "expected_benefit": "A complete audit, and visibility into undocumented screening criteria.",
+      "tradeoffs": "None.",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-113"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "requested_evidence",
+        "rationale": "Asked the ATS admin for the full configuration export; C-113 may have been a manual rejection.",
+        "decided_by": "recruiter.lee@northwind.example",
+        "decided_at": "2026-10-12T15:25:00Z"
+      },
+      "evidence_label": "Plausible missed-talent risk"
+    },
+    {
+      "id": "SA-REQ-SRE-0142-28d82855",
+      "check": "measured_impact",
+      "title": "Measured: 4 of 5 additionally reviewed candidates met the role's requirements",
+      "category": "measured_impact",
+      "evidence_level": 3,
+      "requisition_id": "REQ-SRE-0142",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "After human review, 4 of 5 candidate(s) surfaced by this analysis were confirmed to meet the role's requirements (0 did not, 1 had insufficient evidence), using 85 recruiter minutes \u2014 2.824 incremental qualified candidates per recruiter hour.",
+      "source_refs": [
+        {
+          "kind": "outcome",
+          "id": "C-102",
+          "text": "meets_requirements"
+        },
+        {
+          "kind": "outcome",
+          "id": "C-103",
+          "text": "meets_requirements"
+        },
+        {
+          "kind": "outcome",
+          "id": "C-106",
+          "text": "insufficient_evidence"
+        },
+        {
+          "kind": "outcome",
+          "id": "C-108",
+          "text": "meets_requirements"
+        },
+        {
+          "kind": "outcome",
+          "id": "C-109",
+          "text": "meets_requirements"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "outcome:C-102",
+          "text": "meets_requirements after 15 min; advanced to phone_screen"
+        },
+        {
+          "source": "outcome:C-103",
+          "text": "meets_requirements after 25 min; advanced to hiring_manager_screen"
+        },
+        {
+          "source": "outcome:C-106",
+          "text": "insufficient_evidence after 25 min"
+        },
+        {
+          "source": "outcome:C-108",
+          "text": "meets_requirements after 10 min; advanced to phone_screen"
+        },
+        {
+          "source": "outcome:C-109",
+          "text": "meets_requirements after 10 min; advanced to phone_screen"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Pre/post on the same requisition: three weeks before the corrections versus three weeks after. Recruiter time from the ATS activity log. Not a controlled experiment.",
+        "Small sample; confirm across more requisitions before generalizing."
+      ],
+      "proposed_action": "Keep the corrections whose candidates were confirmed; submit confirmed equivalencies as knowledge proposals.",
+      "expected_benefit": "4 confirmed qualified candidate(s) recovered from the existing applicant pool.",
+      "tradeoffs": "85 recruiter minutes; 1 reviewed candidate(s) not (yet) confirmed.",
+      "rule_id": null,
+      "requirement_id": null,
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-102",
+        "C-103",
+        "C-106",
+        "C-108",
+        "C-109"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [
+        "SA-REQ-SRE-0142-36d39631",
+        "SA-REQ-SRE-0142-4989b969",
+        "SA-REQ-SRE-0142-5f56524c",
+        "SA-REQ-SRE-0142-c1d0ef0b",
+        "SA-REQ-SRE-0142-cd635676"
+      ],
+      "disposition": {
+        "status": "not_required"
+      },
+      "evidence_label": "Measured impact"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "C-101",
+      "ats_status": "advanced",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "84 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "84 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-101/experience[0].title",
+              "text": "Senior Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            },
+            {
+              "source": "candidate:C-101/experience[1].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 84,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-101/experience[0].s1",
+              "text": "Led incident response as incident commander for the payments platform.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-101/experience[0].s3",
+              "text": "Managed Kubernetes clusters and Terraform modules for all environments.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-101/experience[1].s1",
+              "text": "Operated production services and automated deployments with Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-101/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-101/experience[0].s3",
+              "text": "Managed Kubernetes clusters and Terraform modules for all environments.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:C-101/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-101/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R2 described in different terminology: incident response",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: payments"
+      ],
+      "surfaced": false,
+      "reason": "Not excluded by the ATS (status: advanced)."
+    },
+    {
+      "candidate_id": "C-102",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['production reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "64 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Pulumi']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].title",
+              "text": "Production Reliability Engineer",
+              "path": "terminology_variant",
+              "matched": "production reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 64,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].s2",
+              "text": "Led incident response for major outages and coordinated restoration across teams.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "supporting_skill"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-102/experience[0].s4",
+              "text": "Provisioned infrastructure with Pulumi and automated deployments.",
+              "path": "supporting_skill",
+              "matched": "Pulumi",
+              "concept": "skill.pulumi",
+              "record": "skill.pulumi"
+            },
+            {
+              "source": "candidate:C-102/skills.s1",
+              "text": "Pulumi.",
+              "path": "supporting_skill",
+              "matched": "Pulumi",
+              "concept": "skill.pulumi",
+              "record": "skill.pulumi"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-102/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-102/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q5"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: production reliability engineer",
+        "R2 described in different terminology: incident response",
+        "R3 evidenced through an equivalent tool or skill: Pulumi",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: e-commerce"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-103",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['systems operations']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "66 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "equivalent path: eq.incident-management.operational-crisis-response satisfied"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform', 'Ansible']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].title",
+              "text": "Clinical Systems Operations Manager",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            },
+            {
+              "source": "candidate:C-103/experience[0].s1",
+              "text": "Ran systems operations for the electronic health record platform across four hospitals, owning uptime and availability of production systems.",
+              "path": "terminology_variant",
+              "matched": "systems operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "relevant_months": 66,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].s2",
+              "text": "Led the response to EHR outages and coordinated restoration across clinical and IT teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s4",
+              "text": "Ran post-incident reviews that produced corrective actions.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s2",
+              "text": "Led the response to EHR outages and coordinated restoration across clinical and IT teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "cross_team_recovery",
+              "matched": "Coordinated recovery or restoration across teams, departments or units."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s3",
+              "text": "Briefed hospital leadership and clinicians with incident status updates.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-103/experience[0].s4",
+              "text": "Ran post-incident reviews that produced corrective actions.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "post_incident_learning",
+              "matched": "Ran post-incident or after-action reviews that produced corrective actions."
+            }
+          ],
+          "relevant_months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 66 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ],
+          "verify_next": [
+            "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+            "Confirm they communicated status to stakeholders during the event.",
+            "Confirm they drove a review that produced corrective actions.",
+            "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+          ]
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-103/experience[0].s5",
+              "text": "Automated server provisioning with Terraform and Ansible.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-103/experience[0].s5",
+              "text": "Automated server provisioning with Terraform and Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            },
+            {
+              "source": "candidate:C-103/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-103/skills.s2",
+              "text": "Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: systems operations",
+        "R2 evidenced through transferable experience (eq.incident-management.operational-crisis-response)",
+        "R3 evidenced through an equivalent tool or skill: Ansible",
+        "Experience domains: healthcare-operations"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-104",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['network operations']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "72 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "equivalent path: eq.incident-management.operational-crisis-response satisfied"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-104/experience[0].title",
+              "text": "Network Operations Lead",
+              "path": "terminology_variant",
+              "matched": "network operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            },
+            {
+              "source": "candidate:C-104/experience[0].s1",
+              "text": "Led network operations for 30 distribution centers.",
+              "path": "terminology_variant",
+              "matched": "network operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "relevant_months": 72,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-104/experience[0].s2",
+              "text": "Led the response to warehouse network outages and coordinated recovery across site teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-104/experience[0].s2",
+              "text": "Led the response to warehouse network outages and coordinated recovery across site teams.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "cross_team_recovery",
+              "matched": "Coordinated recovery or restoration across teams, departments or units."
+            },
+            {
+              "source": "candidate:C-104/experience[0].s3",
+              "text": "Sent outage communications to regional leadership.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-104/experience[0].s4",
+              "text": "Wrote root cause reports after major failures.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "post_incident_learning",
+              "matched": "Ran post-incident or after-action reviews that produced corrective actions."
+            }
+          ],
+          "relevant_months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 72 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ],
+          "verify_next": [
+            "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+            "Confirm they communicated status to stakeholders during the event.",
+            "Confirm they drove a review that produced corrective actions.",
+            "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+          ]
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R1 described in different terminology: network operations",
+        "R2 evidenced through transferable experience (eq.incident-management.operational-crisis-response)",
+        "Experience domains: logistics"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q5."
+    },
+    {
+      "candidate_id": "C-105",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "none",
+      "nontraditional_signals": [
+        "Experience domains: retail"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2, Q3, Q5."
+    },
+    {
+      "candidate_id": "C-106",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['infrastructure operations']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "72 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "equivalent path: eq.incident-management.operational-crisis-response satisfied"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform', 'infrastructure automation', 'Ansible']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s1",
+              "text": "Directed network and infrastructure operations for a 2,000-person brigade.",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "relevant_months": 72,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "alternative_path",
+          "paths": [
+            "equivalency:eq.incident-management.operational-crisis-response"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s2",
+              "text": "Directed the response to communications outages during deployments, restoring service across units.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "led_response",
+              "matched": "Led, directed or coordinated the response to an outage, incident or crisis (not merely took part)."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s2",
+              "text": "Directed the response to communications outages during deployments, restoring service across units.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "cross_team_recovery",
+              "matched": "Coordinated recovery or restoration across teams, departments or units."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s2",
+              "text": "Directed the response to communications outages during deployments, restoring service across units.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s3",
+              "text": "Delivered status briefings to commanders throughout each outage.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "incident_communications",
+              "matched": "Owned status communications during incidents."
+            },
+            {
+              "source": "candidate:C-106/experience[0].s4",
+              "text": "Led after-action reviews and tracked corrective actions to closure.",
+              "path": "equivalency:eq.incident-management.operational-crisis-response",
+              "indicator": "post_incident_learning",
+              "matched": "Ran post-incident or after-action reviews that produced corrective actions."
+            }
+          ],
+          "relevant_months": null,
+          "notes": [
+            "eq.incident-management.operational-crisis-response: 4 of 4 indicators present; 72 months of relevant experience. Conditions: Evidence must show the candidate led or coordinated response, not merely participated in an event. Responsibilities must be comparable in complexity (multiple teams, time-critical restoration). At least three of the four indicators must be present, including leadership of the response."
+          ],
+          "verify_next": [
+            "Ask for a specific incident the candidate led, its scale, and their decision-making role.",
+            "Confirm they communicated status to stakeholders during the event.",
+            "Confirm they drove a review that produced corrective actions.",
+            "Assess ability to learn the employer's production stack (technical depth is a separate requirement)."
+          ]
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill",
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-106/experience[0].s5",
+              "text": "Built infrastructure automation with Ansible and Terraform.",
+              "path": "terminology_variant",
+              "matched": "infrastructure automation",
+              "concept": "skill.infrastructure-as-code",
+              "record": "skill.infrastructure-as-code"
+            },
+            {
+              "source": "candidate:C-106/experience[0].s5",
+              "text": "Built infrastructure automation with Ansible and Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-106/experience[0].s5",
+              "text": "Built infrastructure automation with Ansible and Terraform.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            },
+            {
+              "source": "candidate:C-106/skills.s1",
+              "text": "Ansible.",
+              "path": "supporting_skill",
+              "matched": "Ansible",
+              "concept": "skill.ansible",
+              "record": "skill.ansible"
+            },
+            {
+              "source": "candidate:C-106/skills.s2",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-106/learning.s1",
+              "text": "Self-directed study of Kubernetes",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: infrastructure operations",
+        "R2 evidenced through transferable experience (eq.incident-management.operational-crisis-response)",
+        "R3 evidenced through an equivalent tool or skill: Ansible",
+        "R3 described in different terminology: infrastructure automation",
+        "Experience domains: military"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-107",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "36 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "36 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "equivalent path: capability evidenced directly"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "insufficient",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 36,
+          "notes": [
+            "36 months of relevant experience found; requirement states 5 years."
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].s2",
+              "text": "Participated in incident response.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-107/experience[0].s1",
+              "text": "Supported production services on call and automated deployments with Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-107/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-107/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-107/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q2",
+        "Q3"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "partial",
+      "nontraditional_signals": [
+        "R2 described in different terminology: incident response",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: saas"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q2."
+    },
+    {
+      "candidate_id": "C-108",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "72 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "72 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 72,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s1",
+              "text": "Led incident response as incident commander for trading systems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s3",
+              "text": "Managed Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-108/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-108/experience[0].s3",
+              "text": "Managed Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:C-108/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q2",
+        "Q4"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R2 described in different terminology: incident response",
+        "Experience domains: fintech"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-109",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "66 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "66 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 66,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].s2",
+              "text": "Led incident response for customer-facing outages and wrote postmortems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-109/experience[0].s3",
+              "text": "Maintained Terraform for all infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-109/skills.s2",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-109/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q2",
+        "Q6"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R2 described in different terminology: incident response",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: media"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-110",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['infrastructure operations']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "74 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform', 'CloudFormation']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s1",
+              "text": "Owned production infrastructure operations and on-call for a SaaS platform.",
+              "path": "terminology_variant",
+              "matched": "infrastructure operations",
+              "concept": "skill.production-operations",
+              "record": "skill.production-operations"
+            }
+          ],
+          "relevant_months": 74,
+          "notes": [
+            "Closely related (not equivalent) terminology found: 'DevOps engineer' in candidate:C-110/experience[0].title"
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s2",
+              "text": "Led incident response for major outages and authored postmortems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct",
+            "supporting_skill"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-110/experience[0].s3",
+              "text": "Wrote Terraform and CloudFormation for all environments.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-110/experience[0].s3",
+              "text": "Wrote Terraform and CloudFormation for all environments.",
+              "path": "supporting_skill",
+              "matched": "CloudFormation",
+              "concept": "skill.cloudformation",
+              "record": "skill.cloudformation"
+            },
+            {
+              "source": "candidate:C-110/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-110/skills.s2",
+              "text": "CloudFormation.",
+              "path": "supporting_skill",
+              "matched": "CloudFormation",
+              "concept": "skill.cloudformation",
+              "record": "skill.cloudformation"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-110/skills.s3",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-110/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q7"
+      ],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R1 described in different terminology: infrastructure operations",
+        "R2 described in different terminology: incident response",
+        "R3 evidenced through an equivalent tool or skill: CloudFormation",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: saas"
+      ],
+      "surfaced": true,
+      "reason": "Excluded by rules the proposed corrections address; every required requirement has evidence."
+    },
+    {
+      "candidate_id": "C-111",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['Site reliability engineering']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "insufficient",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-111/learning.s1",
+              "text": "Online course: Introduction to Site Reliability Engineering",
+              "path": "direct",
+              "matched": "Site reliability engineering",
+              "concept": "skill.site-reliability-engineering",
+              "record": "skill.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 0,
+          "notes": [
+            "0 months of relevant experience found; requirement states 5 years."
+          ],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "none",
+      "nontraditional_signals": [
+        "Experience domains: telecom"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q2, Q3, Q5."
+    },
+    {
+      "candidate_id": "C-112",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": false,
+          "reason": "no listed term found"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": false,
+          "reason": "0 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": false,
+          "reason": "answered 'no', rule requires 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": false,
+          "reason": "no listed term found"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-112/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q5",
+        "Q6",
+        "Q7"
+      ],
+      "passes_corrected": false,
+      "evidence_coverage": "none",
+      "nontraditional_signals": [
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: finance"
+      ],
+      "surfaced": false,
+      "reason": "Still excluded after proposed corrections by Q1, Q2, Q3, Q5."
+    },
+    {
+      "candidate_id": "C-113",
+      "ats_status": "rejected",
+      "current_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "96 relevant months vs 84 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "matched ['Datadog']"
+        }
+      ],
+      "corrected_rules": [
+        {
+          "rule_id": "Q1",
+          "passed": true,
+          "reason": "matched ['site reliability engineer']"
+        },
+        {
+          "rule_id": "Q2",
+          "passed": true,
+          "reason": "96 relevant months vs 60 required"
+        },
+        {
+          "rule_id": "Q3",
+          "passed": true,
+          "reason": "answered 'yes'"
+        },
+        {
+          "rule_id": "Q4",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q5",
+          "passed": true,
+          "reason": "matched ['Terraform']"
+        },
+        {
+          "rule_id": "Q6",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        },
+        {
+          "rule_id": "Q7",
+          "passed": true,
+          "reason": "rule not applied under proposed correction"
+        }
+      ],
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "relevant_months": 96,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R2",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s1",
+              "text": "Led incident response as incident commander for booking systems.",
+              "path": "terminology_variant",
+              "matched": "incident response",
+              "concept": "skill.incident-management",
+              "record": "skill.incident-management"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R3",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s2",
+              "text": "Maintained Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-113/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R4",
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-113/experience[0].s2",
+              "text": "Maintained Terraform and Kubernetes for production infrastructure.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            },
+            {
+              "source": "candidate:C-113/skills.s2",
+              "text": "Kubernetes.",
+              "path": "direct",
+              "matched": "Kubernetes",
+              "concept": "skill.kubernetes",
+              "record": "skill.kubernetes"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R5",
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "evidence": [
+            {
+              "source": "candidate:C-113/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        },
+        {
+          "requirement_id": "R6",
+          "status": "not_evidenced",
+          "paths": [],
+          "evidence": [],
+          "relevant_months": null,
+          "notes": [],
+          "verify_next": []
+        }
+      ],
+      "excluded_by": [],
+      "passes_corrected": true,
+      "evidence_coverage": "complete",
+      "nontraditional_signals": [
+        "R2 described in different terminology: incident response",
+        "R5 described in different terminology: BS in computer science",
+        "Experience domains: travel"
+      ],
+      "surfaced": false,
+      "reason": "Excluded, but the supplied rules do not explain the exclusion."
+    }
+  ],
+  "suppressed": [],
+  "measurement": {
+    "comparison_method": "Pre/post on the same requisition: three weeks before the corrections versus three weeks after. Recruiter time from the ATS activity log. Not a controlled experiment.",
+    "baseline": {
+      "period": "2026-09-14 to 2026-10-04",
+      "applicants": 142,
+      "recruiter_reviewed": 18,
+      "qualified_candidates": 3,
+      "recruiter_hours": 14,
+      "days_to_qualified_shortlist": 21,
+      "advanced_to_interview": 2,
+      "hires": 0,
+      "qualified_yield": 0.167,
+      "recruiter_hours_per_qualified": 4.667,
+      "review_rate": 0.127
+    },
+    "after_change": {
+      "period": "2026-10-13 to 2026-11-02",
+      "applicants": 61,
+      "recruiter_reviewed": 15,
+      "qualified_candidates": 5,
+      "recruiter_hours": 11,
+      "days_to_qualified_shortlist": 9,
+      "advanced_to_interview": 4,
+      "hires": 0,
+      "qualified_yield": 0.333,
+      "recruiter_hours_per_qualified": 2.2,
+      "review_rate": 0.246
+    },
+    "deltas": {
+      "qualified_candidates": 2,
+      "recruiter_reviewed": -3,
+      "recruiter_hours": -3,
+      "qualified_yield": 0.166,
+      "recruiter_hours_per_qualified": -2.467,
+      "days_to_qualified_shortlist": -12
+    },
+    "measured": {
+      "additional_reviews": 5,
+      "confirmed_meets_requirements": 4,
+      "confirmed_does_not_meet": 0,
+      "insufficient_evidence": 1,
+      "advanced_to_next_stage": 4,
+      "review_minutes": 85,
+      "surfacing_precision": 0.8,
+      "false_positive_rate": 0.0,
+      "incremental_qualified_per_recruiter_hour": 2.824
+    },
+    "estimated": {
+      "label": "ESTIMATED \u2014 based on supplied assumptions, not observed",
+      "assumptions": {
+        "cost_per_sourcing_cycle": 6500,
+        "qualified_candidates_needed_per_cycle": 3,
+        "recruiter_hourly_cost": 55,
+        "source": "Northwind TA finance planning assumptions (illustrative)"
+      },
+      "additional_review_cost": 77.92,
+      "sourcing_cycles_potentially_avoided": 1.33,
+      "sourcing_cost_potentially_avoided": 8666.67,
+      "net_estimated_value": 8588.75
+    },
+    "new_risks_observed": [
+      "Broader Q1 matching admitted 4 additional applicants who were screened out in about 20 recruiter minutes in total."
+    ],
+    "unknown_finding_refs": [],
+    "attribution_note": "Measured values come from recorded recruiter reviews and supplied period data. Changes between periods are associated with, not proven to be caused by, approved corrections unless the comparison method controls for other factors.",
+    "attribution": [
+      {
+        "finding_id": "SA-REQ-SRE-0142-d15dcf14",
+        "title": "Q2 requires 7 years; the posting asks for 5",
+        "reviewed": 5,
+        "meets_requirements": 4,
+        "review_minutes": 85
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-3bc61a83",
+        "title": "Preferred qualification R5 is enforced as a knockout by Q4",
+        "reviewed": 3,
+        "meets_requirements": 2,
+        "review_minutes": 60
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-48360a3a",
+        "title": "Preferred qualification R4 is enforced as a knockout by Q6",
+        "reviewed": 3,
+        "meets_requirements": 2,
+        "review_minutes": 60
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-512cd6d3",
+        "title": "R5 accepts equivalent experience, but Q4 has no equivalent path",
+        "reviewed": 3,
+        "meets_requirements": 2,
+        "review_minutes": 60
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-704c5892",
+        "title": "R1 accepts equivalent experience, but Q1 has no equivalent path",
+        "reviewed": 2,
+        "meets_requirements": 2,
+        "review_minutes": 40
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-9403725f",
+        "title": "Q2 is narrower than R1: it ignores Production operations",
+        "reviewed": 3,
+        "meets_requirements": 2,
+        "review_minutes": 65
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-a0ac83a9",
+        "title": "Q2 counts experience only under specific job titles",
+        "reviewed": 3,
+        "meets_requirements": 2,
+        "review_minutes": 65
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-5302d6be",
+        "title": "R2 accepts equivalent experience, but Q3 has no equivalent path",
+        "reviewed": 2,
+        "meets_requirements": 1,
+        "review_minutes": 50
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-9164e1d0",
+        "title": "Q1 is narrower than R1: it ignores Production operations",
+        "reviewed": 2,
+        "meets_requirements": 1,
+        "review_minutes": 50
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-99df8968",
+        "title": "Rule Q7 enforces a requirement the job description does not state",
+        "reviewed": 2,
+        "meets_requirements": 1,
+        "review_minutes": 50
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-b05a4c5a",
+        "title": "Q1 matches literally and misses recognized variants of Site reliability engineering",
+        "reviewed": 1,
+        "meets_requirements": 1,
+        "review_minutes": 15
+      },
+      {
+        "finding_id": "SA-REQ-SRE-0142-f01e2bd0",
+        "title": "Q5 is narrower than R3: it ignores Infrastructure as code",
+        "reviewed": 1,
+        "meets_requirements": 1,
+        "review_minutes": 15
+      }
+    ]
+  },
+  "summary": {
+    "findings": 23,
+    "by_category": {
+      "confirmed_inconsistency": 10,
+      "design_risk": 4,
+      "unverified_assumption": 1,
+      "candidate_review_opportunity": 6,
+      "input_limitation": 1,
+      "measured_impact": 1
+    },
+    "by_level": {
+      "level_1": 10,
+      "level_2": 12,
+      "level_3": 1
+    },
+    "pending_decisions": 1,
+    "candidates_assessed": 13,
+    "candidates_surfaced": 6
+  }
+}

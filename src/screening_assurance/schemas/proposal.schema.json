@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/proposal.schema.json",
+  "title": "Knowledge change proposal",
+  "description": "A recruiter-submitted suggestion. Proposals are never loaded by the engine; an administrator must turn them into a reviewed knowledge revision.",
+  "type": "object",
+  "required": ["id", "submitted_by", "submitted_at", "document", "change", "rationale", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "submitted_by": { "type": "string" },
+    "submitted_at": { "type": "string" },
+    "document": { "enum": ["synonyms", "equivalencies", "skills"] },
+    "target_record": { "type": "string" },
+    "change": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string", "minLength": 1 },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requisition_id": { "type": "string" },
+        "finding_id": { "type": "string" },
+        "job_family": { "type": "string" }
+      }
+    },
+    "status": { "enum": ["open", "accepted", "declined"] },
+    "resolution": { "type": "string" }
+  }
+}

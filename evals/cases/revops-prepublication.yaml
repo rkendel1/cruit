@@ -1,0 +1,16 @@
+id: revops-prepublication
+description: >-
+  Pre-publication design review with no candidates: the engine must find rule
+  defects from the requisition and knowledge alone, and must not invent
+  candidate findings.
+requisition: ../../examples/northwind/requisitions/REQ-RO-0455/requisition.yaml
+policy: ../../examples/northwind/policy.yaml
+expert_labels: {}
+expected_findings:
+  - { check: threshold_inconsistency, rule: Q1, evidence_level: 1 }
+  - { check: experience_path_narrower, rule: Q1 }
+  - { check: preferred_enforced_as_knockout, rule: Q2, evidence_level: 1 }
+  - { check: literal_term_missing_variants, rule: Q3 }
+forbidden_findings:
+  - { check: candidate_review_opportunity }
+  - { check: unverified_necessity, requirement: R2, note: R2 has a documented rationale }

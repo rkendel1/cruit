@@ -1,0 +1,487 @@
+# Skills and capability relationships.
+# Skills are structured, contextual capabilities — not a flat keyword list.
+# Only records with review_status: approved are used by the engine.
+document: skills
+schema_version: 1
+
+records:
+  # ---------------------------------------------------------------- software infrastructure
+  - id: skill.site-reliability-engineering
+    name: Site reliability engineering
+    kind: capability
+    definition: >-
+      Applying software engineering to operate production systems reliably at scale:
+      service-level objectives, automation of operational work, incident response and
+      capacity planning.
+    alternate_names: []
+    relationships:
+      - { type: closely_related, target: skill.production-operations, note: "Production operations is the operational core of SRE; SRE adds software-engineering practice." }
+      - { type: prerequisite, target: skill.incident-management }
+      - { type: closely_related, target: skill.observability }
+    proficiency_levels:
+      - { level: working, description: "Operates and automates production services with defined SLOs." }
+      - { level: advanced, description: "Designs reliability practices and leads incident response across services." }
+    evidence_types: [job responsibilities, on-call history, automation built, SLO ownership]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.production-operations
+    name: Production operations
+    kind: capability
+    definition: >-
+      Running and supporting live production systems: availability, monitoring, change
+      management, on-call and recovery.
+    alternate_names: [IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations]
+    relationships:
+      - { type: closely_related, target: skill.site-reliability-engineering }
+      - { type: not_equivalent, target: skill.it-service-desk, note: "Ticket handling without ownership of production systems is not production operations." }
+    evidence_types: [job responsibilities, on-call history, systems owned]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.incident-management
+    name: Incident management
+    kind: capability
+    definition: >-
+      Leading the response to service-impacting events: coordinating responders, restoring
+      service, communicating status and driving post-incident learning.
+    alternate_names: [incident response, incident command, incident commander, major incident management]
+    relationships:
+      - { type: closely_related, target: skill.post-incident-review }
+      - { type: not_equivalent, target: skill.it-service-desk, note: "Triaging tickets is not leading incident response." }
+    proficiency_levels:
+      - { level: working, description: "Participates effectively as a responder." }
+      - { level: advanced, description: "Leads response, coordinates teams and owns communications and reviews." }
+    evidence_types: [incident command history, post-incident reviews authored, crisis response leadership]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.post-incident-review
+    name: Post-incident review
+    kind: skill
+    definition: Structured analysis after an incident to identify contributing factors and corrective actions.
+    alternate_names: [postmortem, post-mortem, blameless postmortem, root cause analysis]
+    relationships:
+      - { type: supports, target: skill.incident-management }
+    evidence_types: [reviews authored, corrective actions tracked]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.infrastructure-as-code
+    name: Infrastructure as code
+    kind: capability
+    definition: Defining and provisioning infrastructure through versioned, reviewable code rather than manual configuration.
+    alternate_names: [infrastructure automation, infrastructure-as-code]
+    relationships: []
+    evidence_types: [tools used, infrastructure codebases maintained, provisioning automated]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.terraform
+    name: Terraform
+    kind: tool
+    definition: HashiCorp's declarative infrastructure-as-code tool.
+    alternate_names: [HashiCorp Terraform, OpenTofu]
+    relationships:
+      - { type: supports, target: skill.infrastructure-as-code }
+      - { type: transferable, target: skill.pulumi, note: "Same declarative provisioning model; syntax differs." }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.pulumi
+    name: Pulumi
+    kind: tool
+    definition: Infrastructure-as-code tool using general-purpose programming languages.
+    alternate_names: []
+    relationships:
+      - { type: supports, target: skill.infrastructure-as-code }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.cloudformation
+    name: AWS CloudFormation
+    kind: tool
+    definition: AWS-native infrastructure-as-code service.
+    alternate_names: [CloudFormation]
+    relationships:
+      - { type: supports, target: skill.infrastructure-as-code }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.ansible
+    name: Ansible
+    kind: tool
+    definition: Configuration-management and automation tool; commonly used for infrastructure provisioning.
+    alternate_names: []
+    relationships:
+      - { type: supports, target: skill.infrastructure-as-code, note: "Configuration management overlaps with, but is not identical to, declarative provisioning." }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.kubernetes
+    name: Kubernetes
+    kind: tool
+    definition: Container orchestration platform.
+    alternate_names: [k8s]
+    relationships:
+      - { type: transferable, target: skill.nomad, note: "Both schedule containerized workloads; operational concepts transfer." }
+    evidence_types: [tools used, clusters operated]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.nomad
+    name: Nomad
+    kind: tool
+    definition: HashiCorp workload orchestrator.
+    alternate_names: [HashiCorp Nomad]
+    relationships: []
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.observability
+    name: Observability
+    kind: capability
+    definition: Instrumenting, monitoring and alerting on systems to understand their behaviour in production.
+    alternate_names: [monitoring and alerting, application monitoring]
+    relationships: []
+    evidence_types: [tools used, dashboards and alerts built, SLOs defined]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.datadog
+    name: Datadog
+    kind: tool
+    definition: Commercial monitoring and observability platform.
+    alternate_names: []
+    relationships:
+      - { type: supports, target: skill.observability }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.prometheus
+    name: Prometheus
+    kind: tool
+    definition: Open-source metrics and alerting toolkit.
+    alternate_names: []
+    relationships:
+      - { type: supports, target: skill.observability }
+    evidence_types: [tools used]
+    contexts: [software-infrastructure]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.it-service-desk
+    name: IT service desk
+    kind: skill
+    definition: Front-line handling and routing of user support tickets.
+    alternate_names: [help desk, helpdesk, service desk, ticket triage]
+    relationships:
+      - { type: not_equivalent, target: skill.incident-management }
+    evidence_types: [job responsibilities]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.cs-degree
+    name: Bachelor's degree in computer science
+    kind: credential
+    definition: Undergraduate degree in computer science or a closely related discipline.
+    alternate_names: [computer science degree, BS in computer science, BSc computer science]
+    relationships: []
+    evidence_types: [education history]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  # ---------------------------------------------------------------- cross-domain capabilities
+  - id: skill.stakeholder-communication
+    name: Stakeholder communication
+    kind: skill
+    definition: Communicating clearly with customers, executives and partner teams.
+    alternate_names: [executive communication, executive updates, stakeholder updates, customer communication, presented to leadership]
+    relationships: []
+    evidence_types: [communications owned, presentations, written updates]
+    contexts: ["*"]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.data-analysis
+    name: Data analysis
+    kind: skill
+    definition: Using data to answer operational or commercial questions and inform decisions.
+    alternate_names: [data analytics, analytics, SQL, dashboards, trend analysis]
+    relationships: []
+    evidence_types: [analyses produced, dashboards built, tools used]
+    contexts: ["*"]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.operational-leadership
+    name: Operational leadership
+    kind: capability
+    definition: Leading people and processes to deliver day-to-day operational outcomes.
+    alternate_names: [led a team, managed a team, supervised a team, team lead, shift lead]
+    relationships: []
+    evidence_types: [team size led, operational outcomes owned]
+    contexts: ["*"]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.cross-functional-delivery
+    name: Cross-functional problem-solving
+    kind: capability
+    definition: Resolving problems that span teams by combining analysis, communication and execution.
+    alternate_names: [cross-functional collaboration, cross-functional delivery, cross-functional]
+    relationships: []
+    evidence_types: [problems resolved across teams, initiatives led]
+    contexts: ["*"]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  # ---------------------------------------------------------------- customer success
+  - id: skill.customer-success
+    name: Customer success
+    kind: capability
+    definition: >-
+      Owning post-sale outcomes for a set of customer accounts: adoption, health,
+      renewals and expansion.
+    alternate_names: []
+    relationships:
+      - { type: closely_related, target: skill.account-management }
+      - { type: not_equivalent, target: skill.customer-support, note: "Support resolves issues; success owns commercial outcomes for accounts." }
+    evidence_types: [book of accounts owned, renewal and retention results, adoption programmes]
+    contexts: [customer-success, revenue-operations]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.revenue-operations
+    name: Revenue operations
+    kind: capability
+    definition: Aligning sales, marketing and customer-success processes, systems and data around revenue outcomes.
+    alternate_names: [revenue operations manager]
+    relationships:
+      - { type: closely_related, target: skill.crm }
+    evidence_types: [processes owned, systems administered, forecasting owned]
+    contexts: [revenue-operations, customer-success]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.account-management
+    name: Account management
+    kind: capability
+    definition: Managing ongoing commercial relationships with existing customers.
+    alternate_names: [account manager, key account management, strategic account management]
+    relationships:
+      - { type: closely_related, target: skill.customer-success }
+    evidence_types: [accounts owned, revenue retained or grown]
+    contexts: [customer-success, revenue-operations]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.renewals-management
+    name: Renewals management
+    kind: skill
+    definition: Securing contract renewals and managing churn risk for existing accounts.
+    alternate_names: [renewals, renewal management, contract renewals]
+    relationships:
+      - { type: supports, target: skill.customer-success }
+    evidence_types: [renewal rates, accounts renewed]
+    contexts: [customer-success, revenue-operations]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.customer-support
+    name: Customer support
+    kind: skill
+    definition: Resolving customer issues and questions.
+    alternate_names: [technical support, support engineer, support specialist]
+    relationships:
+      - { type: not_equivalent, target: skill.customer-success }
+    evidence_types: [job responsibilities]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.crm
+    name: CRM proficiency
+    kind: capability
+    definition: Using a customer relationship management system to manage accounts, pipeline and activity.
+    alternate_names: [CRM, customer relationship management]
+    relationships: []
+    evidence_types: [tools used]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.salesforce
+    name: Salesforce
+    kind: tool
+    definition: Salesforce CRM platform.
+    alternate_names: [Salesforce CRM, SFDC]
+    relationships:
+      - { type: supports, target: skill.crm }
+      - { type: transferable, target: skill.hubspot, note: "Core CRM workflows transfer; administration depth differs." }
+    evidence_types: [tools used]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.hubspot
+    name: HubSpot
+    kind: tool
+    definition: HubSpot CRM platform.
+    alternate_names: [HubSpot CRM]
+    relationships:
+      - { type: supports, target: skill.crm }
+    evidence_types: [tools used]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.salesforce-admin-cert
+    name: Salesforce Certified Administrator
+    kind: credential
+    definition: Vendor certification for Salesforce platform administration.
+    alternate_names: [Salesforce Administrator certification]
+    relationships:
+      - { type: supports, target: skill.salesforce }
+    evidence_types: [credentials]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  # ---------------------------------------------------------------- logistics operations
+  - id: skill.cdl-class-a
+    name: Commercial driver's license (Class A)
+    kind: regulated_credential
+    definition: Legally required license to operate combination vehicles above federal weight thresholds.
+    alternate_names: [CDL Class A, Class A CDL, CDL-A]
+    relationships: []
+    evidence_types: [credentials]
+    contexts: ["*"]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.transportation-supervision
+    name: Transportation supervision
+    kind: capability
+    definition: Supervising drivers, routes and dispatch to deliver safe, on-time transport operations.
+    alternate_names: [dispatch supervision, fleet supervision, linehaul operations, transportation supervisor, dispatch supervisor]
+    relationships:
+      - { type: closely_related, target: skill.operational-leadership }
+    evidence_types: [drivers supervised, routes managed, safety record]
+    contexts: [logistics-operations]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: skill.dot-compliance
+    name: DOT compliance
+    kind: skill
+    definition: Applying federal motor carrier safety regulations, including hours-of-service rules and inspections.
+    alternate_names: [FMCSA compliance, hours of service, hours-of-service compliance]
+    relationships: []
+    evidence_types: [audits passed, compliance programmes run]
+    contexts: [logistics-operations]
+    confidence: high
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+combinations:
+  - id: combo.cross-functional-problem-solving
+    name: Analysis + communication + operational leadership
+    components: [skill.data-analysis, skill.stakeholder-communication, skill.operational-leadership]
+    min_components: 3
+    supports: skill.cross-functional-delivery
+    rationale: >-
+      Together, analysing a problem, communicating it to stakeholders and leading the
+      operational response is evidence of cross-functional problem-solving even when no
+      single role was titled that way.
+    limitations:
+      - Each component must be evidenced separately; the combination does not infer missing components.
+      - Surfaced only when the role states a need for cross-functional problem-solving.
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/requisition.schema.json",
+  "title": "Requisition and screening configuration",
+  "description": "A requisition export: stated job intent plus the operational screening rules applied to it. inputs_received records what was actually supplied so the engine never claims to have audited configuration it did not see.",
+  "type": "object",
+  "required": ["id", "title", "job_family", "employer_id", "inputs_received", "description", "requirements", "screening_rules"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "job_family": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "employer_id": { "type": "string" },
+    "ats": { "type": "string" },
+    "inputs_received": {
+      "type": "object",
+      "required": ["job_description", "screening_configuration", "candidate_evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "job_description": { "enum": ["supplied", "not_supplied"] },
+        "screening_configuration": {
+          "enum": ["ats_export_verified", "ats_api_verified", "recruiter_documentation", "not_supplied"]
+        },
+        "candidate_evidence": { "enum": ["authorized_full", "authorized_sample", "not_supplied"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "description": { "type": "string" },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "text"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "text", "stated_as"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string" },
+          "stated_as": { "enum": ["required", "preferred"] },
+          "concepts": { "type": "array", "items": { "type": "string", "pattern": "^skill\\." } },
+          "min_years": { "type": "number", "minimum": 0 },
+          "accepts_equivalent": { "type": "boolean" },
+          "necessity_rationale": { "type": ["string", "null"] },
+          "linked_objectives": { "type": "array", "items": { "type": "string" } },
+          "employer_classification": {
+            "description": "Set by the employer after human review (Step 2). Absent means not yet classified.",
+            "enum": ["essential", "preferred", "demonstrable_through_alternatives", "unverified_assumption"]
+          }
+        }
+      }
+    },
+    "screening_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "text", "action", "logic"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "enum": ["knockout_question", "keyword_filter", "minimum_experience", "title_filter", "credential_filter"]
+          },
+          "text": { "type": "string" },
+          "action": { "enum": ["reject", "deprioritize"] },
+          "linked_requirement": { "type": "string" },
+          "concepts": { "type": "array", "items": { "type": "string", "pattern": "^skill\\." } },
+          "logic": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "required_answer": { "enum": ["yes", "no"] },
+              "allows_equivalent": { "type": "boolean" },
+              "terms": { "$ref": "common.schema.json#/$defs/term_list" },
+              "match": { "enum": ["any", "all"] },
+              "field": { "enum": ["resume", "titles", "skills"] },
+              "years": { "type": "number", "minimum": 0 },
+              "titles": { "$ref": "common.schema.json#/$defs/term_list" },
+              "credentials": { "$ref": "common.schema.json#/$defs/term_list" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

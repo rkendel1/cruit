@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/equivalencies.schema.json",
+  "title": "Equivalencies and transferable experience document",
+  "description": "When different experiences or forms of evidence MAY demonstrate the same underlying capability. Similar experience is not automatically equivalent experience: every record states conditions, required evidence, limitations and non-equivalencies.",
+  "type": "object",
+  "required": ["document", "schema_version", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "document": { "const": "equivalencies" },
+    "schema_version": { "const": 1 },
+    "records": { "type": "array", "items": { "$ref": "#/$defs/record" } }
+  },
+  "$defs": {
+    "indicator": {
+      "description": "A deterministic evidence signal. It matches a single sentence of candidate evidence when every group in all_of has at least one term present in that sentence.",
+      "type": "object",
+      "required": ["id", "description", "all_of"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "description": { "type": "string" },
+        "all_of": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": ["id", "target", "summary", "indicators", "min_indicators", "required_indicators", "conditions", "validation_steps", "limitations", "non_equivalencies", "applicable_contexts", "confidence", "version", "review_status", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^eq\\.[a-z0-9][a-z0-9.-]*$" },
+        "target": { "type": "string", "pattern": "^skill\\.[a-z0-9][a-z0-9.-]*$" },
+        "summary": { "type": "string", "minLength": 1 },
+        "source_domains": { "type": "array", "items": { "type": "string" } },
+        "indicators": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/indicator" } },
+        "min_indicators": { "type": "integer", "minimum": 1 },
+        "required_indicators": { "type": "array", "items": { "type": "string" } },
+        "disqualifying_terms": {
+          "description": "If a sentence contains any of these terms, it cannot count toward this equivalency (e.g. 'participated', 'shadowed', 'drill').",
+          "$ref": "common.schema.json#/$defs/term_list"
+        },
+        "min_months": { "type": "integer", "minimum": 0 },
+        "conditions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "validation_steps": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "non_equivalencies": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "applicable_contexts": { "$ref": "common.schema.json#/$defs/contexts" },
+        "confidence": { "$ref": "common.schema.json#/$defs/confidence" },
+        "version": { "type": "integer", "minimum": 1 },
+        "review_status": { "$ref": "common.schema.json#/$defs/review_status" },
+        "provenance": { "$ref": "common.schema.json#/$defs/provenance" }
+      }
+    }
+  }
+}

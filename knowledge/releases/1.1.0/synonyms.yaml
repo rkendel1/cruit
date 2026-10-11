@@ -1,0 +1,168 @@
+# Synonyms and terminology.
+# Synonyms improve recognition; they do not establish competence.
+document: synonyms
+schema_version: 1
+
+records:
+  - id: term.site-reliability-engineering
+    canonical: site reliability engineering
+    concept: skill.site-reliability-engineering
+    variants:
+      - { term: SRE, kind: abbreviation }
+      - { term: site reliability engineer, kind: variant }
+      - { term: production reliability engineering, kind: variant }
+      - { term: production reliability engineer, kind: variant }
+    relationship: equivalent_terminology
+    contexts: [software-infrastructure]
+    confidence: high
+    ambiguities:
+      - { term: reliability engineering, note: "Deliberately not a variant: in manufacturing and hardware contexts it means equipment reliability." }
+    exclusions: []
+    constraint: The presence of a related term does not prove that the candidate possesses the required experience.
+    version: 2
+    rationale: >-
+      Several organizations title the same function 'production reliability engineering'.
+      v2 adds those variants after pilot review found literal SRE filters excluded them.
+    review_status: approved
+    provenance:
+      author: seed-knowledge
+      created: 2026-10-01
+      updated: 2026-10-08
+      sources: ["MVP seed knowledge; pending design-partner validation", "Pilot review note PR-0003 (illustrative)"]
+
+  - id: term.incident-management
+    canonical: incident management
+    concept: skill.incident-management
+    variants:
+      - { term: incident lead, kind: variant }
+      - { term: incident manager, kind: variant }
+    relationship: equivalent_terminology
+    contexts: ["*"]
+    confidence: high
+    constraint: Use of the term does not establish that the candidate led incidents rather than participated in them.
+    version: 1
+    rationale: Common title and responsibility variants for the same function.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.post-incident-review
+    canonical: post-incident review
+    concept: skill.post-incident-review
+    variants:
+      - { term: incident retrospective, kind: variant }
+      - { term: after-action review, kind: variant }
+      - { term: AAR, kind: abbreviation }
+    relationship: equivalent_terminology
+    contexts: ["*"]
+    confidence: high
+    ambiguities:
+      - { term: AAR, note: "Also used for unrelated acronyms; rely on surrounding context." }
+    constraint: Authoring or leading a review is stronger evidence than attending one.
+    version: 2
+    rationale: >-
+      'After-action review' is the military and emergency-services term for the same
+      practice. Added in v2 so these career paths are recognized.
+    review_status: approved
+    provenance:
+      author: seed-knowledge
+      created: 2026-10-01
+      updated: 2026-10-08
+      sources: ["MVP seed knowledge; pending design-partner validation"]
+
+  - id: term.infrastructure-as-code
+    canonical: infrastructure as code
+    concept: skill.infrastructure-as-code
+    variants:
+      - { term: IaC, kind: abbreviation }
+    relationship: equivalent_terminology
+    contexts: [software-infrastructure]
+    confidence: high
+    constraint: Naming the practice does not establish depth of use.
+    version: 1
+    rationale: Standard abbreviation.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.devops
+    canonical: DevOps engineering
+    concept: skill.production-operations
+    variants:
+      - { term: DevOps engineer, kind: variant }
+      - { term: platform engineering, kind: variant }
+      - { term: platform engineer, kind: variant }
+    relationship: closely_related
+    contexts: [software-infrastructure]
+    confidence: medium
+    constraint: >-
+      Closely related, not equivalent. DevOps roles vary from build tooling to full
+      production ownership; verify production responsibility.
+    version: 1
+    rationale: Overlapping roles that frequently include production operations.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.customer-success
+    canonical: customer success
+    concept: skill.customer-success
+    variants:
+      - { term: client success, kind: variant }
+      - { term: customer success management, kind: variant }
+      - { term: customer success manager, kind: variant }
+      - { term: client success manager, kind: variant }
+      - { term: CSM, kind: abbreviation }
+    relationship: equivalent_terminology
+    contexts: [customer-success, revenue-operations]
+    confidence: high
+    ambiguities:
+      - { term: CSM, note: "Also 'Certified ScrumMaster'. Only treated as customer success inside customer-success contexts." }
+    exclusions:
+      - { term: CSM, contexts: [project-management, software-engineering], reason: "Means Certified ScrumMaster in these contexts." }
+    constraint: The presence of a related term does not prove ownership of renewals or account outcomes.
+    version: 1
+    rationale: Organizations use 'client' and 'customer' interchangeably for this function.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.revenue-operations
+    canonical: revenue operations
+    concept: skill.revenue-operations
+    variants:
+      - { term: RevOps, kind: abbreviation }
+      - { term: revenue ops, kind: variant }
+    relationship: equivalent_terminology
+    contexts: [revenue-operations, customer-success]
+    confidence: high
+    constraint: Terminology only; scope of revenue operations roles varies by organization.
+    version: 1
+    rationale: Standard abbreviation and shortening.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.commercial-operations
+    canonical: commercial operations
+    concept: skill.revenue-operations
+    variants:
+      - { term: sales operations, kind: variant }
+      - { term: sales ops, kind: variant }
+    relationship: closely_related
+    contexts: [revenue-operations, customer-success]
+    confidence: medium
+    constraint: Equivalent to revenue operations in some organizations but not universally; verify scope.
+    version: 1
+    rationale: Overlapping functions with organization-specific scope.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: term.cdl-class-a
+    canonical: Class A commercial driver's license
+    concept: skill.cdl-class-a
+    variants:
+      - { term: commercial driver license class A, kind: variant }
+    relationship: equivalent_terminology
+    contexts: ["*"]
+    confidence: high
+    constraint: Terminology only. A license is never satisfied by adjacent experience.
+    version: 1
+    rationale: Spelling variants of the same legal credential.
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }

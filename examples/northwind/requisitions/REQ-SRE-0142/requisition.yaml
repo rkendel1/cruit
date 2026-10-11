@@ -1,0 +1,96 @@
+# De-identified requisition export (fictional). Screening rules were exported
+# from the ATS configuration, so findings about them are Level 1 where the
+# materials themselves establish the discrepancy.
+id: REQ-SRE-0142
+title: Senior Site Reliability Engineer
+job_family: software-infrastructure
+employer_id: northwind
+ats: generic-ats-export-v1
+inputs_received:
+  job_description: supplied
+  screening_configuration: ats_export_verified
+  candidate_evidence: authorized_sample
+  notes: Knockout questions and filters exported from the ATS job configuration on 2026-10-05.
+
+description: |
+  Northwind runs the routing and tracking platform that 40,000 carriers depend on.
+  You will keep it available, lead our incident response, and automate the
+  infrastructure underneath it. We monitor the platform with Prometheus today.
+
+objectives:
+  - { id: O1, text: Reduce customer-impacting outages on the routing platform. }
+  - { id: O2, text: Lead incident response and drive post-incident improvements. }
+  - { id: O3, text: Automate infrastructure provisioning and change management. }
+
+requirements:
+  - id: R1
+    text: 5+ years of site reliability engineering or production operations experience.
+    stated_as: required
+    min_years: 5
+    accepts_equivalent: true
+    linked_objectives: [O1]
+  - id: R2
+    text: Experience leading incident management, including post-incident reviews.
+    stated_as: required
+    accepts_equivalent: true
+    concepts: [skill.incident-management]
+    linked_objectives: [O2]
+  - id: R3
+    text: Proficiency with infrastructure as code (Terraform or equivalent).
+    stated_as: required
+    accepts_equivalent: true
+    linked_objectives: [O3]
+  - id: R4
+    text: Experience operating Kubernetes.
+    stated_as: preferred
+  - id: R5
+    text: Bachelor's degree in computer science or a related field, or equivalent practical experience.
+    stated_as: preferred
+    accepts_equivalent: true
+  - id: R6
+    text: Experience in the logistics or freight industry.
+    stated_as: required
+    necessity_rationale: null
+
+screening_rules:
+  - id: Q1
+    type: keyword_filter
+    text: Résumé must mention site reliability engineer or SRE.
+    action: reject
+    linked_requirement: R1
+    logic: { terms: [site reliability engineer, SRE], match: any, field: resume }
+  - id: Q2
+    type: minimum_experience
+    text: At least 7 years in Site Reliability Engineer roles (by job title).
+    action: reject
+    linked_requirement: R1
+    logic: { terms: [site reliability engineer, SRE], years: 7, field: titles }
+  - id: Q3
+    type: knockout_question
+    text: Have you served as incident commander for a software production environment?
+    action: reject
+    linked_requirement: R2
+    logic: { required_answer: "yes" }
+  - id: Q4
+    type: knockout_question
+    text: Do you hold a bachelor's degree in computer science?
+    action: reject
+    linked_requirement: R5
+    logic: { required_answer: "yes" }
+  - id: Q5
+    type: keyword_filter
+    text: Résumé must mention Terraform.
+    action: reject
+    linked_requirement: R3
+    logic: { terms: [Terraform], match: any, field: resume }
+  - id: Q6
+    type: knockout_question
+    text: Do you have hands-on Kubernetes experience?
+    action: reject
+    linked_requirement: R4
+    logic: { required_answer: "yes" }
+  - id: Q7
+    type: keyword_filter
+    text: Résumé must mention Datadog.
+    action: reject
+    logic: { terms: [Datadog], match: any, field: resume }

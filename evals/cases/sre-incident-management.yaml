@@ -1,0 +1,56 @@
+id: sre-incident-management
+description: >-
+  Senior SRE requisition with literal keyword filters, a title-based experience
+  rule stricter than the posting, knockouts on preferred qualifications, and an
+  unstated tool requirement. Candidate pool mixes conventional SREs, adjacent
+  titles, and nontraditional incident leaders from healthcare, logistics and the
+  military, plus participation-only and under-experienced profiles that must not
+  be surfaced.
+requisition: ../../examples/northwind/requisitions/REQ-SRE-0142/requisition.yaml
+candidates: ../../examples/northwind/requisitions/REQ-SRE-0142/candidates.yaml
+policy: ../../examples/northwind/policy.yaml
+
+expert_labels:
+  C-101: meets_requirements
+  C-102: meets_requirements
+  C-103: meets_requirements
+  C-104: does_not_meet
+  C-105: does_not_meet
+  C-106: meets_requirements
+  C-107: does_not_meet
+  C-108: meets_requirements
+  C-109: meets_requirements
+  C-110: meets_requirements
+  C-111: does_not_meet
+  C-112: does_not_meet
+  C-113: meets_requirements
+label_rationale:
+  C-103: Led EHR outage response across hospitals, owns production systems, writes Terraform. Strong incident lead.
+  C-104: Strong incident leadership but no infrastructure-as-code experience, which is a genuine requirement.
+  C-105: Participation in drills only; help-desk background.
+  C-106: Military communications operations officer who directed outage response and after-action reviews; automates with Ansible/Terraform.
+  C-107: Conventional title but only three years of experience; posting requires five.
+  C-113: Fully conventional profile; exclusion not explained by any supplied rule.
+
+expected_findings:
+  - { check: rule_narrower_than_requirement, rule: Q1, evidence_level: 1 }
+  - { check: literal_term_missing_variants, rule: Q1 }
+  - { check: threshold_inconsistency, rule: Q2, evidence_level: 1 }
+  - { check: experience_path_narrower, rule: Q2 }
+  - { check: equivalent_path_blocked, rule: Q3, evidence_level: 1 }
+  - { check: preferred_enforced_as_knockout, rule: Q4, evidence_level: 1 }
+  - { check: rule_narrower_than_requirement, rule: Q5, evidence_level: 1 }
+  - { check: preferred_enforced_as_knockout, rule: Q6, evidence_level: 1 }
+  - { check: unstated_requirement_enforced, rule: Q7, evidence_level: 1 }
+  - { check: unverified_necessity, requirement: R6 }
+  - { check: candidate_review_opportunity, candidate: C-102 }
+  - { check: candidate_review_opportunity, candidate: C-103 }
+  - { check: candidate_review_opportunity, candidate: C-106 }
+  - { check: unexplained_exclusions, candidate: C-113 }
+
+forbidden_findings:
+  - { check: candidate_review_opportunity, candidate: C-104, note: lacks infrastructure-as-code }
+  - { check: candidate_review_opportunity, candidate: C-105, note: participation-only evidence }
+  - { check: candidate_review_opportunity, candidate: C-107, note: below the posted experience threshold }
+  - { check: candidate_review_opportunity, candidate: C-111, note: keyword from a course is not experience }
+  - { check: candidate_review_opportunity, candidate: C-112 }

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/eval_case.schema.json",
+  "title": "Evaluation case",
+  "description": "A labeled scenario used to regression-test knowledge and engine changes. Expert labels are ground truth; the engine never sees them.",
+  "type": "object",
+  "required": ["id", "description", "requisition", "policy", "expert_labels"],
+  "additionalProperties": false,
+  "$defs": {
+    "finding_matcher": {
+      "type": "object",
+      "required": ["check"],
+      "additionalProperties": false,
+      "properties": {
+        "check": { "type": "string" },
+        "rule": { "type": "string" },
+        "requirement": { "type": "string" },
+        "candidate": { "type": "string" },
+        "evidence_level": { "enum": [1, 2, 3] },
+        "note": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "id": { "type": "string" },
+    "description": { "type": "string" },
+    "requisition": { "type": "string", "description": "Path relative to the case file." },
+    "candidates": { "type": "string" },
+    "policy": { "type": "string" },
+    "expert_labels": {
+      "description": "Candidate id -> expert judgement against the role's genuine requirements.",
+      "type": "object",
+      "additionalProperties": { "enum": ["meets_requirements", "does_not_meet", "insufficient_evidence"] }
+    },
+    "label_rationale": { "type": "object", "additionalProperties": { "type": "string" } },
+    "expected_findings": { "type": "array", "items": { "$ref": "#/$defs/finding_matcher" } },
+    "forbidden_findings": { "type": "array", "items": { "$ref": "#/$defs/finding_matcher" } }
+  }
+}

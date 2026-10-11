@@ -1,0 +1,166 @@
+requisition_id: REQ-SRE-0142
+knowledge: core@1.1.0+8a94e741e4
+note: Suggested changes for the employer to implement in the ATS. Screening Assurance
+  does not modify ATS configuration.
+changes:
+- finding_id: SA-REQ-SRE-0142-704c5892
+  rule: Q1
+  decision: accepted
+  change:
+    allows_equivalent: true
+    equivalencies:
+    - eq.site-reliability.production-operations
+  instruction: Add an equivalent-evidence path (e.g. a follow-up question or recruiter
+    review route) so applicants with equivalent experience are reviewed rather than
+    rejected.
+  current_rule_text: "R\xE9sum\xE9 must mention site reliability engineer or SRE."
+- finding_id: SA-REQ-SRE-0142-9164e1d0
+  rule: Q1
+  decision: accepted
+  change:
+    add_terms:
+    - Production operations
+    - IT operations
+    - systems operations
+    - infrastructure operations
+    - operations engineering
+    - platform operations
+    - network operations
+    - DevOps engineering
+  instruction: 'Extend the rule to recognize: Production operations, IT operations,
+    systems operations, infrastructure operations, operations engineering, platform
+    operations, network operations, DevOps engineering.'
+  current_rule_text: "R\xE9sum\xE9 must mention site reliability engineer or SRE."
+- finding_id: SA-REQ-SRE-0142-9403725f
+  rule: Q2
+  decision: accepted
+  change:
+    add_terms:
+    - Production operations
+    - IT operations
+    - systems operations
+    - infrastructure operations
+    - operations engineering
+    - platform operations
+    - network operations
+    - DevOps engineering
+  instruction: 'Extend the rule to recognize: Production operations, IT operations,
+    systems operations, infrastructure operations, operations engineering, platform
+    operations, network operations, DevOps engineering.'
+  current_rule_text: At least 7 years in Site Reliability Engineer roles (by job title).
+- finding_id: SA-REQ-SRE-0142-d15dcf14
+  rule: Q2
+  decision: accepted
+  change:
+    years: 5
+  instruction: Align the rule threshold with the posted requirement (5 years), or
+    update the posting if the higher threshold is genuinely required.
+  current_rule_text: At least 7 years in Site Reliability Engineer roles (by job title).
+- finding_id: SA-REQ-SRE-0142-5302d6be
+  rule: Q3
+  decision: accepted
+  change:
+    allows_equivalent: true
+    equivalencies:
+    - eq.incident-management.operational-crisis-response
+    evidence_concepts:
+    - skill.incident-management
+  instruction: Add an equivalent-evidence path (e.g. a follow-up question or recruiter
+    review route) so applicants with equivalent experience are reviewed rather than
+    rejected.
+  current_rule_text: Have you served as incident commander for a software production
+    environment?
+- finding_id: SA-REQ-SRE-0142-3bc61a83
+  rule: Q4
+  decision: accepted
+  change:
+    removed: true
+  instruction: Convert the rule into a scoring or ranking signal, or reclassify the
+    requirement as essential with a documented rationale.
+  current_rule_text: Do you hold a bachelor's degree in computer science?
+- finding_id: SA-REQ-SRE-0142-512cd6d3
+  rule: Q4
+  decision: accepted
+  change:
+    allows_equivalent: true
+    equivalencies:
+    - eq.site-reliability.production-operations
+    evidence_concepts:
+    - skill.production-operations
+    - skill.site-reliability-engineering
+  instruction: Add an equivalent-evidence path (e.g. a follow-up question or recruiter
+    review route) so applicants with equivalent experience are reviewed rather than
+    rejected.
+  current_rule_text: Do you hold a bachelor's degree in computer science?
+- finding_id: SA-REQ-SRE-0142-f01e2bd0
+  rule: Q5
+  decision: accepted
+  change:
+    add_terms:
+    - Infrastructure as code
+    - infrastructure automation
+    - IaC
+    - Ansible
+    - AWS CloudFormation
+    - CloudFormation
+    - Pulumi
+    - Terraform
+    - HashiCorp Terraform
+    - OpenTofu
+  instruction: 'Extend the rule to recognize: Infrastructure as code, infrastructure
+    automation, IaC, Ansible, AWS CloudFormation, CloudFormation, Pulumi, Terraform,
+    HashiCorp Terraform, OpenTofu.'
+  current_rule_text: "R\xE9sum\xE9 must mention Terraform."
+- finding_id: SA-REQ-SRE-0142-48360a3a
+  rule: Q6
+  decision: accepted
+  change:
+    removed: true
+  instruction: Convert the rule into a scoring or ranking signal, or reclassify the
+    requirement as essential with a documented rationale.
+  current_rule_text: Do you have hands-on Kubernetes experience?
+- finding_id: SA-REQ-SRE-0142-99df8968
+  rule: Q7
+  decision: accepted
+  change:
+    removed: true
+  instruction: Confirm whether this is a genuine job requirement. If it is, add it
+    to the posted requirements with its rationale; if not, remove the rule or convert
+    it to a preference.
+  current_rule_text: "R\xE9sum\xE9 must mention Datadog."
+- finding_id: SA-REQ-SRE-0142-b05a4c5a
+  rule: Q1
+  decision: accepted
+  change:
+    add_terms:
+    - Site reliability engineering
+    - production reliability engineering
+    - production reliability engineer
+  instruction: 'Add recognized variants to the rule: Site reliability engineering,
+    production reliability engineering, production reliability engineer.'
+  current_rule_text: "R\xE9sum\xE9 must mention site reliability engineer or SRE."
+- finding_id: SA-REQ-SRE-0142-a0ac83a9
+  rule: Q2
+  decision: accepted
+  change:
+    field: resume
+    add_terms:
+    - Production operations
+    - IT operations
+    - systems operations
+    - infrastructure operations
+    - operations engineering
+    - platform operations
+    - network operations
+    - DevOps engineering
+    - Site reliability engineering
+    - SRE
+    - site reliability engineer
+    - production reliability engineering
+    - production reliability engineer
+    equivalencies:
+    - eq.site-reliability.production-operations
+  instruction: "Count relevant experience by responsibilities, not titles: match recognized\
+    \ terminology across the full r\xE9sum\xE9 and route equivalency evidence to recruiter\
+    \ review."
+  current_rule_text: At least 7 years in Site Reliability Engineer roles (by job title).

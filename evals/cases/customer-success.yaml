@@ -1,0 +1,40 @@
+id: customer-success
+description: >-
+  Customer Success Manager requisition documented by the recruiter. A literal
+  "customer success" filter, a title-based prioritization and a certification
+  filter where the posting asks only for proficiency. Includes an employer
+  policy that rejects one general equivalency (support escalation leadership),
+  and profiles whose transferable skills are real but insufficient for the role.
+requisition: ../../examples/northwind/requisitions/REQ-CSM-0388/requisition.yaml
+candidates: ../../examples/northwind/requisitions/REQ-CSM-0388/candidates.yaml
+policy: ../../examples/northwind/policy.yaml
+
+expert_labels:
+  C-201: meets_requirements
+  C-202: meets_requirements
+  C-203: does_not_meet
+  C-204: meets_requirements
+  C-205: does_not_meet
+  C-206: does_not_meet
+  C-207: insufficient_evidence
+  C-208: does_not_meet
+label_rationale:
+  C-202: '"Client success" is the same function under a different name.'
+  C-204: B2B account manager owning renewals, expansion and adoption for a SaaS book — equivalent experience.
+  C-205: Has a cross-functional skill combination but has never owned renewals or a book of business.
+  C-207: Strong CSM; CRM is HubSpot. Depends on whether Salesforce is genuinely required (R4 unverified).
+  C-208: Employer policy rejects support-escalation leadership as equivalent for this role.
+
+expected_findings:
+  - { check: literal_term_missing_variants, rule: Q1 }
+  - { check: equivalent_path_blocked, rule: Q1, evidence_level: 1 }
+  - { check: experience_path_narrower, rule: Q2 }
+  - { check: credential_stricter_than_requirement, rule: Q3, evidence_level: 1 }
+  - { check: unverified_necessity, requirement: R4 }
+  - { check: candidate_review_opportunity, candidate: C-202 }
+  - { check: candidate_review_opportunity, candidate: C-204 }
+
+forbidden_findings:
+  - { check: candidate_review_opportunity, candidate: C-203, note: hospitality guest relations is not B2B customer success }
+  - { check: candidate_review_opportunity, candidate: C-205, note: skill combination alone does not establish renewals ownership }
+  - { check: candidate_review_opportunity, candidate: C-208, note: equivalency rejected by employer policy }

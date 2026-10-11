@@ -1,0 +1,244 @@
+{
+  "totals": {
+    "requisitions": 4,
+    "confirmed_inconsistencies": 15,
+    "approved_corrections": 15,
+    "awaiting_decision": 17,
+    "candidate_review_opportunities": 10
+  },
+  "priority_work": [
+    {
+      "requisition": "REQ-CSM-0388",
+      "finding": "SA-REQ-CSM-0388-7f815e04",
+      "level": 1,
+      "category": "confirmed_inconsistency",
+      "title": "Preferred qualification R4 is enforced as a knockout by Q3",
+      "unlocks": 3
+    },
+    {
+      "requisition": "REQ-RO-0455",
+      "finding": "SA-REQ-RO-0455-4d7c87e1",
+      "level": 1,
+      "category": "confirmed_inconsistency",
+      "title": "Q1 requires 7 years; the posting asks for 5",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-RO-0455",
+      "finding": "SA-REQ-RO-0455-30380d96",
+      "level": 1,
+      "category": "confirmed_inconsistency",
+      "title": "Preferred qualification R3 is enforced as a knockout by Q2",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-CSM-0388",
+      "finding": "SA-REQ-CSM-0388-7f33b017",
+      "level": 2,
+      "category": "candidate_review_opportunity",
+      "title": "Candidate C-202 may meet the requirements through a path the current rules do not recognize",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-CSM-0388",
+      "finding": "SA-REQ-CSM-0388-dc08d1e4",
+      "level": 2,
+      "category": "candidate_review_opportunity",
+      "title": "Candidate C-204 may meet the requirements through a path the current rules do not recognize",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-CSM-0388",
+      "finding": "SA-REQ-CSM-0388-ea6778d8",
+      "level": 2,
+      "category": "candidate_review_opportunity",
+      "title": "Candidate C-207 may meet the requirements through a path the current rules do not recognize",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-LH-0217",
+      "finding": "SA-REQ-LH-0217-6f063ac1",
+      "level": 2,
+      "category": "candidate_review_opportunity",
+      "title": "Candidate C-303 may meet the requirements through a path the current rules do not recognize",
+      "unlocks": 0
+    },
+    {
+      "requisition": "REQ-SRE-0142",
+      "finding": "SA-REQ-SRE-0142-82276566",
+      "level": 2,
+      "category": "candidate_review_opportunity",
+      "title": "Candidate C-110 may meet the requirements through a path the current rules do not recognize",
+      "unlocks": 0
+    }
+  ],
+  "recurring_defects": [
+    {
+      "check": "literal_term_missing_variants",
+      "requisitions": [
+        "REQ-CSM-0388",
+        "REQ-LH-0217",
+        "REQ-RO-0455",
+        "REQ-SRE-0142"
+      ]
+    },
+    {
+      "check": "experience_path_narrower",
+      "requisitions": [
+        "REQ-CSM-0388",
+        "REQ-LH-0217",
+        "REQ-RO-0455",
+        "REQ-SRE-0142"
+      ]
+    },
+    {
+      "check": "preferred_enforced_as_knockout",
+      "requisitions": [
+        "REQ-CSM-0388",
+        "REQ-RO-0455",
+        "REQ-SRE-0142"
+      ]
+    },
+    {
+      "check": "equivalent_path_blocked",
+      "requisitions": [
+        "REQ-CSM-0388",
+        "REQ-SRE-0142"
+      ]
+    },
+    {
+      "check": "unverified_necessity",
+      "requisitions": [
+        "REQ-CSM-0388",
+        "REQ-SRE-0142"
+      ]
+    },
+    {
+      "check": "threshold_inconsistency",
+      "requisitions": [
+        "REQ-RO-0455",
+        "REQ-SRE-0142"
+      ]
+    }
+  ],
+  "by_job_family": {
+    "customer-success": {
+      "equivalent_path_blocked": 1,
+      "credential_stricter_than_requirement": 1,
+      "preferred_enforced_as_knockout": 1,
+      "literal_term_missing_variants": 3,
+      "experience_path_narrower": 1,
+      "unverified_necessity": 1
+    },
+    "logistics-operations": {
+      "literal_term_missing_variants": 2,
+      "experience_path_narrower": 1
+    },
+    "revenue-operations": {
+      "threshold_inconsistency": 1,
+      "preferred_enforced_as_knockout": 1,
+      "literal_term_missing_variants": 2,
+      "experience_path_narrower": 1
+    },
+    "software-infrastructure": {
+      "equivalent_path_blocked": 3,
+      "rule_narrower_than_requirement": 3,
+      "threshold_inconsistency": 1,
+      "preferred_enforced_as_knockout": 2,
+      "unstated_requirement_enforced": 1,
+      "literal_term_missing_variants": 3,
+      "experience_path_narrower": 1,
+      "unverified_necessity": 1
+    }
+  },
+  "measured_outcomes": [
+    {
+      "requisition": "REQ-SRE-0142",
+      "title": "Measured: 4 of 5 additionally reviewed candidates met the role's requirements"
+    }
+  ],
+  "requisitions": [
+    {
+      "id": "REQ-CSM-0388",
+      "title": "Customer Success Manager, Mid-Market",
+      "job_family": "customer-success",
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": 11,
+      "by_category": {
+        "confirmed_inconsistency": 3,
+        "design_risk": 4,
+        "unverified_assumption": 1,
+        "candidate_review_opportunity": 3
+      },
+      "by_level": {
+        "level_1": 3,
+        "level_2": 8,
+        "level_3": 0
+      },
+      "pending_decisions": 7,
+      "candidates_assessed": 8,
+      "candidates_surfaced": 3
+    },
+    {
+      "id": "REQ-LH-0217",
+      "title": "Linehaul Operations Supervisor",
+      "job_family": "logistics-operations",
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": 4,
+      "by_category": {
+        "design_risk": 3,
+        "candidate_review_opportunity": 1
+      },
+      "by_level": {
+        "level_1": 0,
+        "level_2": 4,
+        "level_3": 0
+      },
+      "pending_decisions": 4,
+      "candidates_assessed": 4,
+      "candidates_surfaced": 1
+    },
+    {
+      "id": "REQ-RO-0455",
+      "title": "Revenue Operations Manager",
+      "job_family": "revenue-operations",
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": 5,
+      "by_category": {
+        "confirmed_inconsistency": 2,
+        "design_risk": 3
+      },
+      "by_level": {
+        "level_1": 2,
+        "level_2": 3,
+        "level_3": 0
+      },
+      "pending_decisions": 5,
+      "candidates_assessed": 0,
+      "candidates_surfaced": 0
+    },
+    {
+      "id": "REQ-SRE-0142",
+      "title": "Senior Site Reliability Engineer",
+      "job_family": "software-infrastructure",
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": 23,
+      "by_category": {
+        "confirmed_inconsistency": 10,
+        "design_risk": 4,
+        "unverified_assumption": 1,
+        "candidate_review_opportunity": 6,
+        "input_limitation": 1,
+        "measured_impact": 1
+      },
+      "by_level": {
+        "level_1": 10,
+        "level_2": 12,
+        "level_3": 1
+      },
+      "pending_decisions": 1,
+      "candidates_assessed": 13,
+      "candidates_surfaced": 6
+    }
+  ]
+}

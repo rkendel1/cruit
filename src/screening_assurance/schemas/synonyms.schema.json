@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/synonyms.schema.json",
+  "title": "Synonyms and terminology document",
+  "description": "Alternate terminology that may express the same concept. Synonyms improve recognition; they never establish competence.",
+  "type": "object",
+  "required": ["document", "schema_version", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "document": { "const": "synonyms" },
+    "schema_version": { "const": 1 },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "required": ["id", "canonical", "variants", "relationship", "contexts", "confidence", "constraint", "version", "rationale", "review_status", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^term\\.[a-z0-9][a-z0-9.-]*$" },
+        "canonical": { "type": "string", "minLength": 1 },
+        "concept": {
+          "description": "Skill id this terminology expresses. When omitted, the record id is the concept.",
+          "type": "string",
+          "pattern": "^skill\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "variants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["term", "kind"],
+            "additionalProperties": false,
+            "properties": {
+              "term": { "type": "string", "minLength": 1 },
+              "kind": { "enum": ["abbreviation", "variant", "regional", "legacy", "vendor"] },
+              "contexts": { "$ref": "common.schema.json#/$defs/contexts" }
+            }
+          }
+        },
+        "relationship": { "enum": ["equivalent_terminology", "closely_related"] },
+        "contexts": { "$ref": "common.schema.json#/$defs/contexts" },
+        "confidence": { "$ref": "common.schema.json#/$defs/confidence" },
+        "ambiguities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["term", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "term": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "exclusions": {
+          "description": "Contexts in which a variant must NOT be treated as this concept.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["term", "contexts", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "term": { "type": "string" },
+              "contexts": { "$ref": "common.schema.json#/$defs/contexts" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "constraint": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "review_status": { "$ref": "common.schema.json#/$defs/review_status" },
+        "provenance": { "$ref": "common.schema.json#/$defs/provenance" }
+      }
+    }
+  }
+}

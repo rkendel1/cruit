@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/candidates.schema.json",
+  "title": "Authorized candidate evidence",
+  "description": "De-identified, authorized candidate evidence for one requisition. The contract deliberately has no fields for names, contact details, or protected characteristics, and rejects unknown fields.",
+  "type": "object",
+  "required": ["requisition_id", "authorization", "candidates"],
+  "additionalProperties": false,
+  "properties": {
+    "requisition_id": { "type": "string" },
+    "authorization": {
+      "type": "object",
+      "required": ["basis", "de_identified", "retention_days"],
+      "additionalProperties": false,
+      "properties": {
+        "basis": { "type": "string" },
+        "de_identified": { "const": true },
+        "retention_days": { "type": "integer", "minimum": 1 },
+        "granted_by": { "type": "string" }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "ats_status", "experience"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "ats_status": { "enum": ["rejected", "deprioritized", "in_review", "advanced"] },
+          "ats_exclusion_rule": { "type": "string" },
+          "knockout_answers": {
+            "type": "object",
+            "additionalProperties": { "enum": ["yes", "no"] }
+          },
+          "experience": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["title", "months", "summary"],
+              "additionalProperties": false,
+              "properties": {
+                "title": { "type": "string" },
+                "domain": { "type": "string" },
+                "months": { "type": "integer", "minimum": 0 },
+                "summary": { "type": "string" }
+              }
+            }
+          },
+          "skills": { "type": "array", "items": { "type": "string" } },
+          "credentials": { "type": "array", "items": { "type": "string" } },
+          "education": { "type": "array", "items": { "type": "string" } },
+          "learning": {
+            "description": "Self-directed learning, courses, projects.",
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

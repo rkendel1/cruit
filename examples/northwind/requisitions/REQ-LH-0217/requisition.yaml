@@ -1,0 +1,53 @@
+# De-identified requisition (fictional). Demonstrates a protected requirement:
+# the Class A CDL is legally required, so no alternative path is ever proposed
+# for it — only spelling variants of the license itself are recognized.
+id: REQ-LH-0217
+title: Linehaul Operations Supervisor
+job_family: logistics-operations
+employer_id: northwind
+ats: generic-ats-export-v1
+inputs_received:
+  job_description: supplied
+  screening_configuration: ats_export_verified
+  candidate_evidence: authorized_sample
+
+description: |
+  Supervise linehaul drivers and dispatch for the Midwest network, keep the
+  operation compliant, and cover routes when needed.
+
+objectives:
+  - { id: O1, text: "Run safe, on-time linehaul operations." }
+  - { id: O2, text: Keep the operation DOT-compliant. }
+
+requirements:
+  - id: R1
+    text: Active Class A commercial driver's license.
+    stated_as: required
+    concepts: [skill.cdl-class-a]
+    necessity_rationale: Supervisors must legally operate Class A vehicles to cover routes.
+  - id: R2
+    text: 3+ years supervising transportation or dispatch operations.
+    stated_as: required
+    min_years: 3
+    accepts_equivalent: true
+    concepts: [skill.transportation-supervision]
+    linked_objectives: [O1]
+  - id: R3
+    text: Working knowledge of DOT and hours-of-service compliance.
+    stated_as: required
+    concepts: [skill.dot-compliance]
+    linked_objectives: [O2]
+
+screening_rules:
+  - id: Q1
+    type: credential_filter
+    text: Must hold CDL Class A.
+    action: reject
+    linked_requirement: R1
+    logic: { credentials: [CDL Class A] }
+  - id: Q2
+    type: minimum_experience
+    text: 3 years as Transportation Supervisor or Dispatch Supervisor (by job title).
+    action: reject
+    linked_requirement: R2
+    logic: { terms: [Transportation Supervisor, Dispatch Supervisor], years: 3, field: titles }

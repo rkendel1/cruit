@@ -1,0 +1,54 @@
+# Screening Design Assurance before publication (fictional): a draft
+# requisition with its planned screening rules and no candidates yet.
+id: REQ-RO-0455
+title: Revenue Operations Manager
+job_family: revenue-operations
+employer_id: northwind
+inputs_received:
+  job_description: supplied
+  screening_configuration: recruiter_documentation
+  candidate_evidence: not_supplied
+  notes: Draft rules reviewed before the job is published.
+
+description: |
+  Own the processes, systems and data behind Northwind's go-to-market teams,
+  including forecasting and the CRM.
+
+objectives:
+  - { id: O1, text: Deliver an accurate quarterly revenue forecast. }
+  - { id: O2, text: Keep CRM data and processes reliable for sales and customer success. }
+
+requirements:
+  - id: R1
+    text: 5+ years of revenue operations experience.
+    stated_as: required
+    min_years: 5
+    linked_objectives: [O1]
+  - id: R2
+    text: Salesforce administration experience.
+    stated_as: required
+    concepts: [skill.salesforce]
+    necessity_rationale: Northwind's go-to-market stack runs on Salesforce and this role is its administrator.
+  - id: R3
+    text: MBA or equivalent business education.
+    stated_as: preferred
+
+screening_rules:
+  - id: Q1
+    type: minimum_experience
+    text: 7 years as Revenue Operations Manager (by job title).
+    action: reject
+    linked_requirement: R1
+    logic: { terms: [Revenue Operations Manager], years: 7, field: titles }
+  - id: Q2
+    type: knockout_question
+    text: Do you hold an MBA?
+    action: reject
+    linked_requirement: R3
+    logic: { required_answer: "yes" }
+  - id: Q3
+    type: keyword_filter
+    text: Résumé must mention RevOps.
+    action: reject
+    linked_requirement: R1
+    logic: { terms: [RevOps], match: any, field: resume }

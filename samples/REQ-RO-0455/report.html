@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assurance · REQ-RO-0455</title><style>
+:root{--bg:#f7f6f3;--surface:#ffffff;--ink:#1d1d1b;--muted:#5f5e5a;--line:#e3e1db;--accent:#1f5f8b;
+--l1:#9a3412;--l1bg:#fdf0e8;--l2:#7c5e10;--l2bg:#fbf5e3;--l3:#1e6b3a;--l3bg:#e9f5ee;--ok:#1e6b3a;--warn:#9a3412;
+--chip:#efede7;--code:#f1efe9}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151514;--surface:#1e1e1c;--ink:#ecebe6;--muted:#a3a19a;
+--line:#34332f;--accent:#7cb4dd;--l1:#f0a27a;--l1bg:#3a2419;--l2:#e2c473;--l2bg:#352d17;--l3:#8fd1a6;--l3bg:#1b3125;
+--ok:#8fd1a6;--warn:#f0a27a;--chip:#2a2926;--code:#262522}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+header.top{background:var(--surface);border-bottom:1px solid var(--line);padding:28px 16px 20px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+h1{font-size:26px;line-height:1.25;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:19px;margin:40px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:0 0 6px;line-height:1.35}
+.meta{color:var(--muted);font-size:13px}
+.meta code{font-size:12px}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
+.note{border-left:3px solid var(--accent);padding:8px 12px;background:var(--surface);color:var(--muted);font-size:13.5px;margin:16px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:24px;line-height:1.1}
+.stat span{color:var(--muted);font-size:12.5px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+nav.toc a{font-size:12.5px;color:var(--accent);text-decoration:none;background:var(--chip);padding:3px 9px;border-radius:999px}
+.tbl{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+tr:last-child td{border-bottom:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.card .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.badge{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.b1{color:var(--l1);background:var(--l1bg)}.b2{color:var(--l2);background:var(--l2bg)}.b3{color:var(--l3);background:var(--l3bg)}
+.chip{font-size:11.5px;color:var(--muted);background:var(--chip);padding:2px 8px;border-radius:999px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;font-size:14px;margin:10px 0}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+ul{margin:4px 0 8px;padding-left:20px}
+li{margin:2px 0}
+.ev{font-size:13.5px}
+.ev .src{color:var(--muted);font:12px ui-monospace,SFMono-Regular,Menlo,monospace}
+details{margin-top:8px}
+summary{cursor:pointer;color:var(--accent);font-size:13.5px}
+.decision{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:grid;grid-template-columns:220px 1fr;gap:8px;align-items:start}
+.decision select,.decision textarea,.who input{font:inherit;font-size:13.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;width:100%}
+.decision textarea{min-height:38px;resize:vertical}
+.decided{font-size:13.5px;color:var(--ok)}
+.st-evidenced,.st-alternative_path{color:var(--ok)}.st-not_evidenced,.st-protected_missing,.st-insufficient{color:var(--warn)}
+.st-pending_clarification{color:var(--muted)}
+.bar{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 0;margin-top:40px}
+.bar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.who{display:flex;gap:8px;align-items:center;flex:1;min-width:240px}
+.who input{max-width:280px}
+button{font:inherit;font-size:14px;border:0;border-radius:8px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{background:var(--chip);color:var(--ink)}
+#count{color:var(--muted);font-size:13px}
+pre{background:var(--code);padding:10px;border-radius:8px;overflow:auto;font-size:12.5px}
+@media (max-width:640px){.bar{position:static}.kv{grid-template-columns:1fr}.decision{grid-template-columns:1fr}h1{font-size:22px}}
+</style></head>
+<body data-req="REQ-RO-0455">
+<header class="top"><div class="wrap">
+<div class="meta">Screening Assurance · requisition assurance report</div>
+<h1>Revenue Operations Manager <span class="meta">(REQ-RO-0455)</span></h1>
+<div class="meta">job family <code>revenue-operations</code> · knowledge <code>core@1.1.0+8a94e741e4</code> · engine 0.1.0 · run 2026-11-03T12:00:00Z</div>
+<div class="stats">
+<div class="stat"><b>2</b><span>demonstrable inconsistencies</span></div>
+<div class="stat"><b>3</b><span>risks &amp; review opportunities</span></div>
+<div class="stat"><b>0<span style="font-size:14px"> / 0</span></b><span>candidates surfaced for review</span></div>
+<div class="stat"><b>0</b><span>measured outcomes</span></div>
+<div class="stat"><b>5</b><span>awaiting decision</span></div>
+</div>
+<nav class="toc"><a href="#s1">1 Requirements</a><a href="#s2">2 Rules</a><a href="#s3">3 Inconsistencies</a><a href="#s4">4 Risks</a><a href="#s5">5 Candidates</a><a href="#s6">6 Changes</a><a href="#s7">7 Decisions</a><a href="#s8">8 Outcomes</a></nav>
+</div></header>
+<main class="wrap">
+<div class="note">This report recommends changes and human review. It does not reject, advance or hire anyone, and it never claims a candidate was wrongly excluded. Level 1 findings are established by the supplied materials; Level 2 findings need human judgement; Level 3 findings are measured outcomes.</div>
+<p class="meta">Inputs received: job description: <code>supplied</code> · screening configuration: <code>recruiter_documentation</code> · candidate evidence: <code>not_supplied</code></p>
+<details open><summary>Limitations of this run</summary><ul><li>Screening rules were supplied as recruiter documentation, not verified ATS configuration. Findings describe the documented rules; the live ATS may differ.</li><li>No authorized candidate evidence was supplied; candidate-pool assurance was not performed.</li><li>Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run.</li></ul></details>
+<h2 id="s1">1. Requirements and stated intent</h2>
+<div class="tbl"><table><thead><tr><th>ID</th><th>Requirement</th><th>Stated</th><th>Proposed classification</th><th>Basis</th></tr></thead><tbody><tr><td><b>R1</b></td><td>5+ years of revenue operations experience.</td><td>required</td><td>Essential</td><td class="meta">linked to objectives [&#x27;O1&#x27;]</td></tr><tr><td><b>R2</b></td><td>Salesforce administration experience.</td><td>required</td><td>Essential</td><td class="meta">Northwind&#x27;s go-to-market stack runs on Salesforce and this role is its administrator.</td></tr><tr><td><b>R3</b></td><td>MBA or equivalent business education.</td><td>preferred</td><td>Preferred</td><td class="meta">stated as preferred in the posting</td></tr></tbody></table></div>
+<p class="meta">🔒 Protected (legal, licensing or employer non-negotiable): no alternative path is ever proposed.</p>
+<h2 id="s2">2. Screening rules inspected</h2>
+<div class="tbl"><table><thead><tr><th>Rule</th><th>Rule text</th><th>Linked req.</th><th>Status</th><th>Findings</th></tr></thead><tbody><tr><td><b>Q1</b></td><td>7 years as Revenue Operations Manager (by job title).<br><span class="meta">minimum_experience · reject</span></td><td>R1</td><td>correction proposed</td><td><a href=#SA-REQ-RO-0455-4d7c87e1>4d7c87e1</a> <a href=#SA-REQ-RO-0455-088d343c>088d343c</a> <a href=#SA-REQ-RO-0455-568981f2>568981f2</a> </td></tr><tr><td><b>Q2</b></td><td>Do you hold an MBA?<br><span class="meta">knockout_question · reject</span></td><td>R3</td><td>correction proposed</td><td><a href=#SA-REQ-RO-0455-30380d96>30380d96</a> </td></tr><tr><td><b>Q3</b></td><td>Résumé must mention RevOps.<br><span class="meta">keyword_filter · reject</span></td><td>R1</td><td>correction proposed</td><td><a href=#SA-REQ-RO-0455-130b17ea>130b17ea</a> </td></tr></tbody></table></div>
+<h2 id="s3">3. Confirmed inconsistencies</h2><article class="card" id="SA-REQ-RO-0455-4d7c87e1"><div class="head"><span class="badge b1">Level 1 · Demonstrable inconsistency</span><span class="chip">Confirmed inconsistency</span><span class="chip">confidence: high</span><span class="chip"><code>SA-REQ-RO-0455-4d7c87e1</code></span></div><h3>Q1 requires 7 years; the posting asks for 5</h3><p>Requirement R1 states 5+ years, but rule Q1 enforces 7 years.</p><ul><li class="ev"><span class="src">requirement:R1</span><br>5+ years of revenue operations experience.</li><li class="ev"><span class="src">rule:Q1</span><br>years: 7 — 7 years as Revenue Operations Manager (by job title).</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Align the rule threshold with the posted requirement (5 years), or update the posting if the higher threshold is genuinely required.</dd><dt>Expected benefit</dt><dd>Applicants who meet the posted threshold are no longer silently excluded.</dd><dt>Trade-off</dt><dd>None if the posting reflects the real need.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>years: 5
+</pre></details><p class="meta">Sources: requirement:R1, rule:Q1 · knowledge <code>core@1.1.0+8a94e741e4</code></p><div class="decision" data-fid="SA-REQ-RO-0455-4d7c87e1"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article><article class="card" id="SA-REQ-RO-0455-30380d96"><div class="head"><span class="badge b1">Level 1 · Demonstrable inconsistency</span><span class="chip">Confirmed inconsistency</span><span class="chip">confidence: high</span><span class="chip"><code>SA-REQ-RO-0455-30380d96</code></span></div><h3>Preferred qualification R3 is enforced as a knockout by Q2</h3><p>Requirement R3 is stated as preferred, but rule Q2 rejects applicants who do not meet it.</p><ul><li class="ev"><span class="src">requirement:R3</span><br>stated_as: preferred — MBA or equivalent business education.</li><li class="ev"><span class="src">rule:Q2</span><br>action: reject — Do you hold an MBA?</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.</dd><dt>Expected benefit</dt><dd>Applicants who meet all essential requirements are no longer rejected for lacking a preference.</dd><dt>Trade-off</dt><dd>More applicants reach review; ranking should still favour the preferred qualification.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>removed: true
+</pre></details><p class="meta">Sources: requirement:R3, rule:Q2 · knowledge <code>core@1.1.0+8a94e741e4</code></p><div class="decision" data-fid="SA-REQ-RO-0455-30380d96"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article>
+<h2 id="s4">4. Potential missed-talent risks</h2><article class="card" id="SA-REQ-RO-0455-088d343c"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: medium</span><span class="chip"><code>SA-REQ-RO-0455-088d343c</code></span></div><h3>Q1 matches literally and misses recognized variants of Revenue operations</h3><p>Rule Q1 matches only &#x27;Revenue Operations Manager&#x27;. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.</p><ul><li class="ev"><span class="src">knowledge:skill.revenue-operations</span><br>recognized variant(s): Revenue operations, RevOps, revenue ops, commercial operations</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Add recognized variants to the rule: Revenue operations, RevOps, revenue ops, commercial operations.</dd><dt>Expected benefit</dt><dd>Applicants describing the same work in different words are no longer filtered out.</dd><dt>Trade-off</dt><dd>Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>add_terms:
+- Revenue operations
+- RevOps
+- revenue ops
+- commercial operations
+</pre></details><details><summary>Limitations</summary><ul><li>Synonyms improve recognition; they do not establish competence.</li><li>Terminology only; scope of revenue operations roles varies by organization.</li><li>Equivalent to revenue operations in some organizations but not universally; verify scope.</li><li>Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case.</li></ul></details><p class="meta">Sources: rule:Q1, knowledge:skill.revenue-operations, knowledge:term.commercial-operations, knowledge:term.revenue-operations · knowledge <code>core@1.1.0+8a94e741e4</code> · records: skill.revenue-operations, term.commercial-operations, term.revenue-operations</p><div class="decision" data-fid="SA-REQ-RO-0455-088d343c"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article><article class="card" id="SA-REQ-RO-0455-568981f2"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: medium</span><span class="chip"><code>SA-REQ-RO-0455-568981f2</code></span></div><h3>Q1 counts experience only under specific job titles</h3><p>Rule Q1 only counts experience held under the titles &#x27;Revenue Operations Manager&#x27;. The underlying capability can be demonstrated under other titles and in other domains.</p><ul><li class="ev"><span class="src">rule:Q1</span><br>7 years as Revenue Operations Manager (by job title).</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Count relevant experience by responsibilities, not titles: match recognized terminology across the full résumé and route equivalency evidence to recruiter review.</dd><dt>Expected benefit</dt><dd>Candidates whose titles differ from the conventional path reach human review.</dd><dt>Trade-off</dt><dd>Responsibility-based matching needs recruiter verification; expect modest extra review time.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>field: resume
+add_terms:
+- Revenue operations
+- revenue operations manager
+- RevOps
+- revenue ops
+- commercial operations
+equivalencies: []
+</pre></details><details><summary>Limitations</summary><ul><li>Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.</li><li>Title-based counting may reflect a deliberate employer choice; confirm intent.</li></ul></details><p class="meta">Sources: rule:Q1, requirement:R1 · knowledge <code>core@1.1.0+8a94e741e4</code></p><div class="decision" data-fid="SA-REQ-RO-0455-568981f2"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article><article class="card" id="SA-REQ-RO-0455-130b17ea"><div class="head"><span class="badge b2">Level 2 · Missed-talent risk</span><span class="chip">Screening design risk</span><span class="chip">confidence: medium</span><span class="chip"><code>SA-REQ-RO-0455-130b17ea</code></span></div><h3>Q3 matches literally and misses recognized variants of Revenue operations</h3><p>Rule Q3 matches only &#x27;RevOps&#x27;. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.</p><ul><li class="ev"><span class="src">knowledge:skill.revenue-operations</span><br>recognized variant(s): Revenue operations, revenue operations manager, revenue ops, commercial operations</li></ul><dl class="kv"><dt>Proposed action</dt><dd>Add recognized variants to the rule: Revenue operations, revenue operations manager, revenue ops, commercial operations.</dd><dt>Expected benefit</dt><dd>Applicants describing the same work in different words are no longer filtered out.</dd><dt>Trade-off</dt><dd>Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.</dd></dl><details><summary>Suggested configuration change (simulation only)</summary><pre>add_terms:
+- Revenue operations
+- revenue operations manager
+- revenue ops
+- commercial operations
+</pre></details><details><summary>Limitations</summary><ul><li>Synonyms improve recognition; they do not establish competence.</li><li>Terminology only; scope of revenue operations roles varies by organization.</li><li>Equivalent to revenue operations in some organizations but not universally; verify scope.</li><li>Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case.</li></ul></details><p class="meta">Sources: rule:Q3, knowledge:skill.revenue-operations, knowledge:term.commercial-operations, knowledge:term.revenue-operations · knowledge <code>core@1.1.0+8a94e741e4</code> · records: skill.revenue-operations, term.commercial-operations, term.revenue-operations</p><div class="decision" data-fid="SA-REQ-RO-0455-130b17ea"><select aria-label="Decision"><option value="">— decision —</option><option value="accepted">Accept</option><option value="rejected">Reject</option><option value="deferred">Defer</option><option value="requested_evidence">Request evidence</option><option value="confirmed_necessary">Confirm requirement is necessary</option><option value="reclassified_preferred">Reclassify as preferred</option><option value="approved_candidate_review">Approve candidate review</option></select><textarea placeholder="Rationale (required)" aria-label="Rationale"></textarea></div></article>
+<h2 id="s5">5. Candidate-review opportunities</h2><p class="meta">None found.</p>
+<details><summary>Candidates assessed but not surfaced</summary><div class="tbl"><table><thead><tr><th>Candidate</th><th>ATS status</th><th>Excluded by</th><th>Reason</th></tr></thead><tbody></tbody></table></div></details>
+
+<h2 id="s6">6. Recommended changes</h2>
+<p class="meta">Suggested changes for the employer to implement in the ATS. Nothing is applied automatically.</p><div class="card"><h3>Q1 — 7 years as Revenue Operations Manager (by job title).</h3><pre>suggested_logic:
+  terms:
+  - Revenue Operations Manager
+  - Revenue operations
+  - RevOps
+  - revenue ops
+  - commercial operations
+  years: 5
+  field: resume
+  equivalencies: []
+</pre><p class="meta">From findings: <a href=#SA-REQ-RO-0455-4d7c87e1>SA-REQ-RO-0455-4d7c87e1</a>, <a href=#SA-REQ-RO-0455-088d343c>SA-REQ-RO-0455-088d343c</a>, <a href=#SA-REQ-RO-0455-568981f2>SA-REQ-RO-0455-568981f2</a></p></div><div class="card"><h3>Q2 — Do you hold an MBA?</h3><pre>suggested_logic:
+  removed: true
+</pre><p class="meta">From findings: <a href=#SA-REQ-RO-0455-30380d96>SA-REQ-RO-0455-30380d96</a></p></div><div class="card"><h3>Q3 — Résumé must mention RevOps.</h3><pre>suggested_logic:
+  terms:
+  - RevOps
+  - Revenue operations
+  - revenue operations manager
+  - revenue ops
+  - commercial operations
+  match: any
+  field: resume
+</pre><p class="meta">From findings: <a href=#SA-REQ-RO-0455-130b17ea>SA-REQ-RO-0455-130b17ea</a></p></div>
+<h2 id="s7">7. Human decisions and rationale</h2>
+<p class="meta">No decisions recorded yet. Use the controls on each finding, then export <code>decisions.yaml</code> and re-run.</p>
+<h2 id="s8">8. Outcome measurements</h2><p class="meta">No outcome data supplied yet. Add <code>outcomes.yaml</code> with a documented baseline after corrections are implemented.</p>
+
+</main>
+<div class="bar"><div class="wrap"><div class="who"><label for="who" class="meta">Reviewer</label><input id="who" placeholder="you@company.com"></div>
+<span id="count"></span><button class="ghost" id="show">Preview</button><button id="export">Export decisions.yaml</button></div>
+<div class="wrap"><pre id="preview" hidden></pre></div></div>
+<script>
+const KEY='sa-decisions-'+document.body.dataset.req;
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+const state=load();
+function refresh(){let n=0;document.querySelectorAll('[data-fid]').forEach(el=>{if(el.querySelector('select').value)n++});
+document.getElementById('count').textContent=n+' decision'+(n==1?'':'s')+' recorded in this browser';}
+document.querySelectorAll('[data-fid]').forEach(el=>{const id=el.dataset.fid,sel=el.querySelector('select'),ta=el.querySelector('textarea');
+ if(state[id]){sel.value=state[id].d||'';ta.value=state[id].r||''}
+ const upd=()=>{state[id]={d:sel.value,r:ta.value};save(state);refresh()};sel.onchange=upd;ta.oninput=upd;});
+const who=document.getElementById('who');try{who.value=localStorage.getItem('sa-who')||''}catch(e){}
+who.oninput=()=>{try{localStorage.setItem('sa-who',who.value)}catch(e){}};
+function q(s){return JSON.stringify(s)}
+function build(){const by=who.value.trim()||'reviewer@example.com';const now=new Date().toISOString().slice(0,19)+'Z';
+ let y='requisition_id: '+q(document.body.dataset.req)+'\ndecisions:\n';let n=0,missing=[];
+ document.querySelectorAll('[data-fid]').forEach(el=>{const d=el.querySelector('select').value,r=el.querySelector('textarea').value.trim();
+  if(!d)return; if(!r){missing.push(el.dataset.fid);return}
+  n++;y+='  - finding_id: '+q(el.dataset.fid)+'\n    disposition: '+d+'\n    rationale: '+q(r)+'\n    decided_by: '+q(by)+'\n    decided_at: '+q(now)+'\n';});
+ if(!n)y+='  []\n';return {y,missing};}
+document.getElementById('export').onclick=()=>{const {y,missing}=build();
+ if(missing.length&&!confirm('A rationale is required. '+missing.length+' decision(s) without rationale will be left out. Continue?'))return;
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([y],{type:'text/yaml'}));a.download='decisions.yaml';a.click();};
+document.getElementById('show').onclick=()=>{const p=document.getElementById('preview');p.hidden=!p.hidden;p.textContent=build().y;};
+refresh();
+</script>
+</body></html>

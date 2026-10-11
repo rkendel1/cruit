@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/outcomes.schema.json",
+  "title": "Observed outcomes for a requisition",
+  "description": "Baseline and post-change measurements. Measured values and estimates are kept separate.",
+  "type": "object",
+  "required": ["requisition_id", "comparison_method", "baseline"],
+  "additionalProperties": false,
+  "$defs": {
+    "period": {
+      "type": "object",
+      "required": ["period", "applicants", "recruiter_reviewed", "qualified_candidates", "recruiter_hours"],
+      "additionalProperties": false,
+      "properties": {
+        "period": { "type": "string" },
+        "applicants": { "type": "integer", "minimum": 0 },
+        "recruiter_reviewed": { "type": "integer", "minimum": 0 },
+        "qualified_candidates": { "type": "integer", "minimum": 0 },
+        "recruiter_hours": { "type": "number", "minimum": 0 },
+        "days_to_qualified_shortlist": { "type": ["number", "null"], "minimum": 0 },
+        "advanced_to_interview": { "type": "integer", "minimum": 0 },
+        "hires": { "type": "integer", "minimum": 0 },
+        "recruiting_spend": { "type": "number", "minimum": 0 }
+      }
+    }
+  },
+  "properties": {
+    "requisition_id": { "type": "string" },
+    "comparison_method": {
+      "description": "How the comparison was made, e.g. 'pre/post on same requisition', 'matched comparison requisitions'. Required so attribution is never implicit.",
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline": { "$ref": "#/$defs/period" },
+    "after_change": { "$ref": "#/$defs/period" },
+    "candidate_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["candidate_id", "finding_id", "review_minutes", "outcome"],
+        "additionalProperties": false,
+        "properties": {
+          "candidate_id": { "type": "string" },
+          "finding_id": { "type": "string" },
+          "review_minutes": { "type": "number", "minimum": 0 },
+          "outcome": { "enum": ["meets_requirements", "does_not_meet", "insufficient_evidence"] },
+          "advanced_to": { "type": ["string", "null"] },
+          "reviewer": { "type": "string" }
+        }
+      }
+    },
+    "estimation_assumptions": {
+      "description": "Inputs for ESTIMATED value. Always reported separately from measured results.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cost_per_sourcing_cycle": { "type": "number", "minimum": 0 },
+        "qualified_candidates_needed_per_cycle": { "type": "number", "minimum": 1 },
+        "recruiter_hourly_cost": { "type": "number", "minimum": 0 },
+        "source": { "type": "string" }
+      }
+    },
+    "new_risks_observed": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "knowledge": "core@1.1.0+8a94e741e4",
+  "thresholds": {
+    "min_expected_finding_recall": 1.0,
+    "min_candidate_precision": 0.8,
+    "min_candidate_recall": 0.6,
+    "max_forbidden_violations": 0,
+    "max_guardrail_violations": 0,
+    "max_precision_drop": 0.0,
+    "max_false_positive_increase": 0
+  },
+  "metrics": {
+    "cases": 4,
+    "expected_findings": 28,
+    "expected_found": 28,
+    "expected_finding_recall": 1.0,
+    "forbidden_violations": 0,
+    "guardrail_violations": 0,
+    "candidates_flagged": 10,
+    "true_positives": 10,
+    "false_positives": 0,
+    "missed_qualified": 0,
+    "candidate_precision": 1.0,
+    "candidate_recall": 1.0
+  },
+  "passed": true,
+  "failures": [],
+  "cases": [
+    {
+      "case_id": "customer-success",
+      "description": "Customer Success Manager requisition documented by the recruiter. A literal \"customer success\" filter, a title-based prioritization and a certification filter where the posting asks only for proficiency. Includes an employer policy that rejects one general equivalency (support escalation leadership), and profiles whose transferable skills are real but insufficient for the role.",
+      "expected": [
+        {
+          "check": "literal_term_missing_variants",
+          "rule": "Q1",
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-1fa7cee2"
+        },
+        {
+          "check": "equivalent_path_blocked",
+          "rule": "Q1",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-7da18d53"
+        },
+        {
+          "check": "experience_path_narrower",
+          "rule": "Q2",
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-309d1f67"
+        },
+        {
+          "check": "credential_stricter_than_requirement",
+          "rule": "Q3",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-7d038e7c"
+        },
+        {
+          "check": "unverified_necessity",
+          "requirement": "R4",
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-a1beef17"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-202",
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-7f33b017"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-204",
+          "found": true,
+          "finding_id": "SA-REQ-CSM-0388-dc08d1e4"
+        }
+      ],
+      "forbidden": [
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-203",
+          "note": "hospitality guest relations is not B2B customer success",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-205",
+          "note": "skill combination alone does not establish renewals ownership",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-208",
+          "note": "equivalency rejected by employer policy",
+          "violated": false,
+          "finding_ids": []
+        }
+      ],
+      "candidates": {
+        "excluded": 7,
+        "flagged": [
+          "C-202",
+          "C-204"
+        ],
+        "true_positives": [
+          "C-202",
+          "C-204"
+        ],
+        "false_positives": [],
+        "flagged_unlabeled_or_insufficient": [],
+        "missed_qualified": [],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "guardrail_violations": [],
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": [
+        {
+          "id": "SA-REQ-CSM-0388-7da18d53",
+          "check": "equivalent_path_blocked",
+          "level": 1,
+          "title": "R1 accepts equivalent experience, but Q1 has no equivalent path",
+          "confidence": "high",
+          "affected": [
+            "C-202",
+            "C-204"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-7d038e7c",
+          "check": "credential_stricter_than_requirement",
+          "level": 1,
+          "title": "Q3 requires a credential where R4 asks for proficiency",
+          "confidence": "high",
+          "affected": [
+            "C-202",
+            "C-204",
+            "C-208"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-1fa7cee2",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q1 matches literally and misses recognized variants of Customer success",
+          "confidence": "high",
+          "affected": [
+            "C-202"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-095c74b9",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q2 matches literally and misses recognized variants of Customer success",
+          "confidence": "high",
+          "affected": [
+            "C-202"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-309d1f67",
+          "check": "experience_path_narrower",
+          "level": 2,
+          "title": "Q2 counts experience only under specific job titles",
+          "confidence": "medium",
+          "affected": [
+            "C-202",
+            "C-204"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-16684b3b",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q3 matches literally and misses recognized variants of Salesforce Certified Administrator",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-CSM-0388-a1beef17",
+          "check": "unverified_necessity",
+          "level": 2,
+          "title": "Business necessity of required qualification R4 is undocumented",
+          "confidence": "medium",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-CSM-0388-7f33b017",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-202 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "high",
+          "affected": [
+            "C-202"
+          ]
+        },
+        {
+          "id": "SA-REQ-CSM-0388-dc08d1e4",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-204 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "medium",
+          "affected": [
+            "C-204"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "linehaul-protected-license",
+      "description": "Linehaul supervisor requisition with a legally required Class A CDL. The engine may recognize spelling variants of the license, but must never propose an alternative path for it or surface anyone who lacks it \u2014 however strong their supervisory experience.",
+      "expected": [
+        {
+          "check": "literal_term_missing_variants",
+          "rule": "Q1",
+          "found": true,
+          "finding_id": "SA-REQ-LH-0217-24c327f3"
+        },
+        {
+          "check": "experience_path_narrower",
+          "rule": "Q2",
+          "found": true,
+          "finding_id": "SA-REQ-LH-0217-b7263005"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-303",
+          "found": true,
+          "finding_id": "SA-REQ-LH-0217-6f063ac1"
+        }
+      ],
+      "forbidden": [
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-302",
+          "note": "lacks the legally required license",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "equivalent_path_blocked",
+          "rule": "Q1",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "credential_stricter_than_requirement",
+          "rule": "Q1",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "preferred_enforced_as_knockout",
+          "rule": "Q1",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-304",
+          "violated": false,
+          "finding_ids": []
+        }
+      ],
+      "candidates": {
+        "excluded": 3,
+        "flagged": [
+          "C-303"
+        ],
+        "true_positives": [
+          "C-303"
+        ],
+        "false_positives": [],
+        "flagged_unlabeled_or_insufficient": [],
+        "missed_qualified": [],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "guardrail_violations": [],
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": [
+        {
+          "id": "SA-REQ-LH-0217-24c327f3",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q1 matches literally and misses recognized variants of Commercial driver's license (Class A)",
+          "confidence": "high",
+          "affected": [
+            "C-303"
+          ]
+        },
+        {
+          "id": "SA-REQ-LH-0217-bdfae568",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q2 matches literally and misses recognized variants of Transportation supervision",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-LH-0217-b7263005",
+          "check": "experience_path_narrower",
+          "level": 2,
+          "title": "Q2 counts experience only under specific job titles",
+          "confidence": "medium",
+          "affected": [
+            "C-302",
+            "C-303"
+          ]
+        },
+        {
+          "id": "SA-REQ-LH-0217-6f063ac1",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-303 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "medium",
+          "affected": [
+            "C-303"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "revops-prepublication",
+      "description": "Pre-publication design review with no candidates: the engine must find rule defects from the requisition and knowledge alone, and must not invent candidate findings.",
+      "expected": [
+        {
+          "check": "threshold_inconsistency",
+          "rule": "Q1",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-RO-0455-4d7c87e1"
+        },
+        {
+          "check": "experience_path_narrower",
+          "rule": "Q1",
+          "found": true,
+          "finding_id": "SA-REQ-RO-0455-568981f2"
+        },
+        {
+          "check": "preferred_enforced_as_knockout",
+          "rule": "Q2",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-RO-0455-30380d96"
+        },
+        {
+          "check": "literal_term_missing_variants",
+          "rule": "Q3",
+          "found": true,
+          "finding_id": "SA-REQ-RO-0455-130b17ea"
+        }
+      ],
+      "forbidden": [
+        {
+          "check": "candidate_review_opportunity",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "unverified_necessity",
+          "requirement": "R2",
+          "note": "R2 has a documented rationale",
+          "violated": false,
+          "finding_ids": []
+        }
+      ],
+      "candidates": {
+        "excluded": 0,
+        "flagged": [],
+        "true_positives": [],
+        "false_positives": [],
+        "flagged_unlabeled_or_insufficient": [],
+        "missed_qualified": [],
+        "precision": null,
+        "recall": null
+      },
+      "guardrail_violations": [],
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": [
+        {
+          "id": "SA-REQ-RO-0455-4d7c87e1",
+          "check": "threshold_inconsistency",
+          "level": 1,
+          "title": "Q1 requires 7 years; the posting asks for 5",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-RO-0455-30380d96",
+          "check": "preferred_enforced_as_knockout",
+          "level": 1,
+          "title": "Preferred qualification R3 is enforced as a knockout by Q2",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-RO-0455-088d343c",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q1 matches literally and misses recognized variants of Revenue operations",
+          "confidence": "medium",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-RO-0455-568981f2",
+          "check": "experience_path_narrower",
+          "level": 2,
+          "title": "Q1 counts experience only under specific job titles",
+          "confidence": "medium",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-RO-0455-130b17ea",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q3 matches literally and misses recognized variants of Revenue operations",
+          "confidence": "medium",
+          "affected": []
+        }
+      ]
+    },
+    {
+      "case_id": "sre-incident-management",
+      "description": "Senior SRE requisition with literal keyword filters, a title-based experience rule stricter than the posting, knockouts on preferred qualifications, and an unstated tool requirement. Candidate pool mixes conventional SREs, adjacent titles, and nontraditional incident leaders from healthcare, logistics and the military, plus participation-only and under-experienced profiles that must not be surfaced.",
+      "expected": [
+        {
+          "check": "rule_narrower_than_requirement",
+          "rule": "Q1",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-9164e1d0"
+        },
+        {
+          "check": "literal_term_missing_variants",
+          "rule": "Q1",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-b05a4c5a"
+        },
+        {
+          "check": "threshold_inconsistency",
+          "rule": "Q2",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-d15dcf14"
+        },
+        {
+          "check": "experience_path_narrower",
+          "rule": "Q2",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-a0ac83a9"
+        },
+        {
+          "check": "equivalent_path_blocked",
+          "rule": "Q3",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-5302d6be"
+        },
+        {
+          "check": "preferred_enforced_as_knockout",
+          "rule": "Q4",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-3bc61a83"
+        },
+        {
+          "check": "rule_narrower_than_requirement",
+          "rule": "Q5",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-f01e2bd0"
+        },
+        {
+          "check": "preferred_enforced_as_knockout",
+          "rule": "Q6",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-48360a3a"
+        },
+        {
+          "check": "unstated_requirement_enforced",
+          "rule": "Q7",
+          "evidence_level": 1,
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-99df8968"
+        },
+        {
+          "check": "unverified_necessity",
+          "requirement": "R6",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-ff4b8adc"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-102",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-5f56524c"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-103",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-4989b969"
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-106",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-36d39631"
+        },
+        {
+          "check": "unexplained_exclusions",
+          "candidate": "C-113",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-6f96884a"
+        }
+      ],
+      "forbidden": [
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-104",
+          "note": "lacks infrastructure-as-code",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-105",
+          "note": "participation-only evidence",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-107",
+          "note": "below the posted experience threshold",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-111",
+          "note": "keyword from a course is not experience",
+          "violated": false,
+          "finding_ids": []
+        },
+        {
+          "check": "candidate_review_opportunity",
+          "candidate": "C-112",
+          "violated": false,
+          "finding_ids": []
+        }
+      ],
+      "candidates": {
+        "excluded": 12,
+        "flagged": [
+          "C-102",
+          "C-103",
+          "C-106",
+          "C-108",
+          "C-109",
+          "C-110",
+          "C-113"
+        ],
+        "true_positives": [
+          "C-102",
+          "C-103",
+          "C-106",
+          "C-108",
+          "C-109",
+          "C-110",
+          "C-113"
+        ],
+        "false_positives": [],
+        "flagged_unlabeled_or_insufficient": [],
+        "missed_qualified": [],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "guardrail_violations": [],
+      "knowledge": "core@1.1.0+8a94e741e4",
+      "findings": [
+        {
+          "id": "SA-REQ-SRE-0142-704c5892",
+          "check": "equivalent_path_blocked",
+          "level": 1,
+          "title": "R1 accepts equivalent experience, but Q1 has no equivalent path",
+          "confidence": "high",
+          "affected": [
+            "C-102",
+            "C-103",
+            "C-110"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-9164e1d0",
+          "check": "rule_narrower_than_requirement",
+          "level": 1,
+          "title": "Q1 is narrower than R1: it ignores Production operations",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-106",
+            "C-110"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-9403725f",
+          "check": "rule_narrower_than_requirement",
+          "level": 1,
+          "title": "Q2 is narrower than R1: it ignores Production operations",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-SRE-0142-d15dcf14",
+          "check": "threshold_inconsistency",
+          "level": 1,
+          "title": "Q2 requires 7 years; the posting asks for 5",
+          "confidence": "high",
+          "affected": [
+            "C-108",
+            "C-109"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-5302d6be",
+          "check": "equivalent_path_blocked",
+          "level": 1,
+          "title": "R2 accepts equivalent experience, but Q3 has no equivalent path",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-106",
+            "C-107"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-3bc61a83",
+          "check": "preferred_enforced_as_knockout",
+          "level": 1,
+          "title": "Preferred qualification R5 is enforced as a knockout by Q4",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-105",
+            "C-106",
+            "C-108",
+            "C-111"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-512cd6d3",
+          "check": "equivalent_path_blocked",
+          "level": 1,
+          "title": "R5 accepts equivalent experience, but Q4 has no equivalent path",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-106",
+            "C-108",
+            "C-111"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-f01e2bd0",
+          "check": "rule_narrower_than_requirement",
+          "level": 1,
+          "title": "Q5 is narrower than R3: it ignores Infrastructure as code",
+          "confidence": "high",
+          "affected": [
+            "C-102"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-48360a3a",
+          "check": "preferred_enforced_as_knockout",
+          "level": 1,
+          "title": "Preferred qualification R4 is enforced as a knockout by Q6",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-105",
+            "C-106",
+            "C-109",
+            "C-111",
+            "C-112"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-99df8968",
+          "check": "unstated_requirement_enforced",
+          "level": 1,
+          "title": "Rule Q7 enforces a requirement the job description does not state",
+          "confidence": "high",
+          "affected": [
+            "C-103",
+            "C-104",
+            "C-105",
+            "C-106",
+            "C-110",
+            "C-111",
+            "C-112"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-b05a4c5a",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q1 matches literally and misses recognized variants of Site reliability engineering",
+          "confidence": "high",
+          "affected": [
+            "C-102",
+            "C-111"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-e3e3d885",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q2 matches literally and misses recognized variants of Site reliability engineering",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-SRE-0142-a0ac83a9",
+          "check": "experience_path_narrower",
+          "level": 2,
+          "title": "Q2 counts experience only under specific job titles",
+          "confidence": "medium",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-SRE-0142-9d626aeb",
+          "check": "literal_term_missing_variants",
+          "level": 2,
+          "title": "Q5 matches literally and misses recognized variants of Terraform",
+          "confidence": "high",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-SRE-0142-ff4b8adc",
+          "check": "unverified_necessity",
+          "level": 2,
+          "title": "Business necessity of required qualification R6 is undocumented",
+          "confidence": "medium",
+          "affected": []
+        },
+        {
+          "id": "SA-REQ-SRE-0142-5f56524c",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-102 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "high",
+          "affected": [
+            "C-102"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-4989b969",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-103 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "medium",
+          "affected": [
+            "C-103"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-36d39631",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-106 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "medium",
+          "affected": [
+            "C-106"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-cd635676",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-108 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "high",
+          "affected": [
+            "C-108"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-c1d0ef0b",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-109 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "high",
+          "affected": [
+            "C-109"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-82276566",
+          "check": "candidate_review_opportunity",
+          "level": 2,
+          "title": "Candidate C-110 may meet the requirements through a path the current rules do not recognize",
+          "confidence": "high",
+          "affected": [
+            "C-110"
+          ]
+        },
+        {
+          "id": "SA-REQ-SRE-0142-6f96884a",
+          "check": "unexplained_exclusions",
+          "level": 2,
+          "title": "1 exclusion(s) are not explained by the supplied screening rules",
+          "confidence": "high",
+          "affected": [
+            "C-113"
+          ]
+        }
+      ]
+    }
+  ]
+}

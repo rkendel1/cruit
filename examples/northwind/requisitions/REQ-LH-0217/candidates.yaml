@@ -1,0 +1,55 @@
+requisition_id: REQ-LH-0217
+authorization:
+  basis: Design-partner pilot data-processing agreement, section 4 (illustrative)
+  de_identified: true
+  retention_days: 90
+  granted_by: talent-ops@northwind.example
+
+candidates:
+  - id: C-301
+    ats_status: advanced
+    experience:
+      - title: Transportation Supervisor
+        domain: logistics
+        months: 60
+        summary: >-
+          Supervised 20 linehaul drivers across three terminals.
+          Ran DOT and hours-of-service compliance audits.
+    credentials: [CDL Class A]
+
+  - id: C-302
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Warehouse Operations Manager
+        domain: logistics
+        months: 84
+        summary: >-
+          Led a team of 40 warehouse associates.
+          Managed dispatch of outbound trailers and scheduled routes with carriers.
+          Ran DOT safety compliance audits for the yard.
+
+  - id: C-303
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Fleet Coordinator
+        domain: logistics
+        months: 48
+        summary: >-
+          Supervised 14 linehaul drivers and scheduled daily routes.
+          Ran hours-of-service compliance audits.
+          Improved on-time delivery performance by 12%.
+    credentials: [Class A CDL]
+
+  - id: C-304
+    ats_status: rejected
+    ats_exclusion_rule: Q2
+    experience:
+      - title: Dispatcher
+        domain: logistics
+        months: 30
+        summary: >-
+          Scheduled drivers and routes for a regional fleet.
+          Assisted the safety manager with DOT audits.
+    credentials: [CDL Class A]

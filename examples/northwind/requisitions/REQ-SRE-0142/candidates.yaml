@@ -1,0 +1,210 @@
+# Authorized, de-identified candidate evidence (fictional). No names, contact
+# details or protected characteristics: the contract rejects such fields.
+requisition_id: REQ-SRE-0142
+authorization:
+  basis: Design-partner pilot data-processing agreement, section 4 (illustrative)
+  de_identified: true
+  retention_days: 90
+  granted_by: talent-ops@northwind.example
+
+candidates:
+  - id: C-101
+    ats_status: advanced
+    knockout_answers: { Q3: "yes", Q4: "yes", Q6: "yes" }
+    experience:
+      - title: Senior Site Reliability Engineer
+        domain: payments
+        months: 48
+        summary: >-
+          Led incident response as incident commander for the payments platform.
+          Wrote blameless postmortems and tracked corrective actions.
+          Managed Kubernetes clusters and Terraform modules for all environments.
+          Built Datadog dashboards and SLO alerting.
+      - title: Site Reliability Engineer
+        domain: payments
+        months: 36
+        summary: Operated production services and automated deployments with Terraform.
+    skills: [Terraform, Kubernetes, Datadog, Go]
+    education: [BS in Computer Science]
+
+  - id: C-102
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    knockout_answers: { Q3: "yes", Q4: "yes", Q6: "yes" }
+    experience:
+      - title: Production Reliability Engineer
+        domain: e-commerce
+        months: 64
+        summary: >-
+          Owned availability of production services for a high-traffic retail platform.
+          Led incident response for major outages and coordinated restoration across teams.
+          Authored postmortems with tracked corrective actions.
+          Provisioned infrastructure with Pulumi and automated deployments.
+          Built Datadog monitoring and alerting.
+      - title: Systems Administrator
+        domain: e-commerce
+        months: 24
+        summary: Maintained Linux servers and backups for internal applications.
+    skills: [Pulumi, Kubernetes, Datadog, Python]
+    education: [BS in Computer Science]
+
+  - id: C-103
+    ats_status: rejected
+    ats_exclusion_rule: Q3
+    knockout_answers: { Q3: "no", Q4: "no", Q6: "no" }
+    experience:
+      - title: Clinical Systems Operations Manager
+        domain: healthcare-operations
+        months: 66
+        summary: >-
+          Ran systems operations for the electronic health record platform across four hospitals, owning uptime and availability of production systems.
+          Led the response to EHR outages and coordinated restoration across clinical and IT teams.
+          Briefed hospital leadership and clinicians with incident status updates.
+          Ran post-incident reviews that produced corrective actions.
+          Automated server provisioning with Terraform and Ansible.
+          Built Prometheus alerting for critical services.
+    skills: [Terraform, Ansible, Prometheus, Linux]
+    education: [BS in Health Informatics]
+
+  - id: C-104
+    ats_status: rejected
+    ats_exclusion_rule: Q3
+    knockout_answers: { Q3: "no", Q4: "no", Q6: "no" }
+    experience:
+      - title: Network Operations Lead
+        domain: logistics
+        months: 72
+        summary: >-
+          Led network operations for 30 distribution centers.
+          Led the response to warehouse network outages and coordinated recovery across site teams.
+          Sent outage communications to regional leadership.
+          Wrote root cause reports after major failures.
+    skills: [Cisco networking, Bash]
+
+  - id: C-105
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    knockout_answers: { Q3: "no", Q4: "no", Q6: "no" }
+    experience:
+      - title: IT Support Specialist
+        domain: retail
+        months: 24
+        summary: >-
+          Handled help desk tickets for store systems.
+          Participated in quarterly disaster recovery drills and incident simulations.
+    skills: [Windows, Active Directory]
+
+  - id: C-106
+    ats_status: rejected
+    ats_exclusion_rule: Q2
+    knockout_answers: { Q3: "no", Q4: "no", Q6: "no" }
+    experience:
+      - title: Communications Operations Officer
+        domain: military
+        months: 72
+        summary: >-
+          Directed network and infrastructure operations for a 2,000-person brigade.
+          Directed the response to communications outages during deployments, restoring service across units.
+          Delivered status briefings to commanders throughout each outage.
+          Led after-action reviews and tracked corrective actions to closure.
+          Built infrastructure automation with Ansible and Terraform.
+    skills: [Ansible, Terraform, Linux]
+    learning: [Self-directed study of Kubernetes]
+
+  - id: C-107
+    ats_status: rejected
+    ats_exclusion_rule: Q2
+    knockout_answers: { Q3: "no", Q4: "yes", Q6: "yes" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: saas
+        months: 36
+        summary: >-
+          Supported production services on call and automated deployments with Terraform.
+          Participated in incident response.
+    skills: [Terraform, Kubernetes, Datadog]
+    education: [BS in Computer Science]
+
+  - id: C-108
+    ats_status: rejected
+    ats_exclusion_rule: Q4
+    knockout_answers: { Q3: "yes", Q4: "no", Q6: "yes" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: fintech
+        months: 72
+        summary: >-
+          Led incident response as incident commander for trading systems.
+          Ran blameless postmortems.
+          Managed Terraform and Kubernetes for production infrastructure.
+          Built Datadog SLO dashboards.
+    skills: [Terraform, Kubernetes, Datadog]
+    learning: [Completed online systems-engineering courses]
+
+  - id: C-109
+    ats_status: rejected
+    ats_exclusion_rule: Q6
+    knockout_answers: { Q3: "yes", Q4: "yes", Q6: "no" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: media
+        months: 66
+        summary: >-
+          Operated production services on HashiCorp Nomad.
+          Led incident response for customer-facing outages and wrote postmortems.
+          Maintained Terraform for all infrastructure.
+          Built Datadog monitoring.
+    skills: [Nomad, Terraform, Datadog]
+    education: [BS in Computer Science]
+
+  - id: C-110
+    ats_status: rejected
+    ats_exclusion_rule: Q7
+    knockout_answers: { Q3: "yes", Q4: "yes", Q6: "yes" }
+    experience:
+      - title: DevOps Engineer
+        domain: saas
+        months: 74
+        summary: >-
+          Owned production infrastructure operations and on-call for a SaaS platform.
+          Led incident response for major outages and authored postmortems.
+          Wrote Terraform and CloudFormation for all environments.
+          Built Prometheus alerting.
+    skills: [Terraform, CloudFormation, Kubernetes, Prometheus]
+    education: [BS in Computer Science]
+
+  - id: C-111
+    ats_status: rejected
+    ats_exclusion_rule: Q2
+    knockout_answers: { Q3: "no", Q4: "no", Q6: "no" }
+    experience:
+      - title: Customer Support Representative
+        domain: telecom
+        months: 14
+        summary: Answered customer questions by phone and chat.
+    learning: ["Online course: Introduction to Site Reliability Engineering"]
+
+  - id: C-112
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    knockout_answers: { Q3: "no", Q4: "yes", Q6: "no" }
+    experience:
+      - title: Data Analyst
+        domain: finance
+        months: 40
+        summary: Built SQL dashboards for finance.
+    education: [BS in Computer Science]
+
+  - id: C-113
+    ats_status: rejected
+    knockout_answers: { Q3: "yes", Q4: "yes", Q6: "yes" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: travel
+        months: 96
+        summary: >-
+          Led incident response as incident commander for booking systems.
+          Maintained Terraform and Kubernetes for production infrastructure.
+          Built Datadog SLO dashboards.
+    skills: [Terraform, Kubernetes, Datadog]
+    education: [BS in Computer Science]

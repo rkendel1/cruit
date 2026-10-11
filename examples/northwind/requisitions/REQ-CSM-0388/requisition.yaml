@@ -1,0 +1,65 @@
+# De-identified requisition (fictional). Screening rules were documented by the
+# recruiter rather than exported, so the report states that the live ATS may differ.
+id: REQ-CSM-0388
+title: Customer Success Manager, Mid-Market
+job_family: customer-success
+employer_id: northwind
+ats: generic-ats-export-v1
+inputs_received:
+  job_description: supplied
+  screening_configuration: recruiter_documentation
+  candidate_evidence: authorized_sample
+  notes: Rules transcribed by the requisition's recruiter on 2026-10-06.
+
+description: |
+  Own a book of mid-market shipper accounts on Northwind's freight platform.
+  Drive adoption, renew and grow the accounts, and work with product and support
+  to remove blockers.
+
+objectives:
+  - { id: O1, text: Retain and grow a book of mid-market accounts. }
+  - { id: O2, text: Resolve adoption blockers with product and support teams. }
+
+requirements:
+  - id: R1
+    text: 3+ years of customer success experience with B2B accounts.
+    stated_as: required
+    min_years: 3
+    accepts_equivalent: true
+    linked_objectives: [O1]
+  - id: R2
+    text: Track record of managing renewals for a book of business.
+    stated_as: required
+    linked_objectives: [O1]
+  - id: R3
+    text: Data-driven approach to account health.
+    stated_as: preferred
+    concepts: [skill.data-analysis]
+  - id: R4
+    text: Salesforce proficiency.
+    stated_as: required
+  - id: R5
+    text: Cross-functional problem-solving with product and support teams.
+    stated_as: required
+    accepts_equivalent: true
+    linked_objectives: [O2]
+
+screening_rules:
+  - id: Q1
+    type: keyword_filter
+    text: Résumé must mention customer success.
+    action: reject
+    linked_requirement: R1
+    logic: { terms: [customer success], match: any, field: resume }
+  - id: Q2
+    type: title_filter
+    text: Prioritize applicants who have held the title Customer Success Manager.
+    action: deprioritize
+    linked_requirement: R1
+    logic: { titles: [Customer Success Manager] }
+  - id: Q3
+    type: credential_filter
+    text: Must hold Salesforce Certified Administrator.
+    action: reject
+    linked_requirement: R4
+    logic: { credentials: [Salesforce Certified Administrator] }

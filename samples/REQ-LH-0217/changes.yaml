@@ -1,0 +1,5 @@
+requisition_id: REQ-LH-0217
+knowledge: core@1.1.0+8a94e741e4
+note: Suggested changes for the employer to implement in the ATS. Screening Assurance
+  does not modify ATS configuration.
+changes: []

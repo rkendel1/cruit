@@ -1,0 +1,36 @@
+# Observed outcomes after the approved corrections (illustrative pilot data).
+requisition_id: REQ-SRE-0142
+comparison_method: >-
+  Pre/post on the same requisition: three weeks before the corrections versus three
+  weeks after. Recruiter time from the ATS activity log. Not a controlled experiment.
+baseline:
+  period: 2026-09-14 to 2026-10-04
+  applicants: 142
+  recruiter_reviewed: 18
+  qualified_candidates: 3
+  recruiter_hours: 14
+  days_to_qualified_shortlist: 21
+  advanced_to_interview: 2
+  hires: 0
+after_change:
+  period: 2026-10-13 to 2026-11-02
+  applicants: 61
+  recruiter_reviewed: 15
+  qualified_candidates: 5
+  recruiter_hours: 11
+  days_to_qualified_shortlist: 9
+  advanced_to_interview: 4
+  hires: 0
+candidate_reviews:
+  - { candidate_id: C-102, finding_id: SA-REQ-SRE-0142-5f56524c, review_minutes: 15, outcome: meets_requirements, advanced_to: phone_screen, reviewer: recruiter.lee@northwind.example }
+  - { candidate_id: C-103, finding_id: SA-REQ-SRE-0142-4989b969, review_minutes: 25, outcome: meets_requirements, advanced_to: hiring_manager_screen, reviewer: recruiter.lee@northwind.example }
+  - { candidate_id: C-106, finding_id: SA-REQ-SRE-0142-36d39631, review_minutes: 25, outcome: insufficient_evidence, advanced_to: null, reviewer: recruiter.lee@northwind.example }
+  - { candidate_id: C-108, finding_id: SA-REQ-SRE-0142-cd635676, review_minutes: 10, outcome: meets_requirements, advanced_to: phone_screen, reviewer: recruiter.lee@northwind.example }
+  - { candidate_id: C-109, finding_id: SA-REQ-SRE-0142-c1d0ef0b, review_minutes: 10, outcome: meets_requirements, advanced_to: phone_screen, reviewer: recruiter.lee@northwind.example }
+estimation_assumptions:
+  cost_per_sourcing_cycle: 6500
+  qualified_candidates_needed_per_cycle: 3
+  recruiter_hourly_cost: 55
+  source: Northwind TA finance planning assumptions (illustrative)
+new_risks_observed:
+  - Broader Q1 matching admitted 4 additional applicants who were screened out in about 20 recruiter minutes in total.

@@ -1,0 +1,22 @@
+pack: core
+version: 1.1.0
+status: approved
+approved_by: knowledge-admin@example.com
+approved_at: "2026-10-09"
+documents:
+  synonyms: synonyms.yaml
+  equivalencies: equivalencies.yaml
+  skills: skills.yaml
+changelog:
+  - version: 1.0.0
+    date: "2026-10-01"
+    author: seed-knowledge
+    summary: Initial seed pack for software-infrastructure, customer-success and logistics-operations job families.
+  - version: 1.1.0
+    date: "2026-10-08"
+    author: seed-knowledge
+    summary: >-
+      Recognize 'production reliability engineer' titles; recognize military vocabulary in
+      the operational-crisis-response equivalency (directed, units, after-action, commanders);
+      add after-action review terminology; add B2B account-management equivalency for
+      customer success.

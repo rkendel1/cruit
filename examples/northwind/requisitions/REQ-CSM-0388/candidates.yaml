@@ -1,0 +1,107 @@
+requisition_id: REQ-CSM-0388
+authorization:
+  basis: Design-partner pilot data-processing agreement, section 4 (illustrative)
+  de_identified: true
+  retention_days: 90
+  granted_by: talent-ops@northwind.example
+
+candidates:
+  - id: C-201
+    ats_status: advanced
+    experience:
+      - title: Customer Success Manager
+        domain: saas
+        months: 48
+        summary: >-
+          Managed a book of 45 B2B SaaS accounts and owned renewals.
+          Drove adoption programmes and quarterly business reviews.
+          Partnered cross-functional with product and support teams to resolve adoption blockers.
+          Built account health dashboards in Salesforce.
+    credentials: [Salesforce Certified Administrator]
+
+  - id: C-202
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Client Success Lead
+        domain: saas
+        months: 50
+        summary: >-
+          Owned renewals and expansion for a portfolio of 30 enterprise accounts.
+          Ran onboarding and account health reviews.
+          Worked cross-functional with product and support teams to resolve blockers.
+          Maintained pipeline and renewals forecasts in Salesforce.
+
+  - id: C-203
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Guest Relations Manager
+        domain: hospitality
+        months: 60
+        summary: >-
+          Led a team of 12 front-desk staff.
+          Resolved guest complaints and improved satisfaction scores.
+          Presented to leadership monthly on guest trends using analytics.
+
+  - id: C-204
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Account Manager
+        domain: saas
+        months: 52
+        summary: >-
+          Managed a book of 40 mid-market SaaS accounts.
+          Owned renewals and grew revenue through expansion across accounts.
+          Ran onboarding and quarterly business reviews to drive adoption.
+          Coordinated cross-functional fixes with product and support teams.
+          Tracked pipeline and renewals in Salesforce.
+
+  - id: C-205
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Senior Support Engineer
+        domain: saas
+        months: 48
+        summary: >-
+          Led a team of 6 support engineers.
+          Analyzed ticket trends with SQL dashboards to find product defects.
+          Presented to leadership on top customer pain points.
+          Handled enterprise escalations.
+
+  - id: C-206
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: High School Teacher
+        domain: education
+        months: 84
+        summary: Taught mathematics and coordinated the school robotics club.
+
+  - id: C-207
+    ats_status: rejected
+    ats_exclusion_rule: Q3
+    experience:
+      - title: Customer Success Manager
+        domain: saas
+        months: 44
+        summary: >-
+          Owned renewals for a book of 35 SMB SaaS accounts.
+          Ran onboarding and adoption reviews.
+          Worked cross-functional with product and support to unblock customers.
+          Managed accounts in HubSpot.
+
+  - id: C-208
+    ats_status: rejected
+    ats_exclusion_rule: Q1
+    experience:
+      - title: Enterprise Support Manager
+        domain: saas
+        months: 60
+        summary: >-
+          Owned escalations for strategic enterprise accounts.
+          Accountable for retention of escalated accounts and reduced churn by 8%.
+          Worked cross-functional with product teams on recurring defects.
+          Used Salesforce Service Cloud daily.

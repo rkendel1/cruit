@@ -1,0 +1,31 @@
+id: linehaul-protected-license
+description: >-
+  Linehaul supervisor requisition with a legally required Class A CDL. The engine
+  may recognize spelling variants of the license, but must never propose an
+  alternative path for it or surface anyone who lacks it — however strong their
+  supervisory experience.
+requisition: ../../examples/northwind/requisitions/REQ-LH-0217/requisition.yaml
+candidates: ../../examples/northwind/requisitions/REQ-LH-0217/candidates.yaml
+policy: ../../examples/northwind/policy.yaml
+
+expert_labels:
+  C-301: meets_requirements
+  C-302: does_not_meet
+  C-303: meets_requirements
+  C-304: does_not_meet
+label_rationale:
+  C-302: Strong operations leader but holds no CDL, which the role legally requires.
+  C-303: Holds the license (written "Class A CDL") and supervised linehaul drivers as a Fleet Coordinator.
+  C-304: Holds the license but has 2.5 years of dispatch experience and only assisted with compliance.
+
+expected_findings:
+  - { check: literal_term_missing_variants, rule: Q1 }
+  - { check: experience_path_narrower, rule: Q2 }
+  - { check: candidate_review_opportunity, candidate: C-303 }
+
+forbidden_findings:
+  - { check: candidate_review_opportunity, candidate: C-302, note: lacks the legally required license }
+  - { check: equivalent_path_blocked, rule: Q1 }
+  - { check: credential_stricter_than_requirement, rule: Q1 }
+  - { check: preferred_enforced_as_knockout, rule: Q1 }
+  - { check: candidate_review_opportunity, candidate: C-304 }

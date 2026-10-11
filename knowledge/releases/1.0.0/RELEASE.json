@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "fingerprint": "core@1.0.0+2d833ad705",
+  "checksum": "2d833ad7053c7b5aa1820b8431b2fc61977e64c030214cb61ae8bcfeb41eb052",
+  "released_at": "2026-10-01T15:00:00+00:00",
+  "released_by": "knowledge-admin@example.com",
+  "approved_by": "knowledge-admin@example.com",
+  "eval_summary": {
+    "passed": null,
+    "skipped": true,
+    "note": "Released before the pilot evaluation cases existed."
+  }
+}

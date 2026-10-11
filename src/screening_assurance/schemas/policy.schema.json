@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/policy.schema.json",
+  "title": "Employer policy",
+  "description": "What a specific organization requires. Kept separate from general knowledge; general knowledge never silently overrides it.",
+  "type": "object",
+  "required": ["employer_id", "employer_name", "policy_version"],
+  "additionalProperties": false,
+  "properties": {
+    "employer_id": { "type": "string" },
+    "employer_name": { "type": "string" },
+    "policy_version": { "type": "string" },
+    "non_negotiable": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["concept", "basis", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "concept": { "type": "string", "pattern": "^skill\\." },
+          "job_families": { "$ref": "common.schema.json#/$defs/contexts" },
+          "basis": { "enum": ["legal", "safety", "licensing", "contractual", "job_critical"] },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "accepted_equivalencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "approved_by", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^eq\\." },
+          "job_families": { "$ref": "common.schema.json#/$defs/contexts" },
+          "approved_by": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "rejected_equivalencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "approved_by", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^eq\\." },
+          "job_families": { "$ref": "common.schema.json#/$defs/contexts" },
+          "approved_by": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      }
+    }
+  }
+}

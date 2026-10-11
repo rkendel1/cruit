@@ -1,0 +1,55 @@
+# Knowledge comparison — `core@1.0.0+2d833ad705` → `core@1.1.0+8a94e741e4`
+
+**Regression gate: PASS**
+
+
+| Metric | Baseline | Candidate | Δ |
+|---|---|---|---|
+| cases | 4 | 4 | 0 |
+| expected findings | 28 | 28 | 0 |
+| expected found | 25 | 28 | 3 |
+| expected finding recall | 0.893 | 1.0 | 0.107 |
+| forbidden violations | 0 | 0 | 0 |
+| guardrail violations | 0 | 0 | 0 |
+| candidates flagged | 8 | 10 | 2 |
+| true positives | 8 | 10 | 2 |
+| false positives | 0 | 0 | 0 |
+| missed qualified | 2 | 0 | -2 |
+| candidate precision | 1.0 | 1.0 | 0.0 |
+| candidate recall | 0.8 | 1.0 | 0.2 |
+
+## customer-success
+
+- ➕ `SA-REQ-CSM-0388-7da18d53` R1 accepts equivalent experience, but Q1 has no equivalent path
+- ➕ `SA-REQ-CSM-0388-dc08d1e4` Candidate C-204 may meet the requirements through a path the current rules do not recognize
+- ✎ `SA-REQ-CSM-0388-309d1f67` Q2 counts experience only under specific job titles: {'affected': [['C-202'], ['C-202', 'C-204']]}
+- Newly flagged for review: C-204
+- ✅ expected finding now found: equivalent_path_blocked Q1
+- ✅ expected finding now found: candidate_review_opportunity C-204
+
+## linehaul-protected-license
+
+_No change._
+
+## revops-prepublication
+
+_No change._
+
+## sre-incident-management
+
+- ➕ `SA-REQ-SRE-0142-36d39631` Candidate C-106 may meet the requirements through a path the current rules do not recognize
+- ✎ `SA-REQ-SRE-0142-5302d6be` R2 accepts equivalent experience, but Q3 has no equivalent path: {'affected': [['C-103', 'C-104', 'C-107'], ['C-103', 'C-104', 'C-106', 'C-107']]}
+- ✎ `SA-REQ-SRE-0142-5f56524c` Candidate C-102 may meet the requirements through a path the current rules do not recognize: {'confidence': ['medium', 'high']}
+- ✎ `SA-REQ-SRE-0142-b05a4c5a` Q1 matches literally and misses recognized variants of Site reliability engineering: {'affected': [['C-111'], ['C-102', 'C-111']]}
+- Newly flagged for review: C-106
+- ✅ expected finding now found: candidate_review_opportunity C-106
+
+## Knowledge records changed
+
+```
+Knowledge diff core@1.0.0+2d833ad705 -> core@1.1.0+8a94e741e4
+  + eq.customer-success.b2b-account-management  [equivalencies]
+  ~ eq.incident-management.operational-crisis-response  [equivalencies] v1->v2: indicators, provenance, version
+  ~ term.post-incident-review  [synonyms] v1->v2: ambiguities, provenance, rationale, variants, version
+  ~ term.site-reliability-engineering  [synonyms] v1->v2: provenance, rationale, variants, version
+```

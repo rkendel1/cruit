@@ -1,0 +1,24 @@
+# Employer policy for a fictional employer used in examples and evaluation.
+# Employer policy is separate from general knowledge: it records what THIS
+# organization requires and which general equivalencies it accepts or rejects.
+employer_id: northwind
+employer_name: Northwind Freight & Logistics (fictional)
+policy_version: "2026.2"
+
+non_negotiable:
+  - concept: skill.cdl-class-a
+    job_families: [logistics-operations]
+    basis: legal
+    rationale: Supervisors in this role must be able to legally operate Class A vehicles during driver shortages (FMCSA requirement).
+
+accepted_equivalencies:
+  - id: eq.incident-management.operational-crisis-response
+    job_families: [software-infrastructure]
+    approved_by: vp-engineering@northwind.example
+    rationale: Our best incident leads have come from operations backgrounds; technical depth is assessed separately.
+
+rejected_equivalencies:
+  - id: eq.customer-success.support-escalation-leadership
+    job_families: [customer-success]
+    approved_by: head-of-cs@northwind.example
+    rationale: Our CSM roles carry full commercial quota; support escalation alone has not predicted success here.

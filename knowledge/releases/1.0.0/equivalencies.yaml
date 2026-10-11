@@ -1,0 +1,182 @@
+# Equivalencies and transferable experience.
+# Similar experience is not automatically equivalent experience. Every record
+# states the conditions, the evidence needed, its limitations and what is NOT
+# equivalent. Indicators are matched sentence-by-sentence against candidate
+# evidence: an indicator matches a sentence when every group in all_of has at
+# least one term present in that sentence.
+document: equivalencies
+schema_version: 1
+
+records:
+  - id: eq.incident-management.operational-crisis-response
+    target: skill.incident-management
+    summary: >-
+      Leading operational crisis response outside software — e.g. healthcare systems,
+      utilities, logistics or military operations — may demonstrate incident management.
+    source_domains: [healthcare-operations, utilities, logistics, military, emergency-services]
+    indicators:
+      - id: led_response
+        description: Led, directed or coordinated the response to an outage, incident or crisis (not merely took part).
+        all_of:
+          - [led, coordinated, commanded, headed, ran]
+          - [outage, outages, incident, incidents, crisis, crises, emergency, emergencies, disruption, disruptions, failure, failures]
+      - id: cross_team_recovery
+        description: Coordinated recovery or restoration across teams, departments or units.
+        all_of:
+          - [recovery, restoration, restored, restore, restoring]
+          - [teams, departments, vendors, functions]
+      - id: incident_communications
+        description: Owned status communications during incidents.
+        all_of:
+          - [communications, communication, updates, briefings, briefed, status]
+          - [outage, outages, incident, incidents, crisis, emergency, leadership, executives]
+      - id: post_incident_learning
+        description: Ran post-incident or after-action reviews that produced corrective actions.
+        all_of:
+          - [post-incident, postmortem, postmortems, post-mortem, post-mortems, root cause, lessons learned, retrospectives]
+    min_indicators: 3
+    required_indicators: [led_response]
+    disqualifying_terms: [participated, attended, observed, shadowed, drill, drills, tabletop, simulated]
+    min_months: 12
+    conditions:
+      - Evidence must show the candidate led or coordinated response, not merely participated in an event.
+      - Responsibilities must be comparable in complexity (multiple teams, time-critical restoration).
+      - At least three of the four indicators must be present, including leadership of the response.
+    validation_steps:
+      - Ask for a specific incident the candidate led, its scale, and their decision-making role.
+      - Confirm they communicated status to stakeholders during the event.
+      - Confirm they drove a review that produced corrective actions.
+      - Assess ability to learn the employer's production stack (technical depth is a separate requirement).
+    limitations:
+      - Does not establish software or infrastructure technical depth.
+      - Domain-specific tooling and on-call practices must be learned.
+    non_equivalencies:
+      - Participating in drills, tabletop exercises or simulations.
+      - Front-line ticket handling or help-desk escalation.
+      - Being a responder on an incident someone else led.
+    applicable_contexts: [software-infrastructure]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: eq.site-reliability.production-operations
+    target: skill.site-reliability-engineering
+    summary: >-
+      Owning production systems with automation, on-call responsibility and monitoring may
+      demonstrate site-reliability capability under a different title.
+    source_domains: [it-operations, devops, network-operations, healthcare-it]
+    indicators:
+      - id: production_ownership
+        description: Responsible for availability of production systems or services.
+        all_of:
+          - [production, uptime, availability, reliability, mission-critical, live]
+          - [systems, services, platform, platforms, infrastructure, applications, network, networks]
+      - id: automation
+        description: Automated operational or provisioning work.
+        all_of:
+          - [automated, automation, automating, scripted, terraform, ansible, pulumi, infrastructure as code]
+      - id: on_call
+        description: Carried on-call or incident-response responsibility.
+        all_of:
+          - [on-call, on call, pager, paged, incident, incidents, outage, outages]
+      - id: monitoring
+        description: Built or owned monitoring, alerting or service-level objectives.
+        all_of:
+          - [monitoring, observability, alerting, alerts, slo, slos, sla, slas, prometheus, datadog]
+    min_indicators: 3
+    required_indicators: [production_ownership]
+    disqualifying_terms: [participated, shadowed, intern, internship, coursework, course]
+    min_months: 24
+    conditions:
+      - Must show ownership of production systems, not only development or support.
+      - Must show at least two of automation, on-call, or monitoring alongside production ownership.
+    validation_steps:
+      - Confirm scale and criticality of the systems owned.
+      - Confirm depth of automation (scripts vs. maintained infrastructure code).
+      - Confirm on-call participation and escalation role.
+    limitations:
+      - Does not establish software-engineering depth expected of senior SRE roles.
+    non_equivalencies:
+      - Application development without production ownership.
+      - Help-desk or service-desk work.
+    applicable_contexts: [software-infrastructure]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: eq.customer-success.support-escalation-leadership
+    target: skill.customer-success
+    summary: >-
+      Leading enterprise support escalations with retention responsibility may demonstrate
+      part of customer success.
+    source_domains: [customer-support]
+    indicators:
+      - id: escalations
+        description: Owned escalations for enterprise accounts.
+        all_of:
+          - [escalation, escalations, escalated]
+          - [enterprise, strategic, key]
+      - id: retention
+        description: Responsible for retention outcomes.
+        all_of:
+          - [retention, churn, renewal, renewals]
+    min_indicators: 2
+    required_indicators: [escalations, retention]
+    disqualifying_terms: [assisted, shadowed]
+    min_months: 24
+    conditions:
+      - Must include explicit retention responsibility.
+    validation_steps:
+      - Confirm commercial accountability, not only technical resolution.
+    limitations:
+      - Partial equivalency; expansion experience usually absent.
+    non_equivalencies:
+      - Front-line support without account ownership.
+    applicable_contexts: [customer-success]
+    confidence: low
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
+
+  - id: eq.transportation-supervision.fleet-coordination
+    target: skill.transportation-supervision
+    summary: >-
+      Coordinating fleets or dispatch with direct responsibility for drivers and DOT
+      compliance may demonstrate transportation supervision under another title.
+    source_domains: [fleet-coordination, dispatch, warehouse-operations]
+    indicators:
+      - id: supervises_drivers
+        description: Supervised or scheduled drivers, routes or dispatch.
+        all_of:
+          - [supervised, led, managed, scheduled, directed]
+          - [drivers, routes, fleet, dispatch, dispatchers]
+      - id: safety_compliance
+        description: Ran DOT, hours-of-service or safety compliance.
+        all_of:
+          - [dot, fmcsa, hours of service, hours-of-service, safety]
+          - [compliance, audits, audit, inspections, program]
+      - id: on_time_performance
+        description: Owned on-time performance or route efficiency.
+        all_of:
+          - [on-time, on time, route, routes, delivery, deliveries]
+          - [performance, efficiency, improved, reduced]
+    min_indicators: 2
+    required_indicators: [supervises_drivers]
+    disqualifying_terms: [assisted, shadowed]
+    min_months: 24
+    conditions:
+      - Must include direct supervision or scheduling of drivers.
+    validation_steps:
+      - Confirm number of drivers supervised and authority over scheduling.
+      - Confirm compliance responsibilities.
+    limitations:
+      - Does not substitute for any license the role legally requires.
+    non_equivalencies:
+      - Warehouse-only supervision with no driver or route responsibility.
+    applicable_contexts: [logistics-operations]
+    confidence: medium
+    version: 1
+    review_status: approved
+    provenance: { author: seed-knowledge, created: 2026-10-01, sources: ["MVP seed knowledge; pending design-partner validation"] }
