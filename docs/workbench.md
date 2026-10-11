@@ -14,14 +14,26 @@ knowledge interpretation — it displays what the engine returned and posts expl
 sa workbench [--port 8765] [--workspace ./workspace] [--no-browser]
 ```
 
-## The four views
+## Start screen and views
+
+The start screen offers **Try the guided demo** (a sample requisition, analysed in one click, with a six-step
+walkthrough — see [walkthrough.md](walkthrough.md)) and **Review my requisition** (upload, validate on selection,
+analyse). Every session has a `mode`: `demo` for included sample data, `real` for uploads. The mode is derived from
+the session's source, shown in a banner, and the two kinds are listed separately.
 
 | View | What it shows | Engine source |
 |---|---|---|
-| Requisition intake | Example or uploaded package; per-file validation; input fingerprints; supplied ATS configuration export vs recruiter documentation vs missing (never described as a live audit); pool permitted uses, age limit and retention; requirements, rules and policy; knowledge revision and engine version | `contracts`, `Workspace.input_summary` |
-| Candidate discovery | Evidence groups, per-candidate evidence ledger, unknowns, mandatory-requirement issues, supplied-rule exclusions, freshness, constraints, run and knowledge reference, decision form | `engine/discovery.py` |
-| Screening risks | Screening-risk findings (see [screening-risks.md](screening-risks.md)) with before/after correction simulations; Level 1–3 with the requirement and rule, evidence, affected candidates, confidence, proposed action and trade-off, knowledge reference, decision form with the dispositions the decision model allows for that finding | `engine/checks.py`, `engine/candidates.py`, `measure.py` |
-| Review and export | Pending work, decisions recorded after the run (re-run to apply), carried-over and stale decisions, exports, measured outcomes vs estimates, run history with reproducibility verification, knowledge evaluation and comparison | `Workspace.run/verify_run/export/evaluate/compare` |
+| Overview | *What might we be missing for this role?* — surfaced candidates by evidence group, those rejected by the current process, rule risks with the largest simulated effect, protected requirements and unexplained exclusions | `workbench/walkthrough.py` over the run's result and discovery |
+| The role | Requirements, supplied rules and their source (supplied ATS export vs recruiter documentation vs missing; never described as a live audit), candidate evidence used, employer policy; input fingerprints and knowledge choice under *Technical details* | `contracts`, `Workspace.input_summary` |
+| Candidates | Evidence groups, per-candidate evidence ledger with Observed / Needs verification / Protected requirement labels, unknowns, what to verify, supplied-rule exclusions, corrections that would make the person eligible, provenance, decision form | `engine/discovery.py` |
+| Screening rules | Findings with scope (rule-level, candidate-specific, whole requisition), what the supplied materials show, why it matters, a recruiter-readable before/after simulation, proposed correction and trade-off, uncertainty, technical provenance, decision form | `engine/checks.py`, `engine/risks.py` |
+| Decisions & export | Pending work, decisions recorded after the run (update to apply), carried-over, stale and changed-context decisions in plain language, primary and additional exports, outcomes, run verification, knowledge evaluation | `Workspace.run/verify_run/export/evaluate/compare` |
+
+API additions for the guided demo: `POST /api/demo {example?}` creates a demo session from an included sample with
+candidate evidence and runs it with production knowledge (no recorded outcomes); `GET /api/sessions/<id>/runs/<id>`
+includes a `guide` block (summary counts and the tour's candidate and finding, selected from the run);
+`GET /api/validation-sample` runs the existing validation measurement on the included synthetic dataset and returns
+it with its SYNTHETIC label. All use the same token, Host and JSON checks as the rest of the API.
 
 ## Discovery: from "affected by rules" to "supported by evidence"
 

@@ -31,49 +31,42 @@ general-purpose ontology, language-model extraction. The integration contract is
 
 ---
 
-## Candidate Rediscovery Workbench (recruiter workflow)
+## Recruiter workbench and guided demo
 
-A local web workspace for recruiters. Pick a requisition, supply an authorized de-identified candidate-pool
-export, run discovery and diagnostics, inspect the evidence behind each result, record decisions, and export.
-It runs only on your computer (bound to `127.0.0.1`) and uses the same deterministic engine and versioned
-knowledge pack as the CLI; the browser code only displays results and posts decisions.
+A local web workspace for recruiters. It runs only on your computer (bound to `127.0.0.1`) and uses the same
+deterministic engine and versioned knowledge as the CLI; the browser code only displays results and posts decisions.
 
 ```bash
-pip install -e ".[dev]"
+pip install -e .
 sa workbench                      # opens http://127.0.0.1:8765/ ; workspace data goes to ./workspace
 ```
 
-**Five-minute demonstration (no CLI needed after launch):**
+The start screen offers two paths:
 
-1. Enter your name in **Reviewer** (every run and decision is attributed), then **Load** `REQ-SRE-0142`.
-2. **Requisition intake** shows the inputs and their fingerprints, whether the screening rules are verified
-   ATS configuration or recruiter documentation, the pool's permitted uses and retention, the requirements,
-   the rules and the employer policy. Choose a knowledge revision and **Run discovery and diagnostics**.
-3. **Candidate discovery** groups people by what their evidence supports: *Direct evidence*, *Potentially
-   transferable*, *Insufficient evidence*. Open **P-203** (a utility grid control-room supervisor): the
-   evidence ledger shows each requirement, how it is supported, the quoted source sentences, what remains
-   unknown, what to verify next, record freshness and contact constraints. There is no score.
-4. Below the list, *Not surfaced or not available for action* explains P-204 (looks similar, lacks the
-   evidence) and the stale, unauthorized and expired records — whose evidence is never shown.
-5. Record a decision for P-203 (for example *Review in the ATS*) with a rationale.
-6. **Screening findings**: open *Q2 requires 7 years; the posting asks for 5*, see the affected candidates,
-   and **Accept** it with a rationale.
-7. **Review and export**: **Re-run with the same knowledge** — your decisions carry over by their stable ids.
-   Export the **Candidate review list (CSV)** and the **Report**. Measured outcomes and estimates are shown
-   separately.
-8. Under *Runs and reproducibility*, **Verify** an earlier run: it is re-computed from its stored input
-   fingerprints, knowledge snapshot and decision snapshot and compared byte for byte.
-9. Knowledge change: edit a file in `knowledge/pack/` (for example add a variant in `synonyms.yaml`), then in
-   *Knowledge and evaluation* **Run evaluation** and **Compare** against production. Earlier runs still verify,
-   because each run keeps a copy of the exact knowledge it used.
+- **Try the guided demo** — one click opens a fictional sample requisition, validates and analyses it, and walks you
+  through *What might we be missing?* → the role → a candidate's evidence → a screening-rule risk → the simulated
+  correction → your attributed decision → exports. No ATS, no setup, no personal data; demo sessions are labelled and
+  kept apart from your own.
+- **Review my requisition** — add your own authorized, de-identified files; each is checked as you choose it, and
+  **Analyse** runs it.
 
-**Screening risks (look forward).** In the same session, **Screening risks** shows where the supplied rules may
+See [docs/walkthrough.md](docs/walkthrough.md) for the guided steps (with screenshots), the evidence labels
+(*Observed*, *Simulated*, *Needs verification*, *Protected requirement*) and the audit of the previous journey.
+
+![What might we be missing for this role?](docs/screenshots/02_overview.png)
+
+Outside the tour, the same requisition has five views — Overview, The role, Candidates, Screening rules, Decisions &
+export — that can be used in any order. Decisions carry over between runs by stable ids, earlier runs can be
+**verified** byte for byte from their stored inputs and knowledge snapshot, and knowledge administrators can run the
+evaluation suite from *Decisions & export*.
+
+**Screening risks (look forward).** In the same session, **Screening rules** shows where the supplied rules may
 exclude people whose evidence could meet the requirement. Pick *Q1 is narrower than R1*: you see the requirement
 and the rule, the evidence, a proposed correction, and a deterministic **before/after simulation** — who the supplied
 rule excludes, who would pass the corrected rule, who still fails a mandatory requirement, whose evidence is
 insufficient, whose relevance is not established, and who becomes newly eligible for human review. Authorized pool
-records appear as clearly labelled hypotheticals. Record *Accept* with a rationale, re-run, export *Screening risks and
-simulations*, and **Verify**. Protected requirements (the linehaul licence) are shown with no correction proposed.
+records appear as clearly labelled hypotheticals. Record *Accept the concern* with a rationale, update the analysis, export the *screening-rule findings*, and
+**Verify**. Protected requirements (the linehaul licence) are shown with no correction proposed.
 Details and evidence limits: [docs/screening-risks.md](docs/screening-risks.md).
 
 What the workbench will not do: contact anyone, write to an ATS, advance or reject candidates, rank people,
@@ -94,7 +87,7 @@ sa eval-compare --baseline release:1.0.0 --candidate pack   # what changed when 
 sa portfolio examples --out out  # portfolio overview across requisitions
 sa discover examples/northwind/requisitions/REQ-SRE-0142 --out out   # rediscovery from the CLI
 sa measure evals/validation/northwind-synthetic.yaml   # validation against independently reviewed cases (synthetic here)
-pytest                           # 147 tests
+pytest                           # 159 tests
 ```
 
 Pre-rendered output for every example is committed under [`samples/`](samples) (`make samples` regenerates it).
