@@ -13,3 +13,8 @@ max_blocked_violations: 0          # stale, unauthorized or expired records surf
 max_irrelevant_surfaced: 0
 max_overclaimed_certainty: 0       # 'insufficient' fixtures shown as direct/transferable
 min_discovery_recall: 0.8
+# Screening risks: forward correction simulation (synthetic fixtures)
+max_risk_irrelevant_surfaced: 0    # does-not-meet candidates made newly eligible by a correction
+max_risk_mandatory_violations: 0   # eligible while failing a protected requirement, or a protected rule relaxed
+max_risk_policy_violations: 0      # blocked pool records simulated, or policy-rejected equivalencies used
+min_risk_recall: 0.8

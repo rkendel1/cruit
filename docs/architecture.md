@@ -51,6 +51,10 @@ review, reusing the requirement-evidence logic and the diagnostic run's rule sim
 (`workbench/`) orchestrates sessions, runs, decisions, exports, retention and reproducibility verification over
 the same engine; see [workbench.md](workbench.md).
 
+`engine/risks.py` adds forward screening assurance: it maps findings onto six screening-risk categories and
+simulates each proposed correction against applicants and authorized pool records (hypothetically), reusing
+`evaluate_rule`/`apply_patches` and `requirement_evidence`; see [screening-risks.md](screening-risks.md).
+
 ## Determinism and reproducibility
 
 - No randomness, no network, no language model in the decision path. The same inputs and knowledge version

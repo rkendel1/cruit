@@ -6,6 +6,7 @@ description: >-
   supervisory experience.
 requisition: ../../examples/northwind/requisitions/REQ-LH-0217/requisition.yaml
 candidates: ../../examples/northwind/requisitions/REQ-LH-0217/candidates.yaml
+pool: ../../examples/northwind/requisitions/REQ-LH-0217/candidate-pool.yaml
 policy: ../../examples/northwind/policy.yaml
 
 expert_labels:
@@ -29,3 +30,28 @@ forbidden_findings:
   - { check: credential_stricter_than_requirement, rule: Q1 }
   - { check: preferred_enforced_as_knockout, rule: Q1 }
   - { check: candidate_review_opportunity, candidate: C-304 }
+
+# Forward screening assurance: SYNTHETIC before/after simulation expectations.
+simulation_expectations:
+  - scenario: genuine mandatory requirement remains blocking, with no correction proposed
+    finding: { check: mandatory_requirement_protected, rule: Q1 }
+    no_correction: true
+    category: still_fail_mandatory_requirement
+    includes: [C-302]
+  - scenario: candidate passes a corrected experience rule but still fails another mandatory requirement
+    finding: { check: experience_path_narrower, rule: Q2 }
+    category: still_fail_mandatory_requirement
+    includes: [C-302]
+  - scenario: candidate who fails a mandatory requirement is never newly eligible
+    finding: { check: experience_path_narrower, rule: Q2 }
+    category: newly_eligible_for_review
+    includes: [C-303]
+    excludes: [C-302, P-302]
+  - scenario: license that cannot be verified stays insufficient, not eligible
+    finding: { check: experience_path_narrower, rule: Q2 }
+    category: evidence_insufficient
+    includes: [P-303]
+  - scenario: terminology variant of the license itself is recognized
+    finding: { check: literal_term_missing_variants, rule: Q1 }
+    category: newly_eligible_for_review
+    includes: [C-303]

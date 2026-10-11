@@ -14,6 +14,7 @@ EVIDENCE_LEVELS = {
 
 CATEGORIES = (
     "confirmed_inconsistency",       # level 1
+    "mandatory_protected",           # level 1: a protected requirement is correctly enforced; nothing to relax
     "design_risk",                   # level 2: knowledge-based design risk in rules
     "unverified_assumption",         # level 2: requirement whose necessity needs clarification
     "candidate_review_opportunity",  # level 2: specific candidate(s) worth human review
@@ -61,6 +62,8 @@ class Finding:
     knowledge_refs: list[str] = field(default_factory=list)
     related_findings: list[str] = field(default_factory=list)
     disposition: dict[str, Any] = field(default_factory=lambda: {"status": "pending"})
+    risk_category: str | None = None
+    simulation: dict[str, Any] | None = None
 
     @property
     def evidence_label(self) -> str:

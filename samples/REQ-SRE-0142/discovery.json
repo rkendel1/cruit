@@ -3,7 +3,7 @@
   "knowledge": "core@1.1.0+8a94e741e4",
   "as_of": "2026-10-10",
   "inputs": {
-    "current_applicants": 13,
+    "current_applicants": 14,
     "pool": {
       "pool_id": "NW-POOL-2026-10-ENG",
       "source_system": "northwind-talent-crm",
@@ -22,7 +22,7 @@
     "direct": 8,
     "transferable": 3,
     "insufficient": 1,
-    "not_surfaced": 6,
+    "not_surfaced": 7,
     "blocked": 3,
     "active_workflow": 1
   },
@@ -42,7 +42,7 @@
       },
       "group": "direct",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q5 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q5 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (equivalent tool or credential)."
       ],
       "requirements": [
@@ -214,7 +214,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-5f56524c"
@@ -247,7 +247,7 @@
       },
       "group": "direct",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q2, Q4 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q2, Q4 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
       ],
       "requirements": [
@@ -415,7 +415,7 @@
             "reason": "answered 'no', rule requires 'yes'"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-cd635676"
@@ -446,7 +446,7 @@
       },
       "group": "direct",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q2, Q6 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q2, Q6 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology)."
       ],
       "requirements": [
@@ -606,7 +606,7 @@
             "reason": "answered 'no', rule requires 'yes'"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-c1d0ef0b"
@@ -638,7 +638,7 @@
       },
       "group": "direct",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q7 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology, equivalent tool or credential)."
       ],
       "requirements": [
@@ -821,7 +821,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-82276566"
@@ -1021,7 +1021,7 @@
         "ats_status": "rejected",
         "recorded_rule": null,
         "excluded_by": [],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [],
         "note": "The supplied rules do not explain this exclusion; it may be a manual decision or configuration that was not supplied."
@@ -1600,7 +1600,7 @@
       },
       "group": "transferable",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential).",
         "At least one requirement is supported through an alternative path that a recruiter must verify."
       ],
@@ -1801,7 +1801,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-4989b969"
@@ -1838,7 +1838,7 @@
       },
       "group": "transferable",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential, different terminology).",
         "At least one requirement is supported through an alternative path that a recruiter must verify."
       ],
@@ -2040,7 +2040,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-SRE-0142-36d39631"
@@ -2470,7 +2470,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -2650,7 +2650,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -2685,7 +2685,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -2827,7 +2827,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -2854,7 +2854,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q2, Q3 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q2, Q3 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -3028,7 +3028,7 @@
             "reason": "answered 'no', rule requires 'yes'"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -3058,7 +3058,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q5, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -3213,7 +3213,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -3240,7 +3240,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q5, Q6, Q7 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q5, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -3387,7 +3387,7 @@
             "reason": "no listed term found"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -3405,6 +3405,180 @@
       "verify_next": [],
       "reason": "No supplied evidence supports any required requirement.",
       "listable": false
+    },
+    {
+      "candidate_id": "C-114",
+      "source": {
+        "kind": "current_application",
+        "system": "generic-ats-export-v1",
+        "record_ref": "REQ-SRE-0142/C-114",
+        "evidence_provenance": "application_resume"
+      },
+      "group": "not_surfaced",
+      "why": [
+        "Applied to this requisition and was rejected; the supplied rules do not explain the exclusion."
+      ],
+      "requirements": [
+        {
+          "id": "R1",
+          "text": "5+ years of site reliability engineering or production operations experience.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-114/experience[0].title",
+              "text": "Site Reliability Engineer",
+              "path": "direct",
+              "matched": "site reliability engineer",
+              "concept": "skill.site-reliability-engineering",
+              "record": "term.site-reliability-engineering"
+            }
+          ],
+          "months": 90,
+          "notes": []
+        },
+        {
+          "id": "R2",
+          "text": "Experience leading incident management, including post-incident reviews.",
+          "stated_as": "required",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R3",
+          "text": "Proficiency with infrastructure as code (Terraform or equivalent).",
+          "stated_as": "required",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "direct"
+          ],
+          "path_label": "same terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-114/experience[0].s1",
+              "text": "Maintained Terraform for production infrastructure.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            },
+            {
+              "source": "candidate:C-114/skills.s1",
+              "text": "Terraform.",
+              "path": "direct",
+              "matched": "Terraform",
+              "concept": "skill.terraform",
+              "record": "skill.terraform"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R4",
+          "text": "Experience operating Kubernetes.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R5",
+          "text": "Bachelor's degree in computer science or a related field, or equivalent practical experience.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "evidenced",
+          "paths": [
+            "terminology_variant"
+          ],
+          "path_label": "different terminology",
+          "evidence": [
+            {
+              "source": "candidate:C-114/education.s1",
+              "text": "BS in Computer Science",
+              "path": "terminology_variant",
+              "matched": "BS in computer science",
+              "concept": "skill.cs-degree",
+              "record": "skill.cs-degree"
+            }
+          ],
+          "months": null,
+          "notes": []
+        },
+        {
+          "id": "R6",
+          "text": "Experience in the logistics or freight industry.",
+          "stated_as": "preferred",
+          "protected": false,
+          "status": "not_evidenced",
+          "paths": [],
+          "path_label": "",
+          "evidence": [],
+          "months": null,
+          "notes": []
+        }
+      ],
+      "supported": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "unverified": [
+        {
+          "requirement": "R4",
+          "reason": "Preferred qualification not evidenced."
+        },
+        {
+          "requirement": "R6",
+          "reason": "Preferred qualification not evidenced."
+        }
+      ],
+      "mandatory_issues": [
+        {
+          "requirement": "R2",
+          "issue": "not_evidenced",
+          "detail": "No supporting evidence in the supplied record."
+        }
+      ],
+      "screening": {
+        "applied_to_requisition": true,
+        "ats_status": "rejected",
+        "recorded_rule": null,
+        "excluded_by": [],
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
+        "established": true,
+        "related_findings": [],
+        "note": "The supplied rules do not explain this exclusion; it may be a manual decision or configuration that was not supplied."
+      },
+      "prior_applications": [],
+      "freshness": {
+        "status": "current_application",
+        "note": "Evidence is from the application to this requisition."
+      },
+      "constraints": [
+        "Applied to this requisition; follow your normal applicant process."
+      ],
+      "signals": [
+        "R5: described as BS in computer science"
+      ],
+      "verify_next": [],
+      "reason": "Required evidence missing from a complete record: R2 \u2014 No supporting evidence in the supplied record.",
+      "listable": true
     },
     {
       "candidate_id": "P-204",

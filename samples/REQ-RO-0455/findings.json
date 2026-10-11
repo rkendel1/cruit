@@ -17,7 +17,7 @@
     "status": "approved",
     "path": "knowledge/releases/1.1.0"
   },
-  "engine_version": "0.1.0",
+  "engine_version": "0.2.0",
   "run_at": "2026-11-03T12:00:00Z",
   "inputs": {
     "job_description": "supplied",
@@ -95,8 +95,7 @@
           "Revenue Operations Manager",
           "Revenue operations",
           "RevOps",
-          "revenue ops",
-          "commercial operations"
+          "revenue ops"
         ],
         "years": 5,
         "field": "resume",
@@ -138,8 +137,7 @@
           "RevOps",
           "Revenue operations",
           "revenue operations manager",
-          "revenue ops",
-          "commercial operations"
+          "revenue ops"
         ],
         "match": "any",
         "field": "resume"
@@ -199,6 +197,14 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "rule_narrower",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No candidate evidence was supplied, so candidate impact cannot be verified. This remains a rule-level risk.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
+      },
       "evidence_label": "Demonstrable inconsistency"
     },
     {
@@ -250,6 +256,14 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "preferred_as_knockout",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No candidate evidence was supplied, so candidate impact cannot be verified. This remains a rule-level risk.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
+      },
       "evidence_label": "Demonstrable inconsistency"
     },
     {
@@ -260,7 +274,7 @@
       "evidence_level": 2,
       "requisition_id": "REQ-RO-0455",
       "knowledge_version": "core@1.1.0+8a94e741e4",
-      "observation": "Rule Q1 matches only 'Revenue Operations Manager'. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.",
+      "observation": "Rule Q1 matches only 'Revenue Operations Manager'. The knowledge base records 3 equivalent term(s) for Revenue operations that the rule does not recognize.",
       "source_refs": [
         {
           "kind": "rule",
@@ -274,11 +288,6 @@
         },
         {
           "kind": "knowledge",
-          "id": "term.commercial-operations",
-          "text": ""
-        },
-        {
-          "kind": "knowledge",
           "id": "term.revenue-operations",
           "text": ""
         }
@@ -286,17 +295,16 @@
       "evidence": [
         {
           "source": "knowledge:skill.revenue-operations",
-          "text": "recognized variant(s): Revenue operations, RevOps, revenue ops, commercial operations"
+          "text": "recognized variant(s): Revenue operations, RevOps, revenue ops"
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "limitations": [
         "Synonyms improve recognition; they do not establish competence.",
         "Terminology only; scope of revenue operations roles varies by organization.",
-        "Equivalent to revenue operations in some organizations but not universally; verify scope.",
-        "Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case."
+        "Closely related (not equivalent) terms not proposed: commercial operations, sales operations, sales ops. Verify case by case."
       ],
-      "proposed_action": "Add recognized variants to the rule: Revenue operations, RevOps, revenue ops, commercial operations.",
+      "proposed_action": "Add recognized variants to the rule: Revenue operations, RevOps, revenue ops.",
       "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
       "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
       "rule_id": "Q1",
@@ -308,18 +316,24 @@
         "add_terms": [
           "Revenue operations",
           "RevOps",
-          "revenue ops",
-          "commercial operations"
+          "revenue ops"
         ]
       },
       "knowledge_refs": [
         "skill.revenue-operations",
-        "term.commercial-operations",
         "term.revenue-operations"
       ],
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No candidate evidence was supplied, so candidate impact cannot be verified. This remains a rule-level risk.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -369,8 +383,7 @@
           "Revenue operations",
           "revenue operations manager",
           "RevOps",
-          "revenue ops",
-          "commercial operations"
+          "revenue ops"
         ],
         "equivalencies": []
       },
@@ -378,6 +391,14 @@
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "rule_narrower",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No candidate evidence was supplied, so candidate impact cannot be verified. This remains a rule-level risk.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -389,7 +410,7 @@
       "evidence_level": 2,
       "requisition_id": "REQ-RO-0455",
       "knowledge_version": "core@1.1.0+8a94e741e4",
-      "observation": "Rule Q3 matches only 'RevOps'. The knowledge base records 4 equivalent term(s) for Revenue operations that the rule does not recognize.",
+      "observation": "Rule Q3 matches only 'RevOps'. The knowledge base records 3 equivalent term(s) for Revenue operations that the rule does not recognize.",
       "source_refs": [
         {
           "kind": "rule",
@@ -403,11 +424,6 @@
         },
         {
           "kind": "knowledge",
-          "id": "term.commercial-operations",
-          "text": ""
-        },
-        {
-          "kind": "knowledge",
           "id": "term.revenue-operations",
           "text": ""
         }
@@ -415,17 +431,16 @@
       "evidence": [
         {
           "source": "knowledge:skill.revenue-operations",
-          "text": "recognized variant(s): Revenue operations, revenue operations manager, revenue ops, commercial operations"
+          "text": "recognized variant(s): Revenue operations, revenue operations manager, revenue ops"
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "limitations": [
         "Synonyms improve recognition; they do not establish competence.",
         "Terminology only; scope of revenue operations roles varies by organization.",
-        "Equivalent to revenue operations in some organizations but not universally; verify scope.",
-        "Closely related (not equivalent) terms not proposed: sales operations, sales ops. Verify case by case."
+        "Closely related (not equivalent) terms not proposed: commercial operations, sales operations, sales ops. Verify case by case."
       ],
-      "proposed_action": "Add recognized variants to the rule: Revenue operations, revenue operations manager, revenue ops, commercial operations.",
+      "proposed_action": "Add recognized variants to the rule: Revenue operations, revenue operations manager, revenue ops.",
       "expected_benefit": "Applicants describing the same work in different words are no longer filtered out.",
       "tradeoffs": "Ambiguous abbreviations can admit unrelated profiles; review ambiguity notes first.",
       "rule_id": "Q3",
@@ -437,18 +452,24 @@
         "add_terms": [
           "Revenue operations",
           "revenue operations manager",
-          "revenue ops",
-          "commercial operations"
+          "revenue ops"
         ]
       },
       "knowledge_refs": [
         "skill.revenue-operations",
-        "term.commercial-operations",
         "term.revenue-operations"
       ],
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No candidate evidence was supplied, so candidate impact cannot be verified. This remains a rule-level risk.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     }

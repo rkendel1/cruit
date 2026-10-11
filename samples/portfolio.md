@@ -1,7 +1,7 @@
 # Screening assurance — portfolio overview
 
 - Requisitions reviewed: **4**
-- Findings awaiting decisions: **17**
+- Findings awaiting decisions: **18**
 - Confirmed screening inconsistencies: **15**
 - Approved corrections: **15**
 - Candidate-review opportunities: **10**
@@ -12,9 +12,9 @@
 | Requisition | Job family | L1 | L2 | L3 | Surfaced | Pending | Knowledge |
 |---|---|---|---|---|---|---|---|
 | REQ-CSM-0388 Customer Success Manager, Mid-Market | customer-success | 3 | 8 | 0 | 3/8 | 7 | `core@1.1.0+8a94e741e4` |
-| REQ-LH-0217 Linehaul Operations Supervisor | logistics-operations | 0 | 4 | 0 | 1/4 | 4 | `core@1.1.0+8a94e741e4` |
+| REQ-LH-0217 Linehaul Operations Supervisor | logistics-operations | 1 | 4 | 0 | 1/4 | 5 | `core@1.1.0+8a94e741e4` |
 | REQ-RO-0455 Revenue Operations Manager | revenue-operations | 2 | 3 | 0 | 0/0 | 5 | `core@1.1.0+8a94e741e4` |
-| REQ-SRE-0142 Senior Site Reliability Engineer | software-infrastructure | 10 | 12 | 1 | 6/13 | 1 | `core@1.1.0+8a94e741e4` |
+| REQ-SRE-0142 Senior Site Reliability Engineer | software-infrastructure | 10 | 12 | 1 | 6/14 | 1 | `core@1.1.0+8a94e741e4` |
 
 ## Priority work
 

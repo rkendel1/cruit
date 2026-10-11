@@ -16,9 +16,12 @@ from .candidates import assess_candidates, opportunity_findings, unexplained_fin
 from .checks import active_patches, requirement_views, run_design_checks
 from .interpret import Context
 from .model import DiagnosticResult, RuleView, finding_id
+from .pool import _d as _date, default_as_of
+from .risks import annotate_risks, build_population
 from .rules import apply_patches
 
 CATEGORY_ORDER = {
+    "mandatory_protected": -1,
     "confirmed_inconsistency": 0,
     "design_risk": 1,
     "unverified_assumption": 2,
@@ -75,7 +78,11 @@ def load_bundle(path: str | Path, *, policy: str | Path | None = None) -> Requis
     return bundle
 
 
-def diagnose(bundle: RequisitionBundle, pack: KnowledgePack, *, run_at: str | None = None) -> DiagnosticResult:
+def diagnose(bundle: RequisitionBundle, pack: KnowledgePack, *, run_at: str | None = None,
+             as_of: str | None = None) -> DiagnosticResult:
+    """Run the diagnostic loop. `as_of` (default: pool export date, else run date) governs pool record freshness."""
+    run_at = run_at or datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    as_of = as_of or default_as_of(bundle.pool, run_at)
     decisions = {d["finding_id"]: d for d in (bundle.decisions or {}).get("decisions", [])}
     req, reclassified = _apply_classification_decisions(bundle.requisition, decisions)
     ctx = Context(requisition=req, policy=bundle.policy, pack=pack, decisions=decisions, original=bundle.requisition)
@@ -106,6 +113,14 @@ def diagnose(bundle: RequisitionBundle, pack: KnowledgePack, *, run_at: str | No
         for a in assessments:
             if not a.surfaced and a.ats_status in ("rejected", "deprioritized") and "protected" in a.reason:
                 checks.suppressed.append({"kind": "candidate", "id": a.candidate_id, "reason": a.reason})
+
+    # Forward screening assurance: risk categories and before/after correction simulation
+    # across applicants and (hypothetically) authorized, actionable pool records.
+    population = build_population(ctx, checks, candidates, assessments, bundle.pool, _date(as_of))
+    protected = annotate_risks(ctx, checks, findings, patches, population, assessments)
+    for f in protected:
+        _apply_decision(f, decisions)
+    findings += protected
 
     # Stage 5: measurement.
     measurement = None
@@ -141,7 +156,7 @@ def diagnose(bundle: RequisitionBundle, pack: KnowledgePack, *, run_at: str | No
         knowledge={"pack": pack.pack_id, "version": pack.version, "fingerprint": pack.fingerprint,
                    "status": pack.manifest.get("status"), "path": str(pack.path)},
         engine_version=ENGINE_VERSION,
-        run_at=run_at or datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        run_at=run_at,
         inputs=inputs,
         limitations=limitations,
         requirements=requirement_views(ctx),
@@ -186,6 +201,9 @@ def _limitations(req: dict[str, Any], bundle: RequisitionBundle, decisions: dict
     if cfg == "recruiter_documentation":
         out.append("Screening rules were supplied as recruiter documentation, not verified ATS configuration. "
                    "Findings describe the documented rules; the live ATS may differ.")
+    elif cfg in ("ats_export_verified", "ats_api_verified"):
+        out.append("Screening rules come from a supplied ATS configuration export; this is not a live ATS audit, "
+                   "and the live configuration may have changed since export.")
     elif cfg == "not_supplied":
         out.append("No screening configuration was supplied; only the job description was audited.")
     if not bundle.candidates:

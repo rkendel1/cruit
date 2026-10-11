@@ -106,7 +106,9 @@ class KnowledgePack:
                 if self.applies(ex["contexts"], job_family)
             }
             if normalize(syn["canonical"]) not in excluded:
-                entries.append(TermEntry(syn["canonical"], concept, syn["id"], "canonical", syn["confidence"]))
+                # A closely-related record's canonical term is itself only closely related to the concept.
+                rel = "canonical" if syn["relationship"] == "equivalent_terminology" else syn["relationship"]
+                entries.append(TermEntry(syn["canonical"], concept, syn["id"], rel, syn["confidence"]))
             for var in syn["variants"]:
                 if "contexts" in var and not self.applies(var["contexts"], job_family):
                     continue

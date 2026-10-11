@@ -18,7 +18,9 @@ from typing import Any
 
 from ..contracts import load
 from ..engine import RequisitionBundle, diagnose
+from ..engine.pool import _d as _date, default_as_of, pool_block_reason
 from ..knowledge.pack import KnowledgePack
+from . import risk_eval
 from .discovery_eval import compare_discovery, discovery_failures, render_discovery_suite_markdown, run_discovery_suite
 
 DEFAULT_THRESHOLDS = {
@@ -36,6 +38,11 @@ DEFAULT_THRESHOLDS = {
     "max_irrelevant_surfaced": 0,
     "max_overclaimed_certainty": 0,
     "min_discovery_recall": 0.8,
+    # screening risks (synthetic fixtures)
+    "max_risk_irrelevant_surfaced": 0,
+    "max_risk_mandatory_violations": 0,
+    "max_risk_policy_violations": 0,
+    "min_risk_recall": 0.8,
 }
 
 RUN_AT = "1970-01-01T00:00:00+00:00"  # fixed so eval output is reproducible
@@ -64,9 +71,13 @@ class CaseResult:
     forbidden: list[dict[str, Any]]
     candidates: dict[str, Any]
     guardrail_violations: list[str]
+    risk: dict[str, Any] | None = None
+    simulation_expectations: list[dict[str, Any]] | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
+            "risk": self.risk,
+            "simulation_expectations": self.simulation_expectations or [],
             "case_id": self.case_id,
             "description": self.description,
             "expected": self.expected,
@@ -75,7 +86,8 @@ class CaseResult:
             "guardrail_violations": self.guardrail_violations,
             "knowledge": self.result["knowledge"]["fingerprint"],
             "findings": [{"id": f["id"], "check": f["check"], "level": f["evidence_level"], "title": f["title"],
-                          "confidence": f["confidence"], "affected": f["affected_candidates"]} for f in self.result["findings"]],
+                          "confidence": f["confidence"], "affected": f["affected_candidates"],
+                          "simulation": (f.get("simulation") or {}).get("counts")} for f in self.result["findings"]],
         }
 
 
@@ -87,6 +99,7 @@ def run_case(case_path: Path, pack: KnowledgePack) -> CaseResult:
         requisition=load("requisition", base / case["requisition"]),
         policy=load("policy", base / case["policy"]),
         candidates=load("candidates", base / case["candidates"]) if case.get("candidates") else None,
+        pool=load("candidate_pool", base / case["pool"]) if case.get("pool") else None,
     )
     result = diagnose(bundle, pack, run_at=RUN_AT).as_dict()
     findings = result["findings"]
@@ -127,12 +140,19 @@ def run_case(case_path: Path, pack: KnowledgePack) -> CaseResult:
             guard.append(f"{c['candidate_id']} surfaced despite an unmet protected requirement")
     protected_rules = {r["id"] for r in result["rules"] if r["status"] == "protected"}
     for f in findings:
-        if f.get("rule_id") in protected_rules and f["check"] != "literal_term_missing_variants":
+        if f.get("rule_id") in protected_rules and f.get("proposed_change") and f["check"] != "literal_term_missing_variants":
             guard.append(f"{f['id']} proposes relaxing protected rule {f['rule_id']} ({f['check']})")
     for f in findings:
         if f["category"] == "candidate_review_opportunity" and "Qualification has not been established" not in " ".join(f["limitations"]):
             guard.append(f"{f['id']} does not state that qualification is unestablished")
-    return CaseResult(case["id"], case["description"], result, expected, forbidden, cand, guard)
+    blocked: set[str] = set()
+    if bundle.pool:
+        as_of = _date(default_as_of(bundle.pool, RUN_AT))
+        blocked = {c["id"] for c in bundle.pool["candidates"] if pool_block_reason(c, bundle.pool, as_of)[0]}
+    rejected = {r["id"] for r in bundle.policy.get("rejected_equivalencies", [])}
+    risk = risk_eval.risk_metrics(case, result, blocked_pool_ids=blocked, rejected_equivalencies=rejected)
+    sim_exp = risk_eval.check_expectations(case, result)
+    return CaseResult(case["id"], case["description"], result, expected, forbidden, cand, guard, risk, sim_exp)
 
 
 def run_suite(
@@ -182,6 +202,8 @@ def run_suite(
     if guard > th["max_guardrail_violations"]:
         failures.append(f"{guard} guardrail violation(s)")
     failures += discovery_failures(disc, th)
+    risk = risk_eval.aggregate([c.as_dict() for c in cases])
+    failures += risk_eval.failures(risk, th)
     return {
         "knowledge": pack.fingerprint,
         "thresholds": th,
@@ -190,6 +212,7 @@ def run_suite(
         "failures": failures,
         "cases": [c.as_dict() for c in cases],
         "discovery": disc,
+        "screening_risks": risk,
     }
 
 
@@ -233,6 +256,8 @@ def compare_suites(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict[
     for d in case_diffs:
         for e in d["expected_findings_lost"]:
             regressions.append(f"{d['case_id']}: previously found expected finding lost ({e['check']} {e.get('rule') or e.get('candidate') or e.get('requirement') or ''})")
+    if baseline.get("screening_risks") and candidate.get("screening_risks"):
+        regressions += risk_eval.compare(baseline["screening_risks"], candidate["screening_risks"])
     disc_diffs, disc_regressions = compare_discovery(baseline.get("discovery"), candidate.get("discovery"), th)
     regressions += disc_regressions
     return {
@@ -242,6 +267,7 @@ def compare_suites(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict[
             "candidate": (candidate.get("discovery") or {}).get("metrics"),
             "cases": disc_diffs,
         } if candidate.get("discovery") else None,
+        "screening_risks": {"baseline": baseline.get("screening_risks"), "candidate": candidate.get("screening_risks")},
         "baseline": baseline["knowledge"],
         "candidate": candidate["knowledge"],
         "metrics": {"baseline": mb, "candidate": mc, "delta": deltas},
@@ -279,7 +305,21 @@ def render_suite_markdown(s: dict[str, Any]) -> str:
         if c["guardrail_violations"]:
             L += [f"- ❌ {g}" for g in c["guardrail_violations"]]
         L.append("")
-    return "\n".join(L) + render_discovery_suite_markdown(s.get("discovery"))
+    risk_md = risk_eval.render(s["screening_risks"], s["cases"]) if s.get("screening_risks") else ""
+    return "\n".join(L) + risk_md + render_discovery_suite_markdown(s.get("discovery"))
+
+
+def _render_compare_risks(c: dict[str, Any]) -> list[str]:
+    r = c.get("screening_risks") or {}
+    b, n = r.get("baseline"), r.get("candidate")
+    if not b or not n:
+        return []
+    L = ["## Screening risks (forward simulation)", "", f"> **{n['label']}**", "", "| Metric | Baseline | Candidate |", "|---|---|---|"]
+    for k, v in b.items():
+        if k != "label":
+            L.append(f"| {k.replace('_', ' ')} | {v} | {n[k]} |")
+    L.append("")
+    return L
 
 
 def _render_compare_discovery(c: dict[str, Any]) -> list[str]:
@@ -332,5 +372,6 @@ def render_compare_markdown(c: dict[str, Any]) -> str:
         for e in d["expected_findings_lost"]:
             L.append(f"- ❌ expected finding lost: {e['check']} {e.get('rule') or e.get('candidate') or e.get('requirement') or ''}")
         L.append("")
+    L += _render_compare_risks(c)
     L += _render_compare_discovery(c)
     return "\n".join(L)

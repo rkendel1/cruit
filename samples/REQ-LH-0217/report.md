@@ -1,19 +1,20 @@
 # Requisition assurance report — Linehaul Operations Supervisor (REQ-LH-0217)
 
-Job family `logistics-operations` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.1.0 · run 2026-11-03T12:00:00Z
+Job family `logistics-operations` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.2.0 · run 2026-11-03T12:00:00Z
 
 > This report recommends changes and human review. It does not reject, advance or hire anyone, and it does not claim any candidate was wrongly excluded. Level 1 findings are established by the supplied materials; Level 2 findings are risks that need human judgement; Level 3 findings are measured outcomes.
 
 ## Summary
 
-- **0** demonstrable inconsistencies (Level 1)
+- **1** demonstrable inconsistencies (Level 1)
 - **4** missed-talent risks and review opportunities (Level 2), including **1** candidate(s) of 4 assessed surfaced for human review
 - **0** measured outcomes (Level 3)
-- **4** findings awaiting a human decision
+- **5** findings awaiting a human decision
 
 **Inputs received:** job description: `supplied`, screening configuration: `ats_export_verified`, candidate evidence: `authorized_sample`
 
 **Limitations of this run**
+- Screening rules come from a supplied ATS configuration export; this is not a live ATS audit, and the live configuration may have changed since export.
 - Candidate evidence is a sample; candidate counts do not represent the full applicant pool.
 - Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run.
 
@@ -31,12 +32,48 @@ Job family `logistics-operations` · employer `northwind` · knowledge `core@1.1
 
 | Rule | Type | Action | Linked requirement | Status | Findings |
 |---|---|---|---|---|---|
-| Q1 | credential_filter | reject | R1 | protected | 1 |
+| Q1 | credential_filter | reject | R1 | protected | 2 |
 | Q2 | minimum_experience | reject | R2 | correction proposed | 2 |
 
-## 3. Confirmed inconsistencies
+## 3. Confirmed inconsistencies and protected requirements
 
-_None found._
+### Q1 enforces a protected requirement; no correction is proposed
+
+`SA-REQ-LH-0217-31f7b18c` · Level 1 · Established by the supplied materials · confidence **high** · check `mandatory_requirement_protected`
+
+Rule Q1 enforces a protected requirement: Commercial driver's license (Class A) is a regulated credential in the knowledge base. 2 candidate record(s) in the supplied data do not meet it, and excluding them is expected. 2 other excluded record(s) either show the credential under another spelling or cannot be verified; see the terminology finding for this rule.
+
+**Evidence**
+- `candidate:C-302` — supplied rule: listed credential not held; R1 (protected) not among the supplied credentials
+- `candidate:P-302` — supplied rule: listed credential not held; R1 (protected) not among the supplied credentials
+
+**Proposed action:** Keep the rule. Do not route around it with alternative experience.
+
+**Expected benefit:** Confirms the screen protects a legal, licensing or employer non-negotiable requirement.  
+**Trade-off:** None: relaxing it is out of scope for screening assurance.
+
+**Limitations**
+- Only spelling variants of the credential itself may be recognized (see any terminology finding for this rule).
+- Candidates whose credentials were not supplied are 'cannot verify', not 'does not meet'.
+- Rules come from a supplied ATS configuration export; this is not a live ATS audit.
+
+**Screening-risk category:** Mandatory requirement protected
+
+**Supplied rule impact** — no correction is proposed:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 4: C-302, C-303, P-302 (pool, hypothetical), P-303 (pool, hypothetical) |
+| Still fail a mandatory requirement | 2: C-302, P-302 (pool, hypothetical) |
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
+
+<sub>Sources: rule:Q1, requirement:R1. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
+
+Decision: **Pending human decision**
 
 ## 4. Potential missed-talent risks
 
@@ -49,8 +86,6 @@ Rule Q1 matches only 'CDL Class A'. The knowledge base records 5 equivalent term
 **Evidence**
 - `knowledge:skill.cdl-class-a` — recognized variant(s): Commercial driver's license (Class A), Class A CDL, CDL-A, Class A commercial driver's license, commercial driver license class A
 
-**Consequence in the supplied candidate sample:** 1 candidate(s) would pass this rule under this correction alone (C-303); 1 candidate-review opportunity depends on it (C-303).
-
 **Proposed action:** Add recognized variants to the rule: Commercial driver's license (Class A), Class A CDL, CDL-A, Class A commercial driver's license, commercial driver license class A.
 
 **Expected benefit:** Applicants describing the same work in different words are no longer filtered out.  
@@ -59,6 +94,27 @@ Rule Q1 matches only 'CDL Class A'. The knowledge base records 5 equivalent term
 **Limitations**
 - Synonyms improve recognition; they do not establish competence.
 - Terminology only. A license is never satisfied by adjacent experience.
+
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 4: C-302, C-303, P-302 (pool, hypothetical), P-303 (pool, hypothetical) |
+| Would pass the proposed rule | 1: C-303 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 1: C-303 |
+
+- C-303: eligible together with the proposed corrections to Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q1, knowledge:skill.cdl-class-a, knowledge:term.cdl-class-a. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.cdl-class-a, term.cdl-class-a.</sub>
 
@@ -81,6 +137,25 @@ Rule Q2 matches only 'Transportation Supervisor', 'Dispatch Supervisor'. The kno
 **Limitations**
 - Synonyms improve recognition; they do not establish competence.
 
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 5: C-302, C-303, C-304, P-302 (pool, hypothetical), P-303 (pool, hypothetical) |
+| Would pass the proposed rule | 0 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 0 |
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
+
 <sub>Sources: rule:Q2, knowledge:skill.transportation-supervision. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.transportation-supervision.</sub>
 
 Decision: **Pending human decision**
@@ -94,8 +169,6 @@ Rule Q2 only counts experience held under the titles 'Transportation Supervisor'
 **Evidence**
 - `rule:Q2` — 3 years as Transportation Supervisor or Dispatch Supervisor (by job title).
 
-**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-302, C-303); 1 candidate-review opportunity depends on it (C-303).
-
 **Proposed action:** Count relevant experience by responsibilities, not titles: match recognized terminology across the full résumé and route equivalency evidence to recruiter review.
 
 **Expected benefit:** Candidates whose titles differ from the conventional path reach human review.  
@@ -104,6 +177,27 @@ Rule Q2 only counts experience held under the titles 'Transportation Supervisor'
 **Limitations**
 - Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.
 - Title-based counting may reflect a deliberate employer choice; confirm intent.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 5: C-302, C-303, C-304, P-302 (pool, hypothetical), P-303 (pool, hypothetical) |
+| Would pass the proposed rule | 4: C-302, C-303, P-302 (pool, hypothetical), P-303 (pool, hypothetical) |
+| Still fail a mandatory requirement | 2: C-302, P-302 (pool, hypothetical) |
+| Evidence insufficient to tell | 1: P-303 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 1: C-303 |
+
+- C-303: eligible together with the proposed corrections to Q1
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q2, requirement:R2. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.transportation-supervision.fleet-coordination.</sub>
 
@@ -139,6 +233,8 @@ C-303 was rejected by Q1, Q2. Under the proposed corrections they pass every rul
 **What the recruiter should verify next**
 - Confirm number of drivers supervised and authority over scheduling.
 - Confirm compliance responsibilities.
+
+**Screening-risk category:** Potentially equivalent experience
 
 <sub>Sources: candidate:C-303, rule:Q1, rule:Q2. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.transportation-supervision.fleet-coordination.</sub>
 

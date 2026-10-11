@@ -21,6 +21,7 @@ It is built to prove one thing:
 | Evaluation harness with conventional and nontraditional candidates, before/after comparison when knowledge changes | [`evals/`](evals), [`src/screening_assurance/evals/`](src/screening_assurance/evals) |
 | Human review report separating confirmed inconsistencies from potential missed-talent opportunities | [`src/screening_assurance/report/`](src/screening_assurance/report), [`samples/`](samples) |
 | Pilot measurement plan + outcome measurement (measured vs. estimated, separately) | [`docs/pilot-measurement-plan.md`](docs/pilot-measurement-plan.md), [`src/screening_assurance/measure.py`](src/screening_assurance/measure.py) |
+| Forward screening assurance: screening-risk categories and before/after correction simulation | [`src/screening_assurance/engine/risks.py`](src/screening_assurance/engine/risks.py), [`docs/screening-risks.md`](docs/screening-risks.md) |
 | Candidate rediscovery over an authorized pool + local recruiter workbench | [`src/screening_assurance/engine/discovery.py`](src/screening_assurance/engine/discovery.py), [`src/screening_assurance/workbench/`](src/screening_assurance/workbench), [`docs/workbench.md`](docs/workbench.md) |
 
 Deliberately **not** built yet (per the blueprint): ATS API integrations, an elaborate dashboard, a large
@@ -65,6 +66,15 @@ sa workbench                      # opens http://127.0.0.1:8765/ ; workspace dat
    *Knowledge and evaluation* **Run evaluation** and **Compare** against production. Earlier runs still verify,
    because each run keeps a copy of the exact knowledge it used.
 
+**Screening risks (look forward).** In the same session, **Screening risks** shows where the supplied rules may
+exclude people whose evidence could meet the requirement. Pick *Q1 is narrower than R1*: you see the requirement
+and the rule, the evidence, a proposed correction, and a deterministic **before/after simulation** — who the supplied
+rule excludes, who would pass the corrected rule, who still fails a mandatory requirement, whose evidence is
+insufficient, whose relevance is not established, and who becomes newly eligible for human review. Authorized pool
+records appear as clearly labelled hypotheticals. Record *Accept* with a rationale, re-run, export *Screening risks and
+simulations*, and **Verify**. Protected requirements (the linehaul licence) are shown with no correction proposed.
+Details and evidence limits: [docs/screening-risks.md](docs/screening-risks.md).
+
 What the workbench will not do: contact anyone, write to an ATS, advance or reject candidates, rank people,
 or treat a prior application as permission to contact. See [docs/workbench.md](docs/workbench.md) for the
 data boundaries, the candidate-pool contract and the security model.
@@ -82,7 +92,7 @@ sa eval                          # regression suite against expert-labeled cases
 sa eval-compare --baseline release:1.0.0 --candidate pack   # what changed when knowledge changed
 sa portfolio examples --out out  # portfolio overview across requisitions
 sa discover examples/northwind/requisitions/REQ-SRE-0142 --out out   # rediscovery from the CLI
-pytest                           # 84 tests
+pytest                           # 105 tests
 ```
 
 Pre-rendered output for every example is committed under [`samples/`](samples) (`make samples` regenerates it).
@@ -167,7 +177,10 @@ pilot cases showed 1.0.0 missing them:
 The suite also evaluates **candidate rediscovery** on synthetic fixtures (`evals/discovery/`): relevant surfaced
 and missed, irrelevant surfaced, over-claimed certainty, mandatory-requirement and blocked-record violations,
 and how many results need human verification. Under 1.0.0 two relevant candidates are missed (recall 0.846);
-1.1.0 surfaces them (1.0) without surfacing anyone who lacks the legally required license.
+1.1.0 surfaces them (1.0) without surfacing anyone who lacks the legally required license. Screening-risk simulations
+are scored the same way, plus 17 labelled scenario expectations (narrow rule, preferred-as-knockout, terminology,
+valid and unsupported alternatives, mandatory blocking, insufficient evidence, irrelevant pass-through, rule-level
+only): 1.0.0 meets 15 of 17 (recall 0.778), 1.1.0 meets all 17, with no irrelevant or mandatory violations.
 
 These figures come from **illustrative cases authored alongside the seed knowledge**; they show the harness
 working, not real-world accuracy. Establishing that requires design-partner data — see the
@@ -203,3 +216,4 @@ tests/                pytest suite
 - [Pilot measurement plan](docs/pilot-measurement-plan.md) — acceptance criteria and how to tell whether surfaced candidates are genuinely qualified and recruiter effort is justified.
 - [Integration contract](docs/integration-contract.md) — what an ATS connector must provide, and the audit/retention rules.
 - [Workbench](docs/workbench.md) — the recruiter workflow, candidate-pool contract, discovery groups, data boundaries and security model.
+- [Screening risks](docs/screening-risks.md) — forward screening assurance: risk categories, correction simulation, evidence limits, decision history.

@@ -159,7 +159,7 @@
       },
       "group": "transferable",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the ATS-exported screening configuration).",
+        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the supplied ATS configuration export (not a live ATS audit)).",
         "Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology).",
         "At least one requirement is supported through an alternative path that a recruiter must verify."
       ],
@@ -270,7 +270,7 @@
             "reason": "0 relevant months vs 36 required"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": [
           "SA-REQ-LH-0217-6f063ac1"
@@ -429,7 +429,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -520,7 +520,7 @@
             "reason": "0 relevant months vs 36 required"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },
@@ -552,7 +552,7 @@
       },
       "group": "not_surfaced",
       "why": [
-        "Applied to this requisition and was rejected; excluded by Q2 (simulated against the ATS-exported screening configuration)."
+        "Applied to this requisition and was rejected; excluded by Q2 (simulated against the supplied ATS configuration export (not a live ATS audit))."
       ],
       "requirements": [
         {
@@ -631,7 +631,7 @@
             "reason": "0 relevant months vs 36 required"
           }
         ],
-        "basis": "simulated against the ATS-exported screening configuration",
+        "basis": "simulated against the supplied ATS configuration export (not a live ATS audit)",
         "established": true,
         "related_findings": []
       },

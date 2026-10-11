@@ -95,8 +95,11 @@ def test_transferable_skills_are_not_over_applied(pack):
 def test_protected_license_is_never_relaxed(pack):
     r = run("REQ-LH-0217", pack)
     assert surfaced(r) == ["C-303"]
-    q1 = {f.check for f in r.findings if f.rule_id == "Q1"}
-    assert q1 == {"literal_term_missing_variants"}  # spelling variants only
+    q1 = {f.check for f in r.findings if f.rule_id == "Q1" and f.proposed_change}
+    assert q1 == {"literal_term_missing_variants"}  # spelling variants are the only correction proposed
+    protected = by_check(r, "mandatory_requirement_protected", rule_id="Q1")[0]
+    assert protected.proposed_change is None and "C-302" in protected.affected_candidates
+    assert "C-303" not in protected.affected_candidates  # holds the license under another spelling
     rule = next(x for x in r.rules if x.id == "Q1")
     assert rule.status == "protected"
     c302 = next(c for c in r.candidates if c.candidate_id == "C-302")
@@ -122,7 +125,10 @@ def test_skill_combination_alone_does_not_surface(pack):
 def test_unexplained_exclusions_are_disclosed(pack):
     r = run("REQ-SRE-0142", pack)
     f = by_check(r, "unexplained_exclusions")[0]
-    assert f.affected_candidates == ["C-113"] and f.category == "input_limitation"
+    assert f.affected_candidates == ["C-113", "C-114"] and f.category == "input_limitation"
+    c114 = next(e for e in f.evidence if e["source"] == "candidate:C-114")
+    assert "Q3" in c114["text"]  # the rule that could not be evaluated is named
+    assert f.simulation["evaluable"] is False and f.risk_category == "insufficient_or_unknown"
 
 
 def test_documented_rules_are_disclosed_as_unverified(pack):

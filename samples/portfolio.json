@@ -3,7 +3,7 @@
     "requisitions": 4,
     "confirmed_inconsistencies": 15,
     "approved_corrections": 15,
-    "awaiting_decision": 17,
+    "awaiting_decision": 18,
     "candidate_review_opportunities": 10
   },
   "priority_work": [
@@ -184,17 +184,18 @@
       "title": "Linehaul Operations Supervisor",
       "job_family": "logistics-operations",
       "knowledge": "core@1.1.0+8a94e741e4",
-      "findings": 4,
+      "findings": 5,
       "by_category": {
+        "mandatory_protected": 1,
         "design_risk": 3,
         "candidate_review_opportunity": 1
       },
       "by_level": {
-        "level_1": 0,
+        "level_1": 1,
         "level_2": 4,
         "level_3": 0
       },
-      "pending_decisions": 4,
+      "pending_decisions": 5,
       "candidates_assessed": 4,
       "candidates_surfaced": 1
     },
@@ -237,7 +238,7 @@
         "level_3": 1
       },
       "pending_decisions": 1,
-      "candidates_assessed": 13,
+      "candidates_assessed": 14,
       "candidates_surfaced": 6
     }
   ]

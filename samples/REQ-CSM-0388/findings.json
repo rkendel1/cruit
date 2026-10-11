@@ -17,7 +17,7 @@
     "status": "approved",
     "path": "knowledge/releases/1.1.0"
   },
-  "engine_version": "0.1.0",
+  "engine_version": "0.2.0",
   "run_at": "2026-11-03T12:00:00Z",
   "inputs": {
     "job_description": "supplied",
@@ -263,6 +263,89 @@
         "decided_by": "head-of-cs@northwind.example",
         "decided_at": "2026-10-13T14:05:00Z"
       },
+      "risk_category": "equivalent_experience",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q1",
+        "supplied": {
+          "terms": [
+            "customer success"
+          ],
+          "match": "any",
+          "field": "resume"
+        },
+        "proposed": {
+          "terms": [
+            "customer success"
+          ],
+          "match": "any",
+          "field": "resume",
+          "allows_equivalent": true,
+          "equivalencies": [
+            "eq.customer-success.b2b-account-management"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202",
+            "C-204"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202",
+            "C-204"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 6,
+          "would_pass_proposed_rule": 2,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 2
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: no listed term found; proposed rule: equivalent path: eq.customer-success.b2b-account-management satisfied",
+          "C-203": "supplied rule: no listed term found",
+          "C-204": "supplied rule: no listed term found; proposed rule: equivalent path: eq.customer-success.b2b-account-management satisfied",
+          "C-205": "supplied rule: no listed term found",
+          "C-206": "supplied rule: no listed term found",
+          "C-208": "supplied rule: no listed term found"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q2, Q3",
+          "C-204": "together with the proposed corrections to Q2, Q3"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Demonstrable inconsistency"
     },
     {
@@ -326,6 +409,90 @@
         "decided_by": "head-of-cs@northwind.example",
         "decided_at": "2026-10-13T14:02:00Z"
       },
+      "risk_category": "rule_narrower",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q3",
+        "supplied": {
+          "credentials": [
+            "Salesforce Certified Administrator"
+          ]
+        },
+        "proposed": {
+          "credentials": [
+            "Salesforce Certified Administrator"
+          ],
+          "evidence_concepts": [
+            "skill.salesforce"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-207",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202",
+            "C-204",
+            "C-208"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [
+            "C-208"
+          ],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202",
+            "C-204"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 7,
+          "would_pass_proposed_rule": 3,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 1,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 2
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-207": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: listed credential not held; proposed rule: credential absent; capability evidenced under proposed correction",
+          "C-203": "supplied rule: listed credential not held",
+          "C-204": "supplied rule: listed credential not held; proposed rule: credential absent; capability evidenced under proposed correction",
+          "C-205": "supplied rule: listed credential not held",
+          "C-206": "supplied rule: listed credential not held",
+          "C-207": "supplied rule: listed credential not held",
+          "C-208": "supplied rule: listed credential not held; proposed rule: credential absent; capability evidenced under proposed correction; required evidence missing for R1, R2"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q1, Q2",
+          "C-204": "together with the proposed corrections to Q1, Q2"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Demonstrable inconsistency"
     },
     {
@@ -388,6 +555,94 @@
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "preferred_as_knockout",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q3",
+        "supplied": {
+          "credentials": [
+            "Salesforce Certified Administrator"
+          ]
+        },
+        "proposed": {
+          "removed": true
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-207",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-207",
+            "C-208"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [
+            "C-203",
+            "C-205",
+            "C-206",
+            "C-208"
+          ],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202",
+            "C-204",
+            "C-207"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 7,
+          "would_pass_proposed_rule": 7,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 4,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 3
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-207": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction",
+          "C-203": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction; required evidence missing for R1, R2",
+          "C-204": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction",
+          "C-205": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction; required evidence missing for R1, R2",
+          "C-206": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction; required evidence missing for R1, R2, R5",
+          "C-207": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction",
+          "C-208": "supplied rule: listed credential not held; proposed rule: rule not applied under proposed correction; required evidence missing for R1, R2"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q1, Q2",
+          "C-204": "together with the proposed corrections to Q1, Q2",
+          "C-207": "this correction alone"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
       },
       "evidence_label": "Demonstrable inconsistency"
     },
@@ -454,6 +709,87 @@
         "rationale": "Client success and customer success are the same job here. Exclude the CSM abbreviation per the ambiguity note.",
         "decided_by": "recruiter.diaz@northwind.example",
         "decided_at": "2026-10-13T13:40:00Z"
+      },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q1",
+        "supplied": {
+          "terms": [
+            "customer success"
+          ],
+          "match": "any",
+          "field": "resume"
+        },
+        "proposed": {
+          "terms": [
+            "customer success",
+            "client success",
+            "customer success management",
+            "customer success manager",
+            "client success manager",
+            "CSM"
+          ],
+          "match": "any",
+          "field": "resume"
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 6,
+          "would_pass_proposed_rule": 1,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 1
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: no listed term found; proposed rule: matched ['client success']",
+          "C-203": "supplied rule: no listed term found",
+          "C-204": "supplied rule: no listed term found",
+          "C-205": "supplied rule: no listed term found",
+          "C-206": "supplied rule: no listed term found",
+          "C-208": "supplied rule: no listed term found"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q2, Q3"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -524,6 +860,83 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q2",
+        "supplied": {
+          "titles": [
+            "Customer Success Manager"
+          ]
+        },
+        "proposed": {
+          "terms": [
+            "Customer Success Manager",
+            "Customer success",
+            "client success",
+            "customer success management",
+            "client success manager",
+            "CSM"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 6,
+          "would_pass_proposed_rule": 1,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 1
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: no matching title; proposed rule: matching title found",
+          "C-203": "supplied rule: no matching title",
+          "C-204": "supplied rule: no matching title",
+          "C-205": "supplied rule: no matching title",
+          "C-206": "supplied rule: no matching title",
+          "C-208": "supplied rule: no matching title"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q1, Q3"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Plausible missed-talent risk"
     },
     {
@@ -593,6 +1006,90 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "rule_narrower",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q2",
+        "supplied": {
+          "titles": [
+            "Customer Success Manager"
+          ]
+        },
+        "proposed": {
+          "field": "resume",
+          "terms": [
+            "Customer Success Manager",
+            "Customer success",
+            "client success",
+            "customer success management",
+            "client success manager",
+            "CSM"
+          ],
+          "equivalencies": [
+            "eq.customer-success.b2b-account-management"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [
+            "C-202",
+            "C-204"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-202",
+            "C-204"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 6,
+          "would_pass_proposed_rule": 2,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 2
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: no matching title; proposed rule: matching title found",
+          "C-203": "supplied rule: no matching title",
+          "C-204": "supplied rule: no matching title; proposed rule: matching title found",
+          "C-205": "supplied rule: no matching title",
+          "C-206": "supplied rule: no matching title",
+          "C-208": "supplied rule: no matching title"
+        },
+        "eligibility_basis": {
+          "C-202": "together with the proposed corrections to Q1, Q3",
+          "C-204": "together with the proposed corrections to Q1, Q3"
+        },
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Plausible missed-talent risk"
     },
     {
@@ -646,6 +1143,76 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q3",
+        "supplied": {
+          "credentials": [
+            "Salesforce Certified Administrator"
+          ]
+        },
+        "proposed": {
+          "credentials": [
+            "Salesforce Certified Administrator",
+            "Salesforce Administrator certification"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-202",
+            "C-203",
+            "C-204",
+            "C-205",
+            "C-206",
+            "C-207",
+            "C-208"
+          ],
+          "would_pass_proposed_rule": [],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": []
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 7,
+          "would_pass_proposed_rule": 0,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 0
+        },
+        "sources": {
+          "C-202": "applicant",
+          "C-203": "applicant",
+          "C-204": "applicant",
+          "C-205": "applicant",
+          "C-206": "applicant",
+          "C-207": "applicant",
+          "C-208": "applicant"
+        },
+        "notes": {
+          "C-202": "supplied rule: listed credential not held",
+          "C-203": "supplied rule: listed credential not held",
+          "C-204": "supplied rule: listed credential not held",
+          "C-205": "supplied rule: listed credential not held",
+          "C-206": "supplied rule: listed credential not held",
+          "C-207": "supplied rule: listed credential not held",
+          "C-208": "supplied rule: listed credential not held"
+        },
+        "eligibility_basis": {},
+        "population": {
+          "applicants": 8,
+          "pool_records": 0
+        },
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Plausible missed-talent risk"
     },
     {
@@ -690,6 +1257,14 @@
         "rationale": "Any modern CRM is fine; Salesforce is learnable in a few weeks.",
         "decided_by": "head-of-cs@northwind.example",
         "decided_at": "2026-10-13T14:00:00Z"
+      },
+      "risk_category": "insufficient_or_unknown",
+      "simulation": {
+        "evaluable": false,
+        "reason": "No configuration correction is proposed: this finding asks the employer to classify the requirement. Its effect appears after a recorded decision and a re-run.",
+        "limitations": [
+          "Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -797,6 +1372,39 @@
       ],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "kind": "candidate",
+        "rules": [
+          {
+            "rule": "Q1",
+            "supplied": false,
+            "supplied_reason": "no listed term found",
+            "proposed": true,
+            "proposed_reason": "matched ['client success']"
+          },
+          {
+            "rule": "Q2",
+            "supplied": false,
+            "supplied_reason": "no matching title",
+            "proposed": true,
+            "proposed_reason": "matching title found"
+          },
+          {
+            "rule": "Q3",
+            "supplied": false,
+            "supplied_reason": "listed credential not held",
+            "proposed": true,
+            "proposed_reason": "rule not applied under proposed correction"
+          }
+        ],
+        "result": "passes every rule under the proposed corrections",
+        "limitations": [
+          "Combined effect of all proposed corrections that a human has not rejected.",
+          "Passing the rules does not mean the candidate is qualified."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -921,6 +1529,39 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "equivalent_experience",
+      "simulation": {
+        "evaluable": true,
+        "kind": "candidate",
+        "rules": [
+          {
+            "rule": "Q1",
+            "supplied": false,
+            "supplied_reason": "no listed term found",
+            "proposed": true,
+            "proposed_reason": "equivalent path: eq.customer-success.b2b-account-management satisfied"
+          },
+          {
+            "rule": "Q2",
+            "supplied": false,
+            "supplied_reason": "no matching title",
+            "proposed": true,
+            "proposed_reason": "matching title found"
+          },
+          {
+            "rule": "Q3",
+            "supplied": false,
+            "supplied_reason": "listed credential not held",
+            "proposed": true,
+            "proposed_reason": "rule not applied under proposed correction"
+          }
+        ],
+        "result": "passes every rule under the proposed corrections",
+        "limitations": [
+          "Combined effect of all proposed corrections that a human has not rejected.",
+          "Passing the rules does not mean the candidate is qualified."
+        ]
+      },
       "evidence_label": "Plausible missed-talent risk"
     },
     {
@@ -994,6 +1635,25 @@
       ],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "preferred_as_knockout",
+      "simulation": {
+        "evaluable": true,
+        "kind": "candidate",
+        "rules": [
+          {
+            "rule": "Q3",
+            "supplied": false,
+            "supplied_reason": "listed credential not held",
+            "proposed": true,
+            "proposed_reason": "rule not applied under proposed correction"
+          }
+        ],
+        "result": "passes every rule under the proposed corrections",
+        "limitations": [
+          "Combined effect of all proposed corrections that a human has not rejected.",
+          "Passing the rules does not mean the candidate is qualified."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     }

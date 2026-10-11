@@ -6,12 +6,12 @@
 | Metric | Baseline | Candidate | Δ |
 |---|---|---|---|
 | cases | 4 | 4 | 0 |
-| expected findings | 28 | 28 | 0 |
-| expected found | 25 | 28 | 3 |
-| expected finding recall | 0.893 | 1.0 | 0.107 |
+| expected findings | 29 | 29 | 0 |
+| expected found | 26 | 29 | 3 |
+| expected finding recall | 0.897 | 1.0 | 0.103 |
 | forbidden violations | 0 | 0 | 0 |
 | guardrail violations | 0 | 0 | 0 |
-| candidates flagged | 8 | 10 | 2 |
+| candidates flagged | 9 | 11 | 2 |
 | true positives | 8 | 10 | 2 |
 | false positives | 0 | 0 | 0 |
 | missed qualified | 2 | 0 | -2 |
@@ -43,6 +43,23 @@ _No change._
 - ✎ `SA-REQ-SRE-0142-b05a4c5a` Q1 matches literally and misses recognized variants of Site reliability engineering: {'affected': [['C-111'], ['C-102', 'C-111']]}
 - Newly flagged for review: C-106
 - ✅ expected finding now found: candidate_review_opportunity C-106
+
+## Screening risks (forward simulation)
+
+> **SYNTHETIC FIXTURE RESULTS — not a measure of real-world accuracy**
+
+| Metric | Baseline | Candidate |
+|---|---|---|
+| relevant surfaced | 7 | 9 |
+| relevant missed | 2 | 0 |
+| irrelevant surfaced | 0 | 0 |
+| mandatory violations | 0 | 0 |
+| policy violations | 0 | 0 |
+| needs human verification | 12 | 13 |
+| unknown cause | 2 | 2 |
+| expectations | 17 | 17 |
+| expectations met | 15 | 17 |
+| relevant recall | 0.778 | 1.0 |
 
 ## Candidate rediscovery
 
