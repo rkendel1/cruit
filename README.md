@@ -20,7 +20,8 @@ It is built to prove one thing:
 | Diagnostic engine: requisition + screening rules (+ authorized candidate evidence) → traceable findings | [`src/screening_assurance/engine/`](src/screening_assurance/engine) |
 | Evaluation harness with conventional and nontraditional candidates, before/after comparison when knowledge changes | [`evals/`](evals), [`src/screening_assurance/evals/`](src/screening_assurance/evals) |
 | Human review report separating confirmed inconsistencies from potential missed-talent opportunities | [`src/screening_assurance/report/`](src/screening_assurance/report), [`samples/`](samples) |
-| Pilot measurement plan + outcome measurement (measured vs. estimated, separately) | [`docs/pilot-measurement-plan.md`](docs/pilot-measurement-plan.md), [`src/screening_assurance/measure.py`](src/screening_assurance/measure.py) |
+| Pilot measurement plan + outcome measurement (measured vs. estimated, separately) | [`docs/pilot-measurement-plan.md`](docs/pilot-measurement-plan.md), [`src/screening_assurance/measure/`](src/screening_assurance/measure) |
+| Design-partner validation: independently reviewed datasets, baseline vs. product, explicit unknowns, versioned results | [`docs/validation.md`](docs/validation.md), [`src/screening_assurance/measure/validation.py`](src/screening_assurance/measure/validation.py), `sa measure` |
 | Forward screening assurance: screening-risk categories and before/after correction simulation | [`src/screening_assurance/engine/risks.py`](src/screening_assurance/engine/risks.py), [`docs/screening-risks.md`](docs/screening-risks.md) |
 | Candidate rediscovery over an authorized pool + local recruiter workbench | [`src/screening_assurance/engine/discovery.py`](src/screening_assurance/engine/discovery.py), [`src/screening_assurance/workbench/`](src/screening_assurance/workbench), [`docs/workbench.md`](docs/workbench.md) |
 
@@ -92,7 +93,8 @@ sa eval                          # regression suite against expert-labeled cases
 sa eval-compare --baseline release:1.0.0 --candidate pack   # what changed when knowledge changed
 sa portfolio examples --out out  # portfolio overview across requisitions
 sa discover examples/northwind/requisitions/REQ-SRE-0142 --out out   # rediscovery from the CLI
-pytest                           # 105 tests
+sa measure evals/validation/northwind-synthetic.yaml   # validation against independently reviewed cases (synthetic here)
+pytest                           # 147 tests
 ```
 
 Pre-rendered output for every example is committed under [`samples/`](samples) (`make samples` regenerates it).
@@ -194,7 +196,7 @@ src/screening_assurance/
   schemas/            JSON Schema data contracts (knowledge, requisition, candidates, policy, decisions, outcomes, eval cases, proposals)
   knowledge/          pack loading/indexing, validation, diff, release/promote/rollback registry
   engine/             interpret (normalize + knowledge), checks (design findings), rules (simulation), candidates, orchestration
-  measure.py          outcome & investment measurement (Level 3)
+  measure/            outcome & investment measurement (Level 3); validation.py: design-partner validation datasets
   report/             markdown + HTML requisition reports, discovery section, change proposals, portfolio overview
   workbench/          local web workbench: workspace (sessions, runs, decisions, exports, retention) + loopback server + static UI
   evals/              evaluation harness and knowledge comparison
@@ -202,7 +204,7 @@ src/screening_assurance/
 knowledge/            pack/ (working copy), releases/<ver>/, deployments.yaml, proposals/
 examples/northwind/   fictional employer: policy + 4 requisitions (SRE, customer success, linehaul w/ protected license, pre-publication RevOps),
                       with authorized candidate pools for SRE and linehaul
-evals/                labeled screening cases, synthetic discovery cases, regression thresholds
+evals/                labeled screening cases, synthetic discovery cases, regression thresholds, synthetic validation dataset
 samples/              committed output of `make samples`
 docs/                 blueprint, architecture, knowledge authoring, pilot measurement plan, integration contract
 tests/                pytest suite
@@ -216,4 +218,5 @@ tests/                pytest suite
 - [Pilot measurement plan](docs/pilot-measurement-plan.md) — acceptance criteria and how to tell whether surfaced candidates are genuinely qualified and recruiter effort is justified.
 - [Integration contract](docs/integration-contract.md) — what an ATS connector must provide, and the audit/retention rules.
 - [Workbench](docs/workbench.md) — the recruiter workflow, candidate-pool contract, discovery groups, data boundaries and security model.
+- [Validation](docs/validation.md) — measuring against independently reviewed design-partner cases: dataset contract, `sa measure`, metric definitions, limitations.
 - [Screening risks](docs/screening-risks.md) — forward screening assurance: risk categories, correction simulation, evidence limits, decision history.

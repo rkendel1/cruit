@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://screening-assurance.dev/schemas/validation_dataset.schema.json",
+  "title": "Validation dataset (design-partner or synthetic)",
+  "description": "Recruiter-reviewed hiring cases used to measure Screening Assurance. Inputs reuse the existing requisition, policy, candidates and candidate_pool contracts by path. Every label is explicit: unknown, unavailable and unreviewed outcomes are stated, never implied. No contact details or protected characteristics.",
+  "type": "object",
+  "required": ["dataset_id", "contract_version", "kind", "source", "authorization", "cases"],
+  "additionalProperties": false,
+  "$defs": {
+    "opaque": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,40}$" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}" },
+    "text": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "relevance_review": {
+      "type": "object",
+      "required": ["reviewer", "judgment", "mandatory", "rationale", "reviewed_at", "saw_product_output"],
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": { "$ref": "#/$defs/opaque", "description": "Opaque reviewer reference, e.g. REV-A." },
+        "judgment": { "enum": ["relevant", "not_relevant", "unassessable"] },
+        "mandatory": {
+          "description": "Reviewer's disposition of the requisition's mandatory requirements for this candidate.",
+          "enum": ["met", "not_met", "cannot_verify", "not_assessed"]
+        },
+        "rationale": { "$ref": "#/$defs/text" },
+        "reviewed_at": { "$ref": "#/$defs/date" },
+        "saw_product_output": {
+          "description": "False when the reviewer judged the evidence against the requirements without seeing Screening Assurance output.",
+          "type": "boolean"
+        }
+      }
+    },
+    "finding_review": {
+      "type": "object",
+      "required": ["reviewer", "judgment", "rationale", "reviewed_at"],
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": { "$ref": "#/$defs/opaque" },
+        "judgment": { "enum": ["confirmed", "unsupported", "irrelevant", "needs_more_evidence", "deferred"] },
+        "rationale": { "$ref": "#/$defs/text" },
+        "reviewed_at": { "$ref": "#/$defs/date" }
+      }
+    },
+    "adjudication": {
+      "type": "object",
+      "required": ["judgment", "adjudicator", "rationale", "decided_at"],
+      "additionalProperties": false,
+      "properties": {
+        "judgment": { "type": "string" },
+        "mandatory": { "enum": ["met", "not_met", "cannot_verify", "not_assessed"] },
+        "adjudicator": { "$ref": "#/$defs/opaque" },
+        "rationale": { "$ref": "#/$defs/text" },
+        "decided_at": { "$ref": "#/$defs/date" }
+      }
+    },
+    "finding_matcher": {
+      "type": "object",
+      "required": ["check"],
+      "additionalProperties": false,
+      "properties": {
+        "check": { "type": "string" },
+        "rule": { "type": "string" },
+        "requirement": { "type": "string" },
+        "candidate": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "dataset_id": { "$ref": "#/$defs/opaque" },
+    "contract_version": { "const": 1 },
+    "kind": {
+      "description": "synthetic fixtures are never reported as design-partner evidence.",
+      "enum": ["synthetic", "design_partner"]
+    },
+    "source": {
+      "type": "object",
+      "required": ["provider", "dataset_version", "collected_at", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "provider": { "type": "string", "maxLength": 120 },
+        "dataset_version": { "type": "string", "maxLength": 40 },
+        "collected_at": { "$ref": "#/$defs/date" },
+        "description": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "required": ["basis", "de_identified", "permitted_uses", "retention_days", "deletion", "granted_by"],
+      "additionalProperties": false,
+      "properties": {
+        "basis": { "type": "string", "maxLength": 500 },
+        "de_identified": { "const": true },
+        "permitted_uses": { "type": "array", "contains": { "const": "product_validation" }, "items": { "enum": ["product_validation", "screening_audit", "rediscovery_review"] } },
+        "retention_days": { "type": "integer", "minimum": 1, "maximum": 3650 },
+        "deletion": { "enum": ["delete_results_and_dataset", "delete_results_only"] },
+        "granted_by": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "scenario", "requisition", "policy", "baseline", "candidate_assessments", "finding_reviews"],
+        "additionalProperties": false,
+        "properties": {
+          "case_id": { "$ref": "#/$defs/opaque" },
+          "scenario": { "type": "string", "maxLength": 120, "description": "Grouping label, e.g. job family or evaluation scenario." },
+          "requisition": { "type": "string", "description": "Path to a requisition contract file, relative to the dataset file." },
+          "policy": { "type": "string" },
+          "candidates": { "type": "string" },
+          "pool": { "type": "string" },
+          "decisions": { "type": "string", "description": "Optional decisions contract file: the recruiter decision snapshot the product run used." },
+          "as_of": { "$ref": "#/$defs/date" },
+          "baseline": {
+            "description": "What the existing screening process actually did.",
+            "type": "object",
+            "required": ["source", "observations"],
+            "additionalProperties": false,
+            "properties": {
+              "source": { "enum": ["ats_export", "recruiter_records", "not_available"] },
+              "note": { "type": "string", "maxLength": 1000 },
+              "observations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["candidate", "outcome", "basis"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "candidate": { "$ref": "#/$defs/opaque" },
+                    "outcome": { "enum": ["advanced", "in_review", "rejected", "deprioritized", "not_reviewed", "not_applied", "unknown"] },
+                    "excluded_by_rule": { "type": "string" },
+                    "basis": { "enum": ["observed", "inferred", "unknown"] }
+                  }
+                }
+              }
+            }
+          },
+          "candidate_assessments": {
+            "description": "Independent human review of relevance to the actual requirements.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["candidate", "reviews"],
+              "additionalProperties": false,
+              "properties": {
+                "candidate": { "$ref": "#/$defs/opaque" },
+                "reviews": { "type": "array", "items": { "$ref": "#/$defs/relevance_review" } },
+                "adjudication": { "$ref": "#/$defs/adjudication" }
+              }
+            }
+          },
+          "finding_reviews": {
+            "description": "Independent human review of screening-risk findings, matched by check and rule/requirement/candidate (stable across runs).",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["finding", "reviews"],
+              "additionalProperties": false,
+              "properties": {
+                "finding": { "$ref": "#/$defs/finding_matcher" },
+                "reviews": { "type": "array", "items": { "$ref": "#/$defs/finding_review" } },
+                "adjudication": { "$ref": "#/$defs/adjudication" }
+              }
+            }
+          },
+          "recruiter_decisions": {
+            "description": "Subsequent recruiter decisions (distinct from independent review).",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["subject", "decision", "changed_after_evidence", "decided_by"],
+              "additionalProperties": false,
+              "properties": {
+                "subject": { "type": "string", "maxLength": 80, "description": "Opaque candidate reference or finding check:rule." },
+                "decision": { "type": "string", "maxLength": 80 },
+                "changed_after_evidence": { "type": "boolean" },
+                "decided_by": { "$ref": "#/$defs/opaque" }
+              }
+            }
+          },
+          "downstream": {
+            "description": "Observed downstream outcomes only. attributable records whether the partner's records establish that the outcome followed from a Screening Assurance-surfaced review.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["candidate", "outcome", "observed", "attributable"],
+              "additionalProperties": false,
+              "properties": {
+                "candidate": { "$ref": "#/$defs/opaque" },
+                "outcome": { "enum": ["interviewed", "offer", "hired", "no_further_action", "withdrew", "unknown"] },
+                "observed": { "type": "boolean" },
+                "attributable": { "type": "boolean" },
+                "note": { "type": "string", "maxLength": 500 }
+              }
+            }
+          },
+          "workflow_time": {
+            "type": "object",
+            "required": ["measured"],
+            "additionalProperties": false,
+            "properties": {
+              "measured": { "type": "boolean" },
+              "baseline_minutes": { "type": "number", "minimum": 0 },
+              "assisted_minutes": { "type": "number", "minimum": 0 },
+              "method": { "type": "string", "maxLength": 500 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -35,6 +35,7 @@ SCHEMA_NAMES = (
     "candidate_pool",
     "review_decisions",
     "discovery_case",
+    "validation_dataset",
 )
 
 # Fields that must never appear in candidate evidence. The candidates schema

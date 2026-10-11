@@ -20,13 +20,21 @@ Acceptance criteria are fixed *before* the pilot starts and recorded in the enga
 |---|---|---|
 | 0. Baseline | Record the baseline period for each requisition *before* any change. | `outcomes.yaml` → `baseline` |
 | 1. Diagnose | Run the engine; deliver reports. | `sa diagnose`, `report.html` |
-| 2. Independent validation | A recruiting expert who did not see the engine's output labels a sample of excluded candidates (meets / does not meet / insufficient evidence). These become eval cases. | `evals/cases/*.yaml` (`expert_labels`) |
+| 2. Independent validation | Recruiting experts who did not see the engine's output label candidate relevance and mandatory requirements, and review findings; disagreements are adjudicated or left visibly unresolved. The ATS baseline is recorded alongside. | Validation dataset (`sa schema validation_dataset`), `sa measure` — see [validation.md](validation.md) |
 | 3. Review | Recruiter and hiring manager decide each finding with a rationale. | `decisions.yaml` |
 | 4. Correct | Employer implements accepted changes in the ATS. | `changes.yaml` |
 | 5. Observe | Record after-change period and every additional candidate review (minutes, outcome, stage reached). | `outcomes.yaml` → `after_change`, `candidate_reviews` |
-| 6. Report | Measured results, separately labelled estimates, attribution, new risks. | report §8, `sa portfolio` |
+| 6. Report | Measured results, separately labelled estimates, attribution, new risks. | report §8, `sa portfolio`, `sa measure` report, `sa measure-compare` across versions |
 
 Blind labelling in phase 2 matters: labels made after seeing the engine's evidence are anchored by it.
+Partner labels stay in the validation dataset; they are not copied into `evals/cases`, which remains the
+synthetic knowledge regression suite. Only reviewed knowledge proposals change knowledge.
+
+The metric IDs below map to the validation result (`result.json` → `definitions`): finding confirmation
+rate is **F1** (with F2–F5 reported beside it — unreviewed findings are never counted as confirmed);
+surfacing precision is **1 − D3** over surfaced candidates with a resolved label; relevant candidates the
+existing process missed and the product recovered are **B1–B3**; guardrail violations are **V1/V2**;
+recruiter time is **W1** (measured cases only).
 
 ## Metrics
 
