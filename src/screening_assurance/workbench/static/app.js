@@ -79,7 +79,7 @@ const FIND_DISP = { accepted: "Accept", rejected: "Reject", deferred: "Defer", r
                     confirmed_necessary: "Confirm the requirement is necessary", reclassified_preferred: "Reclassify as preferred",
                     approved_candidate_review: "Approve candidate review" };
 const LEVEL = { 1: ["Level 1", "Demonstrable inconsistency", "bad"], 2: ["Level 2", "Missed-talent risk", "warn"], 3: ["Level 3", "Measured impact", "ok"] };
-const CONFIG = { ats_export_verified: ["Verified ATS configuration (export)", "ok"], ats_api_verified: ["Verified ATS configuration (API)", "ok"],
+const CONFIG = { ats_export_verified: ["Supplied ATS configuration export (not a live audit)", "ok"], ats_api_verified: ["ATS configuration as read at export time (not a live audit)", "ok"],
                  recruiter_documentation: ["Recruiter documentation, not verified", "warn"], not_supplied: ["No screening configuration supplied", "bad"] };
 
 // ------------------------------------------------------------------ shell
@@ -93,7 +93,7 @@ function renderShell() {
     h("span", {}, "Knowledge ", h("b", { class: "mono" }, S.run.run.knowledge.fingerprint)));
   const nav = $("steps"); nav.replaceChildren();
   const steps = [["intake", "Requisition intake", true], ["discovery", "Candidate discovery", !!S.run],
-                 ["findings", "Screening findings", !!S.run], ["review", "Review and export", !!S.run]];
+                 ["findings", "Screening risks", !!S.run], ["review", "Review and export", !!S.run]];
   steps.forEach(([id, label, enabled], i) => nav.append(h("button", {
     "aria-current": S.view === id ? "page" : false, disabled: !enabled,
     onclick: () => { S.view = id; render(); } }, h("span", { class: "n" }, i + 1), label)));
@@ -349,55 +349,107 @@ function candidateDecisionBox(e) {
     h("p", { class: "sub mt8" }, "Recorded in this workspace only. Nothing is sent to the ATS or the candidate."));
 }
 
-// ------------------------------------------------------------------ C. findings
+// ------------------------------------------------------------------ C. screening risks
 function findingDecision(id) { return (S.session.decisions || []).find(d => d.finding_id === id); }
 function findingLink(fid) { return h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); S.selFinding = fid; S.view = "findings"; render(); } }, fid); }
+function levelText(f) { return f.category === "mandatory_protected" ? "Established by supplied materials" : LEVEL[f.evidence_level][1]; }
+function riskLabel(k) { return (S.state.risk_categories || {})[k] || k; }
 function viewFindings() {
   const r = S.run.result;
   const root = h("div", {});
-  root.append(h("div", { class: "view-head" }, h("div", { class: "grow" }, h("h2", {}, "Screening findings"),
-    h("p", {}, "Where the supplied rules disagree with the posting, or may exclude people who could meet it. Corrections are simulated, never applied to the ATS."))));
-  const lv = r.summary.by_level;
-  root.append(h("div", { class: "filters", role: "group", "aria-label": "Filter by evidence level" },
-    [["all", "All (" + r.findings.length + ")"], ["1", "Level 1 (" + lv.level_1 + ")"], ["2", "Level 2 (" + lv.level_2 + ")"], ["3", "Level 3 (" + lv.level_3 + ")"]].map(([k, label]) =>
+  root.append(h("div", { class: "view-head" }, h("div", { class: "grow" }, h("h2", {}, "Screening risks"),
+    h("p", {}, "Where the supplied rules may exclude people whose evidence could meet the requirement, and what a proposed correction would change. Corrections are simulated here, never applied."))));
+  const cfg = CONFIG[r.inputs.screening_configuration] || ["", "muted"];
+  root.append(h("p", { class: "sub" }, "Rules analysed: " + cfg[0] + "."));
+  const cats = Object.keys(S.state.risk_categories || {});
+  const count = (k) => r.findings.filter(f => f.risk_category === k).length;
+  root.append(h("div", { class: "filters", role: "group", "aria-label": "Filter by screening-risk category" },
+    [["all", "All (" + r.findings.length + ")"]].concat(cats.map(k => [k, riskLabel(k) + " (" + count(k) + ")"])).map(([k, label]) =>
       h("button", { "aria-pressed": S.levelFilter === k ? "true" : "false", onclick: () => { S.levelFilter = k; render(); } }, label))));
-  const items = r.findings.filter(f => S.levelFilter === "all" || String(f.evidence_level) === S.levelFilter);
-  const list = h("div", { class: "list" }, items.map(f => {
+  const items = r.findings.filter(f => S.levelFilter === "all" || f.risk_category === S.levelFilter);
+  const list = h("div", { class: "list" }, items.length ? items.map(f => {
     const dec = findingDecision(f.id);
+    const sim = f.simulation || {};
+    const elig = sim.counts ? sim.counts.newly_eligible_for_review : null;
     return h("button", { class: "item", "aria-selected": S.selFinding === f.id ? "true" : "false", onclick: () => { S.selFinding = f.id; render(); } },
       h("div", { class: "line1" }, h("span", { class: "id" }, f.rule_id || f.requirement_id || f.candidate_id || "Run"), h("span", { class: "src" }, LEVEL[f.evidence_level][0])),
       h("div", { class: "small" }, f.title),
-      h("div", { class: "tags" }, h("span", { class: "tag " + LEVEL[f.evidence_level][2] }, LEVEL[f.evidence_level][1]),
+      h("div", { class: "tags" }, f.risk_category ? h("span", { class: "tag " + (f.risk_category === "mandatory_protected" ? "bad" : LEVEL[f.evidence_level][2]) }, riskLabel(f.risk_category)) : h("span", { class: "tag ok" }, LEVEL[f.evidence_level][1]),
+        elig !== null && elig !== undefined && sim.proposed ? h("span", { class: "tag outline" }, elig + " newly eligible in simulation") : null,
         f.category === "measured_impact" ? null : dec ? h("span", { class: "tag accent" }, FIND_DISP[dec.disposition] || dec.disposition) : h("span", { class: "tag outline" }, "Decision pending")));
-  }));
+  }) : h("p", { class: "group-head" }, "No findings in this category."));
   root.append(h("div", { class: "split" }, list, h("div", { class: "detail" }, findingDetail())));
   return root;
 }
 function findingDetail() {
   const r = S.run.result, f = r.findings.find(x => x.id === S.selFinding);
-  if (!f) return h("div", { class: "panel empty" }, "Select a finding to see the rule, the evidence, and the decision it needs.");
+  if (!f) return h("div", { class: "panel empty" }, "Select a finding to see the rule, the evidence, the simulated correction, and the decision it needs.");
   const req = S.session.requisition;
   const reqObj = f.requirement_id && req.requirements.find(x => x.id === f.requirement_id);
   const ruleObj = f.rule_id && req.screening_rules.find(x => x.id === f.rule_id);
   const p = h("div", { class: "panel detail-body" });
   p.append(h("div", { class: "detail-head" }, h("div", {}, h("h2", { class: "fs19" }, f.title), h("div", { class: "sub mono" }, f.id)),
-    h("div", { class: "tags" }, h("span", { class: "tag " + LEVEL[f.evidence_level][2] }, LEVEL[f.evidence_level][0] + ": " + LEVEL[f.evidence_level][1]), h("span", { class: "tag outline" }, "Confidence " + f.confidence))));
+    h("div", { class: "tags" }, f.risk_category ? h("span", { class: "tag " + (f.risk_category === "mandatory_protected" ? "bad" : "warn") }, riskLabel(f.risk_category)) : null,
+      h("span", { class: "tag " + LEVEL[f.evidence_level][2] }, LEVEL[f.evidence_level][0] + ": " + levelText(f)), h("span", { class: "tag outline" }, "Confidence " + f.confidence))));
   p.append(h("p", {}, f.observation));
   if (reqObj || ruleObj) p.append(h("div", { class: "section" }, h("h4", {}, "Requirement and supplied rule"), h("dl", { class: "kv" },
     reqObj ? [h("dt", {}, "Requirement " + reqObj.id), h("dd", {}, reqObj.text + " (" + reqObj.stated_as + ")")] : null,
-    ruleObj ? [h("dt", {}, "Rule " + ruleObj.id), h("dd", {}, ruleObj.text + " (" + ruleObj.type.replace(/_/g, " ") + ", " + ruleObj.action + ")")] : null)));
+    ruleObj ? [h("dt", {}, "Rule " + ruleObj.id), h("dd", {}, ruleObj.text + " (" + ruleObj.type.replace(/_/g, " ") + ", " + ruleObj.action + ")")] : null,
+    ruleObj ? [h("dt", {}, "Rule source"), h("dd", {}, (CONFIG[r.inputs.screening_configuration] || [""])[0])] : null)));
   if (f.evidence.length) p.append(h("div", { class: "section" }, h("h4", {}, "Evidence"), f.evidence.slice(0, 8).map(ev => h("blockquote", { class: "quote" }, h("span", { class: "where" }, (ev.requirement ? ev.requirement + " " : "") + ev.source), ev.text))));
-  const aff = f.affected_candidates || [], unl = f.unlocked_candidates || [];
-  if (aff.length || unl.length) p.append(h("div", { class: "section" }, h("h4", {}, "Affected candidates in the supplied data"),
-    h("p", {}, aff.length ? ["This correction alone lets ", aff.map((c, i) => [i ? ", " : "", candLink(c)]), " pass the rule."] : "No single candidate passes the rule on this correction alone."),
-    unl.length ? h("p", {}, "Candidate-review opportunities depending on it: ", unl.map((c, i) => [i ? ", " : "", candLink(c)])) : null));
-  if (f.category !== "measured_impact") p.append(h("div", { class: "section" }, h("h4", {}, "Proposed action"), h("dl", { class: "kv" },
+  p.append(simulationSection(f));
+  if (f.category !== "measured_impact") p.append(h("div", { class: "section" }, h("h4", {}, f.proposed_change ? "Proposed correction" : "Proposed action"), h("dl", { class: "kv" },
     h("dt", {}, "Action"), h("dd", {}, f.proposed_action), h("dt", {}, "Expected benefit"), h("dd", {}, f.expected_benefit), h("dt", {}, "Trade-off"), h("dd", {}, f.tradeoffs)),
-    f.proposed_change ? h("details", { class: "mt8" }, h("summary", {}, "Suggested configuration change (simulation only)"), h("pre", { class: "out" }, JSON.stringify(f.proposed_change, null, 2))) : null));
-  if (f.limitations.length) p.append(h("div", { class: "section" }, h("h4", {}, "Limitations"), h("ul", { class: "plain small" }, f.limitations.map(l => h("li", {}, l)))));
-  p.append(h("p", { class: "sub mono mt14" }, "Knowledge " + f.knowledge_version + (f.knowledge_refs.length ? ", records " + f.knowledge_refs.join(", ") : "") + ". Sources: " + f.source_refs.map(s => s.kind + ":" + s.id).join(", ")));
+    f.proposed_change ? h("details", { class: "mt8" }, h("summary", {}, "Supplied rule logic and proposed logic"),
+      h("pre", { class: "out" }, "Supplied:\n" + JSON.stringify((f.simulation || {}).supplied || (ruleObj || {}).logic || {}, null, 2) + "\n\nProposed (simulation only):\n" + JSON.stringify((f.simulation || {}).proposed || f.proposed_change, null, 2))) : null));
+  if (f.limitations.length) p.append(h("div", { class: "section" }, h("h4", {}, "Missing evidence, conditions and uncertainty"), h("ul", { class: "plain small" }, f.limitations.map(l => h("li", {}, l)))));
+  p.append(h("p", { class: "sub mono mt14" }, "Run " + S.run.run.run_id + ". Knowledge " + f.knowledge_version + (f.knowledge_refs.length ? ", records " + f.knowledge_refs.join(", ") : "") + ". Sources: " + f.source_refs.map(s => s.kind + ":" + s.id).join(", ") + "."));
   if (f.allowed_dispositions && f.allowed_dispositions.length) p.append(findingDecisionBox(f));
   return p;
+}
+function candChip(cid, sim) {
+  const pool = sim && sim.sources && sim.sources[cid] === "pool";
+  return h("span", {}, candLink(cid), pool ? h("span", { class: "sub" }, " (pool, hypothetical)") : null);
+}
+function simulationSection(f) {
+  const sim = f.simulation;
+  if (!sim) return null;
+  const box = h("div", { class: "section" });
+  if (!sim.evaluable) {
+    box.append(h("h4", {}, "Correction simulation"), h("div", { class: "banner" }, "Not evaluated. " + (sim.reason || "")));
+    return box;
+  }
+  if (sim.kind === "candidate") {
+    box.append(h("h4", {}, "This candidate under the proposed corrections (not applied)"),
+      h("div", { class: "tbl" }, h("table", {}, h("thead", {}, h("tr", {}, h("th", {}, "Rule"), h("th", {}, "Supplied rule"), h("th", {}, "With proposed corrections"))),
+        h("tbody", {}, sim.rules.map(x => h("tr", {}, h("td", {}, h("b", {}, x.rule)),
+          h("td", {}, h("span", { class: "tag " + (x.supplied === false ? "bad" : x.supplied ? "ok" : "warn") }, x.supplied === false ? "Excluded" : x.supplied ? "Passes" : "Cannot evaluate"), " " + x.supplied_reason),
+          h("td", {}, h("span", { class: "tag " + (x.proposed === false ? "bad" : x.proposed ? "ok" : "warn") }, x.proposed === false ? "Excluded" : x.proposed ? "Passes" : "Cannot evaluate"), " " + x.proposed_reason)))))),
+      h("p", { class: "sub mt8" }, "Result: " + sim.result + ". " + sim.limitations.join(" ")));
+    return box;
+  }
+  const order = S.state.simulation_categories || [];
+  const shown = sim.proposed ? order : order.filter(([k]) => k === "excluded_by_supplied_rule" || k === "still_fail_mandatory_requirement");
+  box.append(h("h4", {}, sim.proposed ? "Correction simulation: supplied rule vs. proposed correction (not applied)" : "Supplied rule impact (no correction proposed)"),
+    h("p", { class: "sub" }, "Population: " + sim.population.applicants + " applicant(s) and " + sim.population.pool_records + " authorized pool record(s). Blocked records are never included."),
+    h("div", { class: "tbl" }, h("table", {}, h("tbody", {}, shown.map(([k, label]) => {
+      const ids = sim.categories[k] || [];
+      return h("tr", {}, h("td", {}, h("b", {}, label)), h("td", { class: "small" }, String(ids.length)),
+        h("td", {}, ids.length ? ids.map((c, i) => [i ? ", " : "", candChip(c, sim)]) : "—"));
+    })))));
+  const basis = Object.entries(sim.eligibility_basis || {});
+  if (basis.length) box.append(h("ul", { class: "plain small mt8" }, basis.map(([c, b]) => h("li", {}, c + ": eligible " + b))));
+  const notes = Object.entries(sim.notes || {});
+  if (notes.length) box.append(h("details", { class: "mt8" }, h("summary", {}, "Why each candidate is in these categories"),
+    h("ul", { class: "plain small" }, notes.map(([c, n]) => h("li", {}, h("b", {}, c + " "), n + discoveryNote(c))))));
+  box.append(h("ul", { class: "plain small mt8" }, sim.limitations.map(l => h("li", { class: "sub" }, l))));
+  return box;
+}
+function discoveryNote(cid) {
+  const e = S.run.discovery.entries.find(x => x.candidate_id === cid);
+  if (!e) return "";
+  if (["direct", "transferable", "insufficient"].includes(e.group)) return " (discovery: " + GROUPS[e.group][0].toLowerCase() + ")";
+  return e.listable && e.reason ? " (discovery: " + e.reason + ")" : " (discovery: " + GROUPS[e.group][0].toLowerCase() + ")";
 }
 function candLink(cid) {
   const e = S.run.discovery.entries.find(x => x.candidate_id === cid);
@@ -407,6 +459,7 @@ function candLink(cid) {
 function findingDecisionBox(f) {
   const dec = findingDecision(f.id);
   const applied = f.disposition && f.disposition.status !== "pending";
+  const history = (S.session.decision_history || []).filter(x => x.kind === "finding" && x.id === f.id);
   const sel = h("select", {}, h("option", { value: "" }, "Choose a decision"), f.allowed_dispositions.map(k => h("option", { value: k }, FIND_DISP[k] || k)));
   const why = h("textarea", { placeholder: "Rationale (required)" });
   return h("div", { class: "decision" }, h("h4", {}, "Decision"),
@@ -420,7 +473,9 @@ function findingDecisionBox(f) {
         { finding_id: f.id, disposition: sel.value, rationale: why.value, actor: reviewer() });
       await reloadSession(); render(); toast("Decision recorded. Re-run to apply it to the analysis and report.");
     }) }, dec ? "Update decision" : "Record decision")),
-    h("p", { class: "sub mt8" }, "Rejecting a finding withdraws its correction from the next run. Nothing is changed in the ATS."));
+    history.length ? h("details", { class: "mt10" }, h("summary", {}, "Decision history (" + history.length + ")"),
+      h("ul", { class: "plain small" }, history.slice().reverse().map(x => h("li", {}, x.decided_at.slice(0, 16).replace("T", " ") + " " + (FIND_DISP[x.disposition] || x.disposition) + " by " + x.decided_by + " in run " + x.run_id + ": " + x.rationale)))) : null,
+    h("p", { class: "sub mt8" }, "Accepting records your intent; nothing is changed in the ATS. Rejecting a finding withdraws its correction from the next run's combined simulation."));
 }
 
 // ------------------------------------------------------------------ D. review and export
@@ -450,10 +505,15 @@ function viewReview() {
   const co = run.carried_over;
   if (co.finding_decisions_stale.length || co.candidate_decisions_stale.length) root.append(h("div", { class: "banner" },
     "Decisions kept but not applied to this run because their finding or candidate no longer appears: " + co.finding_decisions_stale.concat(co.candidate_decisions_stale).join(", ")));
+  const changed = co.decisions_with_changed_context || [];
+  if (changed.length) root.append(h("div", { class: "banner" }, h("b", {}, "Decisions made in a different context. "),
+    "They still apply, but the knowledge, the inputs or the item itself changed since the decision. Review them again:",
+    h("ul", { class: "plain small" }, changed.map(c => h("li", {}, c.kind + " " + c.id + " (decided in run " + c.decided_in_run + "): " + c.reasons.join("; "))))));
 
   const exportsList = [["review-list.csv", "Candidate review list (CSV)"], ["review-list.yaml", "Candidate review list (YAML)"], ["report.md", "Report (Markdown)"],
     ["report.html", "Report (HTML)"], ["findings.json", "Findings (JSON)"], ["discovery.json", "Discovery (JSON)"], ["decisions.yaml", "Finding decisions"],
-    ["review-decisions.yaml", "Candidate decisions"], ["changes.yaml", "Accepted configuration changes"], ["bundle.zip", "Everything, with knowledge snapshot (ZIP)"]];
+    ["review-decisions.yaml", "Candidate decisions"], ["screening-risks.yaml", "Screening risks and simulations"],
+    ["decision-history.jsonl", "Decision history"], ["changes.yaml", "Accepted configuration changes"], ["bundle.zip", "Everything, with knowledge snapshot (ZIP)"]];
   root.append(h("div", { class: "grid2" },
     h("section", { class: "panel" }, h("h3", {}, "Export"), h("p", { class: "sub" }, "Exports reflect run " + run.run_id + ". Decision files reflect everything recorded so far."),
       h("div", { class: "row" }, exportsList.map(([name, label]) => h("button", { class: "btn" + (name === "review-list.csv" ? " primary" : ""), onclick: () => guarded(() => download(name)) }, label)))),

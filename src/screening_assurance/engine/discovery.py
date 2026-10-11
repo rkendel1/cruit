@@ -22,23 +22,22 @@ Nothing here grants permission to contact anyone; a prior application is context
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from datetime import date
 from typing import Any
 
 from .candidates import requirement_evidence
 from .engine import RequisitionBundle, _apply_classification_decisions
 from .interpret import Context
+from .pool import DEFAULT_MAX_AGE_DAYS, _d, default_as_of, pool_block_reason
 from .model import DiagnosticResult
 from ..knowledge.pack import KnowledgePack
 
 GROUPS = ("direct", "transferable", "insufficient", "not_surfaced", "blocked", "active_workflow")
 ACTIONABLE = ("direct", "transferable", "insufficient")
-DEFAULT_MAX_AGE_DAYS = 730
 ACTIVE_STATUSES = {"in_review", "advanced"}
 
 CONFIG_BASIS = {
-    "ats_export_verified": "simulated against the ATS-exported screening configuration",
-    "ats_api_verified": "simulated against the screening configuration read from the ATS",
+    "ats_export_verified": "simulated against the supplied ATS configuration export (not a live ATS audit)",
+    "ats_api_verified": "simulated against the configuration as read from the ATS at export time (not a live audit)",
     "recruiter_documentation": "simulated against recruiter-documented rules (not verified ATS configuration)",
     "not_supplied": "no screening configuration was supplied",
 }
@@ -91,10 +90,6 @@ class DiscoveryResult:
         }
 
 
-def _d(s: str) -> date:
-    return date.fromisoformat(s[:10])
-
-
 def _paths_label(paths: list[str]) -> str:
     out = []
     for p in paths:
@@ -128,7 +123,7 @@ def discover(
     decisions = {d["finding_id"]: d for d in (bundle.decisions or {}).get("decisions", [])}
     req, _ = _apply_classification_decisions(bundle.requisition, decisions)
     ctx = Context(requisition=req, policy=bundle.policy, pack=pack, decisions=decisions, original=bundle.requisition)
-    as_of = as_of or (pool["exported_at"][:10] if pool else diag.run_at[:10])
+    as_of = as_of or default_as_of(pool, diag.run_at)
     as_of_d = _d(as_of)
 
     unverified_ids = {f.requirement_id for f in diag.findings if f.check == "unverified_necessity"
@@ -196,18 +191,7 @@ def discover(
                                               listable=True))
                 continue
             seen.add(cid)
-            age = (as_of_d - _d(cand["evidence_updated_at"])).days
-            freshness = {"evidence_updated_at": cand["evidence_updated_at"], "age_days": age, "max_age_days": max_age,
-                         "status": "fresh" if age <= max_age else "stale", "provenance": cand["evidence_provenance"]}
-            auth = cand.get("authorization") or {}
-            uses = auth.get("permitted_uses", pool_uses)
-            blocked = None
-            if "rediscovery_review" not in uses:
-                blocked = "Not authorized for rediscovery review (permitted uses: " + ", ".join(uses) + ")."
-            elif auth.get("expires_at") and _d(auth["expires_at"]) < as_of_d:
-                blocked = f"Authorization expired on {auth['expires_at']}."
-            elif age > max_age:
-                blocked = f"Evidence last updated {cand['evidence_updated_at']} ({age} days ago) exceeds the {max_age}-day limit."
+            blocked, freshness = pool_block_reason(cand, pool, as_of_d)
             if blocked:
                 entries.append(DiscoveryEntry(cid, source, "blocked", reason=blocked, freshness=freshness))
                 continue

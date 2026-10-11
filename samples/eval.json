@@ -12,16 +12,20 @@
     "max_blocked_violations": 0,
     "max_irrelevant_surfaced": 0,
     "max_overclaimed_certainty": 0,
-    "min_discovery_recall": 0.8
+    "min_discovery_recall": 0.8,
+    "max_risk_irrelevant_surfaced": 0,
+    "max_risk_mandatory_violations": 0,
+    "max_risk_policy_violations": 0,
+    "min_risk_recall": 0.8
   },
   "metrics": {
     "cases": 4,
-    "expected_findings": 28,
-    "expected_found": 28,
+    "expected_findings": 29,
+    "expected_found": 29,
     "expected_finding_recall": 1.0,
     "forbidden_violations": 0,
     "guardrail_violations": 0,
-    "candidates_flagged": 10,
+    "candidates_flagged": 11,
     "true_positives": 10,
     "false_positives": 0,
     "missed_qualified": 0,
@@ -32,6 +36,23 @@
   "failures": [],
   "cases": [
     {
+      "risk": {
+        "relevant_surfaced": [
+          "C-202",
+          "C-204"
+        ],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "mandatory_violations": [],
+        "policy_violations": [],
+        "needs_human_verification": [
+          "C-204"
+        ],
+        "unknown_cause": [],
+        "simulated_findings": 6,
+        "rule_level_only": []
+      },
+      "simulation_expectations": [],
       "case_id": "customer-success",
       "description": "Customer Success Manager requisition documented by the recruiter. A literal \"customer success\" filter, a title-based prioritization and a certification filter where the posting asks only for proficiency. Includes an employer policy that rejects one general equivalency (support escalation leadership), and profiles whose transferable skills are real but insufficient for the role.",
       "expected": [
@@ -131,7 +152,16 @@
           "affected": [
             "C-202",
             "C-204"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 2,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 2
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-7d038e7c",
@@ -143,7 +173,16 @@
             "C-202",
             "C-204",
             "C-208"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 3,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 1,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 2
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-1fa7cee2",
@@ -153,7 +192,16 @@
           "confidence": "high",
           "affected": [
             "C-202"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 1,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-095c74b9",
@@ -163,7 +211,16 @@
           "confidence": "high",
           "affected": [
             "C-202"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 1,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-309d1f67",
@@ -174,7 +231,16 @@
           "affected": [
             "C-202",
             "C-204"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 2,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 2
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-16684b3b",
@@ -182,7 +248,16 @@
           "level": 2,
           "title": "Q3 matches literally and misses recognized variants of Salesforce Certified Administrator",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-CSM-0388-a1beef17",
@@ -190,7 +265,8 @@
           "level": 2,
           "title": "Business necessity of required qualification R4 is undocumented",
           "confidence": "medium",
-          "affected": []
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-CSM-0388-7f33b017",
@@ -200,7 +276,8 @@
           "confidence": "high",
           "affected": [
             "C-202"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-CSM-0388-dc08d1e4",
@@ -210,11 +287,60 @@
           "confidence": "medium",
           "affected": [
             "C-204"
-          ]
+          ],
+          "simulation": null
         }
       ]
     },
     {
+      "risk": {
+        "relevant_surfaced": [
+          "C-303"
+        ],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "mandatory_violations": [],
+        "policy_violations": [],
+        "needs_human_verification": [
+          "C-303",
+          "P-303"
+        ],
+        "unknown_cause": [],
+        "simulated_findings": 4,
+        "rule_level_only": []
+      },
+      "simulation_expectations": [
+        {
+          "scenario": "genuine mandatory requirement remains blocking, with no correction proposed",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-LH-0217-31f7b18c"
+        },
+        {
+          "scenario": "candidate passes a corrected experience rule but still fails another mandatory requirement",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-LH-0217-b7263005"
+        },
+        {
+          "scenario": "candidate who fails a mandatory requirement is never newly eligible",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-LH-0217-b7263005"
+        },
+        {
+          "scenario": "license that cannot be verified stays insufficient, not eligible",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-LH-0217-b7263005"
+        },
+        {
+          "scenario": "terminology variant of the license itself is recognized",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-LH-0217-24c327f3"
+        }
+      ],
       "case_id": "linehaul-protected-license",
       "description": "Linehaul supervisor requisition with a legally required Class A CDL. The engine may recognize spelling variants of the license, but must never propose an alternative path for it or surface anyone who lacks it \u2014 however strong their supervisory experience.",
       "expected": [
@@ -288,6 +414,26 @@
       "knowledge": "core@1.1.0+8a94e741e4",
       "findings": [
         {
+          "id": "SA-REQ-LH-0217-31f7b18c",
+          "check": "mandatory_requirement_protected",
+          "level": 1,
+          "title": "Q1 enforces a protected requirement; no correction is proposed",
+          "confidence": "high",
+          "affected": [
+            "C-302",
+            "P-302"
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 4,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 2,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
+        },
+        {
           "id": "SA-REQ-LH-0217-24c327f3",
           "check": "literal_term_missing_variants",
           "level": 2,
@@ -295,7 +441,16 @@
           "confidence": "high",
           "affected": [
             "C-303"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 4,
+            "would_pass_proposed_rule": 1,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-LH-0217-bdfae568",
@@ -303,7 +458,16 @@
           "level": 2,
           "title": "Q2 matches literally and misses recognized variants of Transportation supervision",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 5,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-LH-0217-b7263005",
@@ -314,7 +478,16 @@
           "affected": [
             "C-302",
             "C-303"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 5,
+            "would_pass_proposed_rule": 4,
+            "still_fail_mandatory_requirement": 2,
+            "evidence_insufficient": 1,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-LH-0217-6f063ac1",
@@ -324,11 +497,37 @@
           "confidence": "medium",
           "affected": [
             "C-303"
-          ]
+          ],
+          "simulation": null
         }
       ]
     },
     {
+      "risk": {
+        "relevant_surfaced": [],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "mandatory_violations": [],
+        "policy_violations": [],
+        "needs_human_verification": [],
+        "unknown_cause": [],
+        "simulated_findings": 0,
+        "rule_level_only": [
+          "SA-REQ-RO-0455-088d343c",
+          "SA-REQ-RO-0455-130b17ea",
+          "SA-REQ-RO-0455-30380d96",
+          "SA-REQ-RO-0455-4d7c87e1",
+          "SA-REQ-RO-0455-568981f2"
+        ]
+      },
+      "simulation_expectations": [
+        {
+          "scenario": "rule-level concern where actual candidate impact cannot be verified (no candidate evidence)",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-RO-0455-4d7c87e1"
+        }
+      ],
       "case_id": "revops-prepublication",
       "description": "Pre-publication design review with no candidates: the engine must find rule defects from the requisition and knowledge alone, and must not invent candidate findings.",
       "expected": [
@@ -392,7 +591,8 @@
           "level": 1,
           "title": "Q1 requires 7 years; the posting asks for 5",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-RO-0455-30380d96",
@@ -400,15 +600,17 @@
           "level": 1,
           "title": "Preferred qualification R3 is enforced as a knockout by Q2",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-RO-0455-088d343c",
           "check": "literal_term_missing_variants",
           "level": 2,
           "title": "Q1 matches literally and misses recognized variants of Revenue operations",
-          "confidence": "medium",
-          "affected": []
+          "confidence": "high",
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-RO-0455-568981f2",
@@ -416,19 +618,121 @@
           "level": 2,
           "title": "Q1 counts experience only under specific job titles",
           "confidence": "medium",
-          "affected": []
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-RO-0455-130b17ea",
           "check": "literal_term_missing_variants",
           "level": 2,
           "title": "Q3 matches literally and misses recognized variants of Revenue operations",
-          "confidence": "medium",
-          "affected": []
+          "confidence": "high",
+          "affected": [],
+          "simulation": null
         }
       ]
     },
     {
+      "risk": {
+        "relevant_surfaced": [
+          "C-102",
+          "C-103",
+          "C-106",
+          "C-108",
+          "C-109",
+          "C-110"
+        ],
+        "relevant_missed": [],
+        "irrelevant_surfaced": [],
+        "mandatory_violations": [],
+        "policy_violations": [],
+        "needs_human_verification": [
+          "C-103",
+          "C-106",
+          "C-113",
+          "C-114",
+          "P-201",
+          "P-202",
+          "P-203",
+          "P-204",
+          "P-205",
+          "P-208"
+        ],
+        "unknown_cause": [
+          "C-113",
+          "C-114"
+        ],
+        "simulated_findings": 14,
+        "rule_level_only": []
+      },
+      "simulation_expectations": [
+        {
+          "scenario": "relevant candidate missed by an overly narrow supplied rule",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-9164e1d0"
+        },
+        {
+          "scenario": "preferred criterion incorrectly treated as mandatory",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-48360a3a"
+        },
+        {
+          "scenario": "valid terminology variation",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-b05a4c5a"
+        },
+        {
+          "scenario": "legitimate alternative experience path with the required evidence",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-5302d6be"
+        },
+        {
+          "scenario": "superficially similar but unsupported alternative (drills, participation only)",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-5302d6be"
+        },
+        {
+          "scenario": "alternative incident path, but another genuine requirement (infrastructure as code) is unsupported",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-5302d6be"
+        },
+        {
+          "scenario": "irrelevant candidates pass a proposed correction but are not made eligible",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-99df8968"
+        },
+        {
+          "scenario": "irrelevant candidates are never newly eligible",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-99df8968"
+        },
+        {
+          "scenario": "insufficient evidence to establish an exclusion (no recorded knockout answer)",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-0b941a58"
+        },
+        {
+          "scenario": "pool records cannot be evaluated against a knockout question",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-5302d6be"
+        },
+        {
+          "scenario": "stale, unauthorized and expired pool records never enter a simulation",
+          "met": true,
+          "problems": [],
+          "finding_id": "SA-REQ-SRE-0142-99df8968"
+        }
+      ],
       "case_id": "sre-incident-management",
       "description": "Senior SRE requisition with literal keyword filters, a title-based experience rule stricter than the posting, knockouts on preferred qualifications, and an unstated tool requirement. Candidate pool mixes conventional SREs, adjacent titles, and nontraditional incident leaders from healthcare, logistics and the military, plus participation-only and under-experienced profiles that must not be surfaced.",
       "expected": [
@@ -521,7 +825,13 @@
           "check": "unexplained_exclusions",
           "candidate": "C-113",
           "found": true,
-          "finding_id": "SA-REQ-SRE-0142-6f96884a"
+          "finding_id": "SA-REQ-SRE-0142-0b941a58"
+        },
+        {
+          "check": "unexplained_exclusions",
+          "candidate": "C-114",
+          "found": true,
+          "finding_id": "SA-REQ-SRE-0142-0b941a58"
         }
       ],
       "forbidden": [
@@ -561,7 +871,7 @@
         }
       ],
       "candidates": {
-        "excluded": 12,
+        "excluded": 13,
         "flagged": [
           "C-102",
           "C-103",
@@ -569,7 +879,8 @@
           "C-108",
           "C-109",
           "C-110",
-          "C-113"
+          "C-113",
+          "C-114"
         ],
         "true_positives": [
           "C-102",
@@ -581,7 +892,9 @@
           "C-113"
         ],
         "false_positives": [],
-        "flagged_unlabeled_or_insufficient": [],
+        "flagged_unlabeled_or_insufficient": [
+          "C-114"
+        ],
         "missed_qualified": [],
         "precision": 1.0,
         "recall": 1.0
@@ -599,7 +912,16 @@
             "C-102",
             "C-103",
             "C-110"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 13,
+            "would_pass_proposed_rule": 4,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 1,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-9164e1d0",
@@ -612,7 +934,16 @@
             "C-104",
             "C-106",
             "C-110"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 13,
+            "would_pass_proposed_rule": 7,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 2,
+            "still_fail_other_supplied_rules": 2,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-9403725f",
@@ -620,7 +951,16 @@
           "level": 1,
           "title": "Q2 is narrower than R1: it ignores Production operations",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 17,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-d15dcf14",
@@ -631,7 +971,16 @@
           "affected": [
             "C-108",
             "C-109"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 17,
+            "would_pass_proposed_rule": 3,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 1,
+            "newly_eligible_for_review": 2
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-5302d6be",
@@ -644,7 +993,16 @@
             "C-104",
             "C-106",
             "C-107"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 4,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 7,
+            "relevance_not_established": 2,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 2
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-3bc61a83",
@@ -659,7 +1017,16 @@
             "C-106",
             "C-108",
             "C-111"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 6,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 6,
+            "relevance_not_established": 3,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-512cd6d3",
@@ -673,7 +1040,16 @@
             "C-106",
             "C-108",
             "C-111"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 6,
+            "would_pass_proposed_rule": 5,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 6,
+            "relevance_not_established": 2,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-f01e2bd0",
@@ -683,7 +1059,16 @@
           "confidence": "high",
           "affected": [
             "C-102"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 2,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 1,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-48360a3a",
@@ -699,7 +1084,16 @@
             "C-109",
             "C-111",
             "C-112"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 7,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 6,
+            "relevance_not_established": 4,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-99df8968",
@@ -715,7 +1109,16 @@
             "C-110",
             "C-111",
             "C-112"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 13,
+            "would_pass_proposed_rule": 13,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 1,
+            "relevance_not_established": 5,
+            "still_fail_other_supplied_rules": 4,
+            "newly_eligible_for_review": 3
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-b05a4c5a",
@@ -726,7 +1129,16 @@
           "affected": [
             "C-102",
             "C-111"
-          ]
+          ],
+          "simulation": {
+            "excluded_by_supplied_rule": 13,
+            "would_pass_proposed_rule": 3,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 1,
+            "still_fail_other_supplied_rules": 1,
+            "newly_eligible_for_review": 1
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-e3e3d885",
@@ -734,7 +1146,16 @@
           "level": 2,
           "title": "Q2 matches literally and misses recognized variants of Site reliability engineering",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 17,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-a0ac83a9",
@@ -742,7 +1163,16 @@
           "level": 2,
           "title": "Q2 counts experience only under specific job titles",
           "confidence": "medium",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 17,
+            "would_pass_proposed_rule": 1,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 1,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-9d626aeb",
@@ -750,7 +1180,16 @@
           "level": 2,
           "title": "Q5 matches literally and misses recognized variants of Terraform",
           "confidence": "high",
-          "affected": []
+          "affected": [],
+          "simulation": {
+            "excluded_by_supplied_rule": 7,
+            "would_pass_proposed_rule": 0,
+            "still_fail_mandatory_requirement": 0,
+            "evidence_insufficient": 0,
+            "relevance_not_established": 0,
+            "still_fail_other_supplied_rules": 0,
+            "newly_eligible_for_review": 0
+          }
         },
         {
           "id": "SA-REQ-SRE-0142-ff4b8adc",
@@ -758,7 +1197,8 @@
           "level": 2,
           "title": "Business necessity of required qualification R6 is undocumented",
           "confidence": "medium",
-          "affected": []
+          "affected": [],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-5f56524c",
@@ -768,7 +1208,8 @@
           "confidence": "high",
           "affected": [
             "C-102"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-4989b969",
@@ -778,7 +1219,8 @@
           "confidence": "medium",
           "affected": [
             "C-103"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-36d39631",
@@ -788,7 +1230,8 @@
           "confidence": "medium",
           "affected": [
             "C-106"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-cd635676",
@@ -798,7 +1241,8 @@
           "confidence": "high",
           "affected": [
             "C-108"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-c1d0ef0b",
@@ -808,7 +1252,8 @@
           "confidence": "high",
           "affected": [
             "C-109"
-          ]
+          ],
+          "simulation": null
         },
         {
           "id": "SA-REQ-SRE-0142-82276566",
@@ -818,17 +1263,20 @@
           "confidence": "high",
           "affected": [
             "C-110"
-          ]
+          ],
+          "simulation": null
         },
         {
-          "id": "SA-REQ-SRE-0142-6f96884a",
+          "id": "SA-REQ-SRE-0142-0b941a58",
           "check": "unexplained_exclusions",
           "level": 2,
-          "title": "1 exclusion(s) are not explained by the supplied screening rules",
+          "title": "2 exclusion(s) are not explained by the supplied screening rules",
           "confidence": "high",
           "affected": [
-            "C-113"
-          ]
+            "C-113",
+            "C-114"
+          ],
+          "simulation": null
         }
       ]
     }
@@ -916,6 +1364,7 @@
           "C-107": "not_surfaced",
           "C-111": "not_surfaced",
           "C-112": "not_surfaced",
+          "C-114": "not_surfaced",
           "P-204": "not_surfaced",
           "P-206": "blocked",
           "P-207": "blocked",
@@ -978,6 +1427,7 @@
           "C-107": "Required evidence missing from a complete record: R1 \u2014 36 months of relevant experience found; requirement states 5 years.",
           "C-111": "No supplied evidence supports any required requirement.",
           "C-112": "No supplied evidence supports any required requirement.",
+          "C-114": "Required evidence missing from a complete record: R2 \u2014 No supporting evidence in the supplied record.",
           "P-204": "Required evidence missing from a complete record: R2 \u2014 Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators.; R3 \u2014 No supporting evidence in the supplied record.",
           "P-206": "Evidence last updated 2021-05-10 (1979 days ago) exceeds the 730-day limit.",
           "P-207": "Not authorized for rediscovery review (permitted uses: original_requisition_only).",
@@ -986,5 +1436,18 @@
         }
       }
     ]
+  },
+  "screening_risks": {
+    "label": "SYNTHETIC FIXTURE RESULTS \u2014 not a measure of real-world accuracy",
+    "relevant_surfaced": 9,
+    "relevant_missed": 0,
+    "irrelevant_surfaced": 0,
+    "mandatory_violations": 0,
+    "policy_violations": 0,
+    "needs_human_verification": 13,
+    "unknown_cause": 2,
+    "expectations": 17,
+    "expectations_met": 17,
+    "relevant_recall": 1.0
   }
 }

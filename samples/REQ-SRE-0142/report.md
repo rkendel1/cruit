@@ -1,13 +1,13 @@
 # Requisition assurance report — Senior Site Reliability Engineer (REQ-SRE-0142)
 
-Job family `software-infrastructure` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.1.0 · run 2026-11-03T12:00:00Z
+Job family `software-infrastructure` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.2.0 · run 2026-11-03T12:00:00Z
 
 > This report recommends changes and human review. It does not reject, advance or hire anyone, and it does not claim any candidate was wrongly excluded. Level 1 findings are established by the supplied materials; Level 2 findings are risks that need human judgement; Level 3 findings are measured outcomes.
 
 ## Summary
 
 - **10** demonstrable inconsistencies (Level 1)
-- **12** missed-talent risks and review opportunities (Level 2), including **6** candidate(s) of 13 assessed surfaced for human review
+- **12** missed-talent risks and review opportunities (Level 2), including **6** candidate(s) of 14 assessed surfaced for human review
 - **1** measured outcomes (Level 3)
 - **1** findings awaiting a human decision
 
@@ -15,6 +15,7 @@ Job family `software-infrastructure` · employer `northwind` · knowledge `core@
 
 **Limitations of this run**
 - Requirement R6 treated as 'preferred' because of human decision on SA-REQ-SRE-0142-ff4b8adc.
+- Screening rules come from a supplied ATS configuration export; this is not a live ATS audit, and the live configuration may have changed since export.
 - Candidate evidence is a sample; candidate counts do not represent the full applicant pool.
 - Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run.
 
@@ -43,7 +44,7 @@ Job family `software-infrastructure` · employer `northwind` · knowledge `core@
 | Q6 | knockout_question | reject | R4 | correction proposed | 1 |
 | Q7 | keyword_filter | reject | — (none) | correction proposed | 1 |
 
-## 3. Confirmed inconsistencies
+## 3. Confirmed inconsistencies and protected requirements
 
 ### R1 accepts equivalent experience, but Q1 has no equivalent path
 
@@ -55,12 +56,33 @@ The posting accepts equivalent experience for R1, but rule Q1 only recognizes th
 - `requirement:R1` — 5+ years of site reliability engineering or production operations experience.
 - `rule:Q1` — Résumé must mention site reliability engineer or SRE.
 
-**Consequence in the supplied candidate sample:** 3 candidate(s) would pass this rule under this correction alone (C-102, C-103, C-110); 3 candidate-review opportunities depend on it (C-102, C-103, C-110).
-
 **Proposed action:** Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.
 
 **Expected benefit:** Restores the equivalency the employer already committed to in the posting.  
 **Trade-off:** Equivalent-path applicants need recruiter verification time.
+
+**Screening-risk category:** Potentially equivalent experience
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 13: C-102, C-103, C-104, C-105, C-106, C-110, C-111, C-112, P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 4: C-102, C-103, C-110, P-203 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 1: P-203 (pool, hypothetical) |
+| Newly eligible for human review | 3: C-102, C-103, C-110 |
+
+- C-102: eligible together with the proposed corrections to Q2, Q5
+- C-103: eligible together with the proposed corrections to Q2, Q3, Q4, Q6, Q7
+- C-110: eligible together with the proposed corrections to Q2, Q7
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R1, rule:Q1. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.site-reliability.production-operations.</sub>
 
@@ -76,15 +98,36 @@ Requirement R1 can be met through Production operations, but rule Q1 only recogn
 - `requirement:R1` — 5+ years of site reliability engineering or production operations experience.
 - `rule:Q1` — Résumé must mention site reliability engineer or SRE.
 
-**Consequence in the supplied candidate sample:** 4 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-106, C-110); 3 candidate-review opportunities depend on it (C-103, C-106, C-110).
-
-**Proposed action:** Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations, DevOps engineering.
+**Proposed action:** Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations.
 
 **Expected benefit:** Applicants who meet the requirement as written are no longer filtered out.  
 **Trade-off:** Broader matching may increase review volume; terms are limited to the posted requirement.
 
 **Limitations**
 - Concept recognition uses the knowledge pack; review the proposed terms before adopting them.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 13: C-102, C-103, C-104, C-105, C-106, C-110, C-111, C-112, P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 7: C-103, C-104, C-106, C-110, P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 2: C-104, P-204 (pool, hypothetical) |
+| Relevant evidence, but still fail other supplied rules | 2: P-202 (pool, hypothetical), P-203 (pool, hypothetical) |
+| Newly eligible for human review | 3: C-103, C-106, C-110 |
+
+- C-103: eligible together with the proposed corrections to Q2, Q3, Q4, Q6, Q7
+- C-106: eligible together with the proposed corrections to Q2, Q3, Q4, Q6, Q7
+- C-110: eligible together with the proposed corrections to Q2, Q7
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R1, rule:Q1. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.production-operations.</sub>
 
@@ -100,15 +143,32 @@ Requirement R1 can be met through Production operations, but rule Q2 only recogn
 - `requirement:R1` — 5+ years of site reliability engineering or production operations experience.
 - `rule:Q2` — At least 7 years in Site Reliability Engineer roles (by job title).
 
-**Consequence in the supplied candidate sample:** 0 candidate(s) would pass this rule under this correction alone; 4 candidate-review opportunities depend on it (C-102, C-103, C-106, C-110).
-
-**Proposed action:** Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations, DevOps engineering.
+**Proposed action:** Extend the rule to recognize: Production operations, IT operations, systems operations, infrastructure operations, operations engineering, platform operations, network operations.
 
 **Expected benefit:** Applicants who meet the requirement as written are no longer filtered out.  
 **Trade-off:** Broader matching may increase review volume; terms are limited to the posted requirement.
 
 **Limitations**
 - Concept recognition uses the knowledge pack; review the proposed terms before adopting them.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 17: C-102, C-103, C-104, C-105, C-106, C-107, C-108, C-109, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 0 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 0 |
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R1, rule:Q2. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.production-operations.</sub>
 
@@ -124,12 +184,32 @@ Requirement R1 states 5+ years, but rule Q2 enforces 7 years.
 - `requirement:R1` — 5+ years of site reliability engineering or production operations experience.
 - `rule:Q2` — years: 7 — At least 7 years in Site Reliability Engineer roles (by job title).
 
-**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-108, C-109); 6 candidate-review opportunities depend on it (C-102, C-103, C-106, C-108, C-109, C-110).
-
 **Proposed action:** Align the rule threshold with the posted requirement (5 years), or update the posting if the higher threshold is genuinely required.
 
 **Expected benefit:** Applicants who meet the posted threshold are no longer silently excluded.  
 **Trade-off:** None if the posting reflects the real need.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 17: C-102, C-103, C-104, C-105, C-106, C-107, C-108, C-109, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 3: C-108, C-109, P-201 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 1: P-201 (pool, hypothetical) |
+| Newly eligible for human review | 2: C-108, C-109 |
+
+- C-108: eligible together with the proposed corrections to Q4
+- C-109: eligible together with the proposed corrections to Q6
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R1, rule:Q2. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -145,12 +225,33 @@ The posting accepts equivalent experience for R2, but rule Q3 rejects applicants
 - `requirement:R2` — Experience leading incident management, including post-incident reviews.
 - `rule:Q3` — Have you served as incident commander for a software production environment?
 
-**Consequence in the supplied candidate sample:** 4 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-106, C-107); 2 candidate-review opportunities depend on it (C-103, C-106).
-
 **Proposed action:** Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.
 
 **Expected benefit:** Restores the equivalency the employer already committed to in the posting.  
 **Trade-off:** Equivalent-path applicants need recruiter verification time.
+
+**Screening-risk category:** Potentially equivalent experience
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-103, C-104, C-105, C-106, C-107, C-111, C-112 |
+| Would pass the proposed rule | 4: C-103, C-104, C-106, C-107 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 7: C-114, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 2: C-104, C-107 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 2: C-103, C-106 |
+
+- C-103: eligible together with the proposed corrections to Q1, Q2, Q4, Q6, Q7
+- C-106: eligible together with the proposed corrections to Q1, Q2, Q4, Q6, Q7
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Pool records have no recorded answers to knockout questions, so the supplied question cannot be evaluated for them.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R2, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.incident-management.operational-crisis-response.</sub>
 
@@ -166,12 +267,34 @@ Requirement R5 is stated as preferred, but rule Q4 rejects applicants who do not
 - `requirement:R5` — stated_as: preferred — Bachelor's degree in computer science or a related field, or equivalent practical experience.
 - `rule:Q4` — action: reject — Do you hold a bachelor's degree in computer science?
 
-**Consequence in the supplied candidate sample:** 6 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-105, C-106, C-108, C-111); 3 candidate-review opportunities depend on it (C-103, C-106, C-108).
-
 **Proposed action:** Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.
 
 **Expected benefit:** Applicants who meet all essential requirements are no longer rejected for lacking a preference.  
 **Trade-off:** More applicants reach review; ranking should still favour the preferred qualification.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-103, C-104, C-105, C-106, C-108, C-111 |
+| Would pass the proposed rule | 6: C-103, C-104, C-105, C-106, C-108, C-111 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 6: P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 3: C-104, C-105, C-111 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 3: C-103, C-106, C-108 |
+
+- C-103: eligible together with the proposed corrections to Q1, Q2, Q3, Q6, Q7
+- C-106: eligible together with the proposed corrections to Q1, Q2, Q3, Q6, Q7
+- C-108: eligible together with the proposed corrections to Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Pool records have no recorded answers to knockout questions, so the supplied question cannot be evaluated for them.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R5, rule:Q4. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -187,8 +310,6 @@ The posting accepts equivalent experience for R5, but rule Q4 rejects applicants
 - `requirement:R5` — Bachelor's degree in computer science or a related field, or equivalent practical experience.
 - `rule:Q4` — Do you hold a bachelor's degree in computer science?
 
-**Consequence in the supplied candidate sample:** 5 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-106, C-108, C-111); 3 candidate-review opportunities depend on it (C-103, C-106, C-108).
-
 **Proposed action:** Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.
 
 **Expected benefit:** Restores the equivalency the employer already committed to in the posting.  
@@ -196,6 +317,30 @@ The posting accepts equivalent experience for R5, but rule Q4 rejects applicants
 
 **Limitations**
 - Equivalent practical experience is interpreted as meeting the posted experience requirement(s) R1.
+
+**Screening-risk category:** Potentially equivalent experience
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-103, C-104, C-105, C-106, C-108, C-111 |
+| Would pass the proposed rule | 5: C-103, C-104, C-106, C-108, C-111 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 6: P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 2: C-104, C-111 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 3: C-103, C-106, C-108 |
+
+- C-103: eligible together with the proposed corrections to Q1, Q2, Q3, Q6, Q7
+- C-106: eligible together with the proposed corrections to Q1, Q2, Q3, Q6, Q7
+- C-108: eligible together with the proposed corrections to Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Pool records have no recorded answers to knockout questions, so the supplied question cannot be evaluated for them.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R5, rule:Q4. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.site-reliability.production-operations.</sub>
 
@@ -211,8 +356,6 @@ Requirement R3 can be met through Infrastructure as code, but rule Q5 only recog
 - `requirement:R3` — Proficiency with infrastructure as code (Terraform or equivalent).
 - `rule:Q5` — Résumé must mention Terraform.
 
-**Consequence in the supplied candidate sample:** 1 candidate(s) would pass this rule under this correction alone (C-102); 1 candidate-review opportunity depends on it (C-102).
-
 **Proposed action:** Extend the rule to recognize: Infrastructure as code, infrastructure automation, IaC, Ansible, AWS CloudFormation, CloudFormation, Pulumi, Terraform, HashiCorp Terraform, OpenTofu.
 
 **Expected benefit:** Applicants who meet the requirement as written are no longer filtered out.  
@@ -220,6 +363,27 @@ Requirement R3 can be met through Infrastructure as code, but rule Q5 only recog
 
 **Limitations**
 - Concept recognition uses the knowledge pack; review the proposed terms before adopting them.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-102, C-104, C-105, C-111, C-112, P-203 (pool, hypothetical), P-204 (pool, hypothetical) |
+| Would pass the proposed rule | 2: C-102, P-203 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 1: P-203 (pool, hypothetical) |
+| Newly eligible for human review | 1: C-102 |
+
+- C-102: eligible together with the proposed corrections to Q1, Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R3, rule:Q5. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.infrastructure-as-code.</sub>
 
@@ -235,12 +399,34 @@ Requirement R4 is stated as preferred, but rule Q6 rejects applicants who do not
 - `requirement:R4` — stated_as: preferred — Experience operating Kubernetes.
 - `rule:Q6` — action: reject — Do you have hands-on Kubernetes experience?
 
-**Consequence in the supplied candidate sample:** 7 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-105, C-106, C-109, C-111, C-112); 3 candidate-review opportunities depend on it (C-103, C-106, C-109).
-
 **Proposed action:** Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.
 
 **Expected benefit:** Applicants who meet all essential requirements are no longer rejected for lacking a preference.  
 **Trade-off:** More applicants reach review; ranking should still favour the preferred qualification.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-103, C-104, C-105, C-106, C-109, C-111, C-112 |
+| Would pass the proposed rule | 7: C-103, C-104, C-105, C-106, C-109, C-111, C-112 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 6: P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 4: C-104, C-105, C-111, C-112 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 3: C-103, C-106, C-109 |
+
+- C-103: eligible together with the proposed corrections to Q1, Q2, Q3, Q4, Q7
+- C-106: eligible together with the proposed corrections to Q1, Q2, Q3, Q4, Q7
+- C-109: eligible together with the proposed corrections to Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Pool records have no recorded answers to knockout questions, so the supplied question cannot be evaluated for them.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R4, rule:Q6. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -255,8 +441,6 @@ Screening rule Q7 (keyword_filter, action: reject) screens on 'Datadog', but no 
 **Evidence**
 - `rule:Q7` — Résumé must mention Datadog.
 
-**Consequence in the supplied candidate sample:** 7 candidate(s) would pass this rule under this correction alone (C-103, C-104, C-105, C-106, C-110, C-111, C-112); 3 candidate-review opportunities depend on it (C-103, C-106, C-110).
-
 **Proposed action:** Confirm whether this is a genuine job requirement. If it is, add it to the posted requirements with its rationale; if not, remove the rule or convert it to a preference.
 
 **Expected benefit:** Applicants are screened only on requirements they were told about.  
@@ -264,6 +448,29 @@ Screening rule Q7 (keyword_filter, action: reject) screens on 'Datadog', but no 
 
 **Limitations**
 - The requirement may be genuine but undocumented; only the employer can confirm.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 13: C-103, C-104, C-105, C-106, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 13: C-103, C-104, C-105, C-106, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 1: P-205 (pool, hypothetical) |
+| Pass the rule, but relevance not established | 5: C-104, C-105, C-111, C-112, P-204 (pool, hypothetical) |
+| Relevant evidence, but still fail other supplied rules | 4: P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Newly eligible for human review | 3: C-103, C-106, C-110 |
+
+- C-103: eligible together with the proposed corrections to Q1, Q2, Q3, Q4, Q6
+- C-106: eligible together with the proposed corrections to Q1, Q2, Q3, Q4, Q6
+- C-110: eligible together with the proposed corrections to Q1, Q2
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q7. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -280,8 +487,6 @@ Rule Q1 matches only 'site reliability engineer', 'SRE'. The knowledge base reco
 **Evidence**
 - `knowledge:skill.site-reliability-engineering` — recognized variant(s): Site reliability engineering, production reliability engineering, production reliability engineer
 
-**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-102, C-111); 1 candidate-review opportunity depends on it (C-102).
-
 **Proposed action:** Add recognized variants to the rule: Site reliability engineering, production reliability engineering, production reliability engineer.
 
 **Expected benefit:** Applicants describing the same work in different words are no longer filtered out.  
@@ -291,6 +496,27 @@ Rule Q1 matches only 'site reliability engineer', 'SRE'. The knowledge base reco
 - Synonyms improve recognition; they do not establish competence.
 - 'reliability engineering': Deliberately not a variant: in manufacturing and hardware contexts it means equipment reliability.
 - The presence of a related term does not prove that the candidate possesses the required experience.
+
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 13: C-102, C-103, C-104, C-105, C-106, C-110, C-111, C-112, P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 3: C-102, C-111, P-208 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 1: C-111 |
+| Relevant evidence, but still fail other supplied rules | 1: P-208 (pool, hypothetical) |
+| Newly eligible for human review | 1: C-102 |
+
+- C-102: eligible together with the proposed corrections to Q2, Q5
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q1, knowledge:skill.site-reliability-engineering, knowledge:term.site-reliability-engineering. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.site-reliability-engineering, term.site-reliability-engineering.</sub>
 
@@ -315,6 +541,26 @@ Rule Q2 matches only 'site reliability engineer', 'SRE'. The knowledge base reco
 - 'reliability engineering': Deliberately not a variant: in manufacturing and hardware contexts it means equipment reliability.
 - The presence of a related term does not prove that the candidate possesses the required experience.
 
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 17: C-102, C-103, C-104, C-105, C-106, C-107, C-108, C-109, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 0 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 0 |
+
+<sub>A reviewer rejected this correction; it is excluded from the combined simulation.</sub>  
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
+
 <sub>Sources: rule:Q2, knowledge:skill.site-reliability-engineering, knowledge:term.site-reliability-engineering. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.site-reliability-engineering, term.site-reliability-engineering.</sub>
 
 Decision: **rejected** by recruiter.lee@northwind.example (2026-10-12T15:13:30Z): Moot: Q2 will count responsibilities across the résumé (see the experience-path finding), so adding title variants is unnecessary.
@@ -328,8 +574,6 @@ Rule Q2 only counts experience held under the titles 'site reliability engineer'
 **Evidence**
 - `rule:Q2` — At least 7 years in Site Reliability Engineer roles (by job title).
 
-**Consequence in the supplied candidate sample:** 0 candidate(s) would pass this rule under this correction alone; 4 candidate-review opportunities depend on it (C-102, C-103, C-106, C-110).
-
 **Proposed action:** Count relevant experience by responsibilities, not titles: match recognized terminology across the full résumé and route equivalency evidence to recruiter review.
 
 **Expected benefit:** Candidates whose titles differ from the conventional path reach human review.  
@@ -338,6 +582,25 @@ Rule Q2 only counts experience held under the titles 'site reliability engineer'
 **Limitations**
 - Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.
 - Title-based counting may reflect a deliberate employer choice; confirm intent.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 17: C-102, C-103, C-104, C-105, C-106, C-107, C-108, C-109, C-110, C-111, C-112, P-201 (pool, hypothetical), P-202 (pool, hypothetical), P-203 (pool, hypothetical), P-204 (pool, hypothetical), P-205 (pool, hypothetical), P-208 (pool, hypothetical) |
+| Would pass the proposed rule | 1: P-203 (pool, hypothetical) |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 1: P-203 (pool, hypothetical) |
+| Newly eligible for human review | 0 |
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q2, requirement:R1. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.site-reliability.production-operations.</sub>
 
@@ -360,6 +623,25 @@ Rule Q5 matches only 'Terraform'. The knowledge base records 2 equivalent term(s
 **Limitations**
 - Synonyms improve recognition; they do not establish competence.
 
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-102, C-104, C-105, C-111, C-112, P-203 (pool, hypothetical), P-204 (pool, hypothetical) |
+| Would pass the proposed rule | 0 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 0 |
+
+<sub>Rules come from a supplied ATS configuration export; this is not a live ATS audit.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
+
 <sub>Sources: rule:Q5, knowledge:skill.terraform. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.terraform.</sub>
 
 Decision: **deferred** by recruiter.lee@northwind.example (2026-10-12T15:20:00Z): Superseded by the broader Q5 change; revisit if Q5 stays literal.
@@ -381,17 +663,25 @@ R6 ('Experience in the logistics or freight industry.') is marked required, but 
 **Limitations**
 - The requirement may be genuinely necessary; this finding asks for clarification, not removal.
 
+**Screening-risk category:** Insufficient evidence or unknown cause
+
+**Correction simulation:** not evaluated — No configuration correction is proposed: this finding asks the employer to classify the requirement. Its effect appears after a recorded decision and a re-run.
+
 <sub>Sources: requirement:R6. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
 Decision: **reclassified_preferred** by hm.okafor@northwind.example (2026-10-12T16:12:00Z): Freight experience helps but is not needed to do the job.
 
-### 1 exclusion(s) are not explained by the supplied screening rules
+### 2 exclusion(s) are not explained by the supplied screening rules
 
-`SA-REQ-SRE-0142-6f96884a` · Level 2 · Plausible missed-talent risk · confidence **high** · check `unexplained_exclusions`
+`SA-REQ-SRE-0142-0b941a58` · Level 2 · Plausible missed-talent risk · confidence **high** · check `unexplained_exclusions`
 
-Candidates C-113 were rejected or deprioritized, but pass every supplied rule. Either the supplied configuration is incomplete, or the exclusions were manual decisions.
+Candidates C-113, C-114 were rejected or deprioritized, but pass every supplied rule. Either the supplied configuration is incomplete, or the exclusions were manual decisions.
 
-**Consequence in the supplied candidate sample:** 1 candidate(s) would pass this rule under this correction alone (C-113); 0 candidate-review opportunities depend on it.
+**Evidence**
+- `candidate:C-113` — no supplied rule fails
+- `candidate:C-114` — no supplied rule fails; cannot be evaluated: Q3 (no recorded answer)
+
+**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-113, C-114); 0 candidate-review opportunities depend on it.
 
 **Proposed action:** Supply the complete ATS screening configuration, or confirm these were manual decisions.
 
@@ -401,7 +691,11 @@ Candidates C-113 were rejected or deprioritized, but pass every supplied rule. E
 **Limitations**
 - The engine can only audit configuration it was given; it does not claim a complete audit.
 
-<sub>Sources: candidate:C-113. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
+**Screening-risk category:** Insufficient evidence or unknown cause
+
+**Correction simulation:** not evaluated — The supplied rules do not establish why these candidates were excluded, so no correction can be simulated. Treat as unknown, not as missed candidates.
+
+<sub>Sources: candidate:C-113, candidate:C-114. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
 Decision: **requested_evidence** by recruiter.lee@northwind.example (2026-10-12T15:25:00Z): Asked the ATS admin for the full configuration export; C-113 may have been a manual rejection.
 
@@ -439,6 +733,8 @@ C-102 was rejected by Q1, Q2, Q5. Under the proposed corrections they pass every
 
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
+
+**Screening-risk category:** Terminology not recognized
 
 <sub>Sources: candidate:C-102, rule:Q1, rule:Q2, rule:Q5. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -482,6 +778,8 @@ C-103 was rejected by Q1, Q2, Q3, Q4, Q6, Q7. Under the proposed corrections the
 - Confirm they drove a review that produced corrective actions.
 - Assess ability to learn the employer's production stack (technical depth is a separate requirement).
 
+**Screening-risk category:** Potentially equivalent experience
+
 <sub>Sources: candidate:C-103, rule:Q1, rule:Q2, rule:Q3, rule:Q4, rule:Q6, rule:Q7. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.incident-management.operational-crisis-response.</sub>
 
 Decision: **approved_candidate_review** by recruiter.lee@northwind.example (2026-10-12T15:31:00Z): Hospital EHR incident lead; verify Terraform depth.
@@ -524,6 +822,8 @@ C-106 was rejected by Q1, Q2, Q3, Q4, Q6, Q7. Under the proposed corrections the
 - Confirm they drove a review that produced corrective actions.
 - Assess ability to learn the employer's production stack (technical depth is a separate requirement).
 
+**Screening-risk category:** Potentially equivalent experience
+
 <sub>Sources: candidate:C-106, rule:Q1, rule:Q2, rule:Q3, rule:Q4, rule:Q6, rule:Q7. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.incident-management.operational-crisis-response.</sub>
 
 Decision: **approved_candidate_review** by recruiter.lee@northwind.example (2026-10-12T15:32:00Z): Military communications operations; verify production-scale automation.
@@ -558,6 +858,8 @@ C-108 was rejected by Q2, Q4. Under the proposed corrections they pass every rul
 
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
 
 <sub>Sources: candidate:C-108, rule:Q2, rule:Q4. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -594,6 +896,8 @@ C-109 was rejected by Q2, Q6. Under the proposed corrections they pass every rul
 
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
 
 <sub>Sources: candidate:C-109, rule:Q2, rule:Q6. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -632,6 +936,8 @@ C-110 was rejected by Q1, Q2, Q7. Under the proposed corrections they pass every
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
 
+**Screening-risk category:** Rule narrower than the requirement
+
 <sub>Sources: candidate:C-110, rule:Q1, rule:Q2, rule:Q7. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
 Decision: **Pending human decision**
@@ -658,7 +964,6 @@ suggested_logic:
   - operations engineering
   - platform operations
   - network operations
-  - DevOps engineering
   match: any
   field: resume
   allows_equivalent: true
@@ -681,7 +986,6 @@ suggested_logic:
   - operations engineering
   - platform operations
   - network operations
-  - DevOps engineering
   - Site reliability engineering
   - production reliability engineering
   - production reliability engineer
@@ -772,7 +1076,7 @@ suggested_logic:
 | `SA-REQ-SRE-0142-36d39631` Candidate C-106 may meet the requirements through a path the current rules do not recognize | approved_candidate_review | recruiter.lee@northwind.example | Military communications operations; verify production-scale automation. |
 | `SA-REQ-SRE-0142-cd635676` Candidate C-108 may meet the requirements through a path the current rules do not recognize | approved_candidate_review | recruiter.lee@northwind.example | Conventional profile without a degree. |
 | `SA-REQ-SRE-0142-c1d0ef0b` Candidate C-109 may meet the requirements through a path the current rules do not recognize | approved_candidate_review | recruiter.lee@northwind.example | Nomad instead of Kubernetes. |
-| `SA-REQ-SRE-0142-6f96884a` 1 exclusion(s) are not explained by the supplied screening rules | requested_evidence | recruiter.lee@northwind.example | Asked the ATS admin for the full configuration export; C-113 may have been a manual rejection. |
+| `SA-REQ-SRE-0142-0b941a58` 2 exclusion(s) are not explained by the supplied screening rules | requested_evidence | recruiter.lee@northwind.example | Asked the ATS admin for the full configuration export; C-113 may have been a manual rejection. |
 
 ## 8. Outcome measurements
 
@@ -868,3 +1172,4 @@ Decision: _No decision required (measured outcome)._
 | C-111 | rejected | Q1, Q2, Q3, Q4, Q5, Q6, Q7 | Still excluded after proposed corrections by Q2, Q3, Q5. |
 | C-112 | rejected | Q1, Q2, Q3, Q5, Q6, Q7 | Still excluded after proposed corrections by Q1, Q2, Q3, Q5. |
 | C-113 | rejected | — | Excluded, but the supplied rules do not explain the exclusion. |
+| C-114 | rejected | — | Excluded, but the supplied rules do not explain the exclusion. |

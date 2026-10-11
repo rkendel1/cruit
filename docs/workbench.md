@@ -18,9 +18,9 @@ sa workbench [--port 8765] [--workspace ./workspace] [--no-browser]
 
 | View | What it shows | Engine source |
 |---|---|---|
-| Requisition intake | Example or uploaded package; per-file validation; input fingerprints; verified ATS configuration vs recruiter documentation vs missing; pool permitted uses, age limit and retention; requirements, rules and policy; knowledge revision and engine version | `contracts`, `Workspace.input_summary` |
+| Requisition intake | Example or uploaded package; per-file validation; input fingerprints; supplied ATS configuration export vs recruiter documentation vs missing (never described as a live audit); pool permitted uses, age limit and retention; requirements, rules and policy; knowledge revision and engine version | `contracts`, `Workspace.input_summary` |
 | Candidate discovery | Evidence groups, per-candidate evidence ledger, unknowns, mandatory-requirement issues, supplied-rule exclusions, freshness, constraints, run and knowledge reference, decision form | `engine/discovery.py` |
-| Screening findings | Level 1–3 findings with the requirement and rule, evidence, affected candidates, confidence, proposed action and trade-off, knowledge reference, decision form with the dispositions the decision model allows for that finding | `engine/checks.py`, `engine/candidates.py`, `measure.py` |
+| Screening risks | Screening-risk findings (see [screening-risks.md](screening-risks.md)) with before/after correction simulations; Level 1–3 with the requirement and rule, evidence, affected candidates, confidence, proposed action and trade-off, knowledge reference, decision form with the dispositions the decision model allows for that finding | `engine/checks.py`, `engine/candidates.py`, `measure.py` |
 | Review and export | Pending work, decisions recorded after the run (re-run to apply), carried-over and stale decisions, exports, measured outcomes vs estimates, run history with reproducibility verification, knowledge evaluation and comparison | `Workspace.run/verify_run/export/evaluate/compare` |
 
 ## Discovery: from "affected by rules" to "supported by evidence"

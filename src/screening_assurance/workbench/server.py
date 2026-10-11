@@ -26,6 +26,7 @@ from urllib.parse import unquote, urlparse
 
 from .. import ENGINE_VERSION
 from ..contracts import ContractError
+from ..engine.risks import RISK_CATEGORIES, SIM_CATEGORIES, SIM_LABELS
 from .workspace import CANDIDATE_DISPOSITIONS, EXPORTS, INPUT_KINDS, MAX_FILE_BYTES, Workspace, WorkbenchError
 
 MAX_BODY_BYTES = len(INPUT_KINDS) * MAX_FILE_BYTES + 64 * 1024
@@ -180,6 +181,8 @@ class Handler(BaseHTTPRequestHandler):
                 "examples": ws.examples(),
                 "sessions": ws.sessions(),
                 "candidate_dispositions": CANDIDATE_DISPOSITIONS,
+                "risk_categories": RISK_CATEGORIES,
+                "simulation_categories": [[k, SIM_LABELS[k]] for k in SIM_CATEGORIES],
                 "input_kinds": {k: {"contract": c, "file": f, "required": r} for k, (c, f, r) in INPUT_KINDS.items()},
                 "max_file_bytes": MAX_FILE_BYTES,
                 "evaluation_available": (ws.evals_root / "cases").exists(),

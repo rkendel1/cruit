@@ -35,11 +35,11 @@ _Every required requirement is covered, at least one through an alternative path
 
 #### C-303 · current application · `REQ-LH-0217/C-303`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology).
 - **Why:** At least one requirement is supported through an alternative path that a recruiter must verify.
 - **Supported:** R1, R2, R3
-- **Supplied screening rules:** excluded by Q1, Q2 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q1, Q2 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Verify next:** Confirm number of drivers supervised and authority over scheduling. Confirm compliance responsibilities.
 - **Recruiter decision:** pending

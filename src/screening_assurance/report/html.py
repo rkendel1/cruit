@@ -14,6 +14,8 @@ from typing import Any
 import yaml
 
 from .common import (
+    level_label,
+    simulation_rows,
     CATEGORY_TITLE,
     CLASSIFICATION_LABEL,
     DISPOSITIONS,
@@ -111,9 +113,8 @@ def e(s: Any) -> str:
     return escape("" if s is None else str(s))
 
 
-def _badge(level: int) -> str:
-    label = {1: "Level 1 · Demonstrable inconsistency", 2: "Level 2 · Missed-talent risk", 3: "Level 3 · Measured impact"}[level]
-    return f'<span class="badge b{level}">{label}</span>'
+def _badge(f: dict[str, Any]) -> str:
+    return f'<span class="badge b{f["evidence_level"]}">{e(level_label(f))}</span>'
 
 
 def _decision_controls(f: dict[str, Any]) -> str:
@@ -138,14 +139,15 @@ def _evidence_list(items: list[dict[str, Any]]) -> str:
 
 
 def _finding_card(result: dict[str, Any], f: dict[str, Any]) -> str:
-    parts = [f'<article class="card" id="{e(f["id"])}"><div class="head">{_badge(f["evidence_level"])}'
+    parts = [f'<article class="card" id="{e(f["id"])}"><div class="head">{_badge(f)}'
              f'<span class="chip">{e(CATEGORY_TITLE[f["category"]])}</span><span class="chip">confidence: {e(f["confidence"])}</span>'
              f'<span class="chip"><code>{e(f["id"])}</code></span></div><h3>{e(f["title"])}</h3><p>{e(f["observation"])}</p>']
     if f["category"] == "candidate_review_opportunity":
         parts.append(_candidate_view(result, f))
     else:
         parts.append(_evidence_list(f["evidence"]))
-        if f["category"] != "measured_impact" and (f.get("affected_candidates") or f.get("unlocked_candidates")):
+        if f["category"] not in ("measured_impact", "mandatory_protected") and not (f.get("simulation") or {}).get("categories") \
+                and (f.get("affected_candidates") or f.get("unlocked_candidates")):
             parts.append(
                 f'<p><b>Consequence in the supplied sample:</b> {len(f["affected_candidates"])} candidate(s) pass this rule under this '
                 f'correction alone{(" (" + e(", ".join(f["affected_candidates"])) + ")") if f["affected_candidates"] else ""}; '
@@ -154,6 +156,14 @@ def _finding_card(result: dict[str, Any], f: dict[str, Any]) -> str:
         parts.append(f'<dl class="kv"><dt>Proposed action</dt><dd>{e(f["proposed_action"])}</dd>'
                      f'<dt>Expected benefit</dt><dd>{e(f["expected_benefit"])}</dd>'
                      f'<dt>Trade-off</dt><dd>{e(f["tradeoffs"])}</dd></dl>')
+        sim = f.get("simulation") or {}
+        if sim.get("categories"):
+            rows = "".join(f"<tr><td>{e(a)}</td><td>{e(b)}</td></tr>" for a, b in simulation_rows(sim))
+            title = "Correction simulation (not applied)" if sim.get("proposed") is not None else "Supplied rule impact (no correction proposed)"
+            parts.append(f'<p><b>{title}</b></p><div class="tbl"><table><tbody>' + rows + "</tbody></table></div>"
+                         + "".join(f'<p class="meta">{e(x)}</p>' for x in sim.get("limitations", [])))
+        elif sim and not sim.get("evaluable") and sim.get("reason"):
+            parts.append(f'<p class="meta"><b>Correction simulation:</b> not evaluated — {e(sim["reason"])}</p>')
         if f.get("proposed_change"):
             parts.append(f'<details><summary>Suggested configuration change (simulation only)</summary><pre>{e(yaml.safe_dump(f["proposed_change"], sort_keys=False))}</pre></details>')
         if f["limitations"]:
@@ -279,7 +289,7 @@ def render_html(result: dict[str, Any], discovery: dict[str, Any] | None = None,
 <p class="meta">🔒 Protected (legal, licensing or employer non-negotiable): no alternative path is ever proposed.</p>
 <h2 id="s2">2. Screening rules inspected</h2>
 <div class="tbl"><table><thead><tr><th>Rule</th><th>Rule text</th><th>Linked req.</th><th>Status</th><th>Findings</th></tr></thead><tbody>{rule_rows}</tbody></table></div>
-<h2 id="s3">3. Confirmed inconsistencies</h2>{section(("confirmed_inconsistency",))}
+<h2 id="s3">3. Confirmed inconsistencies and protected requirements</h2>{section(("mandatory_protected", "confirmed_inconsistency"))}
 <h2 id="s4">4. Potential missed-talent risks</h2>{section(("design_risk", "unverified_assumption", "input_limitation"))}
 <h2 id="s5">5. Candidate-review opportunities</h2>{section(("candidate_review_opportunity",))}
 <details><summary>Candidates assessed but not surfaced</summary><div class="tbl"><table><thead><tr><th>Candidate</th><th>ATS status</th><th>Excluded by</th><th>Reason</th></tr></thead><tbody>{not_surfaced}</tbody></table></div></details>

@@ -7,7 +7,7 @@ Knowledge `core@1.1.0+8a94e741e4` · evidence assessed as of 2026-10-10. Groups 
 | Direct evidence | 8 |
 | Potentially transferable — needs human review | 3 |
 | Insufficient evidence | 1 |
-| Not surfaced | 6 |
+| Not surfaced | 7 |
 | Not available for action | 3 |
 | Already in active review | 1 |
 
@@ -21,41 +21,41 @@ _Supplied evidence directly supports every required requirement._
 
 #### C-102 · current application · `REQ-SRE-0142/C-102`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q5 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q5 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (equivalent tool or credential).
 - **Supported:** R1, R2, R3, R4, R5
 - **Unverified:** R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q1, Q2, Q5 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q1, Q2, Q5 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Recruiter decision:** pending
 
 #### C-108 · current application · `REQ-SRE-0142/C-108`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q2, Q4 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q2, Q4 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).
 - **Supported:** R1, R2, R3, R4
 - **Unverified:** R5 — Preferred qualification not evidenced.; R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q2, Q4 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q2, Q4 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Recruiter decision:** pending
 
 #### C-109 · current application · `REQ-SRE-0142/C-109`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q2, Q6 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q2, Q6 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).
 - **Supported:** R1, R2, R3, R5
 - **Unverified:** R4 — Preferred qualification not evidenced.; R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q2, Q6 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q2, Q6 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Recruiter decision:** pending
 
 #### C-110 · current application · `REQ-SRE-0142/C-110`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q7 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (different terminology); R2 (different terminology); R3 (same terminology, equivalent tool or credential).
 - **Supported:** R1, R2, R3, R4, R5
 - **Unverified:** R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q1, Q2, Q7 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q1, Q2, Q7 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Recruiter decision:** pending
 
@@ -65,7 +65,7 @@ _Supplied evidence directly supports every required requirement._
 - **Why:** Evidence supports every required requirement: R1 (same terminology); R2 (different terminology); R3 (same terminology).
 - **Supported:** R1, R2, R3, R4, R5
 - **Unverified:** R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Recruiter decision:** pending
 
@@ -108,24 +108,24 @@ _Every required requirement is covered, at least one through an alternative path
 
 #### C-103 · current application · `REQ-SRE-0142/C-103`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential).
 - **Why:** At least one requirement is supported through an alternative path that a recruiter must verify.
 - **Supported:** R1, R2, R3
 - **Unverified:** R4 — Preferred qualification not evidenced.; R5 — Preferred qualification not evidenced.; R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q1, Q2, Q3, Q4, Q6, Q7 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q1, Q2, Q3, Q4, Q6, Q7 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Verify next:** Ask for a specific incident the candidate led, its scale, and their decision-making role. Confirm they communicated status to stakeholders during the event. Confirm they drove a review that produced corrective actions. Assess ability to learn the employer's production stack (technical depth is a separate requirement).
 - **Recruiter decision:** pending
 
 #### C-106 · current application · `REQ-SRE-0142/C-106`
 
-- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the ATS-exported screening configuration).
+- **Why:** Applied to this requisition and was rejected; excluded by Q1, Q2, Q3, Q4, Q6, Q7 (simulated against the supplied ATS configuration export (not a live ATS audit)).
 - **Why:** Evidence supports every required requirement: R1 (different terminology); R2 (transferable experience); R3 (same terminology, equivalent tool or credential, different terminology).
 - **Why:** At least one requirement is supported through an alternative path that a recruiter must verify.
 - **Supported:** R1, R2, R3, R4
 - **Unverified:** R5 — Preferred qualification not evidenced.; R6 — Preferred qualification not evidenced.
-- **Supplied screening rules:** excluded by Q1, Q2, Q3, Q4, Q6, Q7 — simulated against the ATS-exported screening configuration
+- **Supplied screening rules:** excluded by Q1, Q2, Q3, Q4, Q6, Q7 — simulated against the supplied ATS configuration export (not a live ATS audit)
 - **Constraint:** Applied to this requisition; follow your normal applicant process.
 - **Verify next:** Ask for a specific incident the candidate led, its scale, and their decision-making role. Confirm they communicated status to stakeholders during the event. Confirm they drove a review that produced corrective actions. Assess ability to learn the employer's production stack (technical depth is a separate requirement).
 - **Recruiter decision:** pending
@@ -166,6 +166,7 @@ _Some required evidence exists, but the record is partial or a mandatory require
 |---|---|---|
 | C-104 | not surfaced | Required evidence missing from a complete record: R3 — No supporting evidence in the supplied record. |
 | C-107 | not surfaced | Required evidence missing from a complete record: R1 — 36 months of relevant experience found; requirement states 5 years. |
+| C-114 | not surfaced | Required evidence missing from a complete record: R2 — No supporting evidence in the supplied record. |
 | P-204 | not surfaced | Required evidence missing from a complete record: R2 — Partial evidence for eq.incident-management.operational-crisis-response: only 1 of required 3 indicators.; R3 — No supporting evidence in the supplied record. |
 | P-206 | blocked | Evidence last updated 2021-05-10 (1979 days ago) exceeds the 730-day limit. |
 | P-207 | blocked | Not authorized for rediscovery review (permitted uses: original_requisition_only). |

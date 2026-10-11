@@ -7,8 +7,9 @@ from typing import Any
 import yaml
 
 from .common import (
+    level_label,
+    simulation_rows,
     CLASSIFICATION_LABEL,
-    LEVEL_LABEL,
     SECTIONS,
     STATUS_LABEL,
     candidate_review_answers,
@@ -29,7 +30,7 @@ def _disp(f: dict[str, Any]) -> str:
 
 
 def _finding_block(result: dict[str, Any], f: dict[str, Any]) -> list[str]:
-    out = [f"### {f['title']}", "", f"`{f['id']}` · {LEVEL_LABEL[f['evidence_level']]} · confidence **{f['confidence']}** · check `{f['check']}`", ""]
+    out = [f"### {f['title']}", "", f"`{f['id']}` · {level_label(f)} · confidence **{f['confidence']}** · check `{f['check']}`", ""]
     out.append(f["observation"])
     out.append("")
     if f["category"] == "candidate_review_opportunity":
@@ -40,7 +41,8 @@ def _finding_block(result: dict[str, Any], f: dict[str, Any]) -> list[str]:
             out.append(f"- `{e.get('source')}` — {e.get('text')}")
         out.append("")
     if f["category"] != "candidate_review_opportunity":
-        if f["category"] != "measured_impact" and (f.get("affected_candidates") or f.get("unlocked_candidates")):
+        if f["category"] not in ("measured_impact", "mandatory_protected") and not (f.get("simulation") or {}).get("categories") \
+                and (f.get("affected_candidates") or f.get("unlocked_candidates")):
             out.append(
                 f"**Consequence in the supplied candidate sample:** {len(f['affected_candidates'])} candidate(s) "
                 f"would pass this rule under this correction alone"
@@ -60,6 +62,27 @@ def _finding_block(result: dict[str, Any], f: dict[str, Any]) -> list[str]:
             out.append("**Limitations**")
             out += [f"- {l}" for l in f["limitations"]]
             out.append("")
+    sim = f.get("simulation") or {}
+    if f.get("risk_category"):
+        from ..engine.risks import RISK_CATEGORIES
+        out.append(f"**Screening-risk category:** {RISK_CATEGORIES.get(f['risk_category'], f['risk_category'])}")
+        out.append("")
+    if sim.get("categories"):
+        out.append("**Correction simulation (not applied)** — supplied rule vs. proposed correction:" if sim.get("proposed") is not None
+                   else "**Supplied rule impact** — no correction is proposed:")
+        out.append("")
+        out.append("| Category | Candidates |")
+        out.append("|---|---|")
+        out += [f"| {a} | {_esc(b)} |" for a, b in simulation_rows(sim)]
+        if sim.get("eligibility_basis"):
+            out.append("")
+            out += [f"- {c}: eligible {basis}" for c, basis in sim["eligibility_basis"].items()]
+        out.append("")
+        out += [f"<sub>{x}</sub>  " for x in sim.get("limitations", [])]
+        out.append("")
+    elif sim and not sim.get("evaluable") and sim.get("reason"):
+        out.append(f"**Correction simulation:** not evaluated — {sim['reason']}")
+        out.append("")
     refs = ", ".join(f"{r['kind']}:{r['id']}" for r in f["source_refs"])
     out.append(f"<sub>Sources: {refs}. Knowledge: `{f['knowledge_version']}`"
                + (f"; records: {', '.join(f['knowledge_refs'])}" if f["knowledge_refs"] else "") + ".</sub>")

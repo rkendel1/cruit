@@ -4,36 +4,148 @@
   "title": "Evaluation case",
   "description": "A labeled scenario used to regression-test knowledge and engine changes. Expert labels are ground truth; the engine never sees them.",
   "type": "object",
-  "required": ["id", "description", "requisition", "policy", "expert_labels"],
+  "required": [
+    "id",
+    "description",
+    "requisition",
+    "policy",
+    "expert_labels"
+  ],
   "additionalProperties": false,
   "$defs": {
     "finding_matcher": {
       "type": "object",
-      "required": ["check"],
+      "required": [
+        "check"
+      ],
       "additionalProperties": false,
       "properties": {
-        "check": { "type": "string" },
-        "rule": { "type": "string" },
-        "requirement": { "type": "string" },
-        "candidate": { "type": "string" },
-        "evidence_level": { "enum": [1, 2, 3] },
-        "note": { "type": "string" }
+        "check": {
+          "type": "string"
+        },
+        "rule": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "candidate": {
+          "type": "string"
+        },
+        "evidence_level": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "simulation_expectation": {
+      "type": "object",
+      "required": [
+        "scenario",
+        "finding"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scenario": {
+          "type": "string"
+        },
+        "finding": {
+          "$ref": "#/$defs/finding_matcher"
+        },
+        "evaluable": {
+          "type": "boolean"
+        },
+        "no_correction": {
+          "type": "boolean",
+          "description": "The finding must not propose any correction (protected requirements)."
+        },
+        "category": {
+          "enum": [
+            "excluded_by_supplied_rule",
+            "would_pass_proposed_rule",
+            "still_fail_mandatory_requirement",
+            "evidence_insufficient",
+            "relevance_not_established",
+            "still_fail_other_supplied_rules",
+            "newly_eligible_for_review"
+          ]
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   },
   "properties": {
-    "id": { "type": "string" },
-    "description": { "type": "string" },
-    "requisition": { "type": "string", "description": "Path relative to the case file." },
-    "candidates": { "type": "string" },
-    "policy": { "type": "string" },
+    "id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "requisition": {
+      "type": "string",
+      "description": "Path relative to the case file."
+    },
+    "candidates": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "string"
+    },
     "expert_labels": {
       "description": "Candidate id -> expert judgement against the role's genuine requirements.",
       "type": "object",
-      "additionalProperties": { "enum": ["meets_requirements", "does_not_meet", "insufficient_evidence"] }
+      "additionalProperties": {
+        "enum": [
+          "meets_requirements",
+          "does_not_meet",
+          "insufficient_evidence"
+        ]
+      }
     },
-    "label_rationale": { "type": "object", "additionalProperties": { "type": "string" } },
-    "expected_findings": { "type": "array", "items": { "$ref": "#/$defs/finding_matcher" } },
-    "forbidden_findings": { "type": "array", "items": { "$ref": "#/$defs/finding_matcher" } }
+    "label_rationale": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "expected_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finding_matcher"
+      }
+    },
+    "forbidden_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finding_matcher"
+      }
+    },
+    "simulation_expectations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/simulation_expectation"
+      }
+    },
+    "pool": {
+      "type": "string",
+      "description": "Optional authorized candidate pool, path relative to the case file."
+    }
   }
 }

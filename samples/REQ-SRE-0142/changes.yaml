@@ -26,10 +26,9 @@ changes:
     - operations engineering
     - platform operations
     - network operations
-    - DevOps engineering
   instruction: 'Extend the rule to recognize: Production operations, IT operations,
     systems operations, infrastructure operations, operations engineering, platform
-    operations, network operations, DevOps engineering.'
+    operations, network operations.'
   current_rule_text: "R\xE9sum\xE9 must mention site reliability engineer or SRE."
 - finding_id: SA-REQ-SRE-0142-9403725f
   rule: Q2
@@ -43,10 +42,9 @@ changes:
     - operations engineering
     - platform operations
     - network operations
-    - DevOps engineering
   instruction: 'Extend the rule to recognize: Production operations, IT operations,
     systems operations, infrastructure operations, operations engineering, platform
-    operations, network operations, DevOps engineering.'
+    operations, network operations.'
   current_rule_text: At least 7 years in Site Reliability Engineer roles (by job title).
 - finding_id: SA-REQ-SRE-0142-d15dcf14
   rule: Q2
@@ -152,7 +150,6 @@ changes:
     - operations engineering
     - platform operations
     - network operations
-    - DevOps engineering
     - Site reliability engineering
     - SRE
     - site reliability engineer

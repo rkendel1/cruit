@@ -17,7 +17,7 @@
     "status": "approved",
     "path": "knowledge/releases/1.1.0"
   },
-  "engine_version": "0.1.0",
+  "engine_version": "0.2.0",
   "run_at": "2026-11-03T12:00:00Z",
   "inputs": {
     "job_description": "supplied",
@@ -25,6 +25,7 @@
     "candidate_evidence": "authorized_sample"
   },
   "limitations": [
+    "Screening rules come from a supplied ATS configuration export; this is not a live ATS audit, and the live configuration may have changed since export.",
     "Candidate evidence is a sample; candidate counts do not represent the full applicant pool.",
     "Candidate evidence is matched deterministically against the knowledge pack; language-model interpretation is not used in this run."
   ],
@@ -103,6 +104,7 @@
         ]
       },
       "finding_ids": [
+        "SA-REQ-LH-0217-31f7b18c",
         "SA-REQ-LH-0217-24c327f3"
       ]
     },
@@ -138,6 +140,123 @@
     }
   ],
   "findings": [
+    {
+      "id": "SA-REQ-LH-0217-31f7b18c",
+      "check": "mandatory_requirement_protected",
+      "title": "Q1 enforces a protected requirement; no correction is proposed",
+      "category": "mandatory_protected",
+      "evidence_level": 1,
+      "requisition_id": "REQ-LH-0217",
+      "knowledge_version": "core@1.1.0+8a94e741e4",
+      "observation": "Rule Q1 enforces a protected requirement: Commercial driver's license (Class A) is a regulated credential in the knowledge base. 2 candidate record(s) in the supplied data do not meet it, and excluding them is expected. 2 other excluded record(s) either show the credential under another spelling or cannot be verified; see the terminology finding for this rule.",
+      "source_refs": [
+        {
+          "kind": "rule",
+          "id": "Q1",
+          "text": "Must hold CDL Class A."
+        },
+        {
+          "kind": "requirement",
+          "id": "R1",
+          "text": "Active Class A commercial driver's license."
+        }
+      ],
+      "evidence": [
+        {
+          "source": "candidate:C-302",
+          "text": "supplied rule: listed credential not held; R1 (protected) not among the supplied credentials"
+        },
+        {
+          "source": "candidate:P-302",
+          "text": "supplied rule: listed credential not held; R1 (protected) not among the supplied credentials"
+        }
+      ],
+      "confidence": "high",
+      "limitations": [
+        "Only spelling variants of the credential itself may be recognized (see any terminology finding for this rule).",
+        "Candidates whose credentials were not supplied are 'cannot verify', not 'does not meet'.",
+        "Rules come from a supplied ATS configuration export; this is not a live ATS audit."
+      ],
+      "proposed_action": "Keep the rule. Do not route around it with alternative experience.",
+      "expected_benefit": "Confirms the screen protects a legal, licensing or employer non-negotiable requirement.",
+      "tradeoffs": "None: relaxing it is out of scope for screening assurance.",
+      "rule_id": "Q1",
+      "requirement_id": "R1",
+      "candidate_id": null,
+      "affected_candidates": [
+        "C-302",
+        "P-302"
+      ],
+      "unlocked_candidates": [],
+      "proposed_change": null,
+      "knowledge_refs": [],
+      "related_findings": [],
+      "disposition": {
+        "status": "pending"
+      },
+      "risk_category": "mandatory_protected",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q1",
+        "supplied": {
+          "credentials": [
+            "CDL Class A"
+          ]
+        },
+        "proposed": null,
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-302",
+            "C-303",
+            "P-302",
+            "P-303"
+          ],
+          "would_pass_proposed_rule": [],
+          "still_fail_mandatory_requirement": [
+            "C-302",
+            "P-302"
+          ],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": []
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 4,
+          "would_pass_proposed_rule": 0,
+          "still_fail_mandatory_requirement": 2,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 0
+        },
+        "sources": {
+          "C-302": "applicant",
+          "C-303": "applicant",
+          "P-302": "pool",
+          "P-303": "pool"
+        },
+        "notes": {
+          "C-302": "supplied rule: listed credential not held; R1 (protected) not among the supplied credentials",
+          "C-303": "supplied rule: listed credential not held",
+          "P-302": "supplied rule: listed credential not held; R1 (protected) not among the supplied credentials",
+          "P-303": "supplied rule: listed credential not held"
+        },
+        "eligibility_basis": {},
+        "population": {
+          "applicants": 4,
+          "pool_records": 3
+        },
+        "limitations": [
+          "Rules come from a supplied ATS configuration export; this is not a live ATS audit.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ],
+        "reason": "No correction is proposed for a protected requirement."
+      },
+      "evidence_label": "Demonstrable inconsistency"
+    },
     {
       "id": "SA-REQ-LH-0217-24c327f3",
       "check": "literal_term_missing_variants",
@@ -204,6 +323,78 @@
       "disposition": {
         "status": "pending"
       },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q1",
+        "supplied": {
+          "credentials": [
+            "CDL Class A"
+          ]
+        },
+        "proposed": {
+          "credentials": [
+            "CDL Class A",
+            "Commercial driver's license (Class A)",
+            "Class A CDL",
+            "CDL-A",
+            "Class A commercial driver's license",
+            "commercial driver license class A"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-302",
+            "C-303",
+            "P-302",
+            "P-303"
+          ],
+          "would_pass_proposed_rule": [
+            "C-303"
+          ],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-303"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 4,
+          "would_pass_proposed_rule": 1,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 1
+        },
+        "sources": {
+          "C-302": "applicant",
+          "C-303": "applicant",
+          "P-302": "pool",
+          "P-303": "pool"
+        },
+        "notes": {
+          "C-302": "supplied rule: listed credential not held",
+          "C-303": "supplied rule: listed credential not held; proposed rule: holds ['Class A CDL']",
+          "P-302": "supplied rule: listed credential not held",
+          "P-303": "supplied rule: listed credential not held"
+        },
+        "eligibility_basis": {
+          "C-303": "together with the proposed corrections to Q2"
+        },
+        "population": {
+          "applicants": 4,
+          "pool_records": 3
+        },
+        "limitations": [
+          "Rules come from a supplied ATS configuration export; this is not a live ATS audit.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
+      },
       "evidence_label": "Plausible missed-talent risk"
     },
     {
@@ -259,6 +450,80 @@
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "terminology",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q2",
+        "supplied": {
+          "terms": [
+            "Transportation Supervisor",
+            "Dispatch Supervisor"
+          ],
+          "years": 3,
+          "field": "titles"
+        },
+        "proposed": {
+          "terms": [
+            "Transportation Supervisor",
+            "Dispatch Supervisor",
+            "Transportation supervision",
+            "dispatch supervision",
+            "fleet supervision",
+            "linehaul operations"
+          ],
+          "years": 3,
+          "field": "titles"
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-302",
+            "C-303",
+            "C-304",
+            "P-302",
+            "P-303"
+          ],
+          "would_pass_proposed_rule": [],
+          "still_fail_mandatory_requirement": [],
+          "evidence_insufficient": [],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": []
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 5,
+          "would_pass_proposed_rule": 0,
+          "still_fail_mandatory_requirement": 0,
+          "evidence_insufficient": 0,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 0
+        },
+        "sources": {
+          "C-302": "applicant",
+          "C-303": "applicant",
+          "C-304": "applicant",
+          "P-302": "pool",
+          "P-303": "pool"
+        },
+        "notes": {
+          "C-302": "supplied rule: 0 relevant months vs 36 required",
+          "C-303": "supplied rule: 0 relevant months vs 36 required",
+          "C-304": "supplied rule: 0 relevant months vs 36 required",
+          "P-302": "supplied rule: 0 relevant months vs 36 required",
+          "P-303": "supplied rule: 0 relevant months vs 36 required"
+        },
+        "eligibility_basis": {},
+        "population": {
+          "applicants": 4,
+          "pool_records": 3
+        },
+        "limitations": [
+          "Rules come from a supplied ATS configuration export; this is not a live ATS audit.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -327,6 +592,97 @@
       "related_findings": [],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "rule_narrower",
+      "simulation": {
+        "evaluable": true,
+        "rule": "Q2",
+        "supplied": {
+          "terms": [
+            "Transportation Supervisor",
+            "Dispatch Supervisor"
+          ],
+          "years": 3,
+          "field": "titles"
+        },
+        "proposed": {
+          "terms": [
+            "Transportation Supervisor",
+            "Dispatch Supervisor",
+            "Transportation supervision",
+            "dispatch supervision",
+            "fleet supervision",
+            "linehaul operations"
+          ],
+          "years": 3,
+          "field": "resume",
+          "equivalencies": [
+            "eq.transportation-supervision.fleet-coordination"
+          ]
+        },
+        "categories": {
+          "excluded_by_supplied_rule": [
+            "C-302",
+            "C-303",
+            "C-304",
+            "P-302",
+            "P-303"
+          ],
+          "would_pass_proposed_rule": [
+            "C-302",
+            "C-303",
+            "P-302",
+            "P-303"
+          ],
+          "still_fail_mandatory_requirement": [
+            "C-302",
+            "P-302"
+          ],
+          "evidence_insufficient": [
+            "P-303"
+          ],
+          "relevance_not_established": [],
+          "still_fail_other_supplied_rules": [],
+          "newly_eligible_for_review": [
+            "C-303"
+          ]
+        },
+        "counts": {
+          "excluded_by_supplied_rule": 5,
+          "would_pass_proposed_rule": 4,
+          "still_fail_mandatory_requirement": 2,
+          "evidence_insufficient": 1,
+          "relevance_not_established": 0,
+          "still_fail_other_supplied_rules": 0,
+          "newly_eligible_for_review": 1
+        },
+        "sources": {
+          "C-302": "applicant",
+          "C-303": "applicant",
+          "C-304": "applicant",
+          "P-302": "pool",
+          "P-303": "pool"
+        },
+        "notes": {
+          "C-302": "supplied rule: 0 relevant months vs 36 required; proposed rule: 84 relevant months vs 36 required; R1 (protected) not among the supplied credentials",
+          "C-303": "supplied rule: 0 relevant months vs 36 required; proposed rule: 48 relevant months vs 36 required",
+          "C-304": "supplied rule: 0 relevant months vs 36 required",
+          "P-302": "supplied rule: 0 relevant months vs 36 required; proposed rule: 96 relevant months vs 36 required; R1 (protected) not among the supplied credentials",
+          "P-303": "supplied rule: 0 relevant months vs 36 required; proposed rule: 40 relevant months vs 36 required; R1 (protected) cannot be verified: credentials not supplied"
+        },
+        "eligibility_basis": {
+          "C-303": "together with the proposed corrections to Q1"
+        },
+        "population": {
+          "applicants": 4,
+          "pool_records": 3
+        },
+        "limitations": [
+          "Rules come from a supplied ATS configuration export; this is not a live ATS audit.",
+          "Passing a rule does not mean a candidate is qualified; eligible candidates need human review.",
+          "Pool records did not apply to this requisition. Their results are hypothetical: they show how the supplied rule would treat them, not an exclusion that happened.",
+          "Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     },
@@ -425,6 +781,32 @@
       ],
       "disposition": {
         "status": "pending"
+      },
+      "risk_category": "equivalent_experience",
+      "simulation": {
+        "evaluable": true,
+        "kind": "candidate",
+        "rules": [
+          {
+            "rule": "Q1",
+            "supplied": false,
+            "supplied_reason": "listed credential not held",
+            "proposed": true,
+            "proposed_reason": "holds ['Class A CDL']"
+          },
+          {
+            "rule": "Q2",
+            "supplied": false,
+            "supplied_reason": "0 relevant months vs 36 required",
+            "proposed": true,
+            "proposed_reason": "48 relevant months vs 36 required"
+          }
+        ],
+        "result": "passes every rule under the proposed corrections",
+        "limitations": [
+          "Combined effect of all proposed corrections that a human has not rejected.",
+          "Passing the rules does not mean the candidate is qualified."
+        ]
       },
       "evidence_label": "Plausible missed-talent risk"
     }
@@ -840,17 +1222,18 @@
   ],
   "measurement": null,
   "summary": {
-    "findings": 4,
+    "findings": 5,
     "by_category": {
+      "mandatory_protected": 1,
       "design_risk": 3,
       "candidate_review_opportunity": 1
     },
     "by_level": {
-      "level_1": 0,
+      "level_1": 1,
       "level_2": 4,
       "level_3": 0
     },
-    "pending_decisions": 4,
+    "pending_decisions": 5,
     "candidates_assessed": 4,
     "candidates_surfaced": 1
   }

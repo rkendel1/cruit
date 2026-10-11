@@ -208,3 +208,16 @@ candidates:
           Built Datadog SLO dashboards.
     skills: [Terraform, Kubernetes, Datadog]
     education: [BS in Computer Science]
+
+  - id: C-114
+    ats_status: rejected
+    knockout_answers: { Q4: "yes", Q6: "yes" }
+    experience:
+      - title: Site Reliability Engineer
+        domain: retail
+        months: 90
+        summary: >-
+          Maintained Terraform for production infrastructure.
+          Built Datadog SLO dashboards.
+    skills: [Terraform, Datadog]
+    education: [BS in Computer Science]

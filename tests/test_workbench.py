@@ -305,3 +305,80 @@ def test_request_log_contains_no_candidate_evidence(ws, capsys):
     err = capsys.readouterr().err
     assert "/api/validate" in err
     assert "incident commander" not in err and "P-201" not in err
+
+
+# ------------------------------------------------------------------ forward screening assurance in the workspace
+def test_screening_risk_decisions_keep_history_and_report_changed_context(sre):
+    ws, sid, rid = sre
+    res = ws.load_run(sid, rid)["result"]
+    thr = next(f for f in res["findings"] if f["check"] == "threshold_inconsistency")
+    ws.record_finding_decision(sid, rid, thr["id"], "deferred", "Checking with the hiring manager", REVIEWER)
+    ws.record_finding_decision(sid, rid, thr["id"], "accepted", "Five years confirmed", "hm.okafor@northwind.example")
+    hist = [h for h in ws.decision_history(sid) if h["id"] == thr["id"]]
+    assert [h["disposition"] for h in hist] == ["deferred", "accepted"]           # superseded decision kept
+    assert hist[-1]["decided_by"] == "hm.okafor@northwind.example" and hist[-1]["knowledge"].startswith("core@1.1.0")
+    assert ws.finding_decisions(sid)["decisions"][0]["disposition"] == "accepted"  # one current decision
+    same = ws.run(sid, "env:production", actor=REVIEWER)
+    assert not [c for c in same["carried_over"]["decisions_with_changed_context"] if c["id"] == thr["id"]]
+    other = ws.run(sid, "release:1.0.0", actor=REVIEWER)
+    changed = [c for c in other["carried_over"]["decisions_with_changed_context"] if c["id"] == thr["id"]]
+    assert changed and any("knowledge changed" in r for r in changed[0]["reasons"])
+
+
+def test_screening_risk_export_traces_provenance(sre):
+    ws, sid, rid = sre
+    res = ws.load_run(sid, rid)["result"]
+    q1 = next(f for f in res["findings"] if f["check"] == "rule_narrower_than_requirement" and f["rule_id"] == "Q1")
+    ws.record_finding_decision(sid, rid, q1["id"], "accepted", "Allow production operations", REVIEWER)
+    doc = yaml.safe_load(ws.export(sid, rid, "screening-risks.yaml")[0])
+    assert doc["run_id"] == rid and doc["knowledge"]["fingerprint"].startswith("core@")
+    assert set(doc["inputs_sha256"]) >= {"requisition", "candidates", "candidate_pool"}
+    assert doc["screening_configuration"] == "ats_export_verified" and "not" in doc["label"]
+    f = next(x for x in doc["findings"] if x["finding_id"] == q1["id"])
+    assert f["risk_category"] == "rule_narrower" and f["simulation"]["categories"]["newly_eligible_for_review"]
+    assert f["decision"]["disposition"] == "accepted" and f["decision_history"][0]["run_id"] == rid
+    text = json.dumps(doc)
+    assert "Led the response to EHR outages" not in text  # no candidate evidence text in the risk export
+    names = set(zipfile.ZipFile(io.BytesIO(ws.export(sid, rid, "bundle.zip")[0])).namelist())
+    assert {"screening-risks.yaml", "decision-history.jsonl"} <= names
+
+
+def test_verification_covers_simulations_and_engine_version(sre):
+    ws, sid, rid = sre
+    v = ws.verify_run(sid, rid)
+    assert v["reproduced"] and any(c["check"] == "engine version matches the run" for c in v["checks"])
+    run_dir = ws.sessions_dir / sid / "runs" / rid
+    result = json.loads((run_dir / "result.json").read_text())
+    assert any(f.get("simulation") for f in result["findings"])
+    run = json.loads((run_dir / "run.json").read_text())
+    run["engine_version"] = "0.0.1"
+    (run_dir / "run.json").write_text(json.dumps(run))
+    assert not ws.verify_run(sid, rid)["reproduced"]
+
+
+def test_retention_removes_candidate_decision_history(sre):
+    ws, sid, rid = sre
+    res = ws.load_run(sid, rid)["result"]
+    thr = next(f for f in res["findings"] if f["check"] == "threshold_inconsistency")
+    ws.record_finding_decision(sid, rid, thr["id"], "accepted", "ok", REVIEWER)
+    ws.record_candidate_decision(sid, rid, "P-203", "review_in_ats", "verify", REVIEWER)
+    meta_path = ws.sessions_dir / sid / "session.json"
+    meta = json.loads(meta_path.read_text())
+    meta["retention"]["delete_after"] = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
+    meta_path.write_text(json.dumps(meta))
+    ws.purge_expired()
+    kinds = {h["kind"] for h in ws.decision_history(sid)}
+    assert kinds == {"finding"}
+
+
+def test_state_exposes_screening_risk_vocabulary(server):
+    st, _, b = call(server, "GET", "/api/state")
+    data = json.loads(b)
+    assert "mandatory_protected" in data["risk_categories"]
+    assert ["newly_eligible_for_review", "Newly eligible for human review"] in data["simulation_categories"]
+
+
+def test_input_summary_never_claims_a_live_audit(ws):
+    v = ws.validate_inputs(_texts("REQ-SRE-0142"))
+    label = ws.input_summary(v.data)["screening_configuration_label"]
+    assert "not a live" in label and "Verified" not in label

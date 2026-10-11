@@ -1,6 +1,6 @@
 # Requisition assurance report — Customer Success Manager, Mid-Market (REQ-CSM-0388)
 
-Job family `customer-success` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.1.0 · run 2026-11-03T12:00:00Z
+Job family `customer-success` · employer `northwind` · knowledge `core@1.1.0+8a94e741e4` (approved) · engine 0.2.0 · run 2026-11-03T12:00:00Z
 
 > This report recommends changes and human review. It does not reject, advance or hire anyone, and it does not claim any candidate was wrongly excluded. Level 1 findings are established by the supplied materials; Level 2 findings are risks that need human judgement; Level 3 findings are measured outcomes.
 
@@ -39,7 +39,7 @@ Job family `customer-success` · employer `northwind` · knowledge `core@1.1.0+8
 | Q2 | title_filter | deprioritize | R1 | correction proposed | 2 |
 | Q3 | credential_filter | reject | R4 | correction proposed | 3 |
 
-## 3. Confirmed inconsistencies
+## 3. Confirmed inconsistencies and protected requirements
 
 ### R1 accepts equivalent experience, but Q1 has no equivalent path
 
@@ -51,12 +51,31 @@ The posting accepts equivalent experience for R1, but rule Q1 only recognizes th
 - `requirement:R1` — 3+ years of customer success experience with B2B accounts.
 - `rule:Q1` — Résumé must mention customer success.
 
-**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-202, C-204); 2 candidate-review opportunities depend on it (C-202, C-204).
-
 **Proposed action:** Add an equivalent-evidence path (e.g. a follow-up question or recruiter review route) so applicants with equivalent experience are reviewed rather than rejected.
 
 **Expected benefit:** Restores the equivalency the employer already committed to in the posting.  
 **Trade-off:** Equivalent-path applicants need recruiter verification time.
+
+**Screening-risk category:** Potentially equivalent experience
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-202, C-203, C-204, C-205, C-206, C-208 |
+| Would pass the proposed rule | 2: C-202, C-204 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 2: C-202, C-204 |
+
+- C-202: eligible together with the proposed corrections to Q2, Q3
+- C-204: eligible together with the proposed corrections to Q2, Q3
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R1, rule:Q1. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.customer-success.b2b-account-management.</sub>
 
@@ -72,12 +91,31 @@ Requirement R4 asks for a capability ('Salesforce proficiency.'), but rule Q3 re
 - `requirement:R4` — Salesforce proficiency.
 - `rule:Q3` — Must hold Salesforce Certified Administrator.
 
-**Consequence in the supplied candidate sample:** 3 candidate(s) would pass this rule under this correction alone (C-202, C-204, C-208); 2 candidate-review opportunities depend on it (C-202, C-204).
-
 **Proposed action:** Accept demonstrated proficiency as well as the credential, or document why the credential itself is required.
 
 **Expected benefit:** Proficient applicants without the specific certification are reviewed.  
 **Trade-off:** Proficiency claims need verification during review.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-202, C-203, C-204, C-205, C-206, C-207, C-208 |
+| Would pass the proposed rule | 3: C-202, C-204, C-208 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 1: C-208 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 2: C-202, C-204 |
+
+- C-202: eligible together with the proposed corrections to Q1, Q2
+- C-204: eligible together with the proposed corrections to Q1, Q2
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R4, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -93,12 +131,32 @@ Requirement R4 is stated as preferred, but rule Q3 rejects applicants who do not
 - `requirement:R4` — stated_as: preferred — Salesforce proficiency.
 - `rule:Q3` — action: reject — Must hold Salesforce Certified Administrator.
 
-**Consequence in the supplied candidate sample:** 7 candidate(s) would pass this rule under this correction alone (C-202, C-203, C-204, C-205, C-206, C-207, C-208); 3 candidate-review opportunities depend on it (C-202, C-204, C-207).
-
 **Proposed action:** Convert the rule into a scoring or ranking signal, or reclassify the requirement as essential with a documented rationale.
 
 **Expected benefit:** Applicants who meet all essential requirements are no longer rejected for lacking a preference.  
 **Trade-off:** More applicants reach review; ranking should still favour the preferred qualification.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-202, C-203, C-204, C-205, C-206, C-207, C-208 |
+| Would pass the proposed rule | 7: C-202, C-203, C-204, C-205, C-206, C-207, C-208 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 4: C-203, C-205, C-206, C-208 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 3: C-202, C-204, C-207 |
+
+- C-202: eligible together with the proposed corrections to Q1, Q2
+- C-204: eligible together with the proposed corrections to Q1, Q2
+- C-207: eligible this correction alone
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: requirement:R4, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -115,8 +173,6 @@ Rule Q1 matches only 'customer success'. The knowledge base records 5 equivalent
 **Evidence**
 - `knowledge:term.customer-success` — recognized variant(s): client success, customer success management, customer success manager, client success manager, CSM
 
-**Consequence in the supplied candidate sample:** 1 candidate(s) would pass this rule under this correction alone (C-202); 1 candidate-review opportunity depends on it (C-202).
-
 **Proposed action:** Add recognized variants to the rule: client success, customer success management, customer success manager, client success manager, CSM.
 
 **Expected benefit:** Applicants describing the same work in different words are no longer filtered out.  
@@ -126,6 +182,26 @@ Rule Q1 matches only 'customer success'. The knowledge base records 5 equivalent
 - Synonyms improve recognition; they do not establish competence.
 - 'CSM': Also 'Certified ScrumMaster'. Only treated as customer success inside customer-success contexts.
 - The presence of a related term does not prove ownership of renewals or account outcomes.
+
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-202, C-203, C-204, C-205, C-206, C-208 |
+| Would pass the proposed rule | 1: C-202 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 1: C-202 |
+
+- C-202: eligible together with the proposed corrections to Q2, Q3
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q1, knowledge:term.customer-success. Knowledge: `core@1.1.0+8a94e741e4`; records: term.customer-success.</sub>
 
@@ -140,8 +216,6 @@ Rule Q2 matches only 'Customer Success Manager'. The knowledge base records 5 eq
 **Evidence**
 - `knowledge:skill.customer-success` — recognized variant(s): Customer success, client success, customer success management, client success manager, CSM
 
-**Consequence in the supplied candidate sample:** 1 candidate(s) would pass this rule under this correction alone (C-202); 1 candidate-review opportunity depends on it (C-202).
-
 **Proposed action:** Add recognized variants to the rule: Customer success, client success, customer success management, client success manager, CSM.
 
 **Expected benefit:** Applicants describing the same work in different words are no longer filtered out.  
@@ -151,6 +225,26 @@ Rule Q2 matches only 'Customer Success Manager'. The knowledge base records 5 eq
 - Synonyms improve recognition; they do not establish competence.
 - 'CSM': Also 'Certified ScrumMaster'. Only treated as customer success inside customer-success contexts.
 - The presence of a related term does not prove ownership of renewals or account outcomes.
+
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-202, C-203, C-204, C-205, C-206, C-208 |
+| Would pass the proposed rule | 1: C-202 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 1: C-202 |
+
+- C-202: eligible together with the proposed corrections to Q1, Q3
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q2, knowledge:skill.customer-success, knowledge:term.customer-success. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.customer-success, term.customer-success.</sub>
 
@@ -165,8 +259,6 @@ Rule Q2 only counts experience held under the titles 'Customer Success Manager'.
 **Evidence**
 - `rule:Q2` — Prioritize applicants who have held the title Customer Success Manager.
 
-**Consequence in the supplied candidate sample:** 2 candidate(s) would pass this rule under this correction alone (C-202, C-204); 2 candidate-review opportunities depend on it (C-202, C-204).
-
 **Proposed action:** Count relevant experience by responsibilities, not titles: match recognized terminology across the full résumé and route equivalency evidence to recruiter review.
 
 **Expected benefit:** Candidates whose titles differ from the conventional path reach human review.  
@@ -175,6 +267,27 @@ Rule Q2 only counts experience held under the titles 'Customer Success Manager'.
 **Limitations**
 - Whether alternative experience is equivalent must be judged by a recruiter or hiring manager.
 - Title-based counting may reflect a deliberate employer choice; confirm intent.
+
+**Screening-risk category:** Rule narrower than the requirement
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 6: C-202, C-203, C-204, C-205, C-206, C-208 |
+| Would pass the proposed rule | 2: C-202, C-204 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 2: C-202, C-204 |
+
+- C-202: eligible together with the proposed corrections to Q1, Q3
+- C-204: eligible together with the proposed corrections to Q1, Q3
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
 
 <sub>Sources: rule:Q2, requirement:R1. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.customer-success.b2b-account-management.</sub>
 
@@ -197,6 +310,24 @@ Rule Q3 matches only 'Salesforce Certified Administrator'. The knowledge base re
 **Limitations**
 - Synonyms improve recognition; they do not establish competence.
 
+**Screening-risk category:** Terminology not recognized
+
+**Correction simulation (not applied)** — supplied rule vs. proposed correction:
+
+| Category | Candidates |
+|---|---|
+| Excluded by the supplied rule | 7: C-202, C-203, C-204, C-205, C-206, C-207, C-208 |
+| Would pass the proposed rule | 0 |
+| Still fail a mandatory requirement | 0 |
+| Evidence insufficient to tell | 0 |
+| Pass the rule, but relevance not established | 0 |
+| Relevant evidence, but still fail other supplied rules | 0 |
+| Newly eligible for human review | 0 |
+
+<sub>Rules come from recruiter documentation, not ATS configuration; results show the documented rule's effect.</sub>  
+<sub>Passing a rule does not mean a candidate is qualified; eligible candidates need human review.</sub>  
+<sub>Each correction is simulated on its own. 'Together with the proposed corrections' uses the same combined simulation as candidate-review opportunities, including corrections no human has decided yet.</sub>  
+
 <sub>Sources: rule:Q3, knowledge:skill.salesforce-admin-cert. Knowledge: `core@1.1.0+8a94e741e4`; records: skill.salesforce-admin-cert.</sub>
 
 Decision: **Pending human decision**
@@ -217,6 +348,10 @@ R4 ('Salesforce proficiency.') is marked required, but has no documented rationa
 
 **Limitations**
 - The requirement may be genuinely necessary; this finding asks for clarification, not removal.
+
+**Screening-risk category:** Insufficient evidence or unknown cause
+
+**Correction simulation:** not evaluated — No configuration correction is proposed: this finding asks the employer to classify the requirement. Its effect appears after a recorded decision and a re-run.
 
 <sub>Sources: requirement:R4. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -252,6 +387,8 @@ C-202 was rejected by Q1, Q2, Q3. Under the proposed corrections they pass every
 
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
+
+**Screening-risk category:** Terminology not recognized
 
 <sub>Sources: candidate:C-202, rule:Q1, rule:Q2, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 
@@ -289,6 +426,8 @@ C-204 was rejected by Q1, Q2, Q3. Under the proposed corrections they pass every
 - Confirm renewal ownership and retention results.
 - Confirm adoption or onboarding work, not only commercial negotiation.
 
+**Screening-risk category:** Potentially equivalent experience
+
 <sub>Sources: candidate:C-204, rule:Q1, rule:Q2, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`; records: eq.customer-success.b2b-account-management.</sub>
 
 Decision: **Pending human decision**
@@ -321,6 +460,8 @@ C-207 was rejected by Q3. Under the proposed corrections they pass every rule, a
 
 **What the recruiter should verify next**
 - Confirm the depth and recency of the experience cited for each required requirement.
+
+**Screening-risk category:** Preferred criterion enforced as a knockout
 
 <sub>Sources: candidate:C-207, rule:Q3. Knowledge: `core@1.1.0+8a94e741e4`.</sub>
 

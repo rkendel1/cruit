@@ -70,6 +70,8 @@ EXPORTS = {
     "decisions.yaml": "application/yaml",
     "review-decisions.yaml": "application/yaml",
     "changes.yaml": "application/yaml",
+    "screening-risks.yaml": "application/yaml",
+    "decision-history.jsonl": "application/x-ndjson",
     "bundle.zip": "application/zip",
 }
 
@@ -244,8 +246,8 @@ class Workspace:
         ir = req.get("inputs_received") or {}
         cfg = ir.get("screening_configuration")
         cfg_label = {
-            "ats_export_verified": "Supplied ATS configuration (exported from the ATS)",
-            "ats_api_verified": "Supplied ATS configuration (read from the ATS)",
+            "ats_export_verified": "Supplied ATS configuration export — not a live ATS audit",
+            "ats_api_verified": "Configuration read from the ATS at export time — not a live audit",
             "recruiter_documentation": "Recruiter documentation — not verified ATS configuration",
             "not_supplied": "Missing — no screening configuration supplied",
         }.get(cfg, "Unknown")
@@ -321,6 +323,7 @@ class Workspace:
         meta["runs"] = self.runs(sid)
         meta["decisions"] = self.finding_decisions(sid).get("decisions", [])
         meta["review_decisions"] = self.review_decisions(sid).get("decisions", [])
+        meta["decision_history"] = self.decision_history(sid)
         if not meta.get("candidate_data_deleted"):
             data = self._inputs(sid)
             req = data["requisition"]
@@ -393,6 +396,11 @@ class Workspace:
         for fn in ("review-decisions.yaml",):
             if (d / fn).exists():
                 (d / fn).unlink()
+        hist = d / "decision-history.jsonl"
+        if hist.exists():
+            keep = [line for line in hist.read_text(encoding="utf-8").splitlines()
+                    if line.strip() and json.loads(line).get("kind") == "finding"]
+            hist.write_text("".join(x + "\n" for x in keep), encoding="utf-8")
         meta["candidate_data_deleted"] = True
         (d / "session.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
@@ -411,6 +419,22 @@ class Workspace:
             return {"requisition_id": meta["requisition_id"], "decisions": []}
         return validate_data("review_decisions", parse_text(p.read_text(encoding="utf-8")), "review-decisions.yaml")
 
+    def decision_history(self, sid: str) -> list[dict[str, Any]]:
+        """Append-only record of every decision, including superseded ones, with the context it was made in."""
+        p = self._session_dir(sid) / "decision-history.jsonl"
+        if not p.exists():
+            return []
+        return [json.loads(line) for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+    def _append_history(self, sid: str, entry: dict[str, Any]) -> None:
+        with (self._session_dir(sid) / "decision-history.jsonl").open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(entry, sort_keys=True) + "\n")
+
+    @staticmethod
+    def _context(run: dict[str, Any], subject: dict[str, Any]) -> dict[str, str]:
+        return {"run_id": run["run_id"], "knowledge": run["knowledge"]["fingerprint"],
+                "inputs_sha256": _sha(_canonical(run["inputs"])), "subject_sha256": _subject_hash(subject)}
+
     def record_finding_decision(self, sid: str, run_id: str, finding_id: str, disposition: str,
                                 rationale: str, actor: str) -> dict[str, Any]:
         run = self.load_run(sid, run_id)
@@ -428,6 +452,7 @@ class Workspace:
         doc["decisions"].append(entry)
         validate_data("decisions", doc, "decisions.yaml")
         (self._session_dir(sid) / "decisions.yaml").write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        self._append_history(sid, {"kind": "finding", "id": finding_id, **entry, **self._context(run["run"], f)})
         self._audit("finding_decision", sid, actor=actor, finding=finding_id, disposition=disposition, run=run_id,
                     rationale_sha256=_sha(rationale)[:16])
         return entry
@@ -455,6 +480,7 @@ class Workspace:
         doc["decisions"].append(entry)
         validate_data("review_decisions", doc, "review-decisions.yaml")
         (self._session_dir(sid) / "review-decisions.yaml").write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        self._append_history(sid, {"kind": "candidate", "id": candidate_id, **entry, **self._context(run["run"], e)})
         self._audit("candidate_decision", sid, actor=actor, candidate=candidate_id, disposition=disposition, run=run_id,
                     rationale_sha256=_sha(rationale)[:16])
         return entry
@@ -510,7 +536,7 @@ class Workspace:
         run["knowledge"]["fingerprint"] = result["knowledge"]["fingerprint"]
         run["outputs"] = {"result_sha256": _sha(_canonical(result)), "discovery_sha256": _sha(_canonical(discovery))}
         run["summary"] = {**result["summary"], "discovery": discovery["counts"]}
-        run["carried_over"] = self._carry_over(sid, result, discovery)
+        run["carried_over"] = self._carry_over(sid, result, discovery, run)
         (rd / "result.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
         (rd / "discovery.json").write_text(json.dumps(discovery, indent=2, default=str), encoding="utf-8")
         (rd / "run.json").write_text(json.dumps(run, indent=2), encoding="utf-8")
@@ -528,7 +554,7 @@ class Workspace:
         bundle = RequisitionBundle(path=None, requisition=data["requisition"], policy=data["policy"],
                                    candidates=data.get("candidates"), decisions=decisions,
                                    outcomes=data.get("outcomes"), pool=data.get("candidate_pool"))
-        diag = diagnose(bundle, pack, run_at=run["run_at"])
+        diag = diagnose(bundle, pack, run_at=run["run_at"], as_of=run["as_of"])
         disc = discover(bundle, pack, diag, pool=data.get("candidate_pool"), as_of=run["as_of"])
         result = diag.as_dict()
         result["knowledge"]["path"] = f"runs/{run['run_id']}/knowledge"
@@ -537,16 +563,40 @@ class Workspace:
             f["allowed_dispositions"] = allowed_dispositions(f["check"])
         return result, disc.as_dict()
 
-    def _carry_over(self, sid: str, result: dict[str, Any], discovery: dict[str, Any]) -> dict[str, Any]:
-        fids = {f["id"] for f in result["findings"]}
+    def _carry_over(self, sid: str, result: dict[str, Any], discovery: dict[str, Any],
+                    run: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Which prior decisions apply to this run, which are stale, and which were made in a different context."""
+        findings = {f["id"]: f for f in result["findings"]}
+        entries = {e["candidate_id"]: e for e in discovery["entries"] if e["group"] in ACTIONABLE}
         fd = self.finding_decisions(sid)["decisions"]
-        actionable = {e["candidate_id"] for e in discovery["entries"] if e["group"] in ACTIONABLE}
         cd = self.review_decisions(sid)["decisions"]
+        last: dict[tuple[str, str], dict[str, Any]] = {}
+        for h in self.decision_history(sid):
+            last[(h["kind"], h["id"])] = h
+        changed: list[dict[str, Any]] = []
+        if run is not None:
+            inputs_sha = _sha(_canonical(run["inputs"]))
+            for kind, ids, subjects in (("finding", [d["finding_id"] for d in fd], findings),
+                                        ("candidate", [d["candidate_id"] for d in cd], entries)):
+                for i in ids:
+                    h = last.get((kind, i))
+                    if not h or i not in subjects:
+                        continue
+                    reasons = []
+                    if h.get("knowledge") != run["knowledge"]["fingerprint"]:
+                        reasons.append(f"knowledge changed ({h.get('knowledge')} → {run['knowledge']['fingerprint']})")
+                    if h.get("inputs_sha256") != inputs_sha:
+                        reasons.append("inputs changed")
+                    if h.get("subject_sha256") != _subject_hash(subjects[i]):
+                        reasons.append(f"the {kind} changed since the decision")
+                    if reasons:
+                        changed.append({"kind": kind, "id": i, "decided_in_run": h.get("run_id"), "reasons": reasons})
         return {
-            "finding_decisions_applied": sorted(d["finding_id"] for d in fd if d["finding_id"] in fids),
-            "finding_decisions_stale": sorted(d["finding_id"] for d in fd if d["finding_id"] not in fids),
-            "candidate_decisions_applied": sorted(d["candidate_id"] for d in cd if d["candidate_id"] in actionable),
-            "candidate_decisions_stale": sorted(d["candidate_id"] for d in cd if d["candidate_id"] not in actionable),
+            "finding_decisions_applied": sorted(d["finding_id"] for d in fd if d["finding_id"] in findings),
+            "finding_decisions_stale": sorted(d["finding_id"] for d in fd if d["finding_id"] not in findings),
+            "candidate_decisions_applied": sorted(d["candidate_id"] for d in cd if d["candidate_id"] in entries),
+            "candidate_decisions_stale": sorted(d["candidate_id"] for d in cd if d["candidate_id"] not in entries),
+            "decisions_with_changed_context": changed,
         }
 
     def load_run(self, sid: str, run_id: str) -> dict[str, Any]:
@@ -569,6 +619,8 @@ class Workspace:
         for kind, sha in run["inputs"].items():
             cur = meta["inputs"].get(kind, {}).get("sha256")
             checks.append({"check": f"input {kind} unchanged", "ok": cur == sha})
+        checks.append({"check": "engine version matches the run", "ok": run["engine_version"] == ENGINE_VERSION,
+                       "detail": f"run {run['engine_version']}, installed {ENGINE_VERSION}"})
         snap = load_pack(rd / "knowledge")
         checks.append({"check": "knowledge snapshot matches recorded fingerprint",
                        "ok": snap.fingerprint == run["knowledge"]["fingerprint"], "detail": snap.fingerprint})
@@ -619,6 +671,11 @@ class Workspace:
             body = yaml.safe_dump(self.finding_decisions(sid), sort_keys=False, allow_unicode=True)
         elif name == "review-decisions.yaml":
             body = yaml.safe_dump(review, sort_keys=False, allow_unicode=True)
+        elif name == "screening-risks.yaml":
+            body = yaml.safe_dump(screening_risk_export(result, run, self.finding_decisions(sid), self.decision_history(sid)),
+                                  sort_keys=False, allow_unicode=True)
+        elif name == "decision-history.jsonl":
+            body = "".join(json.dumps(h, sort_keys=True) + "\n" for h in self.decision_history(sid))
         elif name == "changes.yaml":
             body = yaml.safe_dump(render_changes(result), sort_keys=False, allow_unicode=True)
         else:  # bundle.zip
@@ -661,6 +718,59 @@ class Workspace:
         md = render_compare_markdown(cmp) + "\n## Knowledge records changed\n\n```\n" + format_diff(diff_packs(b, c)) + "\n```\n"
         return {"passed": cmp["passed"], "regressions": cmp["regressions"], "baseline": b.fingerprint,
                 "candidate": c.fingerprint, "markdown": md}
+
+
+def _subject_hash(subject: dict[str, Any]) -> str:
+    """Content hash of a finding or discovery entry, ignoring fields that a decision itself changes."""
+    volatile = {"disposition", "knowledge_version", "allowed_dispositions"}
+    return _sha(_canonical({k: v for k, v in subject.items() if k not in volatile}))
+
+
+def screening_risk_export(result: dict[str, Any], run: dict[str, Any], decisions: dict[str, Any],
+                          history: list[dict[str, Any]]) -> dict[str, Any]:
+    """Screening-risk findings with simulations, provenance and attributed decisions (no candidate evidence text)."""
+    from ..engine.risks import RISK_CATEGORIES
+    current = {d["finding_id"]: d for d in decisions.get("decisions", [])}
+    out = []
+    for f in result["findings"]:
+        if not f.get("risk_category"):
+            continue
+        sim = f.get("simulation") or {}
+        out.append({
+            "finding_id": f["id"],
+            "risk_category": f["risk_category"],
+            "risk_category_label": RISK_CATEGORIES.get(f["risk_category"], f["risk_category"]),
+            "check": f["check"],
+            "title": f["title"],
+            "evidence_level": f["evidence_level"],
+            "confidence": f["confidence"],
+            "requirement": f.get("requirement_id"),
+            "rule": f.get("rule_id"),
+            "candidate": f.get("candidate_id"),
+            "affected_candidates": f.get("affected_candidates", []),
+            "proposed_correction": f.get("proposed_change"),
+            "proposed_action": f["proposed_action"],
+            "tradeoffs": f["tradeoffs"],
+            "limitations": f["limitations"],
+            "simulation": {k: sim.get(k) for k in ("evaluable", "reason", "kind", "result", "rule", "supplied", "proposed",
+                                                     "categories", "counts", "sources", "notes", "eligibility_basis",
+                                                     "population", "rules", "limitations") if k in sim},
+            "decision": current.get(f["id"]),
+            "decision_history": [h for h in history if h["kind"] == "finding" and h["id"] == f["id"]],
+            "knowledge": f["knowledge_version"],
+        })
+    return {
+        "label": "Screening-risk findings for human review. Simulations are not applied anywhere and do not establish qualification.",
+        "requisition_id": run["requisition_id"],
+        "run_id": run["run_id"],
+        "run_at": run["run_at"],
+        "engine_version": run["engine_version"],
+        "knowledge": run["knowledge"],
+        "inputs_sha256": run["inputs"],
+        "decisions_snapshot_sha256": run["decisions_sha256"],
+        "screening_configuration": result["inputs"]["screening_configuration"],
+        "findings": out,
+    }
 
 
 def _provenance_header(run: dict[str, Any]) -> str:

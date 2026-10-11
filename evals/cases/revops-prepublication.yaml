@@ -14,3 +14,9 @@ expected_findings:
 forbidden_findings:
   - { check: candidate_review_opportunity }
   - { check: unverified_necessity, requirement: R2, note: R2 has a documented rationale }
+
+# Forward screening assurance: SYNTHETIC expectation.
+simulation_expectations:
+  - scenario: rule-level concern where actual candidate impact cannot be verified (no candidate evidence)
+    finding: { check: threshold_inconsistency, rule: Q1 }
+    evaluable: false

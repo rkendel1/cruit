@@ -6,12 +6,12 @@
 | Metric | Value |
 |---|---|
 | cases | 4 |
-| expected findings | 28 |
-| expected found | 28 |
+| expected findings | 29 |
+| expected found | 29 |
 | expected finding recall | 1.0 |
 | forbidden violations | 0 |
 | guardrail violations | 0 |
-| candidates flagged | 10 |
+| candidates flagged | 11 |
 | true positives | 10 |
 | false positives | 0 |
 | missed qualified | 0 |
@@ -52,11 +52,85 @@ Pre-publication design review with no candidates: the engine must find rule defe
 
 Senior SRE requisition with literal keyword filters, a title-based experience rule stricter than the posting, knockouts on preferred qualifications, and an unstated tool requirement. Candidate pool mixes conventional SREs, adjacent titles, and nontraditional incident leaders from healthcare, logistics and the military, plus participation-only and under-experienced profiles that must not be surfaced.
 
-- Candidates flagged for review: C-102, C-103, C-106, C-108, C-109, C-110, C-113
+- Candidates flagged for review: C-102, C-103, C-106, C-108, C-109, C-110, C-113, C-114
 - True positives: C-102, C-103, C-106, C-108, C-109, C-110, C-113; false positives: —; missed qualified: —
 - Precision 1.0 · recall 1.0
-- Expected findings: 14/14 found
+- Expected findings: 15/15 found
 - Forbidden findings produced: 0
+
+## Screening risks (forward simulation)
+
+> **SYNTHETIC FIXTURE RESULTS — not a measure of real-world accuracy**
+
+| Metric | Value |
+|---|---|
+| relevant surfaced | 9 |
+| relevant missed | 0 |
+| irrelevant surfaced | 0 |
+| mandatory violations | 0 |
+| policy violations | 0 |
+| needs human verification | 13 |
+| unknown cause | 2 |
+| expectations | 17 |
+| expectations met | 17 |
+| relevant recall | 1.0 |
+
+### customer-success
+
+- relevant surfaced: C-202, C-204
+- relevant missed: —
+- irrelevant surfaced: —
+- mandatory violations: —
+- policy violations: —
+- needs human verification: C-204
+- unknown cause: —
+
+### linehaul-protected-license
+
+- relevant surfaced: C-303
+- relevant missed: —
+- irrelevant surfaced: —
+- mandatory violations: —
+- policy violations: —
+- needs human verification: C-303, P-303
+- unknown cause: —
+- ✅ genuine mandatory requirement remains blocking, with no correction proposed
+- ✅ candidate passes a corrected experience rule but still fails another mandatory requirement
+- ✅ candidate who fails a mandatory requirement is never newly eligible
+- ✅ license that cannot be verified stays insufficient, not eligible
+- ✅ terminology variant of the license itself is recognized
+
+### revops-prepublication
+
+- relevant surfaced: —
+- relevant missed: —
+- irrelevant surfaced: —
+- mandatory violations: —
+- policy violations: —
+- needs human verification: —
+- unknown cause: —
+- ✅ rule-level concern where actual candidate impact cannot be verified (no candidate evidence)
+
+### sre-incident-management
+
+- relevant surfaced: C-102, C-103, C-106, C-108, C-109, C-110
+- relevant missed: —
+- irrelevant surfaced: —
+- mandatory violations: —
+- policy violations: —
+- needs human verification: C-103, C-106, C-113, C-114, P-201, P-202, P-203, P-204, P-205, P-208
+- unknown cause: C-113, C-114
+- ✅ relevant candidate missed by an overly narrow supplied rule
+- ✅ preferred criterion incorrectly treated as mandatory
+- ✅ valid terminology variation
+- ✅ legitimate alternative experience path with the required evidence
+- ✅ superficially similar but unsupported alternative (drills, participation only)
+- ✅ alternative incident path, but another genuine requirement (infrastructure as code) is unsupported
+- ✅ irrelevant candidates pass a proposed correction but are not made eligible
+- ✅ irrelevant candidates are never newly eligible
+- ✅ insufficient evidence to establish an exclusion (no recorded knockout answer)
+- ✅ pool records cannot be evaluated against a knockout question
+- ✅ stale, unauthorized and expired pool records never enter a simulation
 
 ## Candidate rediscovery
 

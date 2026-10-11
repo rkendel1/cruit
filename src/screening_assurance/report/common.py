@@ -12,6 +12,7 @@ CATEGORY_TITLE = {
     "candidate_review_opportunity": "Candidate-review opportunity",
     "input_limitation": "Input limitation",
     "measured_impact": "Measured impact",
+    "mandatory_protected": "Protected requirement",
 }
 CLASSIFICATION_LABEL = {
     "essential": "Essential",
@@ -44,7 +45,7 @@ DISPOSITIONS = [
 ]
 
 SECTIONS = [
-    ("design", "Confirmed inconsistencies", lambda f: f["category"] == "confirmed_inconsistency"),
+    ("design", "Confirmed inconsistencies and protected requirements", lambda f: f["category"] in ("confirmed_inconsistency", "mandatory_protected")),
     ("risks", "Potential missed-talent risks", lambda f: f["category"] in ("design_risk", "unverified_assumption", "input_limitation")),
     ("candidates", "Candidate-review opportunities", lambda f: f["category"] == "candidate_review_opportunity"),
     ("measured", "Measured impact", lambda f: f["category"] == "measured_impact"),
@@ -105,3 +106,23 @@ def candidate_review_answers(result: dict[str, Any], f: dict[str, Any]) -> dict[
         "unproven": list(dict.fromkeys(unproven)),
         "verify": verify,
     }
+
+
+def simulation_rows(sim: dict[str, Any] | None) -> list[tuple[str, str]]:
+    """(label, candidates) rows for a correction simulation; pool records are marked as hypothetical."""
+    from ..engine.risks import SIM_CATEGORIES, SIM_LABELS
+    if not sim or not sim.get("categories"):
+        return []
+    rows = []
+    keys = SIM_CATEGORIES if sim.get("proposed") is not None else ("excluded_by_supplied_rule", "still_fail_mandatory_requirement")
+    for k in keys:
+        ids = sim["categories"].get(k, [])
+        shown = ", ".join(i + (" (pool, hypothetical)" if sim["sources"].get(i) == "pool" else "") for i in ids)
+        rows.append((SIM_LABELS[k], f"{len(ids)}" + (f": {shown}" if ids else "")))
+    return rows
+
+
+def level_label(f: dict[str, Any]) -> str:
+    if f.get("category") == "mandatory_protected":
+        return "Level 1 · Established by the supplied materials"
+    return LEVEL_LABEL[f["evidence_level"]]
