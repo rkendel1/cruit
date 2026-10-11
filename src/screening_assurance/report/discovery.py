@@ -113,6 +113,14 @@ def render_discovery_markdown(discovery: dict[str, Any], review_decisions: dict[
     return "\n".join(L)
 
 
+def _evidence_cells(evidence: list[dict[str, Any]], esc) -> str:
+    cells = []
+    for x in evidence[:2]:
+        src = x["source"].split("/")[-1]
+        cells.append(f"<div class=ev><span class=src>{esc(src)}</span> {esc(x['text'])}</div>")
+    return "".join(cells) or "—"
+
+
 def render_discovery_html(discovery: dict[str, Any], review_decisions: dict[str, Any] | None = None) -> str:
     e_ = lambda s: escape("" if s is None else str(s))  # noqa: E731
     dec = {d["candidate_id"]: d for d in (review_decisions or {}).get("decisions", [])}
@@ -128,7 +136,7 @@ def render_discovery_html(discovery: dict[str, Any], review_decisions: dict[str,
             rows = "".join(
                 f'<tr><td><b>{e_(r["id"])}</b><br><span class="meta">{e_(r["stated_as"])}</span></td><td>{e_(r["text"])}</td>'
                 f'<td class="st-{e_(r["status"])}">{e_(r["status"].replace("_", " "))}<br><span class="meta">{e_(r["path_label"])}</span></td>'
-                f'<td>{"".join(f"<div class=ev><span class=src>{e_(x["source"].split("/")[-1])}</span> {e_(x["text"])}</div>" for x in r["evidence"][:2]) or "—"}</td></tr>'
+                f'<td>{_evidence_cells(r["evidence"], e_)}</td></tr>'
                 for r in e["requirements"])
             parts.append(
                 f'<article class="card"><div class="head"><span class="chip">{e_(GROUP_TITLE[g])}</span>'
