@@ -1,4 +1,4 @@
-.PHONY: install test validate eval compare samples ci workbench
+.PHONY: install test validate eval compare measure samples ci workbench
 
 RUN_AT ?= 2026-11-03T12:00:00Z
 
@@ -17,6 +17,9 @@ eval:
 compare:
 	sa eval-compare --baseline release:1.0.0 --candidate pack
 
+measure:
+	sa measure evals/validation/northwind-synthetic.yaml
+
 samples:
 	rm -rf samples
 	for d in examples/northwind/requisitions/*/; do sa diagnose $$d --knowledge env:production --out samples --run-at $(RUN_AT); done
@@ -24,6 +27,7 @@ samples:
 	sa portfolio examples --knowledge env:production --out samples --run-at $(RUN_AT)
 	sa eval --knowledge env:production --out samples/eval.md
 	sa eval-compare --baseline release:1.0.0 --candidate release:1.1.0 --out samples/knowledge-1.0.0-to-1.1.0.md
+	sa measure evals/validation/northwind-synthetic.yaml --knowledge env:production --out samples/validation
 
 ci: validate test eval
 

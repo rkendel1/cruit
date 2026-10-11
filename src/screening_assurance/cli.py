@@ -6,6 +6,8 @@
     sa portfolio <dir>                     portfolio overview across requisitions
     sa eval                                regression-test the knowledge pack against labeled cases
     sa eval-compare --baseline A --candidate B   before/after comparison when knowledge changes
+    sa measure <dataset.yaml>              measure against an independently reviewed validation dataset
+    sa measure-compare <a.json> <b.json>   compare two validation results (engine/knowledge versions)
     sa knowledge validate|diff|status|release|promote|rollback|propose|proposals
     sa propose-from-decisions <requisition-dir>  turn reviewer suggestions into knowledge proposals
     sa schema <name>                       print a data contract (JSON Schema)
@@ -167,6 +169,49 @@ def cmd_eval_compare(args: argparse.Namespace) -> int:
     return 0 if cmp["passed"] else 1
 
 
+# ------------------------------------------------------------------ measure (validation datasets)
+def cmd_measure(args: argparse.Namespace) -> int:
+    from .measure.validation import load_dataset, measure_dataset, purge_expired_results, write_result
+
+    removed = purge_expired_results(args.out)
+    for r in removed:
+        _print(f"Retention: deleted expired validation result {r}")
+    ds = load_dataset(args.dataset)
+    pack = _pack(args)
+    result = measure_dataset(ds, pack)
+    out, status = write_result(result, args.out)
+    m = result["metrics"]
+    if args.json:
+        _print(json.dumps({"result_id": result["result_id"], "status": status, "path": str(out), "label": result["label"],
+                           "metrics": m}, indent=2, default=str))
+    else:
+        _print(result["label"])
+        _print(f"{'Wrote' if status == 'written' else 'Reproduced existing'} {out / 'result.json'} and report.md")
+        d, f, v = m["discovery"], m["screening_risks"], m["violations"]
+        _print(f"Relevant surfaced {d['D1_relevant_surfaced']['numerator']}/{d['D1_relevant_surfaced']['denominator']} · "
+               f"irrelevant surfaced {d['D3_irrelevant_surfaced']['numerator']} · "
+               f"findings confirmed {f['F1_confirmed']['numerator']}/{f['F1_confirmed']['denominator']} · "
+               f"violations: {'YES' if v['occurred'] else 'none'}")
+    return 1 if result["metrics"]["violations"]["occurred"] else 0
+
+
+def cmd_measure_compare(args: argparse.Namespace) -> int:
+    from .measure.validation import compare_results
+    from .report.validation import render_validation_compare_markdown
+
+    a = json.loads(Path(args.a).read_text(encoding="utf-8"))
+    b = json.loads(Path(args.b).read_text(encoding="utf-8"))
+    cmp = compare_results(a, b)
+    md = render_validation_compare_markdown(cmp)
+    if args.out:
+        _write(Path(args.out), md)
+        _write(Path(args.out).with_suffix(".json"), json.dumps(cmp, indent=2, default=str) + "\n")
+        _print(f"{'REGRESSIONS' if cmp['regressions'] else 'No regressions'} — wrote {args.out}")
+    else:
+        _print(md)
+    return 1 if cmp["regressions"] else 0
+
+
 # ------------------------------------------------------------------ knowledge
 def cmd_k_validate(args: argparse.Namespace) -> int:
     path = _registry(args).resolve(args.knowledge)
@@ -300,6 +345,11 @@ def cmd_schema(args: argparse.Namespace) -> int:
 
 
 def cmd_check(args: argparse.Namespace) -> int:
+    if args.contract == "validation_dataset":
+        from .measure.validation import load_dataset
+        ds = load_dataset(args.path)  # schema, referenced inputs, de-identification, references, retention
+        _print(f"OK  {args.path} satisfies the 'validation_dataset' contract ({len(ds.cases)} case(s), kind {ds.data['kind']})")
+        return 0
     load(args.contract, args.path)
     _print(f"OK  {args.path} satisfies the '{args.contract}' contract")
     return 0
@@ -366,6 +416,17 @@ def build_parser() -> argparse.ArgumentParser:
     ec.add_argument("--out")
     ec.set_defaults(func=cmd_eval_compare)
 
+    ms = sub.add_parser("measure", help="measure against an independently reviewed validation dataset")
+    ms.add_argument("dataset")
+    ms.add_argument("--knowledge", default=None, help=kspec)
+    ms.add_argument("--out", default="validation-results", help="results directory (one immutable folder per result id)")
+    ms.add_argument("--json", action="store_true")
+    ms.set_defaults(func=cmd_measure)
+
+    mc = sub.add_parser("measure-compare", help="compare two validation results")
+    mc.add_argument("a"); mc.add_argument("b"); mc.add_argument("--out")
+    mc.set_defaults(func=cmd_measure_compare)
+
     k = sub.add_parser("knowledge", help="manage versioned knowledge")
     ks = k.add_subparsers(dest="kcmd", required=True)
     kv = ks.add_parser("validate"); kv.add_argument("--knowledge", default=None, help=kspec); kv.add_argument("--json", action="store_true"); kv.set_defaults(func=cmd_k_validate)
@@ -389,12 +450,13 @@ def build_parser() -> argparse.ArgumentParser:
     sc = sub.add_parser("schema", help="print a data contract")
     sc.add_argument("name", choices=["synonyms", "skills", "equivalencies", "manifest", "policy", "requisition",
                                      "candidates", "candidate_pool", "decisions", "review_decisions", "outcomes",
-                                     "eval_case", "discovery_case", "proposal", "common"])
+                                     "eval_case", "discovery_case", "proposal", "validation_dataset", "common"])
     sc.set_defaults(func=cmd_schema)
 
     ch = sub.add_parser("check", help="validate a file against a data contract")
     ch.add_argument("contract", choices=["policy", "requisition", "candidates", "candidate_pool", "decisions",
-                                         "review_decisions", "outcomes", "eval_case", "discovery_case", "proposal"])
+                                         "review_decisions", "outcomes", "eval_case", "discovery_case", "proposal",
+                                         "validation_dataset"])
     ch.add_argument("path"); ch.set_defaults(func=cmd_check)
     return p
 

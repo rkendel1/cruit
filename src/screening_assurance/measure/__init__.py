@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from .engine.model import Finding, SourceRef, finding_id
+from ..engine.model import Finding, SourceRef, finding_id
 
 
 def _ratio(a: float, b: float) -> float | None:

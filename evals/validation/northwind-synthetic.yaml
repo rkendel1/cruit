@@ -1,0 +1,206 @@
+# SYNTHETIC validation dataset. It exercises the design-partner measurement loop on the fictional
+# Northwind fixtures. Labels were written alongside the fixtures, so results from this file must
+# never be reported as design-partner evidence or real-world accuracy.
+#
+# Contract: `sa schema validation_dataset`. Run: `sa measure evals/validation/northwind-synthetic.yaml`.
+# Candidate and reviewer references are opaque. No names, contact details or protected characteristics.
+dataset_id: northwind-synthetic
+contract_version: 1
+kind: synthetic
+source:
+  provider: Screening Assurance test fixtures
+  dataset_version: "1"
+  collected_at: "2026-10-10"
+  description: >-
+    Three fictional requisitions with authored baseline outcomes and independent reviews. Includes
+    reviewer disagreement (adjudicated and unresolved), unassessable and unreviewed candidates, pool
+    records with no baseline, a blocked record judged relevant, a case with no baseline, measured
+    review time for one case, and recruiter decisions and downstream outcomes kept apart from review.
+authorization:
+  basis: Synthetic fixtures; no real candidate data
+  de_identified: true
+  permitted_uses: [product_validation]
+  retention_days: 365
+  deletion: delete_results_only
+  granted_by: maintainers
+
+cases:
+  # ------------------------------------------------------------------ SRE
+  - case_id: SRE-0142
+    scenario: software-infrastructure
+    requisition: ../../examples/northwind/requisitions/REQ-SRE-0142/requisition.yaml
+    policy: ../../examples/northwind/policy.yaml
+    candidates: ../../examples/northwind/requisitions/REQ-SRE-0142/candidates.yaml
+    pool: ../../examples/northwind/requisitions/REQ-SRE-0142/candidate-pool.yaml
+    as_of: "2026-10-10"
+    baseline:
+      source: ats_export
+      note: Outcomes and recorded knockout rule from the ATS export; pool records never applied to this requisition.
+      observations:
+        - { candidate: C-101, outcome: advanced, basis: observed }
+        - { candidate: C-102, outcome: rejected, excluded_by_rule: Q1, basis: observed }
+        - { candidate: C-103, outcome: rejected, excluded_by_rule: Q3, basis: observed }
+        - { candidate: C-104, outcome: rejected, excluded_by_rule: Q4, basis: observed }
+        - { candidate: C-105, outcome: rejected, excluded_by_rule: Q3, basis: observed }
+        - { candidate: C-106, outcome: rejected, excluded_by_rule: Q1, basis: observed }
+        - { candidate: C-107, outcome: rejected, excluded_by_rule: Q2, basis: observed }
+        - { candidate: C-108, outcome: rejected, excluded_by_rule: Q4, basis: observed }
+        - { candidate: C-109, outcome: rejected, excluded_by_rule: Q2, basis: observed }
+        - { candidate: C-110, outcome: rejected, excluded_by_rule: Q7, basis: observed }
+        - { candidate: C-111, outcome: rejected, basis: observed }
+        - { candidate: C-112, outcome: rejected, basis: observed }
+        - { candidate: C-113, outcome: unknown, basis: unknown }
+        - { candidate: C-114, outcome: rejected, basis: inferred }
+        - { candidate: P-201, outcome: not_applied, basis: observed }
+        - { candidate: P-202, outcome: not_applied, basis: observed }
+        - { candidate: P-203, outcome: not_applied, basis: observed }
+        - { candidate: P-208, outcome: not_applied, basis: observed }
+    candidate_assessments:
+      - candidate: C-101
+        reviews: [{ reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Conventional SRE profile with incident command and Terraform.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-102
+        reviews:
+          - { reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Production engineering is the same function under another title.", reviewed_at: "2026-10-12", saw_product_output: false }
+          - { reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Same function; strong on-call record.", reviewed_at: "2026-10-13", saw_product_output: false }
+      - candidate: C-103
+        reviews:
+          - { reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Led outage response across hospitals and writes Terraform.", reviewed_at: "2026-10-12", saw_product_output: false }
+          - { reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Equivalent incident leadership; IaC present.", reviewed_at: "2026-10-13", saw_product_output: false }
+      - candidate: C-104
+        reviews:
+          - { reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Strong incident leadership; IaC could be learned.", reviewed_at: "2026-10-12", saw_product_output: false }
+          - { reviewer: REV-B, judgment: not_relevant, mandatory: met, rationale: "No infrastructure-as-code experience, which the role genuinely needs.", reviewed_at: "2026-10-13", saw_product_output: false }
+        adjudication: { judgment: not_relevant, adjudicator: ADJ-1, rationale: "Infrastructure as code is a stated required capability with no evidence here.", decided_at: "2026-10-15" }
+      - candidate: C-105
+        reviews: [{ reviewer: REV-A, judgment: not_relevant, mandatory: met, rationale: "Drill participation only; help-desk background.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-106
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Directed outage response and after-action reviews; automates with Terraform.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: C-107
+        reviews:
+          - { reviewer: REV-A, judgment: not_relevant, mandatory: met, rationale: "Three years against a five-year requirement.", reviewed_at: "2026-10-12", saw_product_output: false }
+          - { reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Depth of on-call ownership offsets the shorter tenure.", reviewed_at: "2026-10-13", saw_product_output: false }
+      - candidate: C-108
+        reviews: [{ reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Meets every required capability; lacks only a preferred certification.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-109
+        reviews: [{ reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Required capabilities evidenced; preferred item absent.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-110
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Full SRE evidence; uses a different monitoring vendor.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: C-111
+        reviews: [{ reviewer: REV-A, judgment: not_relevant, mandatory: met, rationale: "Keyword appears only in coursework.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-113
+        reviews: [{ reviewer: REV-A, judgment: relevant, mandatory: met, rationale: "Conventional profile; exclusion not explained.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-114
+        reviews: [{ reviewer: REV-A, judgment: unassessable, mandatory: cannot_verify, rationale: "No incident evidence and no knockout answer recorded.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: P-201
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Prior SRE applicant with current evidence.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: P-202
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Different title, same reliability work.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: P-203
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Grid control-room incident command transfers; verify cloud depth.", reviewed_at: "2026-10-13", saw_product_output: true }]
+      - candidate: P-204
+        reviews: [{ reviewer: REV-B, judgment: not_relevant, mandatory: met, rationale: "Ticket handling and dashboards, no ownership of production systems.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: P-205
+        reviews: [{ reviewer: REV-B, judgment: unassessable, mandatory: cannot_verify, rationale: "Partial talent-community profile.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: P-206
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Relevant on paper, but evidence is older than permitted for action.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      - candidate: P-208
+        reviews: [{ reviewer: REV-B, judgment: relevant, mandatory: met, rationale: "Production reliability title; same function.", reviewed_at: "2026-10-13", saw_product_output: false }]
+      # C-112, P-207 and P-209 were not reviewed: they stay unreviewed, never implied negative.
+    finding_reviews:
+      - finding: { check: rule_narrower_than_requirement, rule: Q1 }
+        reviews:
+          - { reviewer: REV-A, judgment: confirmed, rationale: "Title knockout excludes production engineers doing the same work.", reviewed_at: "2026-10-14" }
+          - { reviewer: REV-B, judgment: confirmed, rationale: "Agreed; the requirement is the function, not the title.", reviewed_at: "2026-10-14" }
+      - finding: { check: unstated_requirement_enforced, rule: Q7 }
+        reviews:
+          - { reviewer: REV-A, judgment: unsupported, rationale: "Hiring manager confirms the vendor tool is needed from day one; posting will be updated.", reviewed_at: "2026-10-14" }
+      - finding: { check: threshold_inconsistency, rule: Q2 }
+        reviews:
+          - { reviewer: REV-A, judgment: confirmed, rationale: "Knockout asks for more years than the posting.", reviewed_at: "2026-10-14" }
+          - { reviewer: REV-B, judgment: needs_more_evidence, rationale: "Need to confirm which threshold the hiring manager intends.", reviewed_at: "2026-10-14" }
+        adjudication: { judgment: confirmed, adjudicator: ADJ-1, rationale: "Posting is the approved requirement; knockout drifted from it.", decided_at: "2026-10-15" }
+      - finding: { check: unverified_necessity, requirement: R6 }
+        reviews:
+          - { reviewer: REV-A, judgment: needs_more_evidence, rationale: "No record of why this requirement was added.", reviewed_at: "2026-10-14" }
+      - finding: { check: candidate_review_opportunity, candidate: C-103 }
+        reviews:
+          - { reviewer: REV-B, judgment: confirmed, rationale: "Equivalent incident leadership was excluded by a title rule.", reviewed_at: "2026-10-14" }
+    recruiter_decisions:
+      - { subject: C-110, decision: advance_to_screen, changed_after_evidence: true, decided_by: RECR-1 }
+      - { subject: C-103, decision: advance_to_screen, changed_after_evidence: true, decided_by: RECR-1 }
+      - { subject: "rule_narrower_than_requirement:Q1", decision: accepted, changed_after_evidence: false, decided_by: RECR-1 }
+    downstream:
+      - { candidate: C-110, outcome: interviewed, observed: true, attributable: false, note: "Interview scheduled; partner records do not tie it to the product review." }
+      - { candidate: C-103, outcome: unknown, observed: false, attributable: false }
+    workflow_time:
+      measured: true
+      baseline_minutes: 95
+      assisted_minutes: 60
+      method: Synthetic illustration of a stopwatch measurement of one recruiter's review of the rejected pile.
+
+  # ------------------------------------------------------------------ Linehaul (protected licence)
+  - case_id: LH-0217
+    scenario: transportation
+    requisition: ../../examples/northwind/requisitions/REQ-LH-0217/requisition.yaml
+    policy: ../../examples/northwind/policy.yaml
+    candidates: ../../examples/northwind/requisitions/REQ-LH-0217/candidates.yaml
+    pool: ../../examples/northwind/requisitions/REQ-LH-0217/candidate-pool.yaml
+    baseline:
+      source: recruiter_records
+      observations:
+        - { candidate: C-301, outcome: advanced, basis: observed }
+        - { candidate: C-302, outcome: rejected, excluded_by_rule: Q1, basis: observed }
+        - { candidate: C-303, outcome: rejected, excluded_by_rule: Q2, basis: observed }
+        - { candidate: C-304, outcome: rejected, basis: observed }
+        - { candidate: P-301, outcome: not_applied, basis: observed }
+        - { candidate: P-302, outcome: not_applied, basis: observed }
+        - { candidate: P-303, outcome: not_applied, basis: observed }
+    candidate_assessments:
+      - candidate: C-301
+        reviews: [{ reviewer: REV-C, judgment: relevant, mandatory: met, rationale: "Licensed with linehaul experience.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-302
+        reviews: [{ reviewer: REV-C, judgment: not_relevant, mandatory: not_met, rationale: "Experienced driver without the legally required licence.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-303
+        reviews: [{ reviewer: REV-C, judgment: relevant, mandatory: met, rationale: "Licensed; regional route experience is equivalent.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-304
+        reviews: [{ reviewer: REV-C, judgment: not_relevant, mandatory: not_met, rationale: "No licence and no driving experience.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: P-301
+        reviews: [{ reviewer: REV-C, judgment: relevant, mandatory: met, rationale: "Licensed linehaul driver in the pool.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: P-302
+        reviews: [{ reviewer: REV-C, judgment: not_relevant, mandatory: not_met, rationale: "Licence lapsed.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: P-303
+        reviews: [{ reviewer: REV-C, judgment: unassessable, mandatory: cannot_verify, rationale: "Licence cannot be verified from the record.", reviewed_at: "2026-10-12", saw_product_output: false }]
+    finding_reviews:
+      - finding: { check: mandatory_requirement_protected, rule: Q1 }
+        reviews: [{ reviewer: REV-C, judgment: confirmed, rationale: "Licence is a legal requirement and must stay a knockout.", reviewed_at: "2026-10-14" }]
+      - finding: { check: experience_path_narrower, rule: Q2 }
+        reviews: [{ reviewer: REV-C, judgment: confirmed, rationale: "Regional routes are accepted experience under policy.", reviewed_at: "2026-10-14" }]
+    workflow_time: { measured: false }
+
+  # ------------------------------------------------------------------ Customer success (no baseline)
+  - case_id: CSM-0388
+    scenario: customer-success
+    requisition: ../../examples/northwind/requisitions/REQ-CSM-0388/requisition.yaml
+    policy: ../../examples/northwind/policy.yaml
+    candidates: ../../examples/northwind/requisitions/REQ-CSM-0388/candidates.yaml
+    decisions: ../../examples/northwind/requisitions/REQ-CSM-0388/decisions.yaml
+    baseline:
+      source: not_available
+      note: The partner could not export historical outcomes for this requisition.
+      observations: []
+    candidate_assessments:
+      - candidate: C-202
+        reviews: [{ reviewer: REV-D, judgment: relevant, mandatory: met, rationale: "Client success is the same function.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-203
+        reviews: [{ reviewer: REV-D, judgment: not_relevant, mandatory: met, rationale: "Hospitality guest relations is not B2B customer success.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-204
+        reviews: [{ reviewer: REV-D, judgment: relevant, mandatory: met, rationale: "Owns renewals and expansion for a SaaS book.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-207
+        reviews: [{ reviewer: REV-D, judgment: unassessable, mandatory: met, rationale: "Depends on whether the specific CRM is genuinely required.", reviewed_at: "2026-10-12", saw_product_output: false }]
+      - candidate: C-208
+        reviews: [{ reviewer: REV-D, judgment: not_relevant, mandatory: met, rationale: "Policy rejects support-escalation leadership as equivalent.", reviewed_at: "2026-10-12", saw_product_output: false }]
+    finding_reviews:
+      - finding: { check: equivalent_path_blocked, rule: Q1 }
+        reviews: [{ reviewer: REV-D, judgment: confirmed, rationale: "Account management with renewals is equivalent.", reviewed_at: "2026-10-14" }]
+      - finding: { check: unverified_necessity, requirement: R4 }
+        reviews: [{ reviewer: REV-D, judgment: deferred, rationale: "Awaiting hiring-manager input on the CRM requirement.", reviewed_at: "2026-10-14" }]

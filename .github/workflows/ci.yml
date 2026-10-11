@@ -25,9 +25,13 @@ jobs:
           for r in knowledge/releases/*/; do sa knowledge validate --knowledge "$r"; done
       - name: Validate example candidate pools
         run: for f in examples/northwind/requisitions/*/candidate-pool.yaml; do sa check candidate_pool "$f"; done
+      - name: Validate the synthetic validation dataset
+        run: sa check validation_dataset evals/validation/northwind-synthetic.yaml
       - name: Unit tests
         run: pytest -q
       - name: Evaluation suite (regression gate)
         run: sa eval
       - name: Compare working pack against production knowledge
         run: sa eval-compare --baseline env:production --candidate pack
+      - name: Validation measurement on the synthetic dataset (fails on any violation)
+        run: sa measure evals/validation/northwind-synthetic.yaml --out "$RUNNER_TEMP/validation-results"
